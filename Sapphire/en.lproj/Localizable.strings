@@ -2212,3 +2212,55 @@
 "Open queue and playlists in NetEase Cloud Music" = "Open queue and playlists in NetEase Cloud Music";
 
 "Shuffle — tap for Off" = "Shuffle — tap for Off";
+
+"Community Build" = "Community Build";
+
+"Feature not included" = "Feature not included";
+
+"This feature's implementation is not included in the public source. A subscription cannot enable it in this build." = "This feature's implementation is not included in the public source. A subscription cannot enable it in this build.";
+
+"Available local features are free in this community build." = "Available local features are free in this community build.";
+
+"Enable 8D Audio" = "Enable 8D Audio";
+
+"Enable Surround Audio" = "Enable Surround Audio";
+
+"Rotation Speed" = "Rotation Speed";
+
+"Depth" = "Depth";
+
+"Distance" = "Distance";
+
+"Elevation Motion" = "Elevation Motion";
+
+"Front/Back Motion" = "Front/Back Motion";
+
+"Room Size" = "Room Size";
+
+"Room Spread" = "Room Spread";
+
+"Intensity" = "Intensity";
+
+"Center Focus" = "Center Focus";
+
+"Crossfeed" = "Crossfeed";
+
+"Ambience" = "Ambience";
+
+"Up" = "Up";
+
+"Search files" = "Search files";
+
+"Deep Scan" = "Deep Scan";
+
+"Showing the first 500 items. Use search to narrow the results." = "Showing the first 500 items. Use search to narrow the results.";
+
+"Local Text Recognition" = "Local Text Recognition";
+
+"Extract text from images and PDFs on this Mac. Scanned PDF pages use local OCR; files are not uploaded." = "Extract text from images and PDFs on this Mac. Scanned PDF pages use local OCR; files are not uploaded.";
+
+"Show text recognition on the file shelf" = "Show text recognition on the file shelf";
+
+"Choose Image or PDF…" = "Choose Image or PDF…";
+
+"No readable text was found. Check the file and any PDF password protection." = "No readable text was found. Check the file and any PDF password protection.";

@@ -46,24 +46,6 @@ struct MonitoringSettingsView: View { var body: some View { PremiumUnavailableVi
 struct ArchivesAndDMGInstallerSettingsView: View { var body: some View { PremiumUnavailableView(title: "Archives") } }
 struct AppLockSettingsView: View { var body: some View { PremiumUnavailableView(title: "App Lock") } }
 struct DockLayoutsSettingsView: View { var body: some View { PremiumUnavailableView(title: "Dock Layouts") } }
-struct MediaOptimizerSettingsView: View { var body: some View { PremiumUnavailableView(title: "Media Optimizer") } }
-
-struct StorageWorkspaceView: View {
-    @ObservedObject var model: StorageViewModel
-    var body: some View { PremiumUnavailableView(title: "Storage Workspace") }
-}
-
-struct EightDAudioView: View {
-    let bundleID: String
-    let appName: String
-    var body: some View { PremiumUnavailableView(title: "8D Audio") }
-}
-
-struct SurroundAudioView: View {
-    let bundleID: String
-    let appName: String
-    var body: some View { PremiumUnavailableView(title: "Surround Audio") }
-}
 
 struct StorageDetailView: View {
     var body: some View { PremiumUnavailableView(title: "Storage") }

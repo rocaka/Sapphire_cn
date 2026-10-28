@@ -40,7 +40,7 @@ struct PremiumFeatureView<Content: View>: View {
     }
 
     var body: some View {
-        content.disabled(true).opacity(0.45)
+        content.disabled(!PremiumGate.hasAccess(feature)).opacity(PremiumGate.hasAccess(feature) ? 1 : 0.45)
     }
 }
 
@@ -51,8 +51,7 @@ extension View {
 }
 
 func premiumDefaultMessage(for feature: AppFeature) -> String {
-    let tier = SubscriptionFeatureCatalog.minimumTier(for: feature)
-    return "This feature requires Sapphire \(SubscriptionFeatureCatalog.tierDisplayName(tier))."
+    L10n.string("This feature's implementation is not included in the public source. A subscription cannot enable it in this build.")
 }
 
 extension SettingsModel {

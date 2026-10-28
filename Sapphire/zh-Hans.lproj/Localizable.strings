@@ -2212,3 +2212,55 @@
 "Open queue and playlists in NetEase Cloud Music" = "在网易云音乐中打开队列与歌单";
 
 "Shuffle — tap for Off" = "随机播放 — 点击关闭";
+
+"Community Build" = "社区版";
+
+"Feature not included" = "此功能尚未包含";
+
+"This feature's implementation is not included in the public source. A subscription cannot enable it in this build." = "公开源码中尚未包含此功能的实现，在此版本中购买订阅也无法启用。";
+
+"Available local features are free in this community build." = "社区版中已有实现的本地功能免费开放。";
+
+"Enable 8D Audio" = "启用 8D 音效";
+
+"Enable Surround Audio" = "启用环绕音效";
+
+"Rotation Speed" = "旋转速度";
+
+"Depth" = "深度";
+
+"Distance" = "距离";
+
+"Elevation Motion" = "上下移动";
+
+"Front/Back Motion" = "前后移动";
+
+"Room Size" = "房间大小";
+
+"Room Spread" = "空间扩散";
+
+"Intensity" = "强度";
+
+"Center Focus" = "中央聚焦";
+
+"Crossfeed" = "声道交混";
+
+"Ambience" = "环境声";
+
+"Up" = "上一级";
+
+"Search files" = "搜索文件";
+
+"Deep Scan" = "深度扫描";
+
+"Showing the first 500 items. Use search to narrow the results." = "显示前 500 项，请通过搜索缩小范围。";
+
+"Local Text Recognition" = "本地文字识别";
+
+"Extract text from images and PDFs on this Mac. Scanned PDF pages use local OCR; files are not uploaded." = "在本机提取图片和 PDF 的文字。扫描版 PDF 使用本地 OCR，不上传文件。";
+
+"Show text recognition on the file shelf" = "在文件暂存架显示文字识别";
+
+"Choose Image or PDF…" = "选择图片或 PDF…";
+
+"No readable text was found. Check the file and any PDF password protection." = "未找到可读取的文字，请检查文件及 PDF 密码保护。";

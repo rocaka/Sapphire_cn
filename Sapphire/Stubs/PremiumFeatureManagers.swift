@@ -104,7 +104,7 @@ enum MediaOptimizeError: LocalizedError, Equatable {
 
 enum MediaOptimizer {
     static func kind(for url: URL) -> MediaOptimizeKind? { nil }
-    static func canOCR(_ url: URL) -> Bool { false }
+    static func canOCR(_ url: URL) -> Bool { PublicTextRecognition.canRead(url) }
 }
 
 @MainActor
@@ -113,7 +113,9 @@ final class MediaOptimizerManager {
     private init() {}
     func start() {}
     func optimizeFile(_ url: URL) async -> Result<MediaOptimizeResult, MediaOptimizeError> { .failure(.premiumRequired) }
-    func recognizeText(in url: URL) async -> String? { nil }
+    func recognizeText(in url: URL) async -> String? {
+        await Task.detached(priority: .userInitiated) { try? PublicTextRecognition.text(at: url) }.value
+    }
 }
 
 final class EmojiShortcutManager {

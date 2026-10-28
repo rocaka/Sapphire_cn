@@ -958,12 +958,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     private func scheduleSubscriptionValidationTimer() {
         subscriptionValidationTimer?.invalidate()
+        subscriptionValidationTimer = nil
+        #if SAPPHIRE_FULL_BUILD
         subscriptionValidationTimer = Timer.scheduledCoalescing(withTimeInterval: 5 * 60 * 60, repeats: true) { _ in
             Task { @MainActor in
                 print("[AppDelegate] Periodic subscription validation (5-hour interval).")
                 await SubscriptionManager.shared.validateSubscriptionStatus()
             }
         }
+        #endif
     }
 
     private func scheduleHelperHealthCheck() {
@@ -2076,8 +2079,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func handleSubscriptionPaywallRequest(_ notification: Notification) {
+        #if !SAPPHIRE_FULL_BUILD
+        let alert = NSAlert()
+        alert.messageText = L10n.string("Feature not included")
+        alert.informativeText = L10n.string("This feature's implementation is not included in the public source. A subscription cannot enable it in this build.")
+        alert.addButton(withTitle: L10n.string("OK"))
+        alert.runModal()
+        #else
         openSettingsWindow()
         NotificationCenter.default.post(name: .sapphireOpenAccountPane, object: nil)
+        #endif
     }
 
     @objc func screenParametersChanged(notification: Notification) {

@@ -78,7 +78,7 @@ class MusicManager {
         guard isDetailPlayerOpen != isOpen else { return }
         isDetailPlayerOpen = isOpen
         print("[MusicManager:Timing] Detail Player open state changed to: \(isOpen)")
-        if isOpen {
+        if isOpen && !isNeteaseSourceSelected {
             spotifyPrivateAPI.bootstrapIfNeeded(policy: .onDemand)
         }
         refreshTimers()
@@ -105,7 +105,7 @@ class MusicManager {
     func prewarmDetailPlayer() {
         guard !isDetailPlayerOpen, let key = detailPrewarmKey else { return }
         if let prewarm = detailPrewarm, prewarm.key == key, Date().timeIntervalSince(prewarm.date) < 30 { return }
-        spotifyPrivateAPI.bootstrapIfNeeded(policy: .onDemand)
+        if !isNeteaseSourceSelected { spotifyPrivateAPI.bootstrapIfNeeded(policy: .onDemand) }
         detailPrewarm = (key, Date(), Task { @MainActor in await self.loadDetailPlayerExtras() })
     }
 
@@ -122,7 +122,7 @@ class MusicManager {
     func setMusicHubOpen(_ isOpen: Bool) async {
         guard isMusicHubOpen != isOpen else { return }
         isMusicHubOpen = isOpen
-        if isOpen {
+        if isOpen && !isNeteaseSourceSelected {
             spotifyPrivateAPI.bootstrapIfNeeded(policy: .onDemand)
             if spotifyPrivateAPI.isLoggedIn {
                 Task(priority: .utility) {

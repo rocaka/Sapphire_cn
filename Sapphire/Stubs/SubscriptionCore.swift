@@ -15,25 +15,6 @@ public enum SubscriptionTier: String, Codable, CaseIterable {
     case core
 }
 
-public enum AppFeature: String, Codable, CaseIterable {
-    case unlimitedLyricsFetch, translation, geminiLive, advancedFileConversion,
-         priorityAutomation, betaSoftwareUpdates, circleToSearch, liveSports,
-         financeWidget, sportsWidget, financeLiveActivity, prioritizedFeedback,
-         appLock, focusProductiveAccess,
-         menuBarProfiles, androidContinuitySyncMedia, androidContinuityWidgets,
-         androidContinuityPhotoDisk, mediaTools, basicMouseSettings,
-         dockPresets,
-         continuityUniversalKeyboard, continuityEarbudHandoff,
-         continuityHandoff, continuityDocumentScanning,
-         continuityCameraAndMic, continuityMacTabsOnPhone,
-         androidNotificationsOnMac, continuityCloudflareRelay, windowsPreview, dockPreview, allMouseSettings,
-         surroundSound, snapZonesKeyboardShortcuts, emojiSuggestAsYouType,
-         basicStorageFeatures, clipboardPicker, clipboardAdvancedTools, dmgInstaller,
-         macScreenMirroringOnAndroid, macScreenExtensionOnMac, androidInstantHotspot,
-         androidRemoteConnection, advancedStorageFeatures, batteryWidget, audio8D,
-         storageWidgets, ocrFeature
-}
-
 public struct SubscriptionEntitlements: Codable, Equatable {
     public var tier: SubscriptionTier
     public var features: Set<AppFeature>
@@ -43,7 +24,7 @@ public struct SubscriptionEntitlements: Codable, Equatable {
 }
 
 public enum SubscriptionFeatureCatalog {
-    public static func features(for tier: SubscriptionTier) -> Set<AppFeature> { [] }
+    public static func features(for tier: SubscriptionTier) -> Set<AppFeature> { PublicFeatureAvailability.available }
     public static func minimumTier(for feature: AppFeature) -> SubscriptionTier { .free }
     public static func tierDisplayName(_ tier: SubscriptionTier) -> String { tier.rawValue.capitalized }
     public static func marketingSubtitle(for tier: SubscriptionTier) -> String { L10n.string("Includes the core Sapphire experience.") }
@@ -58,7 +39,7 @@ public enum SubscriptionFeatureCatalog {
 }
 
 public enum SubscriptionAccess {
-    public static func hasAccess(to feature: AppFeature) -> Bool { false }
+    public static func hasAccess(to feature: AppFeature) -> Bool { PublicFeatureAvailability.contains(feature) }
     public static func resolvedTier() -> SubscriptionTier { .free }
     public static func intelligenceDailyRunLimit() -> Int { 8 }
 }
@@ -68,10 +49,10 @@ public final class SubscriptionManager: ObservableObject {
 
     public var tierGradientColors: [Color] { [.gray, .gray.opacity(0.6)] }
     public var userInitials: String { "G" }
-    public var tierLabel: String { L10n.string("Free") }
+    public var tierLabel: String { L10n.string("Community Build") }
 
-    @Published public private(set) var entitlements: SubscriptionEntitlements = .free
-    @Published public private(set) var accessibleFeatures: Set<AppFeature> = []
+    @Published public private(set) var entitlements = SubscriptionEntitlements(tier: .free, features: PublicFeatureAvailability.available, expiresAt: nil)
+    @Published public private(set) var accessibleFeatures = PublicFeatureAvailability.available
 
     public init() {}
 
@@ -96,6 +77,7 @@ public final class FeatureGate {
 
     @discardableResult
     public func require(_ feature: AppFeature, message: String) -> Bool {
+        if SubscriptionAccess.hasAccess(to: feature) { return true }
         let post = {
             NotificationCenter.default.post(
                 name: .subscriptionPaywallRequested,

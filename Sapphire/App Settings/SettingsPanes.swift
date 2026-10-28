@@ -101,6 +101,15 @@ struct LockedSettingsSectionView: View {
     }
 
     var body: some View {
+        #if !SAPPHIRE_FULL_BUILD
+        VStack(spacing: 16) {
+            Image(systemName: "shippingbox").font(.largeTitle).foregroundStyle(.secondary)
+            Text(section.label).font(.title2.bold())
+            Text("This feature's implementation is not included in the public source. A subscription cannot enable it in this build.")
+                .foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 420)
+            Text("Available local features are free in this community build.").font(.caption).foregroundStyle(.secondary)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        #else
         VStack(spacing: 16) {
             Image(systemName: "lock.fill")
                 .font(.system(size: 34, weight: .semibold))
@@ -123,6 +132,7 @@ struct LockedSettingsSectionView: View {
             .tint(.purple)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        #endif
     }
 }
 
