@@ -468,6 +468,7 @@
 "Customize what happens when you swipe a clipboard row left or right in the full clipboard view." = "自定义在完整剪贴板视图中向左或向右轻扫项目行的操作。";
 "Customize what happens when you swipe a file drop row left or right. Share only applies to File Shelf items." = "自定义向左或向右轻扫文件行的操作。分享仅适用于文件暂存架项目。";
 "Customize what happens when you swipe a note row left or right in the full notes view." = "自定义在完整便笺视图中向左或向右轻扫便笺行的操作。";
+"Cut" = "剪切";
 "Cut short-form feeds without blocking every app by default." = "限制短内容信息流，默认不屏蔽整个应用。";
 "Cycle Count" = "循环次数";
 "Cycle output device" = "循环切换输出设备";
@@ -580,6 +581,7 @@
 "Earbud Fit Test" = "耳塞贴合度测试";
 "Edit" = "编辑";
 "Edit Custom Configuration" = "编辑自定义配置";
+"Edit Menu Bar Items" = "编辑菜单栏项目";
 "Edit Plane" = "编辑窗口方案";
 "Edit Shortcut" = "编辑快捷指令";
 "Editable" = "可编辑";
@@ -1266,6 +1268,7 @@
 "Open Picker" = "打开选择器";
 "Open Privacy Settings" = "打开隐私设置";
 "Open Queue" = "打开队列";
+"Open Sapphire Setting" = "打开 Sapphire 设置";
 "Open Scheduler" = "打开计划管理器";
 "Open Settings" = "打开设置";
 "Open Shelf on Live Activity Click" = "点击实时活动时打开暂存架";
@@ -1309,6 +1312,7 @@
 "Passive Mode" = "被动模式";
 "Passthrough" = "直通";
 "Password" = "密码";
+"Paste" = "粘贴";
 "Paste Images as PNG Files" = "将图像粘贴为 PNG 文件";
 "Paste as Plain Text" = "粘贴为纯文本";
 "Paste without formatting using its own shortcut." = "使用独立快捷键粘贴不带格式的文本。";
@@ -1379,6 +1383,7 @@
 "Power overview" = "电源概览";
 "Precipitation" = "降水";
 "Prefer airplay over spotify devices" = "优先使用 AirPlay 而非 Spotify 设备";
+"Preferences" = "偏好设置";
 "Preferred microphone" = "首选麦克风";
 "Preferred unit for weather forecasts." = "天气预报使用的温度单位。";
 "Preparing" = "正在准备";
@@ -1448,6 +1453,7 @@
 "Recording" = "正在录制";
 "Recording..." = "正在录制…";
 "Recording... (Esc to cancel)" = "正在录制…（Esc 取消）";
+"Redo" = "重做";
 "Reduce Blue Light" = "减少蓝光";
 "Reduces micro-charging cycles when the limit is reached." = "达到充电上限后减少频繁的小幅充放电。";
 "Reference page listing every keyboard shortcut in Sapphire — global hotkeys, snap zones, and in-app shortcuts." = "查看 Sapphire 的所有键盘快捷键，包括全局快捷键、窗口吸附和应用内快捷键。";
@@ -1599,6 +1605,7 @@
 "Search Apps" = "搜索应用";
 "Search Items…" = "搜索项目…";
 "Search Menu Bar Items" = "搜索菜单栏项目";
+"Search Menu Bar Items…" = "搜索菜单栏项目…";
 "Search Shortcuts" = "搜索快捷指令";
 "Search Spotify" = "搜索 Spotify";
 "Search and open any item, hidden ones included" = "搜索并打开任意项目，包括隐藏项目";

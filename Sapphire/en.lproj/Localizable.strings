@@ -468,6 +468,7 @@
 "Customize what happens when you swipe a clipboard row left or right in the full clipboard view." = "Customize what happens when you swipe a clipboard row left or right in the full clipboard view.";
 "Customize what happens when you swipe a file drop row left or right. Share only applies to File Shelf items." = "Customize what happens when you swipe a file drop row left or right. Share only applies to File Shelf items.";
 "Customize what happens when you swipe a note row left or right in the full notes view." = "Customize what happens when you swipe a note row left or right in the full notes view.";
+"Cut" = "Cut";
 "Cut short-form feeds without blocking every app by default." = "Cut short-form feeds without blocking every app by default.";
 "Cycle Count" = "Cycle Count";
 "Cycle output device" = "Cycle output device";
@@ -580,6 +581,7 @@
 "Earbud Fit Test" = "Earbud Fit Test";
 "Edit" = "Edit";
 "Edit Custom Configuration" = "Edit Custom Configuration";
+"Edit Menu Bar Items" = "Edit Menu Bar Items";
 "Edit Plane" = "Edit Plane";
 "Edit Shortcut" = "Edit Shortcut";
 "Editable" = "Editable";
@@ -1266,6 +1268,7 @@
 "Open Picker" = "Open Picker";
 "Open Privacy Settings" = "Open Privacy Settings";
 "Open Queue" = "Open Queue";
+"Open Sapphire Setting" = "Open Sapphire Setting";
 "Open Scheduler" = "Open Scheduler";
 "Open Settings" = "Open Settings";
 "Open Shelf on Live Activity Click" = "Open Shelf on Live Activity Click";
@@ -1309,6 +1312,7 @@
 "Passive Mode" = "Passive Mode";
 "Passthrough" = "Passthrough";
 "Password" = "Password";
+"Paste" = "Paste";
 "Paste Images as PNG Files" = "Paste Images as PNG Files";
 "Paste as Plain Text" = "Paste as Plain Text";
 "Paste without formatting using its own shortcut." = "Paste without formatting using its own shortcut.";
@@ -1379,6 +1383,7 @@
 "Power overview" = "Power overview";
 "Precipitation" = "Precipitation";
 "Prefer airplay over spotify devices" = "Prefer airplay over spotify devices";
+"Preferences" = "Preferences";
 "Preferred microphone" = "Preferred microphone";
 "Preferred unit for weather forecasts." = "Preferred unit for weather forecasts.";
 "Preparing" = "Preparing";
@@ -1448,6 +1453,7 @@
 "Recording" = "Recording";
 "Recording..." = "Recording...";
 "Recording... (Esc to cancel)" = "Recording... (Esc to cancel)";
+"Redo" = "Redo";
 "Reduce Blue Light" = "Reduce Blue Light";
 "Reduces micro-charging cycles when the limit is reached." = "Reduces micro-charging cycles when the limit is reached.";
 "Reference page listing every keyboard shortcut in Sapphire — global hotkeys, snap zones, and in-app shortcuts." = "Reference page listing every keyboard shortcut in Sapphire — global hotkeys, snap zones, and in-app shortcuts.";
@@ -1599,6 +1605,7 @@
 "Search Apps" = "Search Apps";
 "Search Items…" = "Search Items…";
 "Search Menu Bar Items" = "Search Menu Bar Items";
+"Search Menu Bar Items…" = "Search Menu Bar Items…";
 "Search Shortcuts" = "Search Shortcuts";
 "Search Spotify" = "Search Spotify";
 "Search and open any item, hidden ones included" = "Search and open any item, hidden ones included";

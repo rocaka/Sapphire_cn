@@ -3,6 +3,10 @@ import Foundation
 @main
 struct SigningProbe {
     static func main() throws {
+        precondition(AppSecurityValidator.isSafeIdentifier("com.example.Useful-App"))
+        for invalid in ["../Library/Caches", "/Applications/Test.app", "com.example..app", "com.example:app"] {
+            precondition(!AppSecurityValidator.isSafeIdentifier(invalid))
+        }
         let app = URL(fileURLWithPath: CommandLine.arguments[1])
         let identity = try AppSecurityValidator.identity(at: app)
         precondition(identity.bundleIdentifier == "com.rocaka.sapphirecn")

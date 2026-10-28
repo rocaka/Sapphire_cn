@@ -226,7 +226,7 @@ final class ContinuityManager {
     let messagesBridge = ContinuityResponseBridge()
     let callsBridge = ContinuityResponseBridge()
     let focusModeManager = ContinuityFocusModePlaceholder()
-    func openWidgets() {}
+    func openWidgets(focus: Int? = nil) {}
     func startIfEnabled() {}
     func stop() {}
     func sendMediaCommand(_ action: ContinuityMediaAction, seekMs: Int? = nil) {}
@@ -308,6 +308,7 @@ enum ContinuityBluetoothAddress {
             return String(input[start..<input.index(start, offsetBy: 2)])
         }.joined(separator: "-").uppercased()
     }
+    static func dashed(_ input: String?) -> String? { normalize(input) }
     static func matches(_ lhs: String?, _ rhs: String?) -> Bool {
         guard let lhs = normalize(lhs), let rhs = normalize(rhs) else { return false }
         return lhs == rhs

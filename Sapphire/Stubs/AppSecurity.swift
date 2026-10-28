@@ -81,11 +81,8 @@ enum AppSecurityValidator {
     static func applicationGroups(at bundleURL: URL) -> Set<String> { [] }
 
     static func isSafeIdentifier(_ identifier: String) -> Bool {
-        !identifier.isEmpty
-            && identifier != "."
-            && identifier != ".."
-            && !identifier.contains("/")
-            && !identifier.contains("\\")
+        !identifier.isEmpty && identifier.utf8.count <= 255
+            && identifier.range(of: #"^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*$"#, options: .regularExpression) != nil
     }
 }
 #endif

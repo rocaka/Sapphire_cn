@@ -117,7 +117,7 @@ class AuthLoginCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         let alert = NSAlert()
         alert.messageText = serviceName
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: L10n.string("OK"))
         alert.runModal()
         completionHandler()
     }
@@ -131,8 +131,8 @@ class AuthLoginCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         let alert = NSAlert()
         alert.messageText = serviceName
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: L10n.string("OK"))
+        alert.addButton(withTitle: L10n.string("Cancel"))
         completionHandler(alert.runModal() == .alertFirstButtonReturn)
     }
 }
