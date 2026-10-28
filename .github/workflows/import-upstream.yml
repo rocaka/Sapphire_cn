@@ -1,0 +1,22 @@
+name: Import upstream source
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: destination
+      - name: Import the pinned upstream with its history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone https://github.com/cshariq/Sapphire.git upstream
+          cd upstream
+          git checkout 792f9b4ea3d556d7566fbc38592fe54e88d89dc0
+          git remote add destination https://github.com/rocaka/Sapphire_cn.git
+          gh auth setup-git
+          git push destination HEAD:refs/heads/main
