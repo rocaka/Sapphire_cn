@@ -219,7 +219,7 @@ struct NeteaseMusicSettingsCard: View {
     @State private var trusted = NeteaseMusicBridge.shared.isTrusted
 
     var body: some View {
-        SettingsCard(title: L10n.string("NetEase Cloud Music"), description: L10n.string("NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.")) {
+        SettingsCard(title: "NetEase Cloud Music", description: "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.") {
             VStack(alignment: .leading, spacing: 12) {
                 Text(L10n.string("Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls."))
                     .font(.caption).foregroundStyle(.secondary)
