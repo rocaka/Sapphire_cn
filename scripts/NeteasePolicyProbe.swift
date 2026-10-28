@@ -28,6 +28,17 @@ struct NeteasePolicyProbe {
         expect(match(songs, duration: .nan) == nil, "Reject invalid timing")
         let ambiguous = try JSONDecoder().decode([NeteaseMusicPolicy.Song].self, from: Data(fixture.replacingOccurrences(of: "209226", with: "209227").utf8))
         expect(match(songs + ambiguous) == nil, "Reject ambiguous recordings")
+        let defaults = ["playlists", "devices", "like", "shuffle", "repeat"]
+        let legacyEnabled: Set<String> = ["playlists", "devices"]
+        let netease = MusicPlayerControlsPolicy.buttons(bundleID: NeteaseMusicPolicy.bundleID, isPhone: false, order: defaults, enabled: legacyEnabled, neteaseControlsEnabled: true)
+        expect(netease == ["like", "playlists", "shuffle", "repeat", "devices"], "NetEase controls survive legacy disabled defaults; favorite and list occupy the main row")
+        expect(MusicPlayerControlsPolicy.buttons(bundleID: NeteaseMusicPolicy.bundleID, isPhone: true, order: defaults, enabled: legacyEnabled, neteaseControlsEnabled: true).isEmpty, "Phone controls remain separate")
+        expect(MusicPlayerControlsPolicy.buttons(bundleID: NeteaseMusicPolicy.bundleID, isPhone: false, order: [], enabled: [], neteaseControlsEnabled: true) == ["like", "playlists", "shuffle", "repeat"], "NetEase actions survive an old empty order")
+        expect(MusicPlayerControlsPolicy.buttons(bundleID: NeteaseMusicPolicy.bundleID, isPhone: false, order: defaults, enabled: legacyEnabled, neteaseControlsEnabled: false) == ["devices"], "Explicit NetEase preference is respected")
+        for bundle in ["com.spotify.client", "com.apple.Music", "com.apple.Safari"] {
+            expect(MusicPlayerControlsPolicy.buttons(bundleID: bundle, isPhone: false, order: defaults, enabled: legacyEnabled, neteaseControlsEnabled: true) == ["playlists", "devices"], "Other services retain existing preferences")
+        }
+        expect(MusicPlayerControlsPolicy.supportsTrackActions(bundleID: NeteaseMusicPolicy.bundleID), "NetEase artwork double-tap supports favorite")
         print("NetEase identity, song URL, recording matching and ambiguity checks passed")
     }
 }

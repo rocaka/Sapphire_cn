@@ -2206,3 +2206,9 @@
 "Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback." = "队列、歌单、搜索与账号在网易云客户端中管理；Sapphire 控制其当前播放。";
 "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire." = "通过 macOS 媒体接口和网易云原生菜单接入，Sapphire 不保存网易云账号登录信息。";
 "Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls." = "随当前歌曲显示信息、封面、进度和同步歌词；播放、收藏、随机和循环通过网易云客户端控制。";
+
+"Show NetEase playback controls" = "显示网易云播放操作按钮";
+
+"Open queue and playlists in NetEase Cloud Music" = "在网易云音乐中打开队列与歌单";
+
+"Shuffle — tap for Off" = "随机播放 — 点击关闭";

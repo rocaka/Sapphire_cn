@@ -2206,3 +2206,9 @@
 "Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback." = "Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback.";
 "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire." = "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.";
 "Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls." = "Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls.";
+
+"Show NetEase playback controls" = "Show NetEase playback controls";
+
+"Open queue and playlists in NetEase Cloud Music" = "Open queue and playlists in NetEase Cloud Music";
+
+"Shuffle — tap for Off" = "Shuffle — tap for Off";

@@ -216,11 +216,13 @@ struct AppleMusicAccountCard: View {
 }
 
 struct NeteaseMusicSettingsCard: View {
+    @EditingSettings var settings: SettingsEditingSession
     @State private var trusted = NeteaseMusicBridge.shared.isTrusted
 
     var body: some View {
         SettingsCard(title: "NetEase Cloud Music", description: "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.") {
             VStack(alignment: .leading, spacing: 12) {
+                Toggle("Show NetEase playback controls", isOn: $settings.settings.neteaseShowPlayerControls)
                 Text(L10n.string("Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls."))
                     .font(.caption).foregroundStyle(.secondary)
                 Text(L10n.string("Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback."))

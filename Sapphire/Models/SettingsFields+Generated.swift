@@ -415,6 +415,7 @@ extension SettingsField {
         SettingsField(\.musicAppStates),
         SettingsField(\.musicOpenOnClick),
         SettingsField(\.musicPlayerButtonOrder),
+        SettingsField(\.neteaseShowPlayerControls),
         SettingsField(\.musicLikeButtonEnabled),
         SettingsField(\.musicShuffleButtonEnabled),
         SettingsField(\.musicRepeatButtonEnabled),

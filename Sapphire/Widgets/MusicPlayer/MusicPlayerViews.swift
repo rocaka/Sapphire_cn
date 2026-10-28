@@ -158,9 +158,12 @@ struct MusicPlayerView: View {
     private var holdFeedbackColor: Color { holdFeedback.color }
     private var holdFeedbackButtonID: String? { holdFeedback.buttonID }
 
-    private var isSpotifyOrAppleMusic: Bool {
-        let bundleID = musicManager.lastKnownBundleID
-        return bundleID == "com.spotify.client" || bundleID == "com.apple.Music"
+    private var supportsTrackActions: Bool {
+        MusicPlayerControlsPolicy.supportsTrackActions(bundleID: musicManager.lastKnownBundleID)
+    }
+
+    private var isSmartShuffleActive: Bool {
+        isSpotifyPlaying && musicManager.spotifyPrivateAPI.isSmartShuffleActive
     }
 
     private var shouldShowAirPlay: Bool {
@@ -169,16 +172,19 @@ struct MusicPlayerView: View {
     }
 
     private var enabledButtons: [MusicPlayerButtonType] {
-        if musicManager.isPhoneMediaSourceSelected { return [] }
-        return settings.settings.musicPlayerButtonOrder.filter { type in
-            switch type {
-            case .like: return isSpotifyOrAppleMusic && settings.settings.musicLikeButtonEnabled
-            case .shuffle: return isSpotifyOrAppleMusic && settings.settings.musicShuffleButtonEnabled
-            case .repeat: return isSpotifyOrAppleMusic && settings.settings.musicRepeatButtonEnabled
-            case .playlists: return settings.settings.musicPlaylistsButtonEnabled
-            case .devices: return settings.settings.musicDevicesButtonEnabled
-            }
-        }
+        var enabled = Set<String>()
+        if settings.settings.musicLikeButtonEnabled { enabled.insert("like") }
+        if settings.settings.musicShuffleButtonEnabled { enabled.insert("shuffle") }
+        if settings.settings.musicRepeatButtonEnabled { enabled.insert("repeat") }
+        if settings.settings.musicPlaylistsButtonEnabled { enabled.insert("playlists") }
+        if settings.settings.musicDevicesButtonEnabled { enabled.insert("devices") }
+        return MusicPlayerControlsPolicy.buttons(
+            bundleID: musicManager.isNeteaseSourceSelected ? NeteaseMusicPolicy.bundleID : musicManager.lastKnownBundleID,
+            isPhone: musicManager.isPhoneMediaSourceSelected,
+            order: settings.settings.musicPlayerButtonOrder.map(\.rawValue),
+            enabled: enabled,
+            neteaseControlsEnabled: settings.settings.neteaseShowPlayerControls
+        ).compactMap(MusicPlayerButtonType.init(rawValue:))
     }
 
     private var primaryButtons: [MusicPlayerButtonType] { Array(enabledButtons.prefix(2)) }
@@ -389,7 +395,7 @@ struct MusicPlayerView: View {
                 .frame(width: 56, height: 56)
                 .animation(.easeInOut, value: showTemporaryLikedGlow)
                 .onTapGesture(count: 2) {
-                    guard isSpotifyOrAppleMusic else { return }
+                    guard supportsTrackActions else { return }
                     Task {
                         let wasLiked = musicManager.isLiked
                         await musicManager.toggleLike()
@@ -753,7 +759,10 @@ struct MusicPlayerView: View {
                 .foregroundStyle(holdFeedbackButtonID == "playlists" ? holdFeedbackColor : .secondary)
                 .frame(width: frameSize, height: frameSize)
                 .animation(.easeInOut(duration: 0.15), value: holdFeedbackIcon)
-                .help(MusicLongPressUI.accessoryHelp(primary: "Queue", target: .playlists, settings: settings.settings.value))
+                .accessibilityLabel(Text(musicManager.isNeteaseSourceSelected ? L10n.string("Open queue and playlists in NetEase Cloud Music") : type.displayName))
+                .help(musicManager.isNeteaseSourceSelected
+                    ? L10n.string("Open queue and playlists in NetEase Cloud Music")
+                    : MusicLongPressUI.accessoryHelp(primary: "Queue", target: .playlists, settings: settings.settings.value))
 
             case .devices:
                 let deviceIcon: String = musicManager.currentOutputDeviceSystemImage()
@@ -800,6 +809,7 @@ struct MusicPlayerView: View {
                 .frame(width: frameSize, height: frameSize)
                 .animation(.spring(), value: musicManager.isLiked)
                 .animation(.easeInOut(duration: 0.15), value: holdFeedbackIcon)
+                .accessibilityLabel(Text(type.displayName))
                 .help(MusicLongPressUI.accessoryHelp(primary: "Like", target: .like, settings: settings.settings.value))
 
             case .shuffle:
@@ -811,27 +821,27 @@ struct MusicPlayerView: View {
                     onHoldEnded: endHoldFeedback
                 ) {
                     Image(systemName: holdFeedbackButtonID == "shuffle"
-                          ? (holdFeedbackIcon ?? (musicManager.spotifyPrivateAPI.isSmartShuffleActive ? "sparkles" : type.systemImage))
-                          : (musicManager.spotifyPrivateAPI.isSmartShuffleActive ? "sparkles" : type.systemImage))
+                          ? (holdFeedbackIcon ?? (isSmartShuffleActive ? "sparkles" : type.systemImage))
+                          : (isSmartShuffleActive ? "sparkles" : type.systemImage))
                         .font(.system(size: iconSize))
                         .contentTransition(.symbolEffect(.replace))
                 }
                 .foregroundColor(
                     holdFeedbackButtonID == "shuffle"
                         ? holdFeedbackColor
-                        : (musicManager.spotifyPrivateAPI.isSmartShuffleActive
+                        : (isSmartShuffleActive
                             ? .purple
                             : (musicManager.shuffleState ? .green : .secondary))
                 )
                 .frame(width: frameSize, height: frameSize)
                 .animation(.easeInOut, value: musicManager.shuffleState)
-                .animation(.easeInOut, value: musicManager.spotifyPrivateAPI.isSmartShuffleActive)
+                .animation(.easeInOut, value: isSmartShuffleActive)
                 .animation(.easeInOut(duration: 0.15), value: holdFeedbackIcon)
                 .help(
-                    musicManager.spotifyPrivateAPI.isSmartShuffleActive
+                    isSmartShuffleActive
                         ? MusicLongPressUI.accessoryHelp(primary: "Smart Shuffle — tap for Off", target: .shuffle, settings: settings.settings.value)
                         : (musicManager.shuffleState
-                            ? MusicLongPressUI.accessoryHelp(primary: "Shuffle — tap for Smart Shuffle", target: .shuffle, settings: settings.settings.value)
+                            ? MusicLongPressUI.accessoryHelp(primary: isSpotifyPlaying ? "Shuffle — tap for Smart Shuffle" : "Shuffle — tap for Off", target: .shuffle, settings: settings.settings.value)
                             : MusicLongPressUI.accessoryHelp(primary: "Off — tap for Shuffle", target: .shuffle, settings: settings.settings.value))
                 )
 

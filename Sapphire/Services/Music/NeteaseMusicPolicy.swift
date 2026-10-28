@@ -59,3 +59,30 @@ enum NeteaseMusicPolicy {
         return ids.count == 1 ? ids.first : nil
     }
 }
+
+/// Shared by the player view and regression probe so service support cannot be
+/// wired to command handlers while silently filtered out of the UI.
+enum MusicPlayerControlsPolicy {
+    static func supportsTrackActions(bundleID: String?) -> Bool {
+        bundleID == "com.spotify.client" || bundleID == "com.apple.Music"
+            || NeteaseMusicPolicy.isSource(bundleID)
+    }
+
+    static func buttons(bundleID: String?, isPhone: Bool, order: [String], enabled: Set<String>, neteaseControlsEnabled: Bool) -> [String] {
+        guard !isPhone else { return [] }
+        if NeteaseMusicPolicy.isSource(bundleID) {
+            // Old installations have like/shuffle/repeat disabled by default.
+            // NetEase has its own explicit visibility preference, enabled on upgrade.
+            let actions = neteaseControlsEnabled ? ["like", "playlists", "shuffle", "repeat"] : []
+            return actions + (enabled.contains("devices") ? ["devices"] : [])
+        }
+        return order.filter { button in
+            switch button {
+            case "like", "shuffle", "repeat":
+                return supportsTrackActions(bundleID: bundleID) && enabled.contains(button)
+            case "playlists", "devices": return enabled.contains(button)
+            default: return false
+            }
+        }
+    }
+}

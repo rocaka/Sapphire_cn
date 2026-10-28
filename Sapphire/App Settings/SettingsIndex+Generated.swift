@@ -401,6 +401,7 @@ extension SettingsIndex {
         .init(key: "mouseSmoothScrollSpeed", title: "Glide Distance", detail: nil, section: .mouse, range: (0.25)...(3.0), options: nil),
         .init(key: "musicDevicesButtonEnabled", title: nil, detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicHoldSkipForSecondaryActions", title: nil, detail: nil, section: nil, range: nil, options: nil),
+        .init(key: "neteaseShowPlayerControls", title: "Show NetEase playback controls", detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicLikeButtonEnabled", title: nil, detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicLiveActivityEnabled", title: nil, detail: nil, section: .liveActivities, range: nil, options: nil),
         .init(key: "musicLiveActivityRightTextMode", title: "Right-side track info", detail: "Show title and artist next to the album art. Phone only is the default — Mac music keeps the compact waveform.", section: .music, range: nil, options: MusicLiveActivityRightTextMode.allCases.map(\.rawValue)),
