@@ -17,6 +17,10 @@ jobs:
           git clone https://github.com/cshariq/Sapphire.git upstream
           cd upstream
           git checkout 792f9b4ea3d556d7566fbc38592fe54e88d89dc0
+          git config user.name rocaka
+          git config user.email rocaka@users.noreply.github.com
+          git rm .github/workflows/cla.yml
+          git commit -m "chore: disable upstream CLA bot in Chinese fork"
           git remote add destination https://github.com/rocaka/Sapphire_cn.git
           gh auth setup-git
           git push destination HEAD:refs/heads/main
