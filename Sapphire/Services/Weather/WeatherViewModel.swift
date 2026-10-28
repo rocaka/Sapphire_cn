@@ -60,7 +60,7 @@ class WeatherViewModel: ObservableObject {
     var weatherData: ProcessedWeatherData? { state.weatherData }
     var locationName: String { state.locationName }
     var temperature: String { state.temperature }
-    var conditionDescription: String { state.conditionDescription }
+    var conditionDescription: String { L10n.string(state.conditionDescription == "Clear" ? "Clear Skies" : state.conditionDescription) }
     var highLowTemp: String { state.highLowTemp }
     var feelsLike: String { state.feelsLike }
     var windInfo: String { state.windInfo }

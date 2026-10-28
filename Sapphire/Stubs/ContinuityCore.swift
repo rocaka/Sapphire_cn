@@ -8,6 +8,7 @@
 import AppKit
 import Combine
 import SwiftUI
+import UserNotifications
 
 enum ContinuityDeviceType: String, Codable, Sendable {
     case phone, tablet, mac, unknown
@@ -41,6 +42,9 @@ enum ContinuityNetworkKind: String, Codable {
 struct ContinuityConnectivitySnapshot: Equatable {
     enum Severity: Equatable {
         case noDevice, healthy, degraded, offline
+        var tint: Color {
+            switch self { case .healthy: .green; case .degraded: .orange; case .offline: .red; case .noDevice: .secondary }
+        }
     }
 
     var severity: Severity = .noDevice
@@ -85,6 +89,7 @@ final class ContinuityPeer: Identifiable {
     }
 
     var displayName: String { record.name }
+    func send<T>(_ message: ContinuityPublicMessage, _ payload: T) {}
     func supports(_ capability: ContinuityCapability) -> Bool { capabilities.contains(capability) }
 }
 
@@ -155,6 +160,7 @@ struct ContinuityExternalActivity: Codable, Equatable, Identifiable {
     var progress: ContinuityActivityProgress?
 
     var id: String { key }
+    var shortText: String { text ?? title }
 }
 
 struct ContinuityLiveExternalActivity: Identifiable, Equatable {
@@ -217,6 +223,10 @@ final class ContinuityManager {
 
     private init() {}
 
+    let messagesBridge = ContinuityResponseBridge()
+    let callsBridge = ContinuityResponseBridge()
+    let focusModeManager = ContinuityFocusModePlaceholder()
+    func openWidgets() {}
     func startIfEnabled() {}
     func stop() {}
     func sendMediaCommand(_ action: ContinuityMediaAction, seekMs: Int? = nil) {}
@@ -269,5 +279,42 @@ struct ContinuityNotificationActivityView: View {
 
 extension Notification.Name {
     static let continuityClipboardReceived = Notification.Name("com.rocaka.sapphirecn.continuity.clipboardReceived")
+}
+// Compatibility surface only; the public checkout has no phone transport.
+struct ContinuityFocusModePlaceholder { let isApplyingRemoteFocus = false }
+struct ContinuityResponseBridge {
+    func handleNotificationResponse(_ response: UNNotificationResponse) {}
+}
+enum ContinuityPublicMessage { case earbudCommand, earbudStatus }
+struct ContinuityEarbudCommand {
+    var action: String
+    var stringValue: String? = nil
+    var boolValue: Bool? = nil
+    var intValue: Int? = nil
+}
+struct ContinuityEarbudStatus: Equatable {
+    var snapshot: EarbudControlSnapshot
+}
+enum ContinuityBluetoothAddress {
+    static func normalize(_ input: String?) -> String? {
+        guard let input else { return nil }
+        let pattern = #"(?:[0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}"#
+        if let range = input.range(of: pattern, options: .regularExpression) {
+            return input[range].replacingOccurrences(of: ":", with: "-").uppercased()
+        }
+        guard input.count == 12, input.allSatisfy({ $0.isHexDigit }) else { return nil }
+        return stride(from: 0, to: 12, by: 2).map { offset in
+            let start = input.index(input.startIndex, offsetBy: offset)
+            return String(input[start..<input.index(start, offsetBy: 2)])
+        }.joined(separator: "-").uppercased()
+    }
+    static func matches(_ lhs: String?, _ rhs: String?) -> Bool {
+        guard let lhs = normalize(lhs), let rhs = normalize(rhs) else { return false }
+        return lhs == rhs
+    }
+}
+enum ContinuityLog {
+    static func f(_ message: String) { NSLog("[Sapphire CN] %@", message) }
+    static func fErr(_ message: String) { NSLog("[Sapphire CN] %@", message) }
 }
 #endif

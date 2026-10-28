@@ -72,7 +72,7 @@ struct FocusStreakPanelView: View {
                         .foregroundColor(.white)
                         .monospacedDigit()
                         .contentTransition(.numericText())
-                    Text(snapshot.streak == 1 ? "day" : "days")
+                    Text(verbatim: L10n.string(snapshot.streak == 1 ? "day" : "days"))
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.white.opacity(0.55))
                 }

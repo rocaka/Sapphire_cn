@@ -88,7 +88,7 @@ struct MirrorPlayerView: View {
                                 .foregroundStyle(Color.red.opacity(0.9))
                         }
                     } else {
-                        Text(camera.isDenied ? "No access" : (camera.isError ? "Unavailable" : "Camera off"))
+                        Text(camera.isDenied ? L10n.string("No access") : (camera.isError ? L10n.string("Unavailable") : L10n.string("Camera off")))
                             .font(.system(size: 9, weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                     }
@@ -211,7 +211,7 @@ struct MirrorPlayerView: View {
             }
 
             VStack(spacing: 6) {
-                Text(camera.isDenied ? "Camera Access Denied" : (camera.isError ? "Camera Unavailable" : (camera.isPending ? "Starting Camera…" : "Camera Off")))
+                Text(camera.isDenied ? L10n.string("Camera Access Denied") : (camera.isError ? L10n.string("Camera Unavailable") : (camera.isPending ? L10n.string("Starting Camera…") : L10n.string("Camera Off"))))
                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                 Text(offlineMessage)
                     .font(.system(size: 12))
@@ -369,7 +369,7 @@ struct MirrorFullscreenView: View {
                 Spacer()
 
                 if !camera.isLive {
-                    Text(camera.isDenied ? "Camera access denied" : "Camera off")
+                    Text(verbatim: L10n.string(camera.isDenied ? "Camera access denied" : "Camera off"))
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(.white.opacity(0.7))
                         .padding(.bottom, 40)

@@ -726,6 +726,7 @@ final class EarbudControlManager: ObservableObject {
     }
 }
 
+#if SAPPHIRE_FULL_BUILD
 extension ContinuityEarbudStatus {
     init(snapshot: EarbudControlSnapshot) {
         self.init(
@@ -858,3 +859,4 @@ extension ContinuityEarbudStatus {
         return snap
     }
 }
+#endif

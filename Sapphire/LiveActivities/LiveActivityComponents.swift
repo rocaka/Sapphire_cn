@@ -568,7 +568,7 @@ struct MusicUpNextView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
 
                 VStack(alignment: .leading, spacing: 1) {
-                    Text(title.isEmpty ? "Unknown track" : title)
+                    Text(title.isEmpty ? L10n.string("Unknown track") : title)
                         .font(.system(size: 11, weight: .bold, design: .rounded))
                         .foregroundColor(.white.opacity(0.95))
                         .lineLimit(1)
@@ -2119,7 +2119,7 @@ struct OTPLiveActivityView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Image(systemName: didCopy ? "checkmark" : "doc.on.doc")
-                        Text(didCopy ? "Copied" : "Copy code")
+                        Text(verbatim: L10n.string(didCopy ? "Copied" : "Copy code"))
                     }
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .frame(maxWidth: .infinity)

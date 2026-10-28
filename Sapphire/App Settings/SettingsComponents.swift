@@ -819,12 +819,12 @@ struct SettingsSectionHeader: View {
     var description: LocalizedStringKey? = nil
 
     var body: some View {
-        Text(verbatim: L10n.string(title))
+        Text(title)
             .font(.headline)
             .padding([.top, .horizontal])
             .frame(maxWidth: .infinity, alignment: .leading)
         if let description {
-            Text(verbatim: L10n.string(description))
+            Text(description)
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .padding(.horizontal)

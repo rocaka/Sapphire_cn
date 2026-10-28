@@ -30,7 +30,7 @@ struct DeviceAdjustView: View {
         VStack(spacing: 0) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(device.isOutput ? "MASTER ADJUSTMENTS" : "MICROPHONE CONFIGURATION")
+                    Text(verbatim: L10n.string(device.isOutput ? "MASTER ADJUSTMENTS" : "MICROPHONE CONFIGURATION"))
                         .font(.system(size: 10, weight: .black))
                         .foregroundStyle(.white.opacity(0.4))
                         .tracking(1.2)

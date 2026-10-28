@@ -120,7 +120,7 @@ struct TimerDetailView: View {
                                 .font(.caption)
                                 .foregroundColor(.orange)
                         } else {
-                            Text(timer.isRunning ? "Running" : "Paused")
+                            Text(verbatim: L10n.string(timer.isRunning ? "Running" : "Paused"))
                                 .font(.caption)
                                 .foregroundColor(timer.isRunning ? .orange : .secondary)
                         }
@@ -188,7 +188,7 @@ struct TimerDetailView: View {
                         Image(systemName: "timer")
                         SystemTimerClockText(timer: timer)
                         Spacer()
-                        Text(timer.state == .system ? "Running" : "Paused")
+                        Text(verbatim: L10n.string(timer.state == .system ? "Running" : "Paused"))
                             .font(.caption)
                             .foregroundColor(timer.state == .system ? .orange : .secondary)
                     }
@@ -213,7 +213,7 @@ struct TimerDetailView: View {
                             Image(systemName: "stopwatch")
                             SystemStopwatchClockText(stopwatch: stopwatch)
                             Spacer()
-                            Text(stopwatch.state == .stopwatch ? "Running" : "Paused")
+                            Text(verbatim: L10n.string(stopwatch.state == .stopwatch ? "Running" : "Paused"))
                                 .font(.caption)
                                 .foregroundColor(stopwatch.state == .stopwatch ? .green : .secondary)
                         }

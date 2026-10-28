@@ -919,7 +919,7 @@ struct NextTrackInline: View {
                         .font(.system(size: 7, weight: .heavy, design: .rounded))
                         .kerning(1.1)
                         .foregroundStyle(accent)
-                    Text(title.isEmpty ? "Unknown track" : title)
+                    Text(title.isEmpty ? L10n.string("Unknown track") : title)
                         .font(.system(size: 8, weight: .bold, design: .rounded))
                         .foregroundStyle(.primary)
                         .lineLimit(1)

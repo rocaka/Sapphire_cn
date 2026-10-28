@@ -67,4 +67,7 @@ enum SubscriptionRevocationReason: String {
 final class ScreenPerception {
     func captureAnnotatedScreen() async -> (NSImage?, [String]) { (nil, []) }
 }
+struct SEQuitProtectionRulesView: View {
+    var body: some View { UnavailableFeatureView(name: L10n.string("Quit & Close Protection")) }
+}
 #endif

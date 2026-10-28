@@ -33,7 +33,7 @@ struct NotesWidgetView: View {
     private static func suggestionLabel(for note: QuickNote) -> String {
         let title = note.title.trimmingCharacters(in: .whitespacesAndNewlines)
         let body = note.body.trimmingCharacters(in: .whitespacesAndNewlines)
-        return title.isEmpty ? (body.isEmpty ? "Untitled" : body) : title
+        return title.isEmpty ? (body.isEmpty ? L10n.string("Untitled") : body) : title
     }
 }
 
@@ -134,7 +134,7 @@ struct NotesPlayerView: View {
                     .frame(width: 3, height: 40)
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 6) {
-                        Text(note.title.isEmpty ? "Untitled" : note.title)
+                        Text(note.title.isEmpty ? L10n.string("Untitled") : note.title)
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundStyle(note.isDone ? .secondary : .primary)
                             .strikethrough(note.isDone, color: .secondary)
@@ -145,7 +145,7 @@ struct NotesPlayerView: View {
                                 .foregroundStyle(.green.opacity(0.9))
                         }
                     }
-                    Text(note.body.isEmpty ? "Empty note" : note.body)
+                    Text(note.body.isEmpty ? L10n.string("Empty note") : note.body)
                         .font(.system(size: 11))
                         .foregroundStyle(.secondary)
                         .lineLimit(2)

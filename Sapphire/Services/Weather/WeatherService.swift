@@ -66,7 +66,7 @@ final class WeatherService: NSObject, @MainActor CLLocationManagerDelegate {
 
     private static let hourlyTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "ha"
+        formatter.setLocalizedDateFormatFromTemplate("j")
         return formatter
     }()
 

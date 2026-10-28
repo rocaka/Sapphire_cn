@@ -118,7 +118,7 @@ struct BatteryDetailView: View {
                         .transition(.opacity)
                 }
                 Spacer()
-                Text(stats.timeRemaining == "--" ? "No estimate" : stats.timeRemaining)
+                Text(stats.timeRemaining == "--" ? L10n.string("No estimate") : stats.timeRemaining)
                     .font(.system(size: 11, weight: .medium, design: .rounded))
                     .foregroundColor(.white.opacity(0.6))
             }

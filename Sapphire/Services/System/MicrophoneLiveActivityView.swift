@@ -25,7 +25,7 @@ struct MicrophoneLiveActivityViewRight: View {
     let action: () -> Void
     var body: some View {
         Button(action: action) {
-            Text(mic.isMuted ? "Muted" : "Active")
+            Text(verbatim: L10n.string(mic.isMuted ? "Muted" : "Active"))
                 .font(.system(size: 12, weight: .semibold, design: .rounded))
                 .foregroundColor(mic.isMuted ? Color.red : Color.orange)
         }

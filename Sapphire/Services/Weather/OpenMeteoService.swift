@@ -101,7 +101,7 @@ private func wmcCodeToTWCIcon(_ wmo: Int, isDay: Bool) -> Int {
 
 private func wmcDescription(_ wmo: Int) -> String {
     switch wmo {
-    case 0:      return "Clear"
+    case 0:      return "Clear Skies"
     case 1:      return "Mostly Clear"
     case 2:      return "Partly Cloudy"
     case 3:      return "Overcast"
@@ -176,7 +176,7 @@ final class OpenMeteoService {
 
     private static let hourlyFormatter: DateFormatter = {
         let f = DateFormatter()
-        f.dateFormat = "ha"
+        f.setLocalizedDateFormatFromTemplate("j")
         return f
     }()
 

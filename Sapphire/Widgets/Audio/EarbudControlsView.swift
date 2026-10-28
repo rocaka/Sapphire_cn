@@ -107,7 +107,7 @@ struct EarbudControlsView: View {
     private var header: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(snap.vendor == .sony ? "SONY HEADPHONES" : "GALAXY BUDS")
+                Text(verbatim: L10n.string(snap.vendor == .sony ? "SONY HEADPHONES" : "GALAXY BUDS"))
                     .font(.system(size: 10, weight: .black))
                     .foregroundStyle(.white.opacity(0.4))
                     .tracking(1.2)
@@ -461,7 +461,7 @@ struct EarbudControlsView: View {
                                     .foregroundStyle(.cyan)
                                     .frame(width: 22)
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text(snap.fitTesting ? "Testing fit…" : "Earbud Fit Test")
+                                    Text(verbatim: L10n.string(snap.fitTesting ? "Testing fit…" : "Earbud Fit Test"))
                                         .font(.system(size: 13, weight: .semibold))
                                     Text(
                                         snap.fitTesting
@@ -578,9 +578,9 @@ struct EarbudControlsView: View {
                 .foregroundStyle(finding ? Color.orange : Color.accentColor)
                 .frame(width: 22)
             VStack(alignment: .leading, spacing: 1) {
-                Text(finding ? "Ringing…" : "Find Earbuds")
+                Text(verbatim: L10n.string(finding ? "Ringing…" : "Find Earbuds"))
                     .font(.system(size: 13, weight: .semibold))
-                Text(finding ? "Playing a tone on both buds" : "Ring them if you set them down")
+                Text(verbatim: L10n.string(finding ? "Playing a tone on both buds" : "Ring them if you set them down"))
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -590,7 +590,7 @@ struct EarbudControlsView: View {
                 finding.toggle()
                 manager.find(finding)
             } label: {
-                Text(finding ? "Stop" : "Ring")
+                Text(verbatim: L10n.string(finding ? "Stop" : "Ring"))
                     .font(.system(size: 11, weight: .semibold))
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)

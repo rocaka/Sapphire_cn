@@ -373,10 +373,10 @@ final class ArchiveExtractor: ObservableObject {
         }
 
         if folderName != nil {
-            QuarantineAttribute.copy(from: [quarantineSource], to: destination, recursively: true)
+            try QuarantineAttribute.copy(from: [quarantineSource], to: destination, recursively: true)
         } else {
             for item in placed {
-                QuarantineAttribute.copy(from: [quarantineSource], to: item, recursively: true)
+                try QuarantineAttribute.copy(from: [quarantineSource], to: item, recursively: true)
             }
         }
 

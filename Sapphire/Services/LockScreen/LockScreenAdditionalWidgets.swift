@@ -240,12 +240,12 @@ struct LockScreenCaffeineMiniWidget: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Caffeine")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    Text(caffeineManager.isActive ? "Keeping awake" : "Tap to enable")
+                    Text(verbatim: L10n.string(caffeineManager.isActive ? "Keeping awake" : "Tap to enable"))
                         .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
                 Spacer(minLength: 0)
-                Text(caffeineManager.isActive ? "On" : "Off")
+                Text(verbatim: L10n.string(caffeineManager.isActive ? "On" : "Off"))
                     .font(.system(size: 13, weight: .bold, design: .rounded))
                     .foregroundStyle(caffeineManager.isActive ? .orange : .secondary)
                     .padding(.horizontal, 10)
@@ -271,7 +271,7 @@ struct LockScreenTimerMiniWidget: View {
                 .background(Color.orange.opacity(0.15), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(timerManager.activeTimer == .stopwatch ? "Stopwatch" : "Timer")
+                Text(verbatim: L10n.string(timerManager.activeTimer == .stopwatch ? "Stopwatch" : "Timer"))
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
                 if timerManager.isRunning {
                     LockScreenTimerClockText(timerManager: timerManager, fontSize: 18)

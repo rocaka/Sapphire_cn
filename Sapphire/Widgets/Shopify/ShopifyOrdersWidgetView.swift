@@ -36,7 +36,7 @@ struct ShopifyOrdersWidgetView: View {
                         .foregroundStyle(.green)
                 }
             } else {
-                Text(shopify.isConfigured ? "No orders" : "Set up Shopify")
+                Text(verbatim: L10n.string(shopify.isConfigured ? "No orders" : "Set up Shopify"))
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .lineLimit(1)
             }

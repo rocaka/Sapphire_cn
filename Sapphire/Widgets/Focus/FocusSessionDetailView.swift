@@ -157,7 +157,7 @@ struct FocusSessionDetailView: View {
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: focusManager.isPaused ? "play.fill" : "pause.fill")
-                            Text(focusManager.isPaused ? "Resume" : "Pause")
+                            Text(verbatim: L10n.string(focusManager.isPaused ? "Resume" : "Pause"))
                         }
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundColor(.white)

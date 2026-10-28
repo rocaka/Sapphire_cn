@@ -825,7 +825,7 @@ struct AppsSettingsView: View {
 
             Picker("Update filter", selection: $updateFilter) {
                 ForEach(AppUpdateFilter.allCases) { filter in
-                    Text(filter.rawValue).tag(filter)
+                    Text(verbatim: L10n.string(filter.rawValue)).tag(filter)
                 }
             }
             .labelsHidden()
@@ -848,7 +848,7 @@ struct AppsSettingsView: View {
                     ContentUnavailableView(
                         "No matching apps",
                         systemImage: updateFilter == .updates ? "checkmark.circle" : "magnifyingglass",
-                        description: Text(updateFilter == .updates ? "No installed app updates are currently available." : "Try a different filter or search.")
+                        description: Text(verbatim: L10n.string(updateFilter == .updates ? "No installed app updates are currently available." : "Try a different filter or search."))
                     )
                     .frame(minHeight: 150)
                 } else {
@@ -2986,7 +2986,7 @@ struct LiveActivitiesSettingsView: View {
                         Spacer()
                         Picker("Persistent Activity", selection: persistentActivityBinding) {
                             ForEach(PersistentActivitySelection.allCases) { option in
-                                Text(option.rawValue).tag(option)
+                                Text(verbatim: L10n.string(option.rawValue)).tag(option)
                             }
                         }
                         .labelsHidden()
@@ -3169,7 +3169,7 @@ fileprivate struct SensorSelectionView: View {
                     List {
                         ForEach(SensorGroup.allCases, id: \.self) { group in
                             if let groupSensors = groupedSensors[group], !groupSensors.isEmpty {
-                                Section(header: Text(group.rawValue).font(.headline)) {
+                                Section(header: Text(verbatim: L10n.string(group.rawValue)).font(.headline)) {
                                     ForEach(groupSensors, id: \.key) { sensor in
                                         Toggle(sensor.name, isOn: Binding<Bool>(
                                             get: { selectedSensorKeys.contains(sensor.key) },
@@ -3270,7 +3270,7 @@ struct ShortcutsSettingsView: View {
                         ScrollView {
                             LazyVStack(spacing: 0) {
                                 if filteredAvailableShortcuts.isEmpty {
-                                    Text(searchText.isEmpty ? "No shortcuts found." : "No shortcuts match your search.")
+                                    Text(verbatim: L10n.string(searchText.isEmpty ? "No shortcuts found." : "No shortcuts match your search."))
                                         .font(.caption).foregroundColor(.secondary).padding()
                                 } else {
                                     ForEach(filteredAvailableShortcuts) { shortcut in
@@ -4103,7 +4103,7 @@ private struct WallpaperFileRow: View {
                     Text(media.url.lastPathComponent)
                         .font(.caption.weight(.medium))
                         .lineLimit(1)
-                    Text(media.isVideo ? "Live video" : "Image")
+                    Text(verbatim: L10n.string(media.isVideo ? "Live video" : "Image"))
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 } else if let path, !path.isEmpty {
@@ -5608,7 +5608,7 @@ struct ProximityUnlockSettingsView: View {
                             if authManager.scannedDevices.isEmpty && authManager.isScanning {
                                 Text("Scanning...").font(.caption).foregroundColor(.secondary).frame(minHeight: 80)
                             } else if filteredScannedDevices.isEmpty {
-                                 Text(showUnnamedDevices ? "No devices found. Ensure device is nearby and discoverable." : "No named devices found. Try enabling 'Show unnamed devices'.")
+                                 Text(verbatim: L10n.string(showUnnamedDevices ? "No devices found. Ensure device is nearby and discoverable." : "No named devices found. Try enabling 'Show unnamed devices'."))
                                      .font(.caption).foregroundColor(.secondary).frame(minHeight: 80).padding(.horizontal).multilineTextAlignment(.center)
                             } else {
                                 ForEach(filteredScannedDevices) { device in
@@ -7138,7 +7138,7 @@ struct BatterySpecsCard: View {
                         powerModeManager.enableLowPowerMode()
                     }
                 }) {
-                    Text(powerModeManager.isLowPowerModeActive ? "Enabled" : "Disabled")
+                    Text(verbatim: L10n.string(powerModeManager.isLowPowerModeActive ? "Enabled" : "Disabled"))
                         .font(.system(size: 12)).fontWeight(.medium)
                         .foregroundColor(powerModeManager.isLowPowerModeActive ? .green : .primary)
                         .padding(.horizontal, 8)
@@ -11067,7 +11067,7 @@ struct ModernChannelSwitcher: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(ReleaseChannel.allCases, id: \.self) { channel in
-                Text(channel == .stable ? "Stable" : "Beta")
+                Text(verbatim: L10n.string(channel == .stable ? "Stable" : "Beta"))
                     .font(.subheadline.weight(selection == channel ? .semibold : .regular))
                     .foregroundStyle(selection == channel ? .white : .secondary)
                     .padding(.horizontal, 20)
@@ -12541,7 +12541,7 @@ struct IntelligenceRunnerView: View {
                 HStack(spacing: 6) {
                     Image(systemName: result.success ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                         .foregroundStyle(result.success ? .green : .orange)
-                    Text(result.success ? "Completed" : "Partial")
+                    Text(verbatim: L10n.string(result.success ? "Completed" : "Partial"))
                         .font(.caption.bold())
                     Text("· \(result.subtasksCompleted)/\(result.subtasksTotal) subtasks · \(result.actionsTaken) actions · \(String(format: "%.1fs", result.duration))")
                         .font(.caption)

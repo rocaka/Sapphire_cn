@@ -593,7 +593,7 @@ struct QueueAndPlaylistsView: View {
         let details = musicManager.appleNowPlaying
         return VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(musicManager.title ?? "Not Playing")
+                Text(musicManager.title ?? L10n.string("Not Playing"))
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .lineLimit(2)
                 Button {
@@ -1050,7 +1050,7 @@ struct QueueAndPlaylistsView: View {
     private func nowPlayingHeroCard(_ nowPlaying: PlayerState.Track) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(nowPlaying.metadata?.title ?? "Unknown Track")
+                Text(nowPlaying.metadata?.title ?? L10n.string("Unknown Track"))
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .lineLimit(2)
 
@@ -1058,7 +1058,7 @@ struct QueueAndPlaylistsView: View {
                     openArtistFromNowPlaying(fallbackName: nowPlaying.metadata?.artistName)
                 } label: {
                     HStack(spacing: 4) {
-                        Text(nowPlaying.metadata?.artistName ?? "Unknown Artist")
+                        Text(nowPlaying.metadata?.artistName ?? L10n.string("Unknown Artist"))
                             .font(.system(size: 13, weight: .semibold, design: .rounded))
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -1255,7 +1255,7 @@ struct QueueAndPlaylistsView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Library")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
-                    Text(isAppleMusic ? "Your Apple Music playlists" : "Playlists sorted by Spotify")
+                    Text(verbatim: L10n.string(isAppleMusic ? "Your Apple Music playlists" : "Playlists sorted by Spotify"))
                         .font(.system(size: 11, weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                 }
@@ -2048,11 +2048,11 @@ struct NativeQueueTrackRow: View {
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(track.metadata?.title ?? "Unknown Track")
+                        Text(track.metadata?.title ?? L10n.string("Unknown Track"))
                             .font(.system(size: 12, weight: .semibold, design: .rounded))
                             .lineLimit(1)
                             .foregroundStyle(.primary)
-                        Text(track.metadata?.artistName ?? "Unknown Artist")
+                        Text(track.metadata?.artistName ?? L10n.string("Unknown Artist"))
                             .font(.system(size: 10, weight: .medium, design: .rounded))
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -3498,7 +3498,7 @@ struct PlaylistView: View {
                         .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundStyle(.secondary)
                     if let perms = musicManager.spotifyPrivateAPI.currentPlaylistPermissions {
-                        Text(perms.canEditItems ? "Editable" : "View only")
+                        Text(verbatim: L10n.string(perms.canEditItems ? "Editable" : "View only"))
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                             .padding(.horizontal, 7)
                             .padding(.vertical, 3)
@@ -3613,7 +3613,7 @@ struct PlaylistView: View {
             Task { await musicManager.spotifyPrivateAPI.logSortTelemetry() }
         } label: {
             HStack(spacing: 3) {
-                Text(option.rawValue)
+                Text(verbatim: L10n.string(option.rawValue))
                 if sortOption == option {
                     Image(systemName: sortDirection == .ascending ? "chevron.up" : "chevron.down")
                         .font(.system(size: 8, weight: .bold))
@@ -5411,7 +5411,7 @@ struct AppleMusicSearchView: View {
             Image(systemName: "music.note.house.fill")
                 .font(.system(size: 30, weight: .light))
                 .foregroundStyle(.pink)
-            Text(denied ? "Apple Music access is off" : "Connect Apple Music")
+            Text(verbatim: L10n.string(denied ? "Apple Music access is off" : "Connect Apple Music"))
                 .font(.system(size: 14, weight: .bold, design: .rounded))
             Text(denied
                  ? "Allow Sapphire under System Settings → Privacy & Security → Media & Apple Music."
@@ -5429,7 +5429,7 @@ struct AppleMusicSearchView: View {
                     Task { await apple.requestAuthorization() }
                 }
             } label: {
-                Text(denied ? "Open Privacy Settings" : "Allow Access")
+                Text(verbatim: L10n.string(denied ? "Open Privacy Settings" : "Allow Access"))
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
                     .padding(.horizontal, 14)
                     .padding(.vertical, 7)
@@ -5809,7 +5809,7 @@ struct AppleMusicSearchView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 11, weight: .bold))
-                    Text(vm.route.count > 1 ? "Back" : "Search")
+                    Text(verbatim: L10n.string(vm.route.count > 1 ? "Back" : "Search"))
                         .font(.system(size: 11, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.secondary)

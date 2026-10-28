@@ -83,6 +83,7 @@
 "After enabling it, reopen this menu." = "启用后请重新打开此菜单。";
 "Agent" = "智能体";
 "AirDrop" = "隔空投送";
+"All" = "全部";
 "All Clear" = "一切正常";
 "All Devices" = "所有设备";
 "All Displays" = "所有显示器";
@@ -91,6 +92,7 @@
 "All layouts added" = "已添加所有布局";
 "All widgets and automations" = "所有小组件与自动化";
 "All-Day" = "全天";
+"Allow Access" = "允许访问";
 "Allow Lyrics From:" = "允许以下来源的歌词：";
 "Allow Notifications From:" = "允许来自以下应用的通知：";
 "Allow any widget to be enabled even when Sapphire estimates there is not enough notch space." = "即使 Sapphire 估计刘海空间不足，也允许启用任意小组件。";
@@ -131,6 +133,7 @@
 "App-Specific Overrides" = "按应用覆盖";
 "Appearance" = "外观";
 "Appearance For" = "外观适用对象";
+"Apple Music access is off" = "Apple Music 访问已关闭";
 "Apple Music connection" = "Apple Music 连接";
 "Apple limits brightness to preserve battery life. While this feature is system-controlled and there are no known side-effects, you should use this feature at your own risk." = "Apple 会限制亮度以延长续航。此功能由系统控制，目前无已知副作用，但使用风险由你自行承担。";
 "Application did not terminate." = "应用未退出。";
@@ -271,7 +274,13 @@
 "Calls Through Buds" = "通过耳机通话";
 "Calm" = "平缓";
 "Camera" = "摄像头";
+"Camera Access Denied" = "摄像头访问被拒绝";
+"Camera Denied" = "摄像头已被拒绝";
+"Camera Off" = "摄像头已关闭";
 "Camera Rotation" = "摄像头旋转角度";
+"Camera Unavailable" = "摄像头不可用";
+"Camera access denied" = "摄像头访问被拒绝";
+"Camera off" = "摄像头已关闭";
 "Cancel" = "取消";
 "Cancel Calibration" = "取消校准";
 "Cancel scan" = "取消扫描";
@@ -329,6 +338,8 @@
 "Clear Bass" = "清晰低音";
 "Clear Finished" = "清除已完成";
 "Clear History" = "清除历史记录";
+"Clear Night" = "晴夜";
+"Clear Skies" = "晴空";
 "Clear When Mac Sleeps" = "Mac 睡眠时清除";
 "Clear When Screen Locks" = "锁屏时清除";
 "Clear shortcut" = "清除快捷键";
@@ -355,6 +366,7 @@
 "Close" = "关闭";
 "Close and stop camera" = "关闭并停止摄像头";
 "Closing the main widget view." = "关闭主要小组件视图。";
+"Cloudy" = "多云";
 "Collapse Damping" = "收起阻尼";
 "Collapse Response" = "收起响应";
 "Collapsed Notch Appearance" = "收起时的刘海外观";
@@ -369,6 +381,7 @@
 "Configuration" = "配置";
 "Configure Sapphire content and behavior while your Mac is locked." = "配置 Mac 锁定时 Sapphire 的内容和行为。";
 "Configure window snapping behavior, layouts, and zone actions." = "配置窗口吸附行为、布局和区域操作。";
+"Connect Apple Music" = "连接 Apple Music";
 "Connect Shopify in the Shopify section of Settings to view recent orders." = "在设置的 Shopify 部分连接商店，以查看最近订单。";
 "Connect a Shopify custom app with read_orders access. The Admin API token is stored in the macOS Keychain." = "连接具有 read_orders 权限的 Shopify 自定义应用。管理 API 令牌存储在 macOS 钥匙串中。";
 "Connected" = "已连接";
@@ -389,12 +402,14 @@
 "Control which live activities can surface and auto-expand in the notch." = "控制可在刘海中显示和自动展开的实时活动。";
 "Controls need Accessibility permission; Google Meet also needs permission to control your browser." = "控制操作需要辅助功能权限；Google Meet 还需要控制浏览器的权限。";
 "Convert To" = "转换为";
+"Copied" = "已复制";
 "Copy" = "复制";
 "Copy Command" = "复制命令";
 "Copy Link" = "复制链接";
 "Copy Path" = "复制路径";
 "Copy Text" = "复制文本";
 "Copy again" = "再次复制";
+"Copy code" = "复制验证码";
 "Core app behavior, launch options, animations, and notch controls." = "应用核心行为、启动选项、动画和刘海控制。";
 "Core notch experience" = "刘海核心功能";
 "Corner Radii" = "圆角半径";
@@ -521,6 +536,7 @@
 "Drag files here to add them." = "将文件拖到此处添加。";
 "Drag to set the charge limit — charging pauses at this level to help preserve battery health." = "拖动以设置充电上限，达到此电量时暂停充电以保护电池健康。";
 "Drink plenty of water throughout the day. Dehydration can contribute to dry eyes and eye strain." = "全天适量饮水。缺水可能导致眼睛干涩和视疲劳。";
+"Drizzle" = "毛毛雨";
 "Drop Destinations" = "拖放目标";
 "Drops the speakers to a safe level when headphones go away, and puts their volume back when the headphones return." = "耳机断开时将扬声器降至安全音量，重新连接后恢复。";
 "Duplicate" = "复制";
@@ -529,12 +545,15 @@
 "EQ Bands" = "均衡器频段";
 "Each app is followed the way it reports its own transfers, so you see exact progress where the app provides it." = "根据各应用报告的传输状态跟踪进度；应用提供精确进度时即可显示。";
 "Each profile has its own timer, blocks, and social filters. Sync activation and settings separately." = "每个配置拥有独立计时、屏蔽项和社交过滤条件。启动状态和设置可分别同步。";
+"Earbud Fit Test" = "耳塞贴合度测试";
 "Edit" = "编辑";
 "Edit Custom Configuration" = "编辑自定义配置";
 "Edit Plane" = "编辑窗口方案";
 "Edit Shortcut" = "编辑快捷指令";
+"Editable" = "可编辑";
 "Emoji" = "表情符号";
 "Empty" = "空";
+"Empty note" = "空便笺";
 "Empty the clipboard this long after you copy something." = "复制内容后，经过指定时间清空剪贴板。";
 "Empty the clipboard when the Mac (or its display) sleeps." = "Mac 或显示器睡眠时清空剪贴板。";
 "Empty the clipboard when the screen locks." = "锁屏时清空剪贴板。";
@@ -596,6 +615,7 @@
 "Error" = "错误";
 "Estimated Time" = "预计时间";
 "Evaluate profile conditions in the background to reveal hidden items automatically" = "在后台检查配置条件并自动展开隐藏项目";
+"Event" = "日程";
 "Every 20 minutes, take a 20-second break to look at something 20 feet away." = "每 20 分钟休息 20 秒，望向约 6 米外的物体。";
 "Every 20 minutes, take a 20-second break to look at something 20 feet away. This helps reduce eye strain and gives eye muscles a break." = "每 20 分钟休息 20 秒，望向 20 英尺（约 6 米）外的物体，减轻视疲劳并放松眼部肌肉。";
 "Every Day" = "每天";
@@ -620,6 +640,7 @@
 "Extract Text" = "提取文本";
 "Extract ZIP, RAR, 7-Zip, TAR, and other archives — or auto-mount and install disk images (DMGs) — from anywhere." = "在任意位置解压 ZIP、RAR、7-Zip、TAR 等压缩包，或自动挂载并安装 DMG 磁盘映像。";
 "Extras shown in the music player. Each one applies to every service that supports it." = "音乐播放器的附加功能，适用于所有支持的服务。";
+"Extreme" = "极高";
 "Eye Break" = "护眼休息";
 "Eye Break Status" = "护眼休息状态";
 "Eye Health" = "眼部健康";
@@ -631,6 +652,7 @@
 "Fade Bottom Edge" = "底部边缘渐隐";
 "Fade the lower edge of the notch from black to transparent." = "让刘海底部边缘从黑色渐变为透明。";
 "Failed" = "失败";
+"Fair" = "晴朗";
 "Fan Control" = "风扇控制";
 "Fanless Macs (some MacBook Air models) will show this permanently. Otherwise, ensure the Sapphire helper is installed and retry." = "无风扇 Mac（部分 MacBook Air 机型）会始终显示此提示。其他机型请确认已安装 Sapphire 辅助程序后重试。";
 "Fans return to automatic when Sapphire quits." = "Sapphire 退出时风扇恢复自动控制。";
@@ -638,6 +660,7 @@
 "Featured On" = "收录于";
 "Featured Playlists" = "精选播放列表";
 "Feels Like" = "体感温度";
+"Fetching..." = "正在获取…";
 "File Drops" = "文件投放";
 "File Progress" = "文件进度";
 "File Progress (Beta)" = "文件进度（测试版）";
@@ -649,6 +672,7 @@
 "Filter notifications to only display when a code (OTP) is detected." = "仅显示检测到验证码的通知。";
 "Finance" = "金融";
 "Find Device by Distance" = "按距离查找设备";
+"Find Earbuds" = "查找耳机";
 "Find by Distance..." = "按距离查找…";
 "Find large folders and reclaim space with transparent, user-approved cleanup." = "查找大型文件夹，在你确认后清理并回收空间。";
 "Find tracks, artists, albums, and playlists." = "查找歌曲、艺人、专辑和播放列表。";
@@ -673,6 +697,7 @@
 "Focus session complete " = "专注时段已完成 ";
 "Focus session started " = "专注时段已开始 ";
 "Focus streak" = "连续专注天数";
+"Foggy" = "雾";
 "For OpenBubbles" = "用于 OpenBubbles";
 "For devices like HomePods, show a device-specific icon in the volume HUD." = "为 HomePod 等设备在音量浮层中显示专属图标。";
 "For displays you haven't switched on or off below, including ones you connect later." = "适用于下方未单独开启或关闭的显示器，包括之后连接的显示器。";
@@ -682,6 +707,8 @@
 "Force light or dark glass, or follow the system." = "强制使用浅色或深色玻璃，或跟随系统。";
 "Forget Device" = "忘记设备";
 "Free" = "免费版";
+"Freezing Drizzle" = "冻毛毛雨";
+"Freezing Rain" = "冻雨";
 "French" = "法语";
 "Frosted Overlay" = "磨砂浮层";
 "Full Disk Access" = "完全磁盘访问权限";
@@ -728,7 +755,12 @@
 "Heads-up display overlays for volume, brightness, keyboard, and media feedback." = "音量、亮度、键盘和媒体反馈浮层。";
 "Health & Wellness" = "健康";
 "Heat Protection" = "过热保护";
+"Heavy Drizzle" = "强毛毛雨";
+"Heavy Rain" = "大雨";
 "Heavy Rotation" = "常听歌曲";
+"Heavy Showers" = "强阵雨";
+"Heavy Snow" = "大雪";
+"Helper is ready. You can continue." = "辅助程序已就绪，可以继续。";
 "Here are the suggested settings based on your measurements." = "以下是根据测量结果建议的设置。";
 "Hidden" = "已隐藏";
 "Hide All" = "全部隐藏";
@@ -787,11 +819,13 @@
 "Icon Hiding" = "图标隐藏";
 "Icon Only" = "仅图标";
 "Icon Only (On/Off)" = "仅图标（开启／关闭）";
+"Icy Fog" = "冰雾";
 "Ignore Concealed Items" = "忽略隐藏内容";
 "Ignore Widget Space Limit" = "忽略小组件空间限制";
 "Ignore this app" = "忽略此应用";
 "Ignored" = "已忽略";
 "Ignored Apps" = "忽略的应用";
+"Image" = "图像";
 "Immunity Days" = "豁免日";
 "Import Available" = "可导入";
 "In Finder" = "在访达中";
@@ -867,6 +901,11 @@
 "Library" = "资料库";
 "Lid Hinge Animation" = "屏幕开合动画";
 "Light" = "浅色";
+"Light Drizzle" = "小毛毛雨";
+"Light Rain" = "小雨";
+"Light Rain Shower" = "小阵雨";
+"Light Showers" = "小阵雨";
+"Light Snow" = "小雪";
 "Like" = "收藏";
 "Limit Visible Apps" = "限制显示的应用数";
 "Line" = "线条";
@@ -883,9 +922,11 @@
 "Live Activity" = "实时活动";
 "Live Canvas Video" = "实时动态封面";
 "Live activities and controls for Zoom, Google Meet, Teams, Slack, Discord, FaceTime, recorders and more." = "为 Zoom、Google Meet、Teams、Slack、Discord、FaceTime 和录制应用等提供实时活动及控制。";
+"Live video" = "动态视频";
 "Loading sensors..." = "正在加载传感器…";
 "Loading…" = "正在加载…";
 "Local Network" = "本地网络";
+"Locating…" = "正在定位…";
 "Location" = "位置";
 "Location & Navigation" = "位置与导航";
 "Location Name" = "位置名称";
@@ -924,6 +965,8 @@
 "Lyrics" = "歌词";
 "Lyrics aren't available for this song." = "此歌曲暂无歌词。";
 "Lyrics aren't available." = "暂无歌词。";
+"MASTER ADJUSTMENTS" = "主音频调整";
+"MICROPHONE CONFIGURATION" = "麦克风配置";
 "MacBook Display Only" = "仅 MacBook 显示器";
 "Made For You" = "为你推荐";
 "Main Display Only" = "仅主显示器";
@@ -953,6 +996,7 @@
 "Menu Bar Tint" = "菜单栏着色";
 "Menu bar readouts and notifications for CPU, memory, disk, and network." = "CPU、内存、磁盘和网络的菜单栏数据显示与通知。";
 "Merch" = "周边商品";
+"Mic" = "麦克风";
 "Microphone" = "麦克风";
 "Microphone Gain Preview" = "麦克风增益预览";
 "Mini Widgets" = "迷你小组件";
@@ -969,12 +1013,15 @@
 "Mixing" = "混音";
 "Mode" = "模式";
 "Model Name" = "模型名称";
+"Moderate" = "中等";
 "Monday" = "星期一";
 "Monitor Clipboard" = "监控剪贴板";
 "Monitor installed apps" = "监控已安装应用";
 "Monitoring" = "系统监控";
 "Monthly" = "每月";
 "More Like This" = "相似内容";
+"Mostly Clear" = "大部晴朗";
+"Mostly Cloudy" = "大部多云";
 "Mouse" = "鼠标";
 "Mouse and trackpad scroll, acceleration, and button customization." = "鼠标与触控板的滚动、加速和按键自定义。";
 "Move Down" = "下移";
@@ -990,6 +1037,7 @@
 "Mute all system output as the lid closes, then unmute when it opens past the threshold." = "合盖时将系统输出静音，重新打开超过阈值后取消静音。";
 "Mute microphone" = "麦克风静音";
 "Mute system audio when nearly closed" = "接近合盖时静音";
+"Muted" = "已静音";
 "My Custom Layouts" = "我的自定义布局";
 "My Mac" = "我的 Mac";
 "Name" = "名称";
@@ -1037,6 +1085,7 @@
 "No Spotify speakers online. Open the Spotify desktop app (or another Connect device) to play audio — Sapphire only controls playback." = "没有在线的 Spotify 播放设备。请打开 Spotify 桌面版或其他 Connect 设备播放音频，Sapphire 仅用于控制播放。";
 "No Timer" = "无计时器";
 "No Wi-Fi network detected" = "未检测到 Wi-Fi 网络";
+"No access" = "无权限";
 "No active timer" = "没有运行中的计时器";
 "No app-specific overrides configured." = "尚未配置按应用覆盖。";
 "No apps chosen yet." = "尚未选择应用。";
@@ -1044,17 +1093,24 @@
 "No custom layouts created yet." = "尚未创建自定义布局。";
 "No destinations enabled" = "未启用目标";
 "No device connected" = "未连接设备";
+"No devices found. Ensure device is nearby and discoverable." = "未找到设备。请确认设备在附近且可被发现。";
 "No devices showed a significant change in distance." = "没有设备显示出明显的距离变化。";
 "No displays detected." = "未检测到显示器。";
+"No estimate" = "暂无估计";
 "No faces registered. Add a face to begin using Face ID." = "尚未录入面容。添加面容以启用面容识别。";
 "No fans detected on this system." = "未检测到系统风扇。";
 "No hidden items" = "没有隐藏项目";
+"No installed app updates are currently available." = "当前没有可用的已安装应用更新。";
+"No items scheduled" = "没有计划项目";
 "No limit — enter any number of minutes" = "无限制，可输入任意分钟数";
 "No limit — enter any number of minutes (0 disables the break)" = "无限制，可输入任意分钟数（0 表示禁用休息）";
 "No longer at this location" = "已不在此位置";
 "No lyrics available." = "暂无歌词。";
 "No macOS Focus modes found. Enable Focus Status permission and create modes in System Settings." = "未找到 macOS 专注模式。请启用专注状态权限，并在系统设置中创建模式。";
 "No matching apps" = "没有匹配的应用";
+"No more items today" = "今天没有更多项目";
+"No named devices found. Try enabling 'Show unnamed devices'." = "未找到有名称的设备，请尝试启用“显示未命名设备”。";
+"No orders" = "暂无订单";
 "No orders found." = "未找到订单。";
 "No playlists available." = "暂无播放列表。";
 "No release notes were included for this version." = "此版本没有更新说明。";
@@ -1062,6 +1118,8 @@
 "No scheduled sessions." = "尚无计划专注时段。";
 "No settings matched \"%@\"." = "没有与“%@”匹配的设置。";
 "No shortcuts added." = "尚未添加快捷指令。";
+"No shortcuts found." = "未找到快捷指令。";
+"No shortcuts match your search." = "没有匹配搜索的快捷指令。";
 "No snippets yet — add one, then type its trigger in any app." = "尚无片段。添加后，在任意应用中输入触发词即可。";
 "No tasks scheduled." = "尚无计划任务。";
 "No trusted locations have been added. Face ID will remain unavailable until one is added." = "尚未添加受信任位置。添加前无法使用面容识别。";
@@ -1072,6 +1130,7 @@
 "Not Charging" = "未充电";
 "Not Connected" = "未连接";
 "Not Determined" = "尚未决定";
+"Not Playing" = "未在播放";
 "Not enough notch space on this display." = "此显示器的刘海空间不足。";
 "Not logged in." = "尚未登录。";
 "Not running" = "未运行";
@@ -1162,6 +1221,7 @@
 "Output device for this app" = "此应用的输出设备";
 "Outputs in the cycle" = "循环切换的输出设备";
 "Outside Double Tap" = "外侧双击";
+"Overcast" = "阴";
 "Override default appearance and animation values. This may lead to unexpected behavior." = "覆盖默认外观和动画参数，可能导致意外行为。";
 "Overview" = "概览";
 "PLAYING" = "正在播放";
@@ -1172,6 +1232,8 @@
 "Paired & Monitoring" = "已配对并监控中";
 "Parcel notch popover" = "刘海包裹弹窗";
 "Parcel tracking from email" = "通过邮件跟踪包裹";
+"Partial" = "部分完成";
+"Partly Cloudy" = "局部多云";
 "Passive Mode" = "被动模式";
 "Passthrough" = "直通";
 "Password" = "密码";
@@ -1229,6 +1291,8 @@
 "Play sounds when breaks begin and end." = "休息开始和结束时播放声音。";
 "Play the album, or open it in Spotify for the full track list." = "播放专辑，或在 Spotify 中打开以查看完整曲目列表。";
 "Player Features" = "播放器功能";
+"Playing a tone on both buds" = "正在两侧耳机播放提示音";
+"Playlists sorted by Spotify" = "由 Spotify 排序的播放列表";
 "Please log in to Spotify via the Music section in Sapphire's settings to use this feature." = "请先在 Sapphire 设置的音乐部分登录 Spotify，以使用此功能。";
 "Popular Releases" = "热门发行";
 "Popup Window" = "弹出窗口";
@@ -1288,6 +1352,7 @@
 "Quit on Close" = "关闭时退出";
 "RAM Usage" = "内存使用率";
 "Rain" = "雨声";
+"Rain Shower" = "阵雨";
 "Raising the Clear Bass slider or the low EQ bands adds level below ~150 Hz and can clip into audible distortion. Ease off if it sounds crunchy." = "提高清晰低音或低频均衡器会增强约 150 Hz 以下的电平，可能产生削波失真。听到破音时请降低。";
 "Rank running work alongside notifications instead of with the ambient readouts, so it shows even while music is playing." = "将运行任务与通知并列，而非与环境信息排列，以便音乐播放时也能显示。";
 "Re-Register" = "重新录入";
@@ -1319,6 +1384,7 @@
 "Release Notes" = "更新说明";
 "Release notes" = "更新说明";
 "Remember Last Open Menu" = "记住上次打开的菜单";
+"Reminder" = "提醒事项";
 "Reminders" = "提醒事项";
 "Remove" = "移除";
 "Remove Emojis" = "移除表情符号";
@@ -1392,6 +1458,9 @@
 "Revive with a streak pass" = "使用连续记录补签卡恢复";
 "Rewrite copied URLs without their tracking parameters." = "重写复制的网址并移除跟踪参数。";
 "Right-side track info" = "右侧歌曲信息";
+"Ring" = "响铃";
+"Ring them if you set them down" = "播放铃声以找到放下的耳机";
+"Ringing…" = "正在响铃…";
 "Rotate camera" = "旋转摄像头";
 "Rounded menu bar" = "圆角菜单栏";
 "Rounded separate sides" = "两侧独立圆角";
@@ -1480,6 +1549,7 @@
 "Set Charge Limit" = "设置充电上限";
 "Set Password" = "设置密码";
 "Set RPM at each temperature. Sapphire interpolates between points." = "设置各温度对应的转速，Sapphire 会在各点之间插值。";
+"Set up Shopify" = "设置 Shopify";
 "Set up proximity-based authentication and trusted device behavior." = "设置基于距离的身份验证和受信任设备行为。";
 "Settings" = "设置";
 "Settings Backup" = "设置备份";
@@ -1582,6 +1652,7 @@
 "Show upcoming events as a live activity in the notch." = "在刘海中以实时活动显示即将开始的日程。";
 "Show update Live Activity" = "显示更新实时活动";
 "Show your own image or video behind the clock, sign-in controls, and Sapphire widgets on the lock screen." = "在锁屏时钟、登录控件和 Sapphire 小组件背后显示自选图像或视频。";
+"Showers" = "阵雨";
 "Shuffle" = "随机播放";
 "Sidetone" = "侧音";
 "Sign in to Spotify below. Old sessions are cleared first so a revoked login cannot auto-complete." = "在下方登录 Spotify。会先清除旧会话，避免已撤销登录自动完成授权。";
@@ -1611,6 +1682,9 @@
 "Snippets" = "片段";
 "Snooze 5 min" = "5 分钟后提醒";
 "Snooze for 30 minutes" = "30 分钟后提醒";
+"Snow" = "雪";
+"Snow Grains" = "米雪";
+"Snow Showers" = "阵雪";
 "Solid" = "纯色";
 "Some applications could not be scanned" = "部分应用无法扫描";
 "Some apps only take shortcuts in front; after muting or toggling video, switch back to what you were using." = "部分应用仅在前台响应快捷键；静音或切换视频后，返回你原来使用的应用。";
@@ -1646,6 +1720,8 @@
 "Start playing music with a Premium account to view your queue." = "使用 Premium 账户播放音乐，以查看队列。";
 "Start this profile when a macOS Focus mode turns on, or when your phone enters Do Not Disturb." = "macOS 专注模式开启或手机进入勿扰模式时启动此配置。";
 "Start when the phone enters DND (requires Continuity)." = "手机进入勿扰模式时启动（需要设备互联）。";
+"Starting Camera…" = "正在启动摄像头…";
+"Starting…" = "正在启动…";
 "Starts the screensaver instead of showing the lock screen." = "启动屏幕保护程序而非显示锁屏。";
 "Stats" = "统计";
 "Stats Configuration" = "统计配置";
@@ -1686,6 +1762,7 @@
 "Success" = "成功";
 "Suggestions" = "建议";
 "Sunday" = "星期日";
+"Sunny" = "晴";
 "Sunrise" = "日出";
 "Sunset" = "日落";
 "Surface a live activity while an AI agent, a build, or a terminal command is running." = "AI 智能体、构建或终端命令运行时显示实时活动。";
@@ -1716,19 +1793,23 @@
 "System Enhance" = "系统增强";
 "System Notifications" = "系统通知";
 "System Power" = "系统功耗";
+"System Settings should be open. Under Allow in the Background, turn on both Sapphire and Sapphire Helper, then return here." = "请在已打开的系统设置中，在“允许在后台”下启用 Sapphire 和 Sapphire Helper，然后返回此处。";
 "System Wide" = "整个系统";
 "System apps" = "系统应用";
 "System choice" = "系统选择";
 "TAP START TO BEGIN" = "轻点开始以计时";
 "THIS MAC" = "这台 Mac";
 "TIDAL API Credentials" = "TIDAL API 凭据";
+"Tap Install Helper. Approve the macOS prompt, then enable Sapphire under System Settings → General → Login Items → Background Activity." = "点击“安装辅助程序”，批准 macOS 提示，然后在“系统设置 → 通用 → 登录项 → 后台活动”中启用 Sapphire。";
 "Tap the album art with two fingers to toggle playback." = "双指轻点封面以播放或暂停。";
+"Tap to Start" = "轻点以开始";
 "Task History" = "任务历史";
 "Teams call" = "Teams 通话";
 "Temperature" = "温度";
 "Temperature Unit" = "温度单位";
 "Temporarily remove the dim layer while Mission Control is open so you can actually see the apps in the Exposé grid." = "调度中心打开时暂时移除调暗层，以便查看窗口网格中的应用。";
 "Terminal Commands" = "终端命令";
+"Testing fit…" = "正在测试贴合度…";
 "Text & Editing" = "文本与编辑";
 "Text Snippets" = "文本片段";
 "The 20-20-20 Rule" = "20-20-20 法则";
@@ -1736,6 +1817,7 @@
 "The app is selected. Identifier-linked, shared, and name-based data requires review unless ownership is verified." = "已选中应用。标识符关联、共享及按名称匹配的数据在归属确认前需手动审查。";
 "The fan will be controlled automatically by macOS." = "风扇将由 macOS 自动控制。";
 "The green traffic-light button fills the screen without creating a new Space; clicking it again restores the window." = "点击绿色窗口按钮填满屏幕，不创建新空间；再次点击恢复窗口。";
+"The helper is approved but not responding. Tap Reset Helper so Sapphire can unregister its own background items and reinstall the helper." = "辅助程序已获准但未响应。点击“重置辅助程序”，注销 Sapphire 后台项目并重新安装。";
 "The helper tool ensures your charging rules are still applied even if the Sapphire app isn't running." = "辅助程序确保 Sapphire 未运行时仍应用充电规则。";
 "The most bubbles that show at once. The first two sit on either side of the notch; more line up further out." = "同时显示的气泡上限。前两个位于刘海两侧，更多气泡向外排列。";
 "The notch is off on this display." = "此显示器已关闭刘海。";
@@ -1756,6 +1838,8 @@
 "This week" = "本周";
 "This will replace your current preferences across the app." = "这将替换整个应用的当前偏好设置。";
 "Threshold" = "阈值";
+"Thunderstorm" = "雷暴";
+"Thunderstorm w/ Hail" = "雷暴伴冰雹";
 "Time & Date" = "时间与日期";
 "Timed" = "定时";
 "Timer" = "计时器";
@@ -1795,6 +1879,7 @@
 "Trigger" = "触发词";
 "Trigger layouts with keyboard shortcuts to arrange windows instantly." = "使用键盘快捷键触发布局，快速排列窗口。";
 "Trusted Device" = "受信任设备";
+"Try a different filter or search." = "请尝试其他筛选条件或搜索词。";
 "Try asking" = "试着询问";
 "Try the picker right now — it opens on the Clipboard tab." = "立即试用选择器，将打开剪贴板标签页。";
 "Tune the notch look, materials, colors, and layout styling." = "调整刘海外观、材质、颜色和布局样式。";
@@ -1811,11 +1896,15 @@
 "UP NEXT" = "接下来播放";
 "UV Index" = "紫外线指数";
 "Ultra" = "旗舰版";
+"Unavailable" = "不可用";
 "Undo" = "撤销";
 "Undone" = "已撤销";
 "Uninstall" = "卸载";
 "Unknown" = "未知";
+"Unknown Artist" = "未知艺人";
 "Unknown State" = "未知状态";
+"Unknown Track" = "未知歌曲";
+"Unknown track" = "未知歌曲";
 "Unlimited" = "无限制";
 "Unlimited History" = "无限历史记录";
 "Unlimited live activities" = "无限实时活动";
@@ -1823,6 +1912,7 @@
 "Unlock your Mac using facial recognition when you wake the screen." = "唤醒屏幕时使用面部识别解锁 Mac。";
 "Unlocked" = "已解锁";
 "Until Turned Off" = "直到手动关闭";
+"Untitled" = "未命名";
 "Unverified, shared, nested-component, duplicate-identifier, and app-name matches stay unchecked until you review them." = "未经验证、共享、嵌套组件、重复标识符及应用名称匹配的项目，在审查前保持未选中。";
 "Up Next" = "接下来播放";
 "Update" = "更新";
@@ -1861,9 +1951,11 @@
 "Verification code" = "验证码";
 "Version %@" = "版本 %@";
 "Version %@ is available!" = "版本 %@ 已可用！";
+"Very High" = "很高";
 "Video Playback" = "视频播放";
 "View Style" = "视图样式";
 "View on GitHub" = "在 GitHub 上查看";
+"View only" = "仅查看";
 "Visibility" = "能见度";
 "Visible Battery Info" = "显示的电池信息";
 "Visible Main Widgets" = "显示的主要小组件";
@@ -1943,6 +2035,7 @@
 "You have no events or reminders scheduled." = "没有已安排的日程或提醒事项。";
 "You're All Set!" = "设置完成！";
 "You're on a beta build. Switching to Stable lets you install the latest stable release." = "当前为测试版。切换到稳定渠道可安装最新稳定版。";
+"Your Apple Music playlists" = "你的 Apple Music 播放列表";
 "Your Home" = "你的首页";
 "Your Mac's password is securely stored in the Keychain." = "你的 Mac 密码安全地保存在钥匙串中。";
 "Your Most Played" = "你的常听歌曲";
@@ -1960,6 +2053,7 @@
 "e.g. twitter.com" = "例如 twitter.com";
 "exit =" = "退出码 =";
 "iMessage Registration" = "iMessage 注册";
+"macOS lost the helper registration (SAP-H3). Tap Reset Helper to rebuild it; Sapphire relaunches itself if the helper stays stuck." = "macOS 丢失了辅助程序注册（SAP-H3）。点击“重置辅助程序”重新注册；如果仍无响应，Sapphire 会自行重启。";
 "min" = "分钟";
 "now" = "现在";
 "of" = "共";

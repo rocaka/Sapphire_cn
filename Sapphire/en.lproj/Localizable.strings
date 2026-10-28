@@ -83,6 +83,7 @@
 "After enabling it, reopen this menu." = "After enabling it, reopen this menu.";
 "Agent" = "Agent";
 "AirDrop" = "AirDrop";
+"All" = "All";
 "All Clear" = "All Clear";
 "All Devices" = "All Devices";
 "All Displays" = "All Displays";
@@ -91,6 +92,7 @@
 "All layouts added" = "All layouts added";
 "All widgets and automations" = "All widgets and automations";
 "All-Day" = "All-Day";
+"Allow Access" = "Allow Access";
 "Allow Lyrics From:" = "Allow Lyrics From:";
 "Allow Notifications From:" = "Allow Notifications From:";
 "Allow any widget to be enabled even when Sapphire estimates there is not enough notch space." = "Allow any widget to be enabled even when Sapphire estimates there is not enough notch space.";
@@ -131,6 +133,7 @@
 "App-Specific Overrides" = "App-Specific Overrides";
 "Appearance" = "Appearance";
 "Appearance For" = "Appearance For";
+"Apple Music access is off" = "Apple Music access is off";
 "Apple Music connection" = "Apple Music connection";
 "Apple limits brightness to preserve battery life. While this feature is system-controlled and there are no known side-effects, you should use this feature at your own risk." = "Apple limits brightness to preserve battery life. While this feature is system-controlled and there are no known side-effects, you should use this feature at your own risk.";
 "Application did not terminate." = "Application did not terminate.";
@@ -271,7 +274,13 @@
 "Calls Through Buds" = "Calls Through Buds";
 "Calm" = "Calm";
 "Camera" = "Camera";
+"Camera Access Denied" = "Camera Access Denied";
+"Camera Denied" = "Camera Denied";
+"Camera Off" = "Camera Off";
 "Camera Rotation" = "Camera Rotation";
+"Camera Unavailable" = "Camera Unavailable";
+"Camera access denied" = "Camera access denied";
+"Camera off" = "Camera off";
 "Cancel" = "Cancel";
 "Cancel Calibration" = "Cancel Calibration";
 "Cancel scan" = "Cancel scan";
@@ -329,6 +338,8 @@
 "Clear Bass" = "Clear Bass";
 "Clear Finished" = "Clear Finished";
 "Clear History" = "Clear History";
+"Clear Night" = "Clear Night";
+"Clear Skies" = "Clear Skies";
 "Clear When Mac Sleeps" = "Clear When Mac Sleeps";
 "Clear When Screen Locks" = "Clear When Screen Locks";
 "Clear shortcut" = "Clear shortcut";
@@ -355,6 +366,7 @@
 "Close" = "Close";
 "Close and stop camera" = "Close and stop camera";
 "Closing the main widget view." = "Closing the main widget view.";
+"Cloudy" = "Cloudy";
 "Collapse Damping" = "Collapse Damping";
 "Collapse Response" = "Collapse Response";
 "Collapsed Notch Appearance" = "Collapsed Notch Appearance";
@@ -369,6 +381,7 @@
 "Configuration" = "Configuration";
 "Configure Sapphire content and behavior while your Mac is locked." = "Configure Sapphire content and behavior while your Mac is locked.";
 "Configure window snapping behavior, layouts, and zone actions." = "Configure window snapping behavior, layouts, and zone actions.";
+"Connect Apple Music" = "Connect Apple Music";
 "Connect Shopify in the Shopify section of Settings to view recent orders." = "Connect Shopify in the Shopify section of Settings to view recent orders.";
 "Connect a Shopify custom app with read_orders access. The Admin API token is stored in the macOS Keychain." = "Connect a Shopify custom app with read_orders access. The Admin API token is stored in the macOS Keychain.";
 "Connected" = "Connected";
@@ -389,12 +402,14 @@
 "Control which live activities can surface and auto-expand in the notch." = "Control which live activities can surface and auto-expand in the notch.";
 "Controls need Accessibility permission; Google Meet also needs permission to control your browser." = "Controls need Accessibility permission; Google Meet also needs permission to control your browser.";
 "Convert To" = "Convert To";
+"Copied" = "Copied";
 "Copy" = "Copy";
 "Copy Command" = "Copy Command";
 "Copy Link" = "Copy Link";
 "Copy Path" = "Copy Path";
 "Copy Text" = "Copy Text";
 "Copy again" = "Copy again";
+"Copy code" = "Copy code";
 "Core app behavior, launch options, animations, and notch controls." = "Core app behavior, launch options, animations, and notch controls.";
 "Core notch experience" = "Core notch experience";
 "Corner Radii" = "Corner Radii";
@@ -521,6 +536,7 @@
 "Drag files here to add them." = "Drag files here to add them.";
 "Drag to set the charge limit — charging pauses at this level to help preserve battery health." = "Drag to set the charge limit — charging pauses at this level to help preserve battery health.";
 "Drink plenty of water throughout the day. Dehydration can contribute to dry eyes and eye strain." = "Drink plenty of water throughout the day. Dehydration can contribute to dry eyes and eye strain.";
+"Drizzle" = "Drizzle";
 "Drop Destinations" = "Drop Destinations";
 "Drops the speakers to a safe level when headphones go away, and puts their volume back when the headphones return." = "Drops the speakers to a safe level when headphones go away, and puts their volume back when the headphones return.";
 "Duplicate" = "Duplicate";
@@ -529,12 +545,15 @@
 "EQ Bands" = "EQ Bands";
 "Each app is followed the way it reports its own transfers, so you see exact progress where the app provides it." = "Each app is followed the way it reports its own transfers, so you see exact progress where the app provides it.";
 "Each profile has its own timer, blocks, and social filters. Sync activation and settings separately." = "Each profile has its own timer, blocks, and social filters. Sync activation and settings separately.";
+"Earbud Fit Test" = "Earbud Fit Test";
 "Edit" = "Edit";
 "Edit Custom Configuration" = "Edit Custom Configuration";
 "Edit Plane" = "Edit Plane";
 "Edit Shortcut" = "Edit Shortcut";
+"Editable" = "Editable";
 "Emoji" = "Emoji";
 "Empty" = "Empty";
+"Empty note" = "Empty note";
 "Empty the clipboard this long after you copy something." = "Empty the clipboard this long after you copy something.";
 "Empty the clipboard when the Mac (or its display) sleeps." = "Empty the clipboard when the Mac (or its display) sleeps.";
 "Empty the clipboard when the screen locks." = "Empty the clipboard when the screen locks.";
@@ -596,6 +615,7 @@
 "Error" = "Error";
 "Estimated Time" = "Estimated Time";
 "Evaluate profile conditions in the background to reveal hidden items automatically" = "Evaluate profile conditions in the background to reveal hidden items automatically";
+"Event" = "Event";
 "Every 20 minutes, take a 20-second break to look at something 20 feet away." = "Every 20 minutes, take a 20-second break to look at something 20 feet away.";
 "Every 20 minutes, take a 20-second break to look at something 20 feet away. This helps reduce eye strain and gives eye muscles a break." = "Every 20 minutes, take a 20-second break to look at something 20 feet away. This helps reduce eye strain and gives eye muscles a break.";
 "Every Day" = "Every Day";
@@ -620,6 +640,7 @@
 "Extract Text" = "Extract Text";
 "Extract ZIP, RAR, 7-Zip, TAR, and other archives — or auto-mount and install disk images (DMGs) — from anywhere." = "Extract ZIP, RAR, 7-Zip, TAR, and other archives — or auto-mount and install disk images (DMGs) — from anywhere.";
 "Extras shown in the music player. Each one applies to every service that supports it." = "Extras shown in the music player. Each one applies to every service that supports it.";
+"Extreme" = "Extreme";
 "Eye Break" = "Eye Break";
 "Eye Break Status" = "Eye Break Status";
 "Eye Health" = "Eye Health";
@@ -631,6 +652,7 @@
 "Fade Bottom Edge" = "Fade Bottom Edge";
 "Fade the lower edge of the notch from black to transparent." = "Fade the lower edge of the notch from black to transparent.";
 "Failed" = "Failed";
+"Fair" = "Fair";
 "Fan Control" = "Fan Control";
 "Fanless Macs (some MacBook Air models) will show this permanently. Otherwise, ensure the Sapphire helper is installed and retry." = "Fanless Macs (some MacBook Air models) will show this permanently. Otherwise, ensure the Sapphire helper is installed and retry.";
 "Fans return to automatic when Sapphire quits." = "Fans return to automatic when Sapphire quits.";
@@ -638,6 +660,7 @@
 "Featured On" = "Featured On";
 "Featured Playlists" = "Featured Playlists";
 "Feels Like" = "Feels Like";
+"Fetching..." = "Fetching...";
 "File Drops" = "File Drops";
 "File Progress" = "File Progress";
 "File Progress (Beta)" = "File Progress (Beta)";
@@ -649,6 +672,7 @@
 "Filter notifications to only display when a code (OTP) is detected." = "Filter notifications to only display when a code (OTP) is detected.";
 "Finance" = "Finance";
 "Find Device by Distance" = "Find Device by Distance";
+"Find Earbuds" = "Find Earbuds";
 "Find by Distance..." = "Find by Distance...";
 "Find large folders and reclaim space with transparent, user-approved cleanup." = "Find large folders and reclaim space with transparent, user-approved cleanup.";
 "Find tracks, artists, albums, and playlists." = "Find tracks, artists, albums, and playlists.";
@@ -673,6 +697,7 @@
 "Focus session complete " = "Focus session complete ";
 "Focus session started " = "Focus session started ";
 "Focus streak" = "Focus streak";
+"Foggy" = "Foggy";
 "For OpenBubbles" = "For OpenBubbles";
 "For devices like HomePods, show a device-specific icon in the volume HUD." = "For devices like HomePods, show a device-specific icon in the volume HUD.";
 "For displays you haven't switched on or off below, including ones you connect later." = "For displays you haven't switched on or off below, including ones you connect later.";
@@ -682,6 +707,8 @@
 "Force light or dark glass, or follow the system." = "Force light or dark glass, or follow the system.";
 "Forget Device" = "Forget Device";
 "Free" = "Free";
+"Freezing Drizzle" = "Freezing Drizzle";
+"Freezing Rain" = "Freezing Rain";
 "French" = "French";
 "Frosted Overlay" = "Frosted Overlay";
 "Full Disk Access" = "Full Disk Access";
@@ -728,7 +755,12 @@
 "Heads-up display overlays for volume, brightness, keyboard, and media feedback." = "Heads-up display overlays for volume, brightness, keyboard, and media feedback.";
 "Health & Wellness" = "Health & Wellness";
 "Heat Protection" = "Heat Protection";
+"Heavy Drizzle" = "Heavy Drizzle";
+"Heavy Rain" = "Heavy Rain";
 "Heavy Rotation" = "Heavy Rotation";
+"Heavy Showers" = "Heavy Showers";
+"Heavy Snow" = "Heavy Snow";
+"Helper is ready. You can continue." = "Helper is ready. You can continue.";
 "Here are the suggested settings based on your measurements." = "Here are the suggested settings based on your measurements.";
 "Hidden" = "Hidden";
 "Hide All" = "Hide All";
@@ -787,11 +819,13 @@
 "Icon Hiding" = "Icon Hiding";
 "Icon Only" = "Icon Only";
 "Icon Only (On/Off)" = "Icon Only (On/Off)";
+"Icy Fog" = "Icy Fog";
 "Ignore Concealed Items" = "Ignore Concealed Items";
 "Ignore Widget Space Limit" = "Ignore Widget Space Limit";
 "Ignore this app" = "Ignore this app";
 "Ignored" = "Ignored";
 "Ignored Apps" = "Ignored Apps";
+"Image" = "Image";
 "Immunity Days" = "Immunity Days";
 "Import Available" = "Import Available";
 "In Finder" = "In Finder";
@@ -867,6 +901,11 @@
 "Library" = "Library";
 "Lid Hinge Animation" = "Lid Hinge Animation";
 "Light" = "Light";
+"Light Drizzle" = "Light Drizzle";
+"Light Rain" = "Light Rain";
+"Light Rain Shower" = "Light Rain Shower";
+"Light Showers" = "Light Showers";
+"Light Snow" = "Light Snow";
 "Like" = "Like";
 "Limit Visible Apps" = "Limit Visible Apps";
 "Line" = "Line";
@@ -883,9 +922,11 @@
 "Live Activity" = "Live Activity";
 "Live Canvas Video" = "Live Canvas Video";
 "Live activities and controls for Zoom, Google Meet, Teams, Slack, Discord, FaceTime, recorders and more." = "Live activities and controls for Zoom, Google Meet, Teams, Slack, Discord, FaceTime, recorders and more.";
+"Live video" = "Live video";
 "Loading sensors..." = "Loading sensors...";
 "Loading…" = "Loading…";
 "Local Network" = "Local Network";
+"Locating…" = "Locating…";
 "Location" = "Location";
 "Location & Navigation" = "Location & Navigation";
 "Location Name" = "Location Name";
@@ -924,6 +965,8 @@
 "Lyrics" = "Lyrics";
 "Lyrics aren't available for this song." = "Lyrics aren't available for this song.";
 "Lyrics aren't available." = "Lyrics aren't available.";
+"MASTER ADJUSTMENTS" = "MASTER ADJUSTMENTS";
+"MICROPHONE CONFIGURATION" = "MICROPHONE CONFIGURATION";
 "MacBook Display Only" = "MacBook Display Only";
 "Made For You" = "Made For You";
 "Main Display Only" = "Main Display Only";
@@ -953,6 +996,7 @@
 "Menu Bar Tint" = "Menu Bar Tint";
 "Menu bar readouts and notifications for CPU, memory, disk, and network." = "Menu bar readouts and notifications for CPU, memory, disk, and network.";
 "Merch" = "Merch";
+"Mic" = "Mic";
 "Microphone" = "Microphone";
 "Microphone Gain Preview" = "Microphone Gain Preview";
 "Mini Widgets" = "Mini Widgets";
@@ -969,12 +1013,15 @@
 "Mixing" = "Mixing";
 "Mode" = "Mode";
 "Model Name" = "Model Name";
+"Moderate" = "Moderate";
 "Monday" = "Monday";
 "Monitor Clipboard" = "Monitor Clipboard";
 "Monitor installed apps" = "Monitor installed apps";
 "Monitoring" = "Monitoring";
 "Monthly" = "Monthly";
 "More Like This" = "More Like This";
+"Mostly Clear" = "Mostly Clear";
+"Mostly Cloudy" = "Mostly Cloudy";
 "Mouse" = "Mouse";
 "Mouse and trackpad scroll, acceleration, and button customization." = "Mouse and trackpad scroll, acceleration, and button customization.";
 "Move Down" = "Move Down";
@@ -990,6 +1037,7 @@
 "Mute all system output as the lid closes, then unmute when it opens past the threshold." = "Mute all system output as the lid closes, then unmute when it opens past the threshold.";
 "Mute microphone" = "Mute microphone";
 "Mute system audio when nearly closed" = "Mute system audio when nearly closed";
+"Muted" = "Muted";
 "My Custom Layouts" = "My Custom Layouts";
 "My Mac" = "My Mac";
 "Name" = "Name";
@@ -1037,6 +1085,7 @@
 "No Spotify speakers online. Open the Spotify desktop app (or another Connect device) to play audio — Sapphire only controls playback." = "No Spotify speakers online. Open the Spotify desktop app (or another Connect device) to play audio — Sapphire only controls playback.";
 "No Timer" = "No Timer";
 "No Wi-Fi network detected" = "No Wi-Fi network detected";
+"No access" = "No access";
 "No active timer" = "No active timer";
 "No app-specific overrides configured." = "No app-specific overrides configured.";
 "No apps chosen yet." = "No apps chosen yet.";
@@ -1044,17 +1093,24 @@
 "No custom layouts created yet." = "No custom layouts created yet.";
 "No destinations enabled" = "No destinations enabled";
 "No device connected" = "No device connected";
+"No devices found. Ensure device is nearby and discoverable." = "No devices found. Ensure device is nearby and discoverable.";
 "No devices showed a significant change in distance." = "No devices showed a significant change in distance.";
 "No displays detected." = "No displays detected.";
+"No estimate" = "No estimate";
 "No faces registered. Add a face to begin using Face ID." = "No faces registered. Add a face to begin using Face ID.";
 "No fans detected on this system." = "No fans detected on this system.";
 "No hidden items" = "No hidden items";
+"No installed app updates are currently available." = "No installed app updates are currently available.";
+"No items scheduled" = "No items scheduled";
 "No limit — enter any number of minutes" = "No limit — enter any number of minutes";
 "No limit — enter any number of minutes (0 disables the break)" = "No limit — enter any number of minutes (0 disables the break)";
 "No longer at this location" = "No longer at this location";
 "No lyrics available." = "No lyrics available.";
 "No macOS Focus modes found. Enable Focus Status permission and create modes in System Settings." = "No macOS Focus modes found. Enable Focus Status permission and create modes in System Settings.";
 "No matching apps" = "No matching apps";
+"No more items today" = "No more items today";
+"No named devices found. Try enabling 'Show unnamed devices'." = "No named devices found. Try enabling 'Show unnamed devices'.";
+"No orders" = "No orders";
 "No orders found." = "No orders found.";
 "No playlists available." = "No playlists available.";
 "No release notes were included for this version." = "No release notes were included for this version.";
@@ -1062,6 +1118,8 @@
 "No scheduled sessions." = "No scheduled sessions.";
 "No settings matched \"%@\"." = "No settings matched \"%@\".";
 "No shortcuts added." = "No shortcuts added.";
+"No shortcuts found." = "No shortcuts found.";
+"No shortcuts match your search." = "No shortcuts match your search.";
 "No snippets yet — add one, then type its trigger in any app." = "No snippets yet — add one, then type its trigger in any app.";
 "No tasks scheduled." = "No tasks scheduled.";
 "No trusted locations have been added. Face ID will remain unavailable until one is added." = "No trusted locations have been added. Face ID will remain unavailable until one is added.";
@@ -1072,6 +1130,7 @@
 "Not Charging" = "Not Charging";
 "Not Connected" = "Not Connected";
 "Not Determined" = "Not Determined";
+"Not Playing" = "Not Playing";
 "Not enough notch space on this display." = "Not enough notch space on this display.";
 "Not logged in." = "Not logged in.";
 "Not running" = "Not running";
@@ -1162,6 +1221,7 @@
 "Output device for this app" = "Output device for this app";
 "Outputs in the cycle" = "Outputs in the cycle";
 "Outside Double Tap" = "Outside Double Tap";
+"Overcast" = "Overcast";
 "Override default appearance and animation values. This may lead to unexpected behavior." = "Override default appearance and animation values. This may lead to unexpected behavior.";
 "Overview" = "Overview";
 "PLAYING" = "PLAYING";
@@ -1172,6 +1232,8 @@
 "Paired & Monitoring" = "Paired & Monitoring";
 "Parcel notch popover" = "Parcel notch popover";
 "Parcel tracking from email" = "Parcel tracking from email";
+"Partial" = "Partial";
+"Partly Cloudy" = "Partly Cloudy";
 "Passive Mode" = "Passive Mode";
 "Passthrough" = "Passthrough";
 "Password" = "Password";
@@ -1229,6 +1291,8 @@
 "Play sounds when breaks begin and end." = "Play sounds when breaks begin and end.";
 "Play the album, or open it in Spotify for the full track list." = "Play the album, or open it in Spotify for the full track list.";
 "Player Features" = "Player Features";
+"Playing a tone on both buds" = "Playing a tone on both buds";
+"Playlists sorted by Spotify" = "Playlists sorted by Spotify";
 "Please log in to Spotify via the Music section in Sapphire's settings to use this feature." = "Please log in to Spotify via the Music section in Sapphire's settings to use this feature.";
 "Popular Releases" = "Popular Releases";
 "Popup Window" = "Popup Window";
@@ -1288,6 +1352,7 @@
 "Quit on Close" = "Quit on Close";
 "RAM Usage" = "RAM Usage";
 "Rain" = "Rain";
+"Rain Shower" = "Rain Shower";
 "Raising the Clear Bass slider or the low EQ bands adds level below ~150 Hz and can clip into audible distortion. Ease off if it sounds crunchy." = "Raising the Clear Bass slider or the low EQ bands adds level below ~150 Hz and can clip into audible distortion. Ease off if it sounds crunchy.";
 "Rank running work alongside notifications instead of with the ambient readouts, so it shows even while music is playing." = "Rank running work alongside notifications instead of with the ambient readouts, so it shows even while music is playing.";
 "Re-Register" = "Re-Register";
@@ -1319,6 +1384,7 @@
 "Release Notes" = "Release Notes";
 "Release notes" = "Release notes";
 "Remember Last Open Menu" = "Remember Last Open Menu";
+"Reminder" = "Reminder";
 "Reminders" = "Reminders";
 "Remove" = "Remove";
 "Remove Emojis" = "Remove Emojis";
@@ -1392,6 +1458,9 @@
 "Revive with a streak pass" = "Revive with a streak pass";
 "Rewrite copied URLs without their tracking parameters." = "Rewrite copied URLs without their tracking parameters.";
 "Right-side track info" = "Right-side track info";
+"Ring" = "Ring";
+"Ring them if you set them down" = "Ring them if you set them down";
+"Ringing…" = "Ringing…";
 "Rotate camera" = "Rotate camera";
 "Rounded menu bar" = "Rounded menu bar";
 "Rounded separate sides" = "Rounded separate sides";
@@ -1480,6 +1549,7 @@
 "Set Charge Limit" = "Set Charge Limit";
 "Set Password" = "Set Password";
 "Set RPM at each temperature. Sapphire interpolates between points." = "Set RPM at each temperature. Sapphire interpolates between points.";
+"Set up Shopify" = "Set up Shopify";
 "Set up proximity-based authentication and trusted device behavior." = "Set up proximity-based authentication and trusted device behavior.";
 "Settings" = "Settings";
 "Settings Backup" = "Settings Backup";
@@ -1582,6 +1652,7 @@
 "Show upcoming events as a live activity in the notch." = "Show upcoming events as a live activity in the notch.";
 "Show update Live Activity" = "Show update Live Activity";
 "Show your own image or video behind the clock, sign-in controls, and Sapphire widgets on the lock screen." = "Show your own image or video behind the clock, sign-in controls, and Sapphire widgets on the lock screen.";
+"Showers" = "Showers";
 "Shuffle" = "Shuffle";
 "Sidetone" = "Sidetone";
 "Sign in to Spotify below. Old sessions are cleared first so a revoked login cannot auto-complete." = "Sign in to Spotify below. Old sessions are cleared first so a revoked login cannot auto-complete.";
@@ -1611,6 +1682,9 @@
 "Snippets" = "Snippets";
 "Snooze 5 min" = "Snooze 5 min";
 "Snooze for 30 minutes" = "Snooze for 30 minutes";
+"Snow" = "Snow";
+"Snow Grains" = "Snow Grains";
+"Snow Showers" = "Snow Showers";
 "Solid" = "Solid";
 "Some applications could not be scanned" = "Some applications could not be scanned";
 "Some apps only take shortcuts in front; after muting or toggling video, switch back to what you were using." = "Some apps only take shortcuts in front; after muting or toggling video, switch back to what you were using.";
@@ -1646,6 +1720,8 @@
 "Start playing music with a Premium account to view your queue." = "Start playing music with a Premium account to view your queue.";
 "Start this profile when a macOS Focus mode turns on, or when your phone enters Do Not Disturb." = "Start this profile when a macOS Focus mode turns on, or when your phone enters Do Not Disturb.";
 "Start when the phone enters DND (requires Continuity)." = "Start when the phone enters DND (requires Continuity).";
+"Starting Camera…" = "Starting Camera…";
+"Starting…" = "Starting…";
 "Starts the screensaver instead of showing the lock screen." = "Starts the screensaver instead of showing the lock screen.";
 "Stats" = "Stats";
 "Stats Configuration" = "Stats Configuration";
@@ -1686,6 +1762,7 @@
 "Success" = "Success";
 "Suggestions" = "Suggestions";
 "Sunday" = "Sunday";
+"Sunny" = "Sunny";
 "Sunrise" = "Sunrise";
 "Sunset" = "Sunset";
 "Surface a live activity while an AI agent, a build, or a terminal command is running." = "Surface a live activity while an AI agent, a build, or a terminal command is running.";
@@ -1716,19 +1793,23 @@
 "System Enhance" = "System Enhance";
 "System Notifications" = "System Notifications";
 "System Power" = "System Power";
+"System Settings should be open. Under Allow in the Background, turn on both Sapphire and Sapphire Helper, then return here." = "System Settings should be open. Under Allow in the Background, turn on both Sapphire and Sapphire Helper, then return here.";
 "System Wide" = "System Wide";
 "System apps" = "System apps";
 "System choice" = "System choice";
 "TAP START TO BEGIN" = "TAP START TO BEGIN";
 "THIS MAC" = "THIS MAC";
 "TIDAL API Credentials" = "TIDAL API Credentials";
+"Tap Install Helper. Approve the macOS prompt, then enable Sapphire under System Settings → General → Login Items → Background Activity." = "Tap Install Helper. Approve the macOS prompt, then enable Sapphire under System Settings → General → Login Items → Background Activity.";
 "Tap the album art with two fingers to toggle playback." = "Tap the album art with two fingers to toggle playback.";
+"Tap to Start" = "Tap to Start";
 "Task History" = "Task History";
 "Teams call" = "Teams call";
 "Temperature" = "Temperature";
 "Temperature Unit" = "Temperature Unit";
 "Temporarily remove the dim layer while Mission Control is open so you can actually see the apps in the Exposé grid." = "Temporarily remove the dim layer while Mission Control is open so you can actually see the apps in the Exposé grid.";
 "Terminal Commands" = "Terminal Commands";
+"Testing fit…" = "Testing fit…";
 "Text & Editing" = "Text & Editing";
 "Text Snippets" = "Text Snippets";
 "The 20-20-20 Rule" = "The 20-20-20 Rule";
@@ -1736,6 +1817,7 @@
 "The app is selected. Identifier-linked, shared, and name-based data requires review unless ownership is verified." = "The app is selected. Identifier-linked, shared, and name-based data requires review unless ownership is verified.";
 "The fan will be controlled automatically by macOS." = "The fan will be controlled automatically by macOS.";
 "The green traffic-light button fills the screen without creating a new Space; clicking it again restores the window." = "The green traffic-light button fills the screen without creating a new Space; clicking it again restores the window.";
+"The helper is approved but not responding. Tap Reset Helper so Sapphire can unregister its own background items and reinstall the helper." = "The helper is approved but not responding. Tap Reset Helper so Sapphire can unregister its own background items and reinstall the helper.";
 "The helper tool ensures your charging rules are still applied even if the Sapphire app isn't running." = "The helper tool ensures your charging rules are still applied even if the Sapphire app isn't running.";
 "The most bubbles that show at once. The first two sit on either side of the notch; more line up further out." = "The most bubbles that show at once. The first two sit on either side of the notch; more line up further out.";
 "The notch is off on this display." = "The notch is off on this display.";
@@ -1756,6 +1838,8 @@
 "This week" = "This week";
 "This will replace your current preferences across the app." = "This will replace your current preferences across the app.";
 "Threshold" = "Threshold";
+"Thunderstorm" = "Thunderstorm";
+"Thunderstorm w/ Hail" = "Thunderstorm w/ Hail";
 "Time & Date" = "Time & Date";
 "Timed" = "Timed";
 "Timer" = "Timer";
@@ -1795,6 +1879,7 @@
 "Trigger" = "Trigger";
 "Trigger layouts with keyboard shortcuts to arrange windows instantly." = "Trigger layouts with keyboard shortcuts to arrange windows instantly.";
 "Trusted Device" = "Trusted Device";
+"Try a different filter or search." = "Try a different filter or search.";
 "Try asking" = "Try asking";
 "Try the picker right now — it opens on the Clipboard tab." = "Try the picker right now — it opens on the Clipboard tab.";
 "Tune the notch look, materials, colors, and layout styling." = "Tune the notch look, materials, colors, and layout styling.";
@@ -1811,11 +1896,15 @@
 "UP NEXT" = "UP NEXT";
 "UV Index" = "UV Index";
 "Ultra" = "Ultra";
+"Unavailable" = "Unavailable";
 "Undo" = "Undo";
 "Undone" = "Undone";
 "Uninstall" = "Uninstall";
 "Unknown" = "Unknown";
+"Unknown Artist" = "Unknown Artist";
 "Unknown State" = "Unknown State";
+"Unknown Track" = "Unknown Track";
+"Unknown track" = "Unknown track";
 "Unlimited" = "Unlimited";
 "Unlimited History" = "Unlimited History";
 "Unlimited live activities" = "Unlimited live activities";
@@ -1823,6 +1912,7 @@
 "Unlock your Mac using facial recognition when you wake the screen." = "Unlock your Mac using facial recognition when you wake the screen.";
 "Unlocked" = "Unlocked";
 "Until Turned Off" = "Until Turned Off";
+"Untitled" = "Untitled";
 "Unverified, shared, nested-component, duplicate-identifier, and app-name matches stay unchecked until you review them." = "Unverified, shared, nested-component, duplicate-identifier, and app-name matches stay unchecked until you review them.";
 "Up Next" = "Up Next";
 "Update" = "Update";
@@ -1861,9 +1951,11 @@
 "Verification code" = "Verification code";
 "Version %@" = "Version %@";
 "Version %@ is available!" = "Version %@ is available!";
+"Very High" = "Very High";
 "Video Playback" = "Video Playback";
 "View Style" = "View Style";
 "View on GitHub" = "View on GitHub";
+"View only" = "View only";
 "Visibility" = "Visibility";
 "Visible Battery Info" = "Visible Battery Info";
 "Visible Main Widgets" = "Visible Main Widgets";
@@ -1943,6 +2035,7 @@
 "You have no events or reminders scheduled." = "You have no events or reminders scheduled.";
 "You're All Set!" = "You're All Set!";
 "You're on a beta build. Switching to Stable lets you install the latest stable release." = "You're on a beta build. Switching to Stable lets you install the latest stable release.";
+"Your Apple Music playlists" = "Your Apple Music playlists";
 "Your Home" = "Your Home";
 "Your Mac's password is securely stored in the Keychain." = "Your Mac's password is securely stored in the Keychain.";
 "Your Most Played" = "Your Most Played";
@@ -1960,6 +2053,7 @@
 "e.g. twitter.com" = "e.g. twitter.com";
 "exit =" = "exit =";
 "iMessage Registration" = "iMessage Registration";
+"macOS lost the helper registration (SAP-H3). Tap Reset Helper to rebuild it; Sapphire relaunches itself if the helper stays stuck." = "macOS lost the helper registration (SAP-H3). Tap Reset Helper to rebuild it; Sapphire relaunches itself if the helper stays stuck.";
 "min" = "min";
 "now" = "now";
 "of" = "of";

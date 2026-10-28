@@ -429,7 +429,7 @@ private struct NotchIntelligenceControls: View {
                     )
 
                 if isHovered {
-                    Text(isLiveRunning ? "Stop" : "Blip")
+                    Text(verbatim: L10n.string(isLiveRunning ? "Stop" : "Blip"))
                         .font(.system(size: NotchConfiguration.geminiButtonTextFontSize, weight: .semibold))
                         .fixedSize()
                         .foregroundColor(.white)
@@ -464,7 +464,7 @@ private struct NotchIntelligenceControls: View {
                     Image(systemName: microphoneManager.isMuted ? "mic.slash.fill" : "mic.fill")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(microphoneManager.isMuted ? .white.opacity(0.85) : .red)
-                    Text(microphoneManager.isMuted ? "Muted" : "Mic")
+                    Text(verbatim: L10n.string(microphoneManager.isMuted ? "Muted" : "Mic"))
                         .font(.system(size: 12, weight: .semibold, design: .rounded))
                         .foregroundColor(.white)
                 }

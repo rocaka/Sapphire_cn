@@ -98,3 +98,6 @@ Sapphire.xcodeproj/xcuserdata/Shariq.xcuserdatad/xcschemes/xcschememanagement.pl
 *.mobileprovision
 *.provisionprofile
 /build.log
+
+__pycache__/
+*.pyc
