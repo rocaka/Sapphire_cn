@@ -69,12 +69,12 @@ enum EmojiSkinTone: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .none: "Default"
-        case .light: "Light"
-        case .mediumLight: "Medium Light"
-        case .medium: "Medium"
-        case .mediumDark: "Medium Dark"
-        case .dark: "Dark"
+        case .none: L10n.string("Default")
+        case .light: L10n.string("Light")
+        case .mediumLight: L10n.string("Medium Light")
+        case .medium: L10n.string("Medium")
+        case .mediumDark: L10n.string("Medium Dark")
+        case .dark: L10n.string("Dark")
         }
     }
 }
@@ -211,17 +211,17 @@ enum MenuBarRevealConditionKind: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .batteryBelow: "Battery Level Below"
-        case .batteryAbove: "Battery Level Above"
-        case .charging: "Charging"
-        case .onBatteryPower: "On Battery Power"
-        case .focusActive: "Any Focus Active"
-        case .focusIdentifier: "Focus Mode Is"
-        case .wifiEquals: "Wi-Fi Network Is"
-        case .wifiConnected: "Wi-Fi Connected"
-        case .scriptSucceeds: "Script Exits Successfully"
-        case .scriptFails: "Script Fails"
-        case .scriptExitCode: "Script Exit Code Is"
+        case .batteryBelow: L10n.string("Battery Level Below")
+        case .batteryAbove: L10n.string("Battery Level Above")
+        case .charging: L10n.string("Charging")
+        case .onBatteryPower: L10n.string("On Battery Power")
+        case .focusActive: L10n.string("Any Focus Active")
+        case .focusIdentifier: L10n.string("Focus Mode Is")
+        case .wifiEquals: L10n.string("Wi-Fi Network Is")
+        case .wifiConnected: L10n.string("Wi-Fi Connected")
+        case .scriptSucceeds: L10n.string("Script Exits Successfully")
+        case .scriptFails: L10n.string("Script Fails")
+        case .scriptExitCode: L10n.string("Script Exit Code Is")
         }
     }
 

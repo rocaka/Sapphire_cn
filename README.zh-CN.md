@@ -21,7 +21,7 @@ python3 scripts/check-localization.py
 scripts/build-cn.sh
 ```
 
-输出为 `build-cn/Sapphire-CN.zip` 和 SHA-256 文件。默认构建本机架构；请按实际下载产物的架构使用。`CONFIGURATION=Debug scripts/build-cn.sh` 可构建调试版。
+输出为 `build-cn/Sapphire-CN.zip` 和 SHA-256 文件。Release 默认按项目配置构建通用架构（Apple Silicon 与 Intel）；捆绑的第三方设备工具仍受上游二进制架构限制。请以构建日志中 `lipo -archs` 的实际结果为准。`CONFIGURATION=Debug scripts/build-cn.sh` 可构建调试版。
 
 ## 签名与权限
 

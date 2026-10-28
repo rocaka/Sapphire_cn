@@ -17,9 +17,9 @@ enum BrightnessKeyStep: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .full: "Full Step"
-        case .half: "½ Step"
-        case .quarter: "¼ Step"
+        case .full: L10n.string("Full Step")
+        case .half: L10n.string("½ Step")
+        case .quarter: L10n.string("¼ Step")
         }
     }
 
@@ -45,10 +45,10 @@ enum DisplayBrightnessMethod: String, Equatable {
 
     var displayName: String {
         switch self {
-        case .native: "Native"
-        case .ddc: "DDC"
-        case .software: "Software"
-        case .probing: "Detecting…"
+        case .native: L10n.string("Native")
+        case .ddc: L10n.string("DDC")
+        case .software: L10n.string("Software")
+        case .probing: L10n.string("Detecting…")
         }
     }
 }

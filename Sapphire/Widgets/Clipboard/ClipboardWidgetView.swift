@@ -34,13 +34,13 @@ extension ClipboardItemKind {
     var displayName: String {
         switch self {
         case .text:
-            return "Text"
+            return L10n.string("Text")
         case .image:
-            return "Image"
+            return L10n.string("Image")
         case .file:
-            return "File"
+            return L10n.string("File")
         case .folder:
-            return "Folder"
+            return L10n.string("Folder")
         }
     }
 }

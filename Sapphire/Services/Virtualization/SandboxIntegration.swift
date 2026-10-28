@@ -42,19 +42,19 @@ struct SapphireVMLifecycleSnapshot: Codable {
 
         var displayName: String {
             switch self {
-            case .created: return "Created"
-            case .preparing: return "Preparing"
-            case .starting: return "Starting"
-            case .running: return "Running"
-            case .pausing: return "Pausing"
-            case .paused: return "Paused"
-            case .resuming: return "Resuming"
-            case .installing: return "Installing"
-            case .saving: return "Saving"
-            case .restoring: return "Restoring"
-            case .stopping: return "Stopping"
-            case .stopped: return "Stopped"
-            case .failed: return "Needs attention"
+            case .created: return L10n.string("Created")
+            case .preparing: return L10n.string("Preparing")
+            case .starting: return L10n.string("Starting")
+            case .running: return L10n.string("Running")
+            case .pausing: return L10n.string("Pausing")
+            case .paused: return L10n.string("Paused")
+            case .resuming: return L10n.string("Resuming")
+            case .installing: return L10n.string("Installing")
+            case .saving: return L10n.string("Saving")
+            case .restoring: return L10n.string("Restoring")
+            case .stopping: return L10n.string("Stopping")
+            case .stopped: return L10n.string("Stopped")
+            case .failed: return L10n.string("Needs attention")
             }
         }
     }

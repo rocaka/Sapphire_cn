@@ -75,7 +75,7 @@ struct FileProgressDetailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text(tracker.transfers.count == 1 ? "1 transfer" : "\(tracker.transfers.count) transfers")
+                Text(verbatim: tracker.transfers.count == 1 ? L10n.string("1 transfer") : L10n.format("%lld transfers", tracker.transfers.count))
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.9))
                 Spacer()

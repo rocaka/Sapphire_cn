@@ -36,12 +36,12 @@ enum ParcelCarrier: String, Codable, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .ups: return "UPS"
-        case .fedex: return "FedEx"
-        case .usps: return "USPS"
-        case .dhl: return "DHL"
-        case .amazon: return "Amazon"
-        case .unknown: return "Carrier"
+        case .ups: return L10n.string("UPS")
+        case .fedex: return L10n.string("FedEx")
+        case .usps: return L10n.string("USPS")
+        case .dhl: return L10n.string("DHL")
+        case .amazon: return L10n.string("Amazon")
+        case .unknown: return L10n.string("Carrier")
         }
     }
 

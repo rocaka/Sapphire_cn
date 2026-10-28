@@ -11,7 +11,7 @@ import SwiftUI
 enum MonitorType: String, Codable, CaseIterable {
     case screen, audio, location, calendar, contacts
 
-    var displayName: String { rawValue.capitalized }
+    var displayName: String { L10n.string(rawValue.capitalized) }
     var icon: String { "circle.dashed" }
 }
 

@@ -12,16 +12,28 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        id: spm
+        with:
+          path: build-cn/DerivedData/SourcePackages
+          key: spm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/Package.resolved') }}
       - name: Check localization resources
         run: python3 scripts/check-localization.py
       - name: Verify language lookup at runtime
         run: |
           xcrun swiftc -module-cache-path "$RUNNER_TEMP/l10n-cache" Sapphire/App/Localization.swift scripts/LocalizationProbe.swift -o "$RUNNER_TEMP/l10n-probe"
           "$RUNNER_TEMP/l10n-probe" "$PWD/Sapphire"
+      - name: Verify nested signing and tamper rejection
+        run: scripts/test-signing.sh
       - name: Build and ad-hoc sign
         run: |
           set -o pipefail
           scripts/build-cn.sh 2>&1 | tee build.log
+      - uses: actions/cache/save@v4
+        if: always() && steps.spm.outputs.cache-hit != 'true'
+        with:
+          path: build-cn/DerivedData/SourcePackages
+          key: spm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/Package.resolved') }}
       - name: Upload build and diagnostics
         if: always()
         uses: actions/upload-artifact@v4

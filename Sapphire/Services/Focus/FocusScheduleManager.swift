@@ -17,12 +17,12 @@ enum FocusScheduleRepeat: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .once: return "Once"
-        case .daily: return "Daily"
-        case .weekdays: return "Weekdays"
-        case .weekly: return "Weekly"
-        case .custom: return "Specific days"
-        case .monthly: return "Monthly"
+        case .once: return L10n.string("Once")
+        case .daily: return L10n.string("Daily")
+        case .weekdays: return L10n.string("Weekdays")
+        case .weekly: return L10n.string("Weekly")
+        case .custom: return L10n.string("Specific days")
+        case .monthly: return L10n.string("Monthly")
         }
     }
 }

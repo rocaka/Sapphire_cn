@@ -29,7 +29,7 @@ struct InstalledAppUpdatesBatchBar: View {
                         .buttonStyle(.link)
                         .font(.caption)
 
-                        Text(selectedCount == 0 ? "None selected" : "\(selectedCount) selected")
+                        Text(verbatim: selectedCount == 0 ? L10n.string("None selected") : L10n.format("%lld selected", selectedCount))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

@@ -22,19 +22,19 @@ enum FileProgressApp: String, CaseIterable, Identifiable, Codable {
 
     var displayName: String {
         switch self {
-        case .safari: "Safari"
-        case .chrome: "Google Chrome"
-        case .edge: "Microsoft Edge"
-        case .brave: "Brave"
-        case .arc: "Arc"
-        case .opera: "Opera"
-        case .vivaldi: "Vivaldi"
-        case .chromium: "Chromium"
-        case .firefox: "Firefox"
-        case .zen: "Zen Browser"
-        case .finder: "Finder copies"
-        case .airDrop: "AirDrop"
-        case .other: "Other apps"
+        case .safari: L10n.string("Safari")
+        case .chrome: L10n.string("Google Chrome")
+        case .edge: L10n.string("Microsoft Edge")
+        case .brave: L10n.string("Brave")
+        case .arc: L10n.string("Arc")
+        case .opera: L10n.string("Opera")
+        case .vivaldi: L10n.string("Vivaldi")
+        case .chromium: L10n.string("Chromium")
+        case .firefox: L10n.string("Firefox")
+        case .zen: L10n.string("Zen Browser")
+        case .finder: L10n.string("Finder copies")
+        case .airDrop: L10n.string("AirDrop")
+        case .other: L10n.string("Other apps")
         }
     }
 

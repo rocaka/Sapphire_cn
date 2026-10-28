@@ -101,10 +101,10 @@ enum GalaxyTouchOption: Int, CaseIterable, Sendable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .voiceAssistant: "Voice assistant"
-        case .noiseControl: "Noise control"
-        case .volume: "Volume"
-        case .spotify: "Spotify Spot On"
+        case .voiceAssistant: L10n.string("Voice assistant")
+        case .noiseControl: L10n.string("Noise control")
+        case .volume: L10n.string("Volume")
+        case .spotify: L10n.string("Spotify Spot On")
         }
     }
 }
@@ -128,10 +128,10 @@ enum GalaxyNoiseControlMode: Int, CaseIterable, Sendable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .off: "Off"
-        case .anc: "Noise Cancelling"
-        case .ambient: "Ambient Sound"
-        case .adaptive: "Adaptive"
+        case .off: L10n.string("Off")
+        case .anc: L10n.string("Noise Cancelling")
+        case .ambient: L10n.string("Ambient Sound")
+        case .adaptive: L10n.string("Adaptive")
         }
     }
 
@@ -172,13 +172,13 @@ enum GalaxyEqualizerPreset: Int, CaseIterable, Sendable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .off: "Normal"
-        case .bassBoost: "Bass Boost"
-        case .soft: "Soft"
-        case .dynamic: "Dynamic"
-        case .clear: "Clear"
-        case .trebleBoost: "Treble Boost"
-        case .custom: "Custom"
+        case .off: L10n.string("Normal")
+        case .bassBoost: L10n.string("Bass Boost")
+        case .soft: L10n.string("Soft")
+        case .dynamic: L10n.string("Dynamic")
+        case .clear: L10n.string("Clear Sound")
+        case .trebleBoost: L10n.string("Treble Boost")
+        case .custom: L10n.string("Custom")
         }
     }
 

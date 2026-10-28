@@ -12,6 +12,9 @@ xcodebuild -project Sapphire.xcodeproj -scheme Sapphire \
   -derivedDataPath "$BUILD_DIR/DerivedData" \
   CODE_SIGNING_ALLOWED=NO build
 APP="$BUILD_DIR/DerivedData/Build/Products/$CONFIGURATION/Sapphire.app"
+test -f "$APP/Contents/Resources/zh-Hans.lproj/Localizable.strings"
+test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
+/usr/bin/lipo -archs "$APP/Contents/MacOS/Sapphire"
 python3 "$ROOT/scripts/sign-cn.py" "$APP" "$SIGNING_IDENTITY"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "$APP"
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP" "$BUILD_DIR/Sapphire-CN.zip"

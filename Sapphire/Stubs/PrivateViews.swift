@@ -11,7 +11,7 @@ private struct UnavailableFeatureView: View {
     let name: String
 
     var body: some View {
-        Text("\(name) is not included in this build.")
+        Text(verbatim: L10n.format("%@ is not included in this build.", L10n.string(name)))
             .foregroundColor(.secondary)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

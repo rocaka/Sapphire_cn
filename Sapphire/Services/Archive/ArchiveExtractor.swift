@@ -19,9 +19,9 @@ enum ArchiveExtractionMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .smart: "Smart"
-        case .folder: "Always into a Folder"
-        case .inPlace: "In Place"
+        case .smart: L10n.string("Smart")
+        case .folder: L10n.string("Always into a Folder")
+        case .inPlace: L10n.string("In Place")
         }
     }
 }
@@ -33,9 +33,9 @@ enum ArchivePostExtractAction: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .reveal: "Reveal in Finder"
-        case .open: "Open Folder"
-        case .none: "Nothing"
+        case .reveal: L10n.string("Reveal in Finder")
+        case .open: L10n.string("Open Folder")
+        case .none: L10n.string("Nothing")
         }
     }
 

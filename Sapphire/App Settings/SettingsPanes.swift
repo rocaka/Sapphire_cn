@@ -8346,7 +8346,7 @@ struct TaskRowView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(task.action.displayName).font(.headline)
+                Text(verbatim: L10n.string(task.action.displayName)).font(.headline)
 
                 switch task.action {
                 case .setChargeLimit, .dischargeTo:
@@ -8383,7 +8383,7 @@ struct AddTaskView: View {
 
             VStack(spacing: 15) {
                 Picker("Action:", selection: $newTask.action) {
-                    ForEach(TaskAction.allCases) { Text($0.displayName).tag($0) }
+                    ForEach(TaskAction.allCases) { Text(verbatim: L10n.string($0.displayName)).tag($0) }
                 }
                 .onChange(of: newTask.action) {
                     if newTask.action == .setFanSensorBased, newTask.sensorKey.isEmpty {
@@ -8419,7 +8419,7 @@ struct AddTaskView: View {
                 }
 
                 Picker("Repeat:", selection: $newTask.repeatInterval) {
-                    ForEach(RepeatInterval.allCases) { Text($0.displayName).tag($0) }
+                    ForEach(RepeatInterval.allCases) { Text(verbatim: L10n.string($0.displayName)).tag($0) }
                 }
 
                 DatePicker("Time:", selection: $newTask.startTime, displayedComponents: .hourAndMinute)

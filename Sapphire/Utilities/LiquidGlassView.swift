@@ -32,21 +32,21 @@ enum LiquidGlassMaterial: String, Codable, CaseIterable, Identifiable, Hashable 
 
     var displayName: String {
         switch self {
-        case .sidebar: return "Sidebar"
-        case .sheet: return "Sheet"
-        case .hud: return "HUD"
-        case .windowBackground: return "Window Background"
-        case .popover: return "Popover"
-        case .menu: return "Menu"
-        case .fullscreenUI: return "Fullscreen UI"
-        case .controlCenter: return "Control Center"
-        case .widgets: return "Widgets"
-        case .inspector: return "Inspector"
-        case .titlebar: return "Titlebar"
-        case .tooltip: return "Tooltip"
-        case .frosted: return "Frosted"
-        case .clearGlass: return "Clear Glass"
-        case .chromatic: return "Chromatic"
+        case .sidebar: return L10n.string("Sidebar")
+        case .sheet: return L10n.string("Sheet")
+        case .hud: return L10n.string("HUD")
+        case .windowBackground: return L10n.string("Window Background")
+        case .popover: return L10n.string("Popover")
+        case .menu: return L10n.string("Menu")
+        case .fullscreenUI: return L10n.string("Fullscreen UI")
+        case .controlCenter: return L10n.string("Control Center")
+        case .widgets: return L10n.string("Widgets")
+        case .inspector: return L10n.string("Inspector")
+        case .titlebar: return L10n.string("Titlebar")
+        case .tooltip: return L10n.string("Tooltip")
+        case .frosted: return L10n.string("Frosted")
+        case .clearGlass: return L10n.string("Clear Glass")
+        case .chromatic: return L10n.string("Chromatic")
         }
     }
 
@@ -131,9 +131,9 @@ enum LiquidGlassAppearance: Int, Codable, CaseIterable, Identifiable, Hashable {
 
     var displayName: String {
         switch self {
-        case .light: return "Light"
-        case .dark: return "Dark"
-        case .auto: return "Auto"
+        case .light: return L10n.string("Light")
+        case .dark: return L10n.string("Dark")
+        case .auto: return L10n.string("Auto")
         }
     }
 }

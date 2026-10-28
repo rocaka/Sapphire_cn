@@ -16,9 +16,9 @@ enum EarbudVendor: String, Codable, Equatable {
 
     var displayName: String {
         switch self {
-        case .none: "Headphones"
-        case .galaxy: "Galaxy Buds"
-        case .sony: "Sony Headphones"
+        case .none: L10n.string("Headphones")
+        case .galaxy: L10n.string("Galaxy Buds")
+        case .sony: L10n.string("Sony Headphones")
         }
     }
 

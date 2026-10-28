@@ -39,16 +39,16 @@ enum AppActivityApp: String, CaseIterable, Identifiable, Codable {
 
     var displayName: String {
         switch self {
-        case .zoom: "Zoom"
-        case .googleMeet: "Google Meet"
-        case .teams: "Microsoft Teams"
-        case .slack: "Slack huddles"
-        case .discord: "Discord voice"
-        case .faceTime: "FaceTime"
-        case .webex: "Webex"
-        case .voiceMemos: "Voice Memos"
-        case .quickTime: "QuickTime recordings"
-        case .screenSharing: "Screen Sharing"
+        case .zoom: L10n.string("Zoom")
+        case .googleMeet: L10n.string("Google Meet")
+        case .teams: L10n.string("Microsoft Teams")
+        case .slack: L10n.string("Slack huddles")
+        case .discord: L10n.string("Discord voice")
+        case .faceTime: L10n.string("FaceTime")
+        case .webex: L10n.string("Webex")
+        case .voiceMemos: L10n.string("Voice Memos")
+        case .quickTime: L10n.string("QuickTime recordings")
+        case .screenSharing: L10n.string("Screen Sharing")
         }
     }
 

@@ -32,23 +32,23 @@ enum InstalledAppUpdateSource: Equatable {
 
     var displayName: String {
         switch self {
-        case .none: return "No update source"
-        case .sparkle: return "Sparkle"
-        case .appStore: return "Mac App Store"
-        case .keystone: return "Google Update"
-        case .electron(.github): return "electron-updater · GitHub"
-        case .electron(.generic): return "electron-updater"
-        case .homebrew: return "Homebrew"
-        case .mozilla(.firefox): return "Mozilla"
-        case .mozilla(.thunderbird): return "Mozilla"
-        case .jsonManifest: return "App update manifest"
-        case .visualStudioCode: return "Visual Studio Code Update"
-        case .androidStudio: return "Android Studio Update"
-        case .jetBrains: return "JetBrains Update"
-        case .microsoftEdge: return "Microsoft Edge Update"
-        case .github: return "GitHub Releases"
-        case .blender: return "Blender Releases"
-        case .selfUpdating: return "Self-updating"
+        case .none: return L10n.string("No update source")
+        case .sparkle: return L10n.string("Sparkle")
+        case .appStore: return L10n.string("Mac App Store")
+        case .keystone: return L10n.string("Google Update")
+        case .electron(.github): return L10n.string("electron-updater · GitHub")
+        case .electron(.generic): return L10n.string("electron-updater")
+        case .homebrew: return L10n.string("Homebrew")
+        case .mozilla(.firefox): return L10n.string("Mozilla")
+        case .mozilla(.thunderbird): return L10n.string("Mozilla")
+        case .jsonManifest: return L10n.string("App update manifest")
+        case .visualStudioCode: return L10n.string("Visual Studio Code Update")
+        case .androidStudio: return L10n.string("Android Studio Update")
+        case .jetBrains: return L10n.string("JetBrains Update")
+        case .microsoftEdge: return L10n.string("Microsoft Edge Update")
+        case .github: return L10n.string("GitHub Releases")
+        case .blender: return L10n.string("Blender Releases")
+        case .selfUpdating: return L10n.string("Self-updating")
         }
     }
 

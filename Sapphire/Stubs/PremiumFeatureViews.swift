@@ -32,7 +32,7 @@ private struct PremiumUnavailableView: View {
     let title: String
 
     var body: some View {
-        Text("\(title) is not included in this build.")
+        Text(verbatim: L10n.format("%@ is not included in this build.", L10n.string(title)))
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
