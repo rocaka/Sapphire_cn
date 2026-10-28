@@ -9220,7 +9220,7 @@ struct MusicSettingsView: View {
                         ToggleRow(title: "Enable Translation", description: "Automatically translate non-English lyrics.", isOn: $settings.settings.enableLyricTranslation)
                         HStack {
                             Text("Translate to"); Spacer()
-                            Picker("", selection: $settings.settings.lyricTranslationLanguage) { Text("English").tag("en"); Text("Spanish").tag("es"); Text("French").tag("fr") }.labelsHidden().frame(width: 150)
+                            Picker("", selection: $settings.settings.lyricTranslationLanguage) { Text("Chinese (Simplified)").tag("zh-CN"); Text("English").tag("en"); Text("Spanish").tag("es"); Text("French").tag("fr") }.labelsHidden().frame(width: 150)
                         }.padding().disabled(!settings.settings.enableLyricTranslation).opacity(settings.settings.enableLyricTranslation ? 1.0 : 0.5)
                         Divider().padding(.leading, 20)
                         HStack {

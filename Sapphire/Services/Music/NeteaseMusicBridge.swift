@@ -73,8 +73,11 @@ final class NeteaseMusicBridge {
 
     nonisolated private static func checked(_ item: AXUIElement?) -> Bool? {
         guard let item else { return nil }
-        // A present, empty mark means off. An unsupported attribute is unknown.
-        guard let mark = attribute(item, kAXMenuItemMarkCharAttribute) as? String else { return nil }
+        // AppKit may return noValue for an unmarked item; unsupported is unknown.
+        var value: CFTypeRef?
+        let result = AXUIElementCopyAttributeValue(item, kAXMenuItemMarkCharAttribute as CFString, &value)
+        if result == .noValue { return false }
+        guard result == .success, let mark = value as? String else { return nil }
         return !mark.isEmpty
     }
 

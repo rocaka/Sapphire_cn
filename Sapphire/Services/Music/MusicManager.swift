@@ -3116,8 +3116,18 @@ class MusicManager {
                 guard !Task.isCancelled, self.lastTrackIdentity == fetchIdentity, self.isNeteaseSourceSelected else { return }
                 self.lyricsRetry.recordSuccess(attemptKey)
                 self.wordTimingBase = nil
-                self.replaceLyrics(lines)
-                self.lyricsCache.set(lines, for: cacheKey)
+                if lines.contains(where: { $0.translatedText?.isEmpty == false }) {
+                    self.lyricsTranslationCache.set(
+                        LyricsTranslation(sourceLanguage: "netease-original", translatedLines: lines),
+                        for: LyricsTranslation.cacheKey(trackKey: cacheKey, targetLanguage: "zh-CN")
+                    )
+                }
+                // Native tlyric is Chinese; display it only when the user selects Chinese.
+                var originals = lines
+                for i in originals.indices { originals[i].translatedText = nil }
+                self.replaceLyrics(originals)
+                self.lyricsCache.set(originals, for: cacheKey)
+                self.retranslateLyricsIfNeeded()
                 return
             }
             guard !Task.isCancelled, self.lastTrackIdentity == fetchIdentity else { return }
@@ -3468,6 +3478,9 @@ class MusicManager {
             }
 
             guard lang != target else {
+                for i in lyricsToUpdate.indices { lyricsToUpdate[i].translatedText = nil }
+                guard !Task.isCancelled, self.lastTrackIdentity == fetchIdentity else { return }
+                self.replaceLyrics(lyricsToUpdate, preservePosition: true)
                 if let translationKey {
                     self.lyricsTranslationCache.set(
                         LyricsTranslation(sourceLanguage: lang, byOriginal: [:]),
