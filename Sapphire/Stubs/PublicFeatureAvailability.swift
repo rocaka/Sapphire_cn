@@ -3,6 +3,7 @@
 import Foundation
 
 public enum AppFeature: String, Codable, CaseIterable {
+    case clipboardAutoClear, clipboardCleanURL
     case unlimitedLyricsFetch, translation, geminiLive, advancedFileConversion,
          priorityAutomation, betaSoftwareUpdates, circleToSearch, liveSports,
          financeWidget, sportsWidget, financeLiveActivity, prioritizedFeedback,
@@ -25,7 +26,7 @@ enum PublicFeatureAvailability {
     static let available: Set<AppFeature> = [
         .unlimitedLyricsFetch, .translation, .snapZonesKeyboardShortcuts,
         .focusProductiveAccess, .batteryWidget, .basicStorageFeatures,
-        .audio8D, .surroundSound, .ocrFeature
+        .audio8D, .surroundSound, .ocrFeature, .clipboardPicker, .clipboardAutoClear, .clipboardCleanURL
     ]
 
     static func contains(_ feature: AppFeature) -> Bool { available.contains(feature) }

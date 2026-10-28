@@ -8,6 +8,9 @@ import Foundation
         precondition(PublicFeatureAvailability.contains(.audio8D))
         precondition(PublicFeatureAvailability.contains(.surroundSound))
         precondition(PublicFeatureAvailability.contains(.ocrFeature))
+        precondition(PublicFeatureAvailability.contains(.clipboardPicker))
+        precondition(PublicFeatureAvailability.contains(.clipboardAutoClear))
+        precondition(PublicFeatureAvailability.contains(.clipboardCleanURL))
         for unavailable in [AppFeature.appLock, .geminiLive, .liveSports, .financeWidget, .menuBarProfiles, .dockPresets, .continuityHandoff, .betaSoftwareUpdates] {
             precondition(!PublicFeatureAvailability.contains(unavailable), "Do not grant access to missing implementations: \(unavailable)")
         }

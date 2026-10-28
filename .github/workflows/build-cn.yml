@@ -41,6 +41,8 @@ jobs:
         run: scripts/test-public-features.sh
       - name: Verify local image and PDF text recognition
         run: scripts/test-text-recognition.sh
+      - name: Verify clipboard URL and auto-clear policies
+        run: scripts/test-clipboard-tools.sh
       - name: Verify nested signing and tamper rejection
         run: scripts/test-signing.sh
       - name: Build and ad-hoc sign

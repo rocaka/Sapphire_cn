@@ -124,30 +124,6 @@ final class EmojiShortcutManager {
     func stopMonitoring() {}
 }
 
-@MainActor
-final class ClipboardPickerManager: ObservableObject {
-    static let shared = ClipboardPickerManager()
-    private init() {}
-    func presentPicker() {}
-    func stopMonitoring() {}
-}
-
-final class ClipboardAutoClearManager {
-    static let shared = ClipboardAutoClearManager()
-    private init() {}
-    func start() {}
-    func stop() {}
-}
-
-final class CleanURLManager {
-    static let shared = CleanURLManager()
-    private init() {}
-    func start() {}
-    func stopPolling() {}
-    func stopMonitoring() {}
-    func cleanClipboardLinkNow() {}
-}
-
 final class FinderCutPasteManager {
     static let shared = FinderCutPasteManager()
     private init() {}

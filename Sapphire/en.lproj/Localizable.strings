@@ -2264,3 +2264,9 @@
 "Choose Image or PDF…" = "Choose Image or PDF…";
 
 "No readable text was found. Check the file and any PDF password protection." = "No readable text was found. Check the file and any PDF password protection.";
+
+"Search saved clipboard items and paste one into the active app. Copying is available without Accessibility; automatic pasting needs Accessibility access." = "Search saved clipboard items and paste one into the active app. Copying is available without Accessibility; automatic pasting needs Accessibility access.";
+
+"Search clipboard" = "Search clipboard";
+
+"Select an item to copy and paste. Without Accessibility access, use Command-V after copying." = "Select an item to copy and paste. Without Accessibility access, use Command-V after copying.";

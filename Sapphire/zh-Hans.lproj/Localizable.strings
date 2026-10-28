@@ -2264,3 +2264,9 @@
 "Choose Image or PDF…" = "选择图片或 PDF…";
 
 "No readable text was found. Check the file and any PDF password protection." = "未找到可读取的文字，请检查文件及 PDF 密码保护。";
+
+"Search saved clipboard items and paste one into the active app. Copying is available without Accessibility; automatic pasting needs Accessibility access." = "搜索保存的剪贴板记录并粘贴到当前应用。复制无需辅助功能权限，自动粘贴需要该权限。";
+
+"Search clipboard" = "搜索剪贴板";
+
+"Select an item to copy and paste. Without Accessibility access, use Command-V after copying." = "选择一项以复制并粘贴。未授权辅助功能时，请在复制后按 Command-V 粘贴。";

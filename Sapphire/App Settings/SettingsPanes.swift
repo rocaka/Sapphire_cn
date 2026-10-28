@@ -2231,6 +2231,21 @@ struct ClipboardSettingsView: View {
     @ObservedObject private var shortcutRecorder = GlobalShortcutRecorder.shared
     @ObservedObject private var clipboardPickerManager = ClipboardPickerManager.shared
 
+    private var autoClearFeature: AppFeature {
+        #if SAPPHIRE_FULL_BUILD
+        .clipboardAdvancedTools
+        #else
+        .clipboardAutoClear
+        #endif
+    }
+    private var cleanURLFeature: AppFeature {
+        #if SAPPHIRE_FULL_BUILD
+        .clipboardAdvancedTools
+        #else
+        .clipboardCleanURL
+        #endif
+    }
+
     private var isRecordingPickerShortcut: Bool {
         shortcutRecorder.isRecording && shortcutRecorder.recordingIdentifier == "clipboardPickerShortcut"
     }
@@ -2244,7 +2259,7 @@ struct ClipboardSettingsView: View {
         VStack(alignment: .leading, spacing: 0) {
             PremiumFeatureView(feature: .clipboardPicker) {
                 VStack(alignment: .leading, spacing: 0) {
-                    SettingsSectionHeader(title: "Quick Picker", description: "Open the unified Sapphire picker right where you're typing with a global shortcut. Selecting a clipboard item copies it and pastes it at the cursor; the Emoji tab types emoji directly. (The emoji shortcut opens the same panel on its Emoji tab.)")
+                    SettingsSectionHeader(title: "Quick Picker", description: "Search saved clipboard items and paste one into the active app. Copying is available without Accessibility; automatic pasting needs Accessibility access.")
 
                     ToggleRow(
                         title: "Enable Quick Picker",
@@ -2454,7 +2469,7 @@ struct ClipboardSettingsView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 0) {
-                    PremiumFeatureView(feature: .clipboardAdvancedTools) {
+                    PremiumFeatureView(feature: autoClearFeature) {
                         VStack(alignment: .leading, spacing: 0) {
                             SettingsSectionHeader(title: "Auto-Clear Clipboard", description: "Empty the system clipboard a set time after copying, or when the Mac sleeps or the screen locks. Saved history items are never touched.")
 
@@ -2513,7 +2528,7 @@ struct ClipboardSettingsView: View {
                 .modifier(SettingsContainerModifier())
 
                 VStack(alignment: .leading, spacing: 0) {
-                    PremiumFeatureView(feature: .clipboardAdvancedTools) {
+                    PremiumFeatureView(feature: cleanURLFeature) {
                         VStack(alignment: .leading, spacing: 0) {
                             SettingsSectionHeader(title: "Clean URL", description: "Strip tracking parameters (utm_*, fbclid, gclid, …) from copied links automatically. Images, files and rich text pass through untouched.")
 
