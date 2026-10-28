@@ -1155,7 +1155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         DispatchQueue.main.async {
             HelperAlertPresenter.presentModal(
-                messageText: "Signed Out of Sapphire",
+                messageText: L10n.string("Signed Out of Sapphire"),
                 informativeText: reason.alertMessage,
                 alertStyle: .warning,
                 buttonTitles: ["Open Account Settings", "OK"]
@@ -1521,8 +1521,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         isPresentingSapphireVMLaunchFailure = true
 
         HelperAlertPresenter.presentModal(
-            messageText: "Sapphire VM Isn’t Available",
-            informativeText: "Sapphire couldn’t open this virtual machine link. Make sure the standalone Sapphire VM app is installed, then try again.",
+            messageText: L10n.string("Sapphire VM Isn’t Available"),
+            informativeText: L10n.string("Sapphire couldn’t open this virtual machine link. Make sure the standalone Sapphire VM app is installed, then try again."),
             alertStyle: .warning,
             buttonTitles: ["OK"]
         ) { [weak self] _ in
@@ -1555,9 +1555,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                     accessibilityDescription: "Sapphire Launchpad"
                 )
                 let menu = NSMenu()
-                menu.addItem(NSMenuItem(title: "Show Launchpad", action: #selector(showLaunchpadAction), keyEquivalent: ""))
+                menu.addItem(NSMenuItem(title: L10n.string("Show Launchpad"), action: #selector(showLaunchpadAction), keyEquivalent: ""))
                 menu.addItem(.separator())
-                menu.addItem(NSMenuItem(title: "Quit Sapphire", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+                menu.addItem(NSMenuItem(title: L10n.string("Quit Sapphire"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
                 for item in menu.items { item.target = self }
                 statusItem?.menu = menu
             }

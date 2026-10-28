@@ -122,7 +122,7 @@ final class LyricsEvaluationHarness {
     func install() {
         guard observer == nil else { return }
         observer = DistributedNotificationCenter.default().addObserver(
-            forName: Notification.Name("com.cshariq.sapphire.debug.lyrics"),
+            forName: Notification.Name("com.rocaka.sapphirecn.debug.lyrics"),
             object: nil,
             queue: .main
         ) { notification in

@@ -11,14 +11,14 @@ import os.log
 
 struct AudioDeviceController {
     static let shared = AudioDeviceController()
-    private let logger = Logger(subsystem: "com.cshariq.sapphire", category: "AudioDeviceController")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecn", category: "AudioDeviceController")
 
     func createAggregateDevice(outputDevices: [AudioDevice], masterDeviceUID: String) -> AudioDeviceID? {
         let subDeviceUIDs = outputDevices.map { $0.uid as CFString }
 
         let description: [String: Any] = [
             kAudioAggregateDeviceNameKey: "Sapphire Multi-Output",
-            kAudioAggregateDeviceUIDKey: "com.cshariq.sapphire.multi-output-device",
+            kAudioAggregateDeviceUIDKey: "com.rocaka.sapphirecn.multi-output-device",
             kAudioAggregateDeviceSubDeviceListKey: subDeviceUIDs,
             kAudioAggregateDeviceMasterSubDeviceKey: masterDeviceUID as CFString,
             kAudioAggregateDeviceIsStackedKey: true

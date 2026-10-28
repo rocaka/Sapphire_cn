@@ -46,7 +46,7 @@ public enum SubscriptionFeatureCatalog {
     public static func features(for tier: SubscriptionTier) -> Set<AppFeature> { [] }
     public static func minimumTier(for feature: AppFeature) -> SubscriptionTier { .free }
     public static func tierDisplayName(_ tier: SubscriptionTier) -> String { tier.rawValue.capitalized }
-    public static func marketingSubtitle(for tier: SubscriptionTier) -> String { "Includes the core Sapphire experience." }
+    public static func marketingSubtitle(for tier: SubscriptionTier) -> String { L10n.string("Includes the core Sapphire experience.") }
     public static func marketingTierHighlights() -> [(tier: SubscriptionTier, features: [String])] {
         [
             (tier: .free, features: ["Core notch experience"]),
@@ -68,7 +68,7 @@ public final class SubscriptionManager: ObservableObject {
 
     public var tierGradientColors: [Color] { [.gray, .gray.opacity(0.6)] }
     public var userInitials: String { "G" }
-    public var tierLabel: String { "Free" }
+    public var tierLabel: String { L10n.string("Free") }
 
     @Published public private(set) var entitlements: SubscriptionEntitlements = .free
     @Published public private(set) var accessibleFeatures: Set<AppFeature> = []
@@ -78,7 +78,7 @@ public final class SubscriptionManager: ObservableObject {
     public var activeTier: SubscriptionTier { entitlements.tier }
     public var hasCorePlan: Bool { activeTier == .core }
     public var isSignedIn: Bool { false }
-    public var userDisplayName: String { "Guest" }
+    public var userDisplayName: String { L10n.string("Guest") }
     public var hasBetaSoftwareAccess: Bool { false }
 
     public func hasAccess(to feature: AppFeature) -> Bool { SubscriptionAccess.hasAccess(to: feature) }

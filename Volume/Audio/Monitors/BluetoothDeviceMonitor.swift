@@ -25,11 +25,11 @@ final class BluetoothDeviceMonitor {
     // MARK: - Private
 
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire",
+        subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn",
         category: "BluetoothDeviceMonitor"
     )
 
-    private static let btQueue = DispatchQueue(label: "com.cshariq.sapphire.bluetooth")
+    private static let btQueue = DispatchQueue(label: "com.rocaka.sapphirecn.bluetooth")
 
     private var timeoutTasks: [String: Task<Void, Never>] = [:]
 

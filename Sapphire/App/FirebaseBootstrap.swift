@@ -22,6 +22,10 @@ enum FirebaseBootstrap {
 
     static func configureIfNeeded() {
         guard !isConfigured else { return }
+        guard let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+              let options = FirebaseOptions(contentsOfFile: path),
+              let apiKey = options.apiKey, !apiKey.isEmpty,
+              options.projectID != "sapphire-stub" else { return }
         #if DEBUG
         AppCheck.setAppCheckProviderFactory(AppCheckDebugProviderFactory())
         #else

@@ -20,7 +20,7 @@ final class MediaKeyMonitor {
     private let hudController: HUDWindowController
     private let popupVisibility: PopupVisibilityService
     private let mediaKeyStatus: MediaKeyStatus
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "MediaKeyMonitor")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "MediaKeyMonitor")
 
     private let volumeStep: Float = 1.0 / 16.0
 

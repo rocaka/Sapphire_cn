@@ -11,7 +11,7 @@ import XCTest
 
 final class DefaultFileHandlerTests: XCTestCase {
     private let own = URL(fileURLWithPath: "/Applications/Sapphire.app")
-    private let sapphire = "com.cshariq.sapphire"
+    private let sapphire = "com.rocaka.sapphirecn"
 
     func testTheSameBundleIsRecognisedThroughSymlinksAndTrailingSlashes() {
         let viaSymlink = URL(fileURLWithPath: "/tmp/Sapphire.app")

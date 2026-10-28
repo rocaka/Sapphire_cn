@@ -23,7 +23,7 @@ final class MenuBarVisibilityRestrictor {
 
     private nonisolated static let frameworkPath = "/System/Library/PrivateFrameworks/MenuBarClientCore.framework/MenuBarClientCore"
     private nonisolated static let syntheticClickTag: Int64 = 0x5341_5050_4D42
-    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "MenuBarRestriction")
+    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "MenuBarRestriction")
 
     nonisolated static let isAvailable: Bool = {
         guard dlopen(frameworkPath, RTLD_NOW) != nil else { return false }

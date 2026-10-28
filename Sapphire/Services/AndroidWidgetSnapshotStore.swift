@@ -218,14 +218,14 @@ struct AndroidWidgetCatalog: Codable, Sendable {
 }
 
 enum AndroidWidgetSnapshotStore {
-    static let appGroupIdentifier = "group.com.cshariq.sapphire"
-    static let widgetKind = "com.cshariq.sapphire.android-widget"
-    static let slotKindPrefix = "com.cshariq.sapphire.android-widget.slot."
+    static let appGroupIdentifier = "group.com.rocaka.sapphirecn"
+    static let widgetKind = "com.rocaka.sapphirecn.android-widget"
+    static let slotKindPrefix = "com.rocaka.sapphirecn.android-widget.slot."
     static let slotCount = 12
-    static let combinedKind = "com.cshariq.sapphire.android-widgets.all"
+    static let combinedKind = "com.rocaka.sapphirecn.android-widgets.all"
 
     static func slotKind(_ slot: Int) -> String { slotKindPrefix + String(slot) }
-    static let requestNotification = "com.cshariq.sapphire.android-widgets.request"
+    static let requestNotification = "com.rocaka.sapphirecn.android-widgets.request"
 
     private static let directoryName = "AndroidWidgets"
     private static let catalogFilename = "catalog.json"

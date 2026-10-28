@@ -18,7 +18,7 @@ final class DevTaskDetailModel: ObservableObject {
     @Published var confirmingStop = false
 
     nonisolated private static let inspector = DevTaskInspector()
-    nonisolated private static let queue = DispatchQueue(label: "com.shariq.sapphire.devtask.inspect", qos: .userInitiated)
+    nonisolated private static let queue = DispatchQueue(label: "com.rocaka.sapphirecn.devtask.inspect", qos: .userInitiated)
     private static let pollInterval: Duration = .seconds(2)
 
     private var statusTask: Task<Void, Never>?

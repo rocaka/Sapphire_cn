@@ -44,7 +44,7 @@ final class AppleMusicSystemQueue {
         let ok: Bool
     }
 
-    private let log = Logger(subsystem: "com.cshariq.sapphire", category: "AppleMusicQueue")
+    private let log = Logger(subsystem: "com.rocaka.sapphirecn", category: "AppleMusicQueue")
 
     private init() {}
 

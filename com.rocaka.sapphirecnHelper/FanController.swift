@@ -21,8 +21,8 @@ final class FanController {
     }
 
     private let smc: SMC
-    private let logger = Logger(subsystem: "com.shariq.sapphireHelper", category: "FanController")
-    private let queue = DispatchQueue(label: "com.shariq.sapphireHelper.fans", qos: .userInitiated)
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecnHelper", category: "FanController")
+    private let queue = DispatchQueue(label: "com.rocaka.sapphirecnHelper.fans", qos: .userInitiated)
 
     private var applied: [Int: AppliedState] = [:]
     private var pendingRestore: Set<Int> = []

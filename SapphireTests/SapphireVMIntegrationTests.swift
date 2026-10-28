@@ -155,7 +155,7 @@ final class SapphireVMIntegrationTests: XCTestCase {
     }
 
     func testSapphireSchemeIsRegisteredByHostApp() throws {
-        guard Bundle.main.bundleIdentifier == "com.cshariq.sapphire" else {
+        guard Bundle.main.bundleIdentifier == "com.rocaka.sapphirecn" else {
             throw XCTSkip("This contract test requires Sapphire.app as the test host.")
         }
         let registrations = try XCTUnwrap(

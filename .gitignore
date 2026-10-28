@@ -90,3 +90,11 @@ Sapphire.xcodeproj/xcuserdata/Shariq.xcuserdatad/xcschemes/xcschememanagement.pl
 /SapphireTests/AppStorageModelsTests.swift
 /SapphireTests/ClipboardPickerPositioningTests.swift
 /SapphireTests/ContinuityStatusProtocolTests.swift
+
+# Sapphire CN local builds and signing material
+/build-cn/
+*.p12
+*.p8
+*.mobileprovision
+*.provisionprofile
+/build.log

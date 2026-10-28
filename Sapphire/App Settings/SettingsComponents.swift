@@ -20,7 +20,7 @@ struct InfoContainer: View {
                 .foregroundColor(color)
                 .padding(.top, 2)
 
-            Text(text)
+            Text(verbatim: L10n.string(text))
                 .font(.system(size: 13))
                 .foregroundStyle(.white.opacity(0.8))
                 .lineSpacing(4)
@@ -37,7 +37,7 @@ struct SettingsSwitch: View {
     @Binding var isOn: Bool
 
     var body: some View {
-        Toggle(title, isOn: $isOn)
+        Toggle(L10n.string(title), isOn: $isOn)
             .labelsHidden()
             .toggleStyle(.switch)
     }
@@ -50,10 +50,10 @@ struct SettingsRowLabel: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(title)
+            Text(verbatim: L10n.string(title))
                 .font(titleFont)
             if !description.isEmpty {
-                Text(description)
+                Text(verbatim: L10n.string(description))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -142,7 +142,7 @@ struct IconToggleRow: View {
         HStack(spacing: 15) {
             SettingsIconBadge(systemImage: systemImage, color: color)
 
-            Text(title)
+            Text(verbatim: L10n.string(title))
                 .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(.white)
 
@@ -313,7 +313,7 @@ struct LiveActivityRowView: View {
     private func optionToggle(_ title: String, detail: String, isOn: Binding<Bool>) -> some View {
         Toggle(isOn: isOn) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
+                Text(verbatim: L10n.string(title))
                     .font(.system(size: 12, weight: .semibold))
                 Text(detail)
                     .font(.system(size: 10))
@@ -529,7 +529,7 @@ struct AppTogglesListView: View {
     @ViewBuilder
     private func appSection(_ title: String, apps: [SystemApp]) -> some View {
         if !apps.isEmpty {
-            Text(title).font(.caption).foregroundStyle(.secondary).padding(.vertical, 5)
+            Text(verbatim: L10n.string(title)).font(.caption).foregroundStyle(.secondary).padding(.vertical, 5)
             ForEach(apps) { app in
                 SystemAppRowView(app: app, isEnabled: isEnabled(app))
                 if app.id != apps.last?.id {
@@ -819,12 +819,12 @@ struct SettingsSectionHeader: View {
     var description: LocalizedStringKey? = nil
 
     var body: some View {
-        Text(title)
+        Text(verbatim: L10n.string(title))
             .font(.headline)
             .padding([.top, .horizontal])
             .frame(maxWidth: .infinity, alignment: .leading)
         if let description {
-            Text(description)
+            Text(verbatim: L10n.string(description))
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
@@ -856,7 +856,7 @@ struct StatusCapsuleLabel: View {
         HStack(spacing: 5) {
             Image(systemName: icon)
                 .font(.system(size: 10, weight: .bold))
-            Text(title)
+            Text(verbatim: L10n.string(title))
                 .font(.system(size: 11, weight: .semibold, design: .rounded))
         }
         .foregroundStyle(color)
@@ -877,7 +877,7 @@ struct SettingsDetailRow<Content: View>: View {
 
     var body: some View {
         HStack {
-            Text(title)
+            Text(verbatim: L10n.string(title))
             Spacer()
             HStack { content }
                 .foregroundStyle(.secondary)
@@ -895,7 +895,7 @@ struct SettingsMultiSelectList<Option: Identifiable & Equatable>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
+            Text(verbatim: L10n.string(title))
                 .font(.caption.weight(.medium))
                 .foregroundColor(.secondary)
                 .padding(.top, 8)

@@ -1,0 +1,30 @@
+name: Build Sapphire CN
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check localization resources
+        run: python3 scripts/check-localization.py
+      - name: Build and ad-hoc sign
+        run: |
+          set -o pipefail
+          scripts/build-cn.sh 2>&1 | tee build.log
+      - name: Upload build and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sapphire-CN
+          path: |
+            build-cn/Sapphire-CN.zip
+            build-cn/Sapphire-CN.zip.sha256
+            build.log
+          if-no-files-found: warn

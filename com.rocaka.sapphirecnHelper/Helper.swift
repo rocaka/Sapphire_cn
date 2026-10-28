@@ -160,7 +160,7 @@ fileprivate enum IOPMPrivate {
 
 class Helper: NSObject, HelperProtocol {
 
-    private let logger = Logger(subsystem: "com.shariq.sapphireHelper", category: "Helper")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecnHelper", category: "Helper")
     private let updateInstallLock = NSLock()
     var client: InstallationClient?
     private let smc: SMC?
@@ -841,8 +841,8 @@ class Helper: NSObject, HelperProtocol {
               !expectedVersion.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               currentComponents.count == applicationsComponents.count + 1,
               currentComponents.prefix(applicationsComponents.count).elementsEqual(applicationsComponents),
-              Bundle(url: currentURL)?.bundleIdentifier == "com.cshariq.sapphire",
-              Bundle(url: newURL)?.bundleIdentifier == "com.cshariq.sapphire" else {
+              Bundle(url: currentURL)?.bundleIdentifier == "com.rocaka.sapphirecn",
+              Bundle(url: newURL)?.bundleIdentifier == "com.rocaka.sapphirecn" else {
             fail("Invalid app paths for the update.")
             return
         }
@@ -890,7 +890,7 @@ class Helper: NSObject, HelperProtocol {
         let isMonotonicUpgrade = marketingComparison == .orderedDescending
             || (marketingComparison == .orderedSame
                 && HelperSapphireVersionOrdering.compareBuild(stagedBuild, currentBuild) == .orderedDescending)
-        guard stagedBundle?.bundleIdentifier == "com.cshariq.sapphire",
+        guard stagedBundle?.bundleIdentifier == "com.rocaka.sapphirecn",
               stagedVersion == expectedVersion,
               isMonotonicUpgrade,
               SecStaticCodeCreateWithPath(stagingURL as CFURL, [], &stagedCode) == errSecSuccess,
@@ -1139,7 +1139,7 @@ class Helper: NSObject, HelperProtocol {
 
         let description: [String: Any] = [
             kAudioAggregateDeviceNameKey: "Sapphire Multi-Output",
-            kAudioAggregateDeviceUIDKey: "com.shariq.sapphire.multi-output-device",
+            kAudioAggregateDeviceUIDKey: "com.rocaka.sapphirecn.multi-output-device",
             kAudioAggregateDeviceSubDeviceListKey: subDeviceList,
             kAudioAggregateDeviceMasterSubDeviceKey: masterDeviceUID as CFString,
             kAudioAggregateDeviceIsStackedKey: 1
@@ -1448,9 +1448,9 @@ private struct SleepLogEntry: Codable {
 final class SleepBatteryMonitor {
     static let shared = SleepBatteryMonitor()
 
-    private let monitorID = "com.shariq.sapphireHelper.sleepmonitor" as CFString
+    private let monitorID = "com.rocaka.sapphirecnHelper.sleepmonitor" as CFString
     private let wakeEventType = "wake" as CFString
-    private let logger = Logger(subsystem: "com.shariq.sapphireHelper", category: "SleepBatteryMonitor")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecnHelper", category: "SleepBatteryMonitor")
 
     private weak var enforcementHelper: Helper?
 

@@ -115,7 +115,7 @@ final class FocusWebsiteBlocker {
 private final class FocusBlockPageServer {
     var productiveAccessHandler: ((String) -> Bool)?
     private var listener: NWListener?
-    private let queue = DispatchQueue(label: "com.cshariq.sapphire.focus-block-redirect")
+    private let queue = DispatchQueue(label: "com.rocaka.sapphirecn.focus-block-redirect")
 
     func start() {
         guard listener == nil else { return }

@@ -8,7 +8,7 @@ import Foundation
 import os
 
 enum LyricsLog {
-    static let logger = Logger(subsystem: "com.shariq.sapphire", category: "lyrics")
+    static let logger = Logger(subsystem: "com.rocaka.sapphirecn", category: "lyrics")
 
     private static let lastByKey = OSAllocatedUnfairLock(initialState: [String: String]())
 

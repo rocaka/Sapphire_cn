@@ -31,7 +31,7 @@
 		CAFE200000000000000010BB /* SapphireAudioDriver.driver in Embed Audio Driver */ = {isa = PBXBuildFile; fileRef = CAFE200000000000000001BB /* SapphireAudioDriver.driver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAFE200000000000000013BB /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFE200000000000000014BB /* CoreAudio.framework */; };
 		CAFE2000000000000000A1BB /* SapphireAudioDriver.c in Sources */ = {isa = PBXBuildFile; fileRef = CAFE2000000000000000A0BB /* SapphireAudioDriver.c */; };
-		DA1D1AB72EAA76DA00E7F1B4 /* com.shariq.sapphireHelper in Embed Helper Executable */ = {isa = PBXBuildFile; fileRef = DA452EAF2EAA57C90070E5C9 /* com.shariq.sapphireHelper */; };
+		DA1D1AB72EAA76DA00E7F1B4 /* com.rocaka.sapphirecnHelper in Embed Helper Executable */ = {isa = PBXBuildFile; fileRef = DA452EAF2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */; };
 		DA262AE02EA4841B0027CA69 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA262ADF2EA4841B0027CA69 /* OSD.framework */; };
 		DA262AE62EA485150027CA69 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA262AE52EA485150027CA69 /* CoreDisplay.framework */; };
 		DA262AF52EA5D1B70027CA69 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA262AF42EA5D1B70027CA69 /* MultitouchSupport.framework */; };
@@ -183,7 +183,7 @@
 			containerPortal = DA46CF6E2DCBCA0000F00EC5 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DA452EAE2EAA57C90070E5C9;
-			remoteInfo = com.shariq.sapphireHelper;
+			remoteInfo = com.rocaka.sapphirecnHelper;
 		};
 		DA46CF802DCBCA0100F00EC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -275,7 +275,7 @@
 			dstPath = "";
 			dstSubfolder = Executables;
 			files = (
-				DA1D1AB72EAA76DA00E7F1B4 /* com.shariq.sapphireHelper in Embed Helper Executable */,
+				DA1D1AB72EAA76DA00E7F1B4 /* com.rocaka.sapphirecnHelper in Embed Helper Executable */,
 			);
 			name = "Embed Helper Executable";
 		};
@@ -361,7 +361,7 @@
 		DA262AF02EA5D1940027CA69 /* MultitouchSessionFilterSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSessionFilterSupport.framework; path = ../../../../System/Library/PrivateFrameworks/MultitouchSessionFilterSupport.framework; sourceTree = "<group>"; };
 		DA262AF32EA5D1A20027CA69 /* PrivateFrameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PrivateFrameworks; path = ../../../../System/Library/PrivateFrameworks; sourceTree = "<group>"; };
 		DA262AF42EA5D1B70027CA69 /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = ../../../../System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = "<group>"; };
-		DA452EAF2EAA57C90070E5C9 /* com.shariq.sapphireHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.shariq.sapphireHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA452EAF2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.rocaka.sapphirecnHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA46CF762DCBCA0000F00EC5 /* Sapphire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sapphire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA46CF872DCBCA0100F00EC5 /* SapphireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SapphireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA5256782E162B9F00D8F42E /* NearbyTransferDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyTransferDisplayState.swift; sourceTree = "<group>"; };
@@ -479,7 +479,7 @@
 		F1CE000000000000000004AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1CE000000000000000005AA /* SapphireFinderSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SapphireFinderSync.entitlements; sourceTree = "<group>"; };
 		F2DE000000000000000001BB /* SapphireFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SapphireFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2DE000000000000000002BB /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
+		F2DE000000000000000002BB /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileProviderExtension.swift; path = PublicExtensionStubs/FileProvider/FileProviderExtension.swift; sourceTree = SOURCE_ROOT; };
 		F2DE000000000000000003BB /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
 		F2DE000000000000000004BB /* FileProviderEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderEnumerator.swift; sourceTree = "<group>"; };
 		F2DE000000000000000005BB /* HostConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostConnection.swift; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DA1D1AB22EAA74CB00E7F1B4 /* Exceptions for "com.shariq.sapphireHelper" folder in "Sapphire" target */ = {
+		DA1D1AB22EAA74CB00E7F1B4 /* Exceptions for "com.rocaka.sapphirecnHelper" folder in "Sapphire" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				CodesignCheckError.swift,
@@ -547,11 +547,11 @@
 				Services/Music/SapphireMediaQueue.framework,
 			);
 		};
-		DABFA98F2EBFBA8B000C5A8B /* Exceptions for "com.shariq.sapphireHelper" folder in "Embed Helper LaunchDaemon Plist" phase from "Sapphire" target */ = {
+		DABFA98F2EBFBA8B000C5A8B /* Exceptions for "com.rocaka.sapphirecnHelper" folder in "Embed Helper LaunchDaemon Plist" phase from "Sapphire" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = DABFA98B2EBFBA35000C5A8B /* Embed Helper LaunchDaemon Plist */;
 			membershipExceptions = (
-				com.shariq.sapphireHelper.plist,
+				com.rocaka.sapphirecnHelper.plist,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -567,13 +567,13 @@
 			path = Sapphire;
 			sourceTree = "<group>";
 		};
-		DA452EB02EAA57C90070E5C9 /* com.shariq.sapphireHelper */ = {
+		DA452EB02EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DA1D1AB22EAA74CB00E7F1B4 /* Exceptions for "com.shariq.sapphireHelper" folder in "Sapphire" target */,
-				DABFA98F2EBFBA8B000C5A8B /* Exceptions for "com.shariq.sapphireHelper" folder in "Embed Helper LaunchDaemon Plist" phase from "Sapphire" target */,
+				DA1D1AB22EAA74CB00E7F1B4 /* Exceptions for "com.rocaka.sapphirecnHelper" folder in "Sapphire" target */,
+				DABFA98F2EBFBA8B000C5A8B /* Exceptions for "com.rocaka.sapphirecnHelper" folder in "Embed Helper LaunchDaemon Plist" phase from "Sapphire" target */,
 			);
-			path = com.shariq.sapphireHelper;
+			path = com.rocaka.sapphirecnHelper;
 			sourceTree = "<group>";
 		};
 		DA46CF7F2DCBCA0100F00EC5 /* SapphireTests */ = {
@@ -777,7 +777,7 @@
 				DAF7D8AD2E20801E00AB0820 /* SwiftProtobuf_SwiftProtobuf.bundle */,
 				DA183FC92E122AF30056667D /* Sapphire */,
 				DAA7D9D52E8633B20032748B /* abt */,
-				DA452EB02EAA57C90070E5C9 /* com.shariq.sapphireHelper */,
+				DA452EB02EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */,
 				DA46CFCE2DCE7B9E00F00EC5 /* Frameworks */,
 				DA46CF772DCBCA0000F00EC5 /* Products */,
 				DA7C498E2E15D33A0049937A /* Nearby */,
@@ -802,7 +802,7 @@
 				DA46CF872DCBCA0100F00EC5 /* SapphireTests.xctest */,
 				DA7C49802E15CCA50049937A /* libNearbyShare.dylib */,
 				DAA7D9D42E8633B20032748B /* abt */,
-				DA452EAF2EAA57C90070E5C9 /* com.shariq.sapphireHelper */,
+				DA452EAF2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */,
 				CAFE100000000000000001AA /* SapphireCameraExtension.systemextension */,
 				CAFE200000000000000001BB /* SapphireAudioDriver.driver */,
 			);
@@ -1110,9 +1110,9 @@
 			productReference = CAFE200000000000000001BB /* SapphireAudioDriver.driver */;
 			productType = "com.apple.product-type.bundle";
 		};
-		DA452EAE2EAA57C90070E5C9 /* com.shariq.sapphireHelper */ = {
+		DA452EAE2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA452EB32EAA57C90070E5C9 /* Build configuration list for PBXNativeTarget "com.shariq.sapphireHelper" */;
+			buildConfigurationList = DA452EB32EAA57C90070E5C9 /* Build configuration list for PBXNativeTarget "com.rocaka.sapphirecnHelper" */;
 			buildPhases = (
 				DA452EAB2EAA57C90070E5C9 /* Sources */,
 				DA452EAC2EAA57C90070E5C9 /* Frameworks */,
@@ -1120,11 +1120,11 @@
 			buildRules = (
 			);
 			fileSystemSynchronizedGroups = (
-				DA452EB02EAA57C90070E5C9 /* com.shariq.sapphireHelper */,
+				DA452EB02EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */,
 			);
-			name = com.shariq.sapphireHelper;
+			name = com.rocaka.sapphirecnHelper;
 			productName = SapphireHelper;
-			productReference = DA452EAF2EAA57C90070E5C9 /* com.shariq.sapphireHelper */;
+			productReference = DA452EAF2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */;
 			productType = "com.apple.product-type.tool";
 		};
 		DA46CF752DCBCA0000F00EC5 /* Sapphire */ = {
@@ -1304,6 +1304,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = DA46CF6D2DCBCA0000F00EC5;
@@ -1335,7 +1336,7 @@
 				DA46CF862DCBCA0100F00EC5 /* SapphireTests */,
 				DA7C497F2E15CCA50049937A /* NearbyShare */,
 				DAA7D9D32E8633B20032748B /* abt */,
-				DA452EAE2EAA57C90070E5C9 /* com.shariq.sapphireHelper */,
+				DA452EAE2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */,
 				CAFE10000000000000000EAA /* SapphireCameraExtension */,
 				CAFE20000000000000000BBB /* SapphireAudioDriver */,
 				F1CE000000000000000008AA /* SapphireFinderSync */,
@@ -1454,8 +1455,8 @@
 		DA452EBA2EAA5A010070E5C9 /* Resign Sapphire Helper */ = {
 			isa = PBXShellScriptBuildPhase;
 			inputPaths = (
-				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH)/com.shariq.sapphireHelper",
-				"$(SRCROOT)/com.shariq.sapphireHelper/sapphireHelper.entitlements",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH)/com.rocaka.sapphirecnHelper",
+				"$(SRCROOT)/com.rocaka.sapphirecnHelper/sapphireHelper.entitlements",
 			);
 			name = "Resign Sapphire Helper";
 			outputPaths = (
@@ -1463,8 +1464,8 @@
 			);
 			shellPath = /bin/sh;
 			shellScript = (
-				"HELPER=\"${TARGET_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}/com.shariq.sapphireHelper\"",
-				"ENTITLEMENTS=\"${SRCROOT}/com.shariq.sapphireHelper/sapphireHelper.entitlements\"",
+				"HELPER=\"${TARGET_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}/com.rocaka.sapphirecnHelper\"",
+				"ENTITLEMENTS=\"${SRCROOT}/com.rocaka.sapphirecnHelper/sapphireHelper.entitlements\"",
 				"STAMP=\"${SCRIPT_OUTPUT_FILE_0}\"",
 				"",
 				"if [ ! -f \"$HELPER\" ]; then",
@@ -1485,7 +1486,7 @@
 				"# \"unidentified developer\" item (regression from --timestamp=none in 2.55).",
 				"echo \"Re-signing Sapphire helper with empty entitlements (identity: ${EXPANDED_CODE_SIGN_IDENTITY})\"",
 				"codesign --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" \\",
-				"  --identifier com.shariq.sapphireHelper \\",
+				"  --identifier com.rocaka.sapphirecnHelper \\",
 				"  --entitlements \"$ENTITLEMENTS\" \\",
 				"  --generate-entitlement-der \\",
 				"  --options runtime \\",
@@ -1523,7 +1524,9 @@
 			shellPath = /bin/sh;
 			shellScript = (
 				"set -e",
-				"\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"",
+				"if [ \"${SAPPHIRE_UPLOAD_CRASHLYTICS:-NO}\" = \"YES\" ]; then",
+				"  \"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"",
+				"fi",
 				"touch \"${SCRIPT_OUTPUT_FILE_0}\"",
 				"",
 			);
@@ -1606,10 +1609,6 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				F2DE000000000000000013BB /* FileProviderExtension.swift in Sources */,
-				F2DE000000000000000014BB /* FileProviderItem.swift in Sources */,
-				F2DE000000000000000015BB /* FileProviderEnumerator.swift in Sources */,
-				F2DE000000000000000016BB /* HostConnection.swift in Sources */,
-				F2DE000000000000000017BB /* ContinuityFileProviderShared.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -1632,7 +1631,7 @@
 		};
 		DA452EB92EAA58100070E5C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA452EAE2EAA57C90070E5C9 /* com.shariq.sapphireHelper */;
+			target = DA452EAE2EAA57C90070E5C9 /* com.rocaka.sapphirecnHelper */;
 			targetProxy = DA452EB82EAA58100070E5C9 /* PBXContainerItemProxy */;
 		};
 		DA46CF812DCBCA0100F00EC5 /* PBXTargetDependency */ = {
@@ -1663,10 +1662,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = SapphireAndroidWidgets/SapphireAndroidWidgets.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1678,7 +1677,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.AndroidWidgets;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.AndroidWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
@@ -1693,10 +1692,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = SapphireAndroidWidgets/SapphireAndroidWidgets.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1708,7 +1707,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.AndroidWidgets;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.AndroidWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
@@ -1722,11 +1721,11 @@
 			baseConfigurationReference = CAFE0000000000000000A0CC /* Extensions.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "$(SAPPHIRE_CAMERA_ENTITLEMENTS)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "$(SAPPHIRE_CAMERA_EXCLUDED_SOURCES)";
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1739,7 +1738,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphire.CameraExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.CameraExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1754,11 +1753,11 @@
 			baseConfigurationReference = CAFE0000000000000000A0CC /* Extensions.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "$(SAPPHIRE_CAMERA_ENTITLEMENTS)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "$(SAPPHIRE_CAMERA_EXCLUDED_SOURCES)";
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1771,7 +1770,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphire.CameraExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.CameraExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1783,11 +1782,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAFE0000000000000000A0CC /* Extensions.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "$(SAPPHIRE_AUDIO_EXCLUDED_SOURCES)";
 				EXECUTABLE_EXTENSION = driver;
@@ -1796,7 +1795,7 @@
 				INFOPLIST_FILE = "$(SAPPHIRE_AUDIO_INFOPLIST_FILE)";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphire.ContinuityMicDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.ContinuityMicDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = driver;
@@ -1807,11 +1806,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAFE0000000000000000A0CC /* Extensions.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "$(SAPPHIRE_AUDIO_EXCLUDED_SOURCES)";
 				EXECUTABLE_EXTENSION = driver;
@@ -1819,24 +1818,24 @@
 				INFOPLIST_FILE = "$(SAPPHIRE_AUDIO_INFOPLIST_FILE)";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphire.ContinuityMicDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.ContinuityMicDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = driver;
 			};
 			name = Release;
 		};
-		DA452EB42EAA57C90070E5C9 /* Debug configuration for PBXNativeTarget "com.shariq.sapphireHelper" */ = {
+		DA452EB42EAA57C90070E5C9 /* Debug configuration for PBXNativeTarget "com.rocaka.sapphirecnHelper" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_CODE_COVERAGE = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
@@ -1850,9 +1849,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(TARGET_NAME)/Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				OTHER_CODE_SIGN_FLAGS = "--identifier com.shariq.sapphireHelper --generate-entitlement-der --timestamp";
+				OTHER_CODE_SIGN_FLAGS = "--identifier com.rocaka.sapphirecnHelper --generate-entitlement-der";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphireHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecnHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
@@ -1863,24 +1862,24 @@
 				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "com.shariq.sapphireHelper/SapphireHelper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "com.rocaka.sapphirecnHelper/SapphireHelper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		DA452EB52EAA57C90070E5C9 /* Release configuration for PBXNativeTarget "com.shariq.sapphireHelper" */ = {
+		DA452EB52EAA57C90070E5C9 /* Release configuration for PBXNativeTarget "com.rocaka.sapphirecnHelper" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_CODE_COVERAGE = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
@@ -1894,9 +1893,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/$(TARGET_NAME)/Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				OTHER_CODE_SIGN_FLAGS = "--identifier com.shariq.sapphireHelper --generate-entitlement-der --timestamp";
+				OTHER_CODE_SIGN_FLAGS = "--identifier com.rocaka.sapphirecnHelper --generate-entitlement-der";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shariq.sapphireHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecnHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
@@ -1907,7 +1906,7 @@
 				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "com.shariq.sapphireHelper/SapphireHelper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "com.rocaka.sapphirecnHelper/SapphireHelper-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1917,9 +1916,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1940,9 +1939,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1995,7 +1994,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2064,7 +2063,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2096,14 +2095,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				AUTOMATION_APPLE_EVENTS = YES;
-				CODE_SIGN_ENTITLEMENTS = Sapphire/SapphireDebug.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Sapphire/SapphirePublic.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_CODE_COVERAGE = NO;
 				ENABLE_DEBUG_DYLIB = NO;
@@ -2114,13 +2113,13 @@
 				ENABLE_RESOURCE_ACCESS_CONTACTS = YES;
 				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = YES;
-				EXCLUDED_SOURCE_FILE_NAMES = "*/Sapphire/Stubs/*";
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Sapphire/Services/Music";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrivateHeaders";
 				INFOPLIST_FILE = Sapphire/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Sapphire;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sapphire 中文版";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Sapphire controls playback in Music and Spotify, and reads and types into your Terminal or iTerm tabs when you send a message or command to a running task from the notch.";
@@ -2157,7 +2156,7 @@
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
@@ -2182,13 +2181,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				AUTOMATION_APPLE_EVENTS = YES;
-				CODE_SIGN_ENTITLEMENTS = Sapphire/Sapphire.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Sapphire/SapphirePublic.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_CODE_COVERAGE = NO;
 				ENABLE_DEBUG_DYLIB = NO;
@@ -2199,12 +2198,12 @@
 				ENABLE_RESOURCE_ACCESS_CONTACTS = YES;
 				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = YES;
-				EXCLUDED_SOURCE_FILE_NAMES = "*/Sapphire/Stubs/*";
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Sapphire/Services/Music";
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/PrivateHeaders";
 				INFOPLIST_FILE = Sapphire/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Sapphire;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sapphire 中文版";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Sapphire controls playback in Music and Spotify, and reads and types into your Terminal or iTerm tabs when you send a message or command to a running task from the notch.";
@@ -2240,7 +2239,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
@@ -2260,7 +2259,7 @@
 		DA7C49872E15CCA50049937A /* Debug configuration for PBXNativeTarget "NearbyShare" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "";
@@ -2276,7 +2275,7 @@
 		DA7C49882E15CCA50049937A /* Release configuration for PBXNativeTarget "NearbyShare" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "";
@@ -2292,7 +2291,7 @@
 		DAA7D9D92E8633B20032748B /* Debug configuration for PBXNativeTarget "abt" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2306,7 +2305,7 @@
 		DAA7D9DA2E8633B20032748B /* Release configuration for PBXNativeTarget "abt" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2321,11 +2320,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = PublicExtensionStubs/FinderSync/Info.plist;
@@ -2336,7 +2335,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.FinderSync;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.FinderSync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2351,11 +2350,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = PublicExtensionStubs/FinderSync/Info.plist;
@@ -2366,7 +2365,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.FinderSync;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.FinderSync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2379,15 +2378,15 @@
 		F2DE00000000000000000CBB /* Debug configuration for PBXNativeTarget "SapphireFileProvider" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SapphireFileProvider/SapphireFileProvider.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SapphireFileProvider/Info.plist;
+				INFOPLIST_FILE = PublicExtensionStubs/FileProvider/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2395,7 +2394,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.FileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2409,15 +2408,15 @@
 		F2DE00000000000000000DBB /* Release configuration for PBXNativeTarget "SapphireFileProvider" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SapphireFileProvider/SapphireFileProvider.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVQFWJ7C7S;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SapphireFileProvider/Info.plist;
+				INFOPLIST_FILE = PublicExtensionStubs/FileProvider/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2425,7 +2424,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cshariq.sapphire.FileProvider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rocaka.sapphirecn.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2461,11 +2460,11 @@
 			);
 			defaultConfigurationName = Release;
 		};
-		DA452EB32EAA57C90070E5C9 /* Build configuration list for PBXNativeTarget "com.shariq.sapphireHelper" */ = {
+		DA452EB32EAA57C90070E5C9 /* Build configuration list for PBXNativeTarget "com.rocaka.sapphirecnHelper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA452EB42EAA57C90070E5C9 /* Debug configuration for PBXNativeTarget "com.shariq.sapphireHelper" */,
-				DA452EB52EAA57C90070E5C9 /* Release configuration for PBXNativeTarget "com.shariq.sapphireHelper" */,
+				DA452EB42EAA57C90070E5C9 /* Debug configuration for PBXNativeTarget "com.rocaka.sapphirecnHelper" */,
+				DA452EB52EAA57C90070E5C9 /* Release configuration for PBXNativeTarget "com.rocaka.sapphirecnHelper" */,
 			);
 			defaultConfigurationName = Release;
 		};

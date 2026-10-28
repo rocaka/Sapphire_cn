@@ -183,7 +183,7 @@ private struct HelperInstallationStepView: View {
                 .padding(.horizontal, 50)
                 .padding(.bottom, 8)
 
-            Text(stepGuidance)
+            Text(verbatim: L10n.string(stepGuidance))
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
@@ -208,7 +208,7 @@ private struct HelperInstallationStepView: View {
                         helperManager.beginInstallation()
                     }
                 } label: {
-                    Text(helperManager.isResettingHelper ? "Resetting…" : primaryActionTitle)
+                    Text(verbatim: L10n.string(helperManager.isResettingHelper ? "Resetting…" : primaryActionTitle))
                         .font(.headline)
                         .frame(maxWidth: 280)
                         .padding(.vertical, 12)
@@ -344,7 +344,7 @@ private struct PrivacyStepView: View {
 
     private struct PrivacySection: View {
         let title: String, content: String
-        var body: some View { VStack(alignment: .leading, spacing: 4) { Text(title).font(.headline).foregroundStyle(.primary); Text(content).font(.callout).foregroundStyle(.secondary).lineSpacing(4) } }
+        var body: some View { VStack(alignment: .leading, spacing: 4) { Text(verbatim: L10n.string(title)).font(.headline).foregroundStyle(.primary); Text(verbatim: L10n.string(content)).font(.callout).foregroundStyle(.secondary).lineSpacing(4) } }
     }
 }
 
@@ -893,7 +893,7 @@ private struct OnboardingUpdateStatusView: View {
             switch updateChecker.status {
             case .checking: HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Checking for updates...").foregroundStyle(.secondary) }
             case .upToDate: HStack(spacing: 8) { Image(systemName: "checkmark.circle.fill").foregroundStyle(.green); Text("You are up to date!").foregroundStyle(.secondary) }
-            case .available(let version, _): VStack(spacing: 8) { Text("Version \(version) is available!").font(.headline); Link(destination: URL(string: "https://github.com/cshariq/Sapphire/releases")!) { Text("Download from GitHub") }.buttonStyle(.bordered).tint(.accentColor) }
+            case .available(let version, _): VStack(spacing: 8) { Text("Version \(version) is available!").font(.headline); Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn/releases")!) { Text("Download from GitHub") }.buttonStyle(.bordered).tint(.accentColor) }
             case .error(let message): HStack(spacing: 8) { Image(systemName: "xmark.octagon.fill").foregroundColor(.red); Text(message).foregroundStyle(.secondary).lineLimit(1) }
             default: EmptyView()
             }
@@ -908,7 +908,7 @@ private struct ModernOnboardingRow<Content: View>: View {
     var body: some View {
         HStack(spacing: 15) {
             Image(systemName: iconName).font(.title.weight(.semibold)).foregroundColor(iconColor).frame(width: 44, height: 44).background(iconColor.opacity(0.15)).clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            VStack(alignment: .leading, spacing: 3) { Text(title).font(.headline.weight(.bold)); Text(description).font(.callout).foregroundColor(.secondary) }
+            VStack(alignment: .leading, spacing: 3) { Text(verbatim: L10n.string(title)).font(.headline.weight(.bold)); Text(verbatim: L10n.string(description)).font(.callout).foregroundColor(.secondary) }
             Spacer()
             content
         }.padding(16).background(.black.opacity(0.15)).clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)).overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(Color.white.opacity(0.1), lineWidth: 1))
@@ -921,7 +921,7 @@ private struct OnboardingButton: View {
     @Environment(\.isEnabled) private var isEnabled
     var body: some View {
         Button(action: action) {
-            Text(title).font(.headline.weight(.bold)).foregroundColor(isEnabled ? .black.opacity(0.8) : .gray).padding(.horizontal, 60).frame(height: 50)
+            Text(verbatim: L10n.string(title)).font(.headline.weight(.bold)).foregroundColor(isEnabled ? .black.opacity(0.8) : .gray).padding(.horizontal, 60).frame(height: 50)
                 .background(LinearGradient(gradient: Gradient(colors: isEnabled ? [Color(red: 154/255, green: 249/255, blue: 165/255), Color(red: 174/255, green: 255/255, blue: 247/255)] : [.gray.opacity(0.5)]), startPoint: .leading, endPoint: .trailing))
                 .clipShape(Capsule()).shadow(color: .white.opacity(isEnabled ? 0.3 : 0), radius: 10, y: 5)
         }.buttonStyle(.plain).scaleEffect(isEnabled ? 1.0 : 0.98).padding(.bottom, 50)
@@ -944,7 +944,7 @@ private struct MusicServiceButton: View {
     var body: some View {
         HStack {
             iconView.aspectRatio(contentMode: .fit).frame(width: 28, height: 28)
-            Text(title).font(.system(size: 18, weight: .bold, design: .rounded)); Spacer()
+            Text(verbatim: L10n.string(title)).font(.system(size: 18, weight: .bold, design: .rounded)); Spacer()
             Image(systemName: "checkmark.circle.fill").font(.title2).foregroundStyle(.white).opacity(isSelected ? 1.0 : 0.0).scaleEffect(isSelected ? 1.0 : 0.5)
         }.padding(.horizontal, 20).frame(height: 65).background(ZStack { RoundedRectangle(cornerRadius: 20, style: .continuous).fill(.black.opacity(0.2)); RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(Color.white.opacity(0.1), lineWidth: 1); if isSelected { RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(Color.indigo, lineWidth: 3).shadow(color: .indigo.opacity(0.5), radius: 8) } })
         .scaleEffect(isPressed ? 0.97 : 1.0).contentShape(Rectangle()).onTapGesture { withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { action() } }
@@ -956,7 +956,7 @@ private struct PermissionSectionView: View {
     let title: String, permissions: [PermissionItem]
     var description: String? = nil
     @ObservedObject var manager: PermissionsManager
-    var body: some View { if !permissions.isEmpty { VStack(alignment: .leading, spacing: 4) { Text(title).font(.title2.weight(.semibold)); if let description = description { Text(description).font(.caption).foregroundColor(.secondary).padding(.bottom, 8) }; VStack(spacing: 15) { ForEach(permissions) { permission in PermissionRowView(permission: permission, manager: manager) } } } } }
+    var body: some View { if !permissions.isEmpty { VStack(alignment: .leading, spacing: 4) { Text(verbatim: L10n.string(title)).font(.title2.weight(.semibold)); if let description = description { Text(verbatim: L10n.string(description)).font(.caption).foregroundColor(.secondary).padding(.bottom, 8) }; VStack(spacing: 15) { ForEach(permissions) { permission in PermissionRowView(permission: permission, manager: manager) } } } } }
 }
 
 private struct PermissionRowView: View {
@@ -965,7 +965,7 @@ private struct PermissionRowView: View {
     var body: some View {
         HStack(spacing: 15) {
             Image(systemName: permission.iconName).font(.title2).frame(width: 40, height: 40).background(permission.iconColor.opacity(0.2)).clipShape(Circle()).foregroundColor(permission.iconColor)
-            VStack(alignment: .leading, spacing: 2) { Text(permission.title).font(.headline); Text(permission.description).font(.subheadline).foregroundColor(.secondary) }
+            VStack(alignment: .leading, spacing: 2) { Text(verbatim: L10n.string(permission.title)).font(.headline); Text(verbatim: L10n.string(permission.description)).font(.subheadline).foregroundColor(.secondary) }
             Spacer()
             PermissionFeatureInfoButton(permission: permission)
                 .padding(.trailing, 4)

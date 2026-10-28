@@ -14,7 +14,7 @@ final class EncryptionManager: @unchecked Sendable {
     private let key: SymmetricKey
 
     private init() {
-        let tag = "com.cshariq.sapphire.stub-encryption-key"
+        let tag = "com.rocaka.sapphirecn.stub-encryption-key"
         if let stored = UserDefaults.standard.data(forKey: tag) {
             key = SymmetricKey(data: stored)
         } else {

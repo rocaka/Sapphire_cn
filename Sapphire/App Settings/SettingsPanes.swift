@@ -185,8 +185,8 @@ struct PermissionStatusRowView: View {
         HStack(spacing: 15) {
             Image(systemName: permission.iconName).font(.system(size: 18, weight: .medium)).foregroundColor(permission.iconColor).frame(width: 36, height: 36).background(permission.iconColor.opacity(0.15)).clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
-                Text(permission.title).font(.system(size: 14, weight: .medium))
-                Text(permission.description).font(.caption).foregroundColor(.secondary)
+                Text(verbatim: L10n.string(permission.title)).font(.system(size: 14, weight: .medium))
+                Text(verbatim: L10n.string(permission.description)).font(.caption).foregroundColor(.secondary)
             }
             Spacer()
             let status = permissionsManager.status(for: permission.type)
@@ -229,7 +229,7 @@ struct PermissionFeatureInfoPopover: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Label {
-                Text(permission.title)
+                Text(verbatim: L10n.string(permission.title))
             } icon: {
                 Image(systemName: permission.iconName)
                     .foregroundStyle(permission.iconColor)
@@ -239,7 +239,7 @@ struct PermissionFeatureInfoPopover: View {
             Divider()
 
             if features.isEmpty {
-                Text(permission.description)
+                Text(verbatim: L10n.string(permission.description))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -272,7 +272,7 @@ struct NotchAppearanceEditorView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if !title.isEmpty {
-                Text(title).font(.headline).padding([.top, .horizontal])
+                Text(verbatim: L10n.string(title)).font(.headline).padding([.top, .horizontal])
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
 
@@ -1021,7 +1021,7 @@ private struct AppsMetricCard: View {
                 .frame(width: 24, height: 24)
                 .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.caption).foregroundStyle(.secondary)
+                Text(verbatim: L10n.string(title)).font(.caption).foregroundStyle(.secondary)
                 Text(value).font(.subheadline.weight(.semibold)).lineLimit(1)
                 Text(detail).font(.caption2).foregroundStyle(.tertiary).lineLimit(1)
             }
@@ -1865,9 +1865,9 @@ fileprivate struct AnimationSliderRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(verbatim: L10n.string(title))
                         if !description.isEmpty {
-                            Text(description)
+                            Text(verbatim: L10n.string(description))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -7007,7 +7007,7 @@ struct PowerShareRow: View {
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(color)
                     .frame(width: 18)
-                Text(title)
+                Text(verbatim: L10n.string(title))
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
                 Spacer()
@@ -7189,7 +7189,7 @@ private struct BatteryMetricGraphCard<Value: Plottable & Comparable>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text(title).font(.system(size: 15, weight: .semibold, design: .rounded))
+                Text(verbatim: L10n.string(title)).font(.system(size: 15, weight: .semibold, design: .rounded))
                 Spacer()
                 Text(currentValue)
                     .font(.system(size: 13, weight: .bold, design: .rounded))
@@ -9603,9 +9603,9 @@ struct EyeBreakRecommendationsView: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 5) {
-                Text(title)
+                Text(verbatim: L10n.string(title))
                     .font(.headline)
-                Text(description)
+                Text(verbatim: L10n.string(description))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -10112,7 +10112,7 @@ struct MetricCardView: View {
             HStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 10))
-                Text(title)
+                Text(verbatim: L10n.string(title))
                     .font(.system(size: 10))
             }
             .foregroundColor(.secondary)
@@ -11436,7 +11436,7 @@ private struct MenuBarHotkeysSettingsSection: View {
             ? "Not Set"
             : "\(KeyboardShortcutHelper.description(for: shortcut.wrappedValue.modifiers))\(shortcut.wrappedValue.key)"
         return HStack {
-            Text(title).font(.system(size: 14, weight: .medium))
+            Text(verbatim: L10n.string(title)).font(.system(size: 14, weight: .medium))
             Spacer()
             if !isRecording {
                 Text(label)
@@ -12796,7 +12796,7 @@ struct FocusSessionSettingsView: View {
             HStack(spacing: 8) {
                 Image(systemName: on ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(on ? Color.purple : Color.secondary)
-                Text(title)
+                Text(verbatim: L10n.string(title))
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(.primary)
                     .lineLimit(1)
@@ -13372,7 +13372,7 @@ struct FocusSessionSettingsView: View {
     }
 
     private func sectionLabel(_ title: String) -> some View {
-        Text(title)
+        Text(verbatim: L10n.string(title))
             .font(.system(size: 14, weight: .semibold))
             .padding(.top, 12).padding(.horizontal, 16).padding(.bottom, 6)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -13411,7 +13411,7 @@ private struct FocusScheduleRowView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.secondary)
                 }
-                Text(subtitle)
+                Text(verbatim: L10n.string(subtitle))
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(1)

@@ -136,7 +136,7 @@ final class ProcessTapController: ProcessTapControlling {
         self.targetDeviceUIDs = targetDeviceUIDs
         self.deviceMonitor = deviceMonitor
         self.preferredTapSourceDeviceUID = preferredTapSourceDeviceUID
-        self.logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "ProcessTapController(\(app.name))")
+        self.logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "ProcessTapController(\(app.name))")
     }
 
     convenience init(

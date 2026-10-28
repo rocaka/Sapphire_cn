@@ -10,7 +10,7 @@ import XCTest
 
 @MainActor
 final class ArchiveDefaultHandlerTests: XCTestCase {
-    private let sapphireBundleIdentifier = "com.cshariq.sapphire"
+    private let sapphireBundleIdentifier = "com.rocaka.sapphirecn"
 
     func testAllHandlersMatch() {
         let status = ArchiveExtractor.evaluateDefaultHandlerStatus(

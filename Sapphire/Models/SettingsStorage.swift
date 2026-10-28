@@ -287,9 +287,9 @@ enum SettingsWriterElection {
 }
 
 final class SettingsInstanceGuard {
-    static let didPersistNotification = Notification.Name("com.cshariq.sapphire.settings.didPersist")
-    static let instanceLaunchedNotification = Notification.Name("com.cshariq.sapphire.settings.instanceLaunched")
-    static let instanceTerminatingNotification = Notification.Name("com.cshariq.sapphire.settings.instanceTerminating")
+    static let didPersistNotification = Notification.Name("com.rocaka.sapphirecn.settings.didPersist")
+    static let instanceLaunchedNotification = Notification.Name("com.rocaka.sapphirecn.settings.instanceLaunched")
+    static let instanceTerminatingNotification = Notification.Name("com.rocaka.sapphirecn.settings.instanceTerminating")
 
     struct Role: Equatable {
         var isWriter: Bool

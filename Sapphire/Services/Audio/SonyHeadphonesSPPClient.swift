@@ -29,7 +29,7 @@ final class SonyHeadphonesSPPClient: NSObject, IOBluetoothRFCOMMChannelDelegate 
     private var device: IOBluetoothDevice?
     private var receiveBuffer = Data()
     private var sequence: UInt8 = 0
-    private let queue = DispatchQueue(label: "com.shariq.sapphire.sony-mdr-spp")
+    private let queue = DispatchQueue(label: "com.rocaka.sapphirecn.sony-mdr-spp")
 
     func connect(address: String?) {
         handedOffToPhone = false

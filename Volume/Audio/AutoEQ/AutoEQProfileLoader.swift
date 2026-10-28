@@ -8,7 +8,7 @@ import Foundation
 import os
 
 final class AutoEQProfileLoader {
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "AutoEQProfileLoader")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "AutoEQProfileLoader")
 
     private var importDirectory: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!

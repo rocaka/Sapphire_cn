@@ -309,7 +309,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
     private var activationObserver: NSObjectProtocol?
     private var initialCheckWorkItem: DispatchWorkItem?
     private var networkMonitor: NWPathMonitor?
-    private let networkMonitorQueue = DispatchQueue(label: "com.cshariq.sapphire.update-network", qos: .utility)
+    private let networkMonitorQueue = DispatchQueue(label: "com.rocaka.sapphirecn.update-network", qos: .utility)
     private var periodicCheckInterval: TimeInterval = 5 * 60 * 60
     private let persistedAvailableUpdateKey = "SapphirePersistedAvailableUpdate"
     private let releasesCacheKey = "SapphireReleasesCache"
@@ -536,7 +536,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
     }
 
     private func fetchReleases(useConditionalRequest: Bool = true) async throws -> FetchedGitHubReleases {
-        guard let url = URL(string: "https://api.github.com/repos/cshariq/Sapphire/releases?per_page=50") else {
+        guard let url = URL(string: "https://api.github.com/repos/rocaka/Sapphire_cn/releases?per_page=50") else {
             throw UpdateMetadataError.invalidResponse
         }
         var request = URLRequest(url: url)
@@ -812,7 +812,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
         }
         releaseNotesVersion = targetVersion
         releaseNotes = nil
-        releaseNotesURL = URL(string: "https://github.com/cshariq/Sapphire/releases")
+        releaseNotesURL = URL(string: "https://github.com/rocaka/Sapphire_cn/releases")
     }
 
     private static func normalizedNotes(_ body: String?) -> String? {

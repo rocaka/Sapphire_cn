@@ -1365,7 +1365,7 @@ private final class BrewProcessState: @unchecked Sendable {
 
     private let lock = NSLock()
     private let outputQueue = DispatchQueue(
-        label: "com.cshariq.sapphire.homebrew-output",
+        label: "com.rocaka.sapphirecn.homebrew-output",
         qos: .utility
     )
     private var maximumOutputBytes = 5 * 1_024 * 1_024
@@ -2570,7 +2570,7 @@ final class InstalledAppUpdatesChecker: ObservableObject {
     private var entryCheckTasks: [String: Task<Void, Never>] = [:]
     private var networkMonitor: NWPathMonitor?
     private let networkMonitorQueue = DispatchQueue(
-        label: "com.cshariq.sapphire.installed-app-update-network",
+        label: "com.rocaka.sapphirecn.installed-app-update-network",
         qos: .utility
     )
     private var backgroundChecksEnabled = false

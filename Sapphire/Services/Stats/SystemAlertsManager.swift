@@ -422,7 +422,7 @@ final class SystemAlertsManager: ObservableObject {
     }
 
     private func postAlert(kind: AlertKind, title: String, body: String) {
-        let identifier = "com.shariq.sapphire.monitoring.\(kind.rawValue)"
+        let identifier = "com.rocaka.sapphirecn.monitoring.\(kind.rawValue)"
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             let allowed = settings.authorizationStatus == .authorized

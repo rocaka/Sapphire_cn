@@ -1473,7 +1473,7 @@ struct NotchController: View {
             return Empty().eraseToAnyPublisher()
         }
         return DistributedNotificationCenter.default()
-            .publisher(for: Notification.Name("com.cshariq.sapphire.debug.notch"))
+            .publisher(for: Notification.Name("com.rocaka.sapphirecn.debug.notch"))
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }()

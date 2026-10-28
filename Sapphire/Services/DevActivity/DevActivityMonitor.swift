@@ -38,9 +38,9 @@ final class DevActivityMonitor: ObservableObject {
     @Published private(set) var isBusy: Bool = false
 
     private let settings = SettingsModel.shared
-    private let logger = Logger(subsystem: "com.shariq.sapphire", category: "DevActivity")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecn", category: "DevActivity")
     private let engine = DevActivityScanEngine()
-    private let scanQueue = DispatchQueue(label: "com.shariq.sapphire.devactivity", qos: .utility)
+    private let scanQueue = DispatchQueue(label: "com.rocaka.sapphirecn.devactivity", qos: .utility)
 
     private var timer: Timer?
     private var cancellables = Set<AnyCancellable>()

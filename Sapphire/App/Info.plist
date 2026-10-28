@@ -71,7 +71,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.cshariq.sapphire.docklayout</string>
+				<string>com.rocaka.sapphirecn.docklayout</string>
 			</array>
 		</dict>
 	</array>
@@ -81,7 +81,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.cshariq.sapphire</string>
+			<string>com.rocaka.sapphirecn</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>sapphire</string>
@@ -131,7 +131,7 @@
 			<key>UTTypeDescription</key>
 			<string>Sapphire Settings Backup</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.cshariq.sapphire.settings-backup</string>
+			<string>com.rocaka.sapphirecn.settings-backup</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -148,7 +148,7 @@
 			<key>UTTypeDescription</key>
 			<string>Sapphire Dock Layout</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.cshariq.sapphire.docklayout</string>
+			<string>com.rocaka.sapphirecn.docklayout</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -165,7 +165,7 @@
 			<key>UTTypeDescription</key>
 			<string>Sapphire Launchpad Item</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.cshariq.sapphire.launchpaditem</string>
+			<string>com.rocaka.sapphirecn.launchpaditem</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

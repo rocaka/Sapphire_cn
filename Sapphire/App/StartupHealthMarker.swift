@@ -23,7 +23,7 @@ final class StartupHealthMarker {
     private(set) var mode: LaunchMode = .normal
     private var healthyWork: DispatchWorkItem?
 
-    private let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "StartupHealth")
+    private let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "StartupHealth")
 
     init(defaults: UserDefaults) {
         self.defaults = defaults

@@ -26,9 +26,9 @@ final class DDCController {
     private var probeWorkItem: DispatchWorkItem?
     private var displayChangeObserver: NSObjectProtocol?
 
-    private let ddcQueue = DispatchQueue(label: "com.cshariq.sapphire.ddc", qos: .utility)
+    private let ddcQueue = DispatchQueue(label: "com.rocaka.sapphirecn.ddc", qos: .utility)
     private let settingsManager: SettingsManager
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "DDCController")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "DDCController")
 
     var onProbeCompleted: (() -> Void)?
 

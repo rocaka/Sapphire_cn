@@ -93,7 +93,7 @@ final class DDCChannel {
     private let directory: DDCServiceDirectory
     private let onProbe: (ProbeOutcome) -> Void
     private let onFailure: () -> Void
-    private let logger = Logger(subsystem: "com.shariq.sapphire", category: "DDC")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecn", category: "DDC")
 
     private let lock = NSLock()
     private var mailbox = LatestValueMailbox<UInt16>()
@@ -115,7 +115,7 @@ final class DDCChannel {
         self.directory = directory
         self.onProbe = onProbe
         self.onFailure = onFailure
-        queue = DispatchQueue(label: "com.shariq.sapphire.ddc.\(displayID)", qos: .userInitiated)
+        queue = DispatchQueue(label: "com.rocaka.sapphirecn.ddc.\(displayID)", qos: .userInitiated)
     }
 
     func probe() {

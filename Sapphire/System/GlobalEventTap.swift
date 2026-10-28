@@ -129,7 +129,7 @@ final class GlobalEventTap: @unchecked Sendable {
     )
 
     private let log = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire",
+        subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn",
         category: "GlobalEventTap"
     )
 

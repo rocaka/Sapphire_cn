@@ -20,7 +20,7 @@ final class EchoTracker {
     private var nextToken: Int = 0
 
     init(label: String, timeoutDuration: TimeInterval = 2.0,
-         logger: Logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "EchoTracker")) {
+         logger: Logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "EchoTracker")) {
         self.label = label
         self.timeoutDuration = timeoutDuration
         self.logger = logger

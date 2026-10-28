@@ -25,7 +25,7 @@ final class LyricsAudioTap {
         }
     }
 
-    private let queue = DispatchQueue(label: "com.shariq.sapphire.lyrics-audio-tap", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "com.rocaka.sapphirecn.lyrics-audio-tap", qos: .userInitiated)
     private var tapID = AudioObjectID(kAudioObjectUnknown)
     private var aggregateID = AudioObjectID(kAudioObjectUnknown)
     private var ioProcID: AudioDeviceIOProcID?
@@ -62,7 +62,7 @@ final class LyricsAudioTap {
 
         let aggregateDescription: [String: Any] = [
             kAudioAggregateDeviceNameKey: "Sapphire Lyrics Timing",
-            kAudioAggregateDeviceUIDKey: "com.shariq.sapphire.lyrics-tap.\(UUID().uuidString)",
+            kAudioAggregateDeviceUIDKey: "com.rocaka.sapphirecn.lyrics-tap.\(UUID().uuidString)",
             kAudioAggregateDeviceIsPrivateKey: true,
             kAudioAggregateDeviceIsStackedKey: false,
             kAudioAggregateDeviceTapAutoStartKey: true,

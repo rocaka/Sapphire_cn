@@ -39,7 +39,7 @@ final class AudioDeviceMonitor: AudioDeviceProviding {
 
     var inputPriorityOrder: (() -> [String])?
 
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "AudioDeviceMonitor")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "AudioDeviceMonitor")
 
     private var deviceListListenerBlock: AudioObjectPropertyListenerBlock?
     private var deviceListAddress = AudioObjectPropertyAddress(

@@ -89,7 +89,7 @@ enum SapphirePerformance {
         if isCollectionEnabled, networkMonitor == nil {
             let monitor = NWPathMonitor()
             monitor.pathUpdateHandler = { _ in }
-            monitor.start(queue: DispatchQueue(label: "com.cshariq.sapphire.firebase-performance-network"))
+            monitor.start(queue: DispatchQueue(label: "com.rocaka.sapphirecn.firebase-performance-network"))
             networkMonitor = monitor
         } else if !isCollectionEnabled {
             networkMonitor?.cancel()

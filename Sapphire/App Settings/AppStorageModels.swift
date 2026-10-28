@@ -2523,7 +2523,7 @@ final class InstalledAppIconRepository: @unchecked Sendable {
 
     private let lock = NSLock()
     private let expirationQueue = DispatchQueue(
-        label: "com.cshariq.sapphire.installed-app-icons.expiration",
+        label: "com.rocaka.sapphirecn.installed-app-icons.expiration",
         qos: .utility
     )
     private var entries: [String: Entry] = [:]

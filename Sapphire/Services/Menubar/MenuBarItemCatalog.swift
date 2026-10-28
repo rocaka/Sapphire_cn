@@ -37,7 +37,7 @@ final class MenuBarItemCatalog: @unchecked Sendable {
     private var negativeCache: [pid_t: (misses: Int, retryAfter: CFAbsoluteTime)] = [:]
 
     private var observers: [NSObjectProtocol] = []
-    private let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "MenuBarItemCatalog")
+    private let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "MenuBarItemCatalog")
     private let ownPID = ProcessInfo.processInfo.processIdentifier
 
     private static let missBackoff: [CFTimeInterval] = [5, 30, 120, 600]

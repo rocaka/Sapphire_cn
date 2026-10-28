@@ -20,7 +20,7 @@ final class GalaxyBudsSPPClient: NSObject, IOBluetoothRFCOMMChannelDelegate {
     private var rfcommChannel: IOBluetoothRFCOMMChannel?
     private var device: IOBluetoothDevice?
     private var receiveBuffer = Data()
-    private let queue = DispatchQueue(label: "com.shariq.sapphire.galaxy-buds-spp")
+    private let queue = DispatchQueue(label: "com.rocaka.sapphirecn.galaxy-buds-spp")
     private var pendingEnableSeamless = true
 
     func connect(address: String?, name: String?, enableSeamless: Bool = true) {

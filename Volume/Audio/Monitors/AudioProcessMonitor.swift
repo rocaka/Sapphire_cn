@@ -22,7 +22,7 @@ final class AudioProcessMonitor: AudioProcessMonitoring {
     private(set) var activeApps: [AudioApp] = []
     var onAppsChanged: (([AudioApp]) -> Void)?
 
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "AudioProcessMonitor")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "AudioProcessMonitor")
 
     private static let systemDaemonPrefixes: [String] = [
         "com.apple.siri",

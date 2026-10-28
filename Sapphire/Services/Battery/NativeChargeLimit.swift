@@ -38,7 +38,7 @@ enum NativeChargeLimit {
     private typealias SetLimitFn = @convention(c) (AnyObject, Selector, UInt8, ErrorPointer) -> Bool
 
     // All mutable state below is only touched on `queue`.
-    private static let queue = DispatchQueue(label: "com.shariq.sapphire.nativeChargeLimit")
+    private static let queue = DispatchQueue(label: "com.rocaka.sapphirecn.nativeChargeLimit")
     private static var client: AnyObject?
     private static var didAttemptLoad = false
     /// A limit the firmware silently refused; not retried until a different limit is requested.

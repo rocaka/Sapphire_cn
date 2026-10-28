@@ -7,7 +7,7 @@
 import AudioToolbox
 import os
 
-private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "OrphanedTapCleanup")
+private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "OrphanedTapCleanup")
 
 enum OrphanedTapCleanup {
     static func destroyOrphanedDevices() {

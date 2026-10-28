@@ -88,7 +88,7 @@ final class SystemMutationJournal: @unchecked Sendable {
             try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true)
             try data.write(to: fileURL, options: .atomic)
         } catch {
-            Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "SystemMutationJournal")
+            Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "SystemMutationJournal")
                 .error("Could not write the system-mutation journal: \(error.localizedDescription, privacy: .public)")
         }
     }
@@ -98,7 +98,7 @@ final class SystemMutationJournal: @unchecked Sendable {
 
 @MainActor
 enum SystemMutationRecovery {
-    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "SystemMutationRecovery")
+    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "SystemMutationRecovery")
 
     static func restoreAfterUnexpectedExit(journal: SystemMutationJournal = .shared) {
         for record in journal.pending {

@@ -8,7 +8,7 @@ import Foundation
 import AppKit
 import os
 
-private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "Permission")
+private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "Permission")
 
 // MARK: - Permission Status
 

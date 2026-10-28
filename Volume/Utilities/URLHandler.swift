@@ -24,7 +24,7 @@ protocol URLHandlerEngine {
 @MainActor
 final class URLHandler {
     private let audioEngine: any URLHandlerEngine
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.cshariq.sapphire", category: "URLHandler")
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.rocaka.sapphirecn", category: "URLHandler")
 
     init(audioEngine: any URLHandlerEngine) {
         self.audioEngine = audioEngine

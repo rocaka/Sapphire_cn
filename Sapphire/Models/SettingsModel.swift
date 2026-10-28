@@ -10,7 +10,7 @@ import Combine
 import UniformTypeIdentifiers
 
 extension UTType {
-    static let sapphireSettingsBackup = UTType(exportedAs: "com.cshariq.sapphire.settings-backup")
+    static let sapphireSettingsBackup = UTType(exportedAs: "com.rocaka.sapphirecn.settings-backup")
 }
 
 public struct StatThreshold: Codable, Equatable {
@@ -110,10 +110,10 @@ enum FullScreenActivityVisibility: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .showAll: "Show All"
-        case .hidePersistent: "Hide Persistent"
-        case .hideSelected: "Hide Selected"
-        case .hideAll: "Hide All"
+        case .showAll: L10n.string("Show All")
+        case .hidePersistent: L10n.string("Hide Persistent")
+        case .hideSelected: L10n.string("Hide Selected")
+        case .hideAll: L10n.string("Hide All")
         }
     }
 
@@ -154,12 +154,12 @@ public enum StatType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .cpu: return "CPU Usage"
-        case .ram: return "RAM Usage"
-        case .gpu: return "GPU Usage"
-        case .disk: return "Disk Activity"
-        case .systemPower: return "System Power"
-        case .batteryPower: return "Battery Draw"
+        case .cpu: return L10n.string("CPU Usage")
+        case .ram: return L10n.string("RAM Usage")
+        case .gpu: return L10n.string("GPU Usage")
+        case .disk: return L10n.string("Disk Activity")
+        case .systemPower: return L10n.string("System Power")
+        case .batteryPower: return L10n.string("Battery Draw")
         }
     }
 
@@ -182,11 +182,11 @@ enum AnimationProfile: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .snappy: "Snappy"
-        case .fluid: "Fluid"
-        case .bouncy: "Bouncy"
-        case .calm: "Calm"
-        case .custom: "Custom"
+        case .snappy: L10n.string("Snappy")
+        case .fluid: L10n.string("Fluid")
+        case .bouncy: L10n.string("Bouncy")
+        case .calm: L10n.string("Calm")
+        case .custom: L10n.string("Custom")
         }
     }
 }
@@ -194,7 +194,7 @@ enum AnimationProfile: String, Codable, CaseIterable, Identifiable {
 enum WidgetSwitchEffect: String, Codable, CaseIterable, Identifiable {
     case smooth, bouncy
     var id: String { self.rawValue }
-    var displayName: String { self.rawValue.capitalized }
+    var displayName: String { L10n.string(self.rawValue.capitalized) }
 }
 
 enum WidgetSwitchTransition: String, Codable, CaseIterable, Identifiable {
@@ -203,9 +203,9 @@ enum WidgetSwitchTransition: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .slide: "Slide"
-        case .fade: "Fade"
-        case .blurAndFade: "Blur & Fade"
+        case .slide: L10n.string("Slide")
+        case .fade: L10n.string("Fade")
+        case .blurAndFade: L10n.string("Blur & Fade")
         }
     }
 }
@@ -317,20 +317,20 @@ enum WeatherInfoType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .temperature: "Current Temperature"
-        case .condition: "Condition Icon"
-        case .wind: "Wind"
-        case .humidity: "Humidity"
-        case .feelsLike: "Feels Like"
-        case .precipitation: "Precipitation"
-        case .sunrise: "Sunrise"
-        case .sunset: "Sunset"
-        case .uvIndex: "UV Index"
-        case .visibility: "Visibility"
-        case .pressure: "Pressure"
-        case .locationName: "Location Name"
-        case .conditionDescription: "Condition Description"
-        case .highLowTemp: "High / Low Temperature"
+        case .temperature: L10n.string("Current Temperature")
+        case .condition: L10n.string("Condition Icon")
+        case .wind: L10n.string("Wind")
+        case .humidity: L10n.string("Humidity")
+        case .feelsLike: L10n.string("Feels Like")
+        case .precipitation: L10n.string("Precipitation")
+        case .sunrise: L10n.string("Sunrise")
+        case .sunset: L10n.string("Sunset")
+        case .uvIndex: L10n.string("UV Index")
+        case .visibility: L10n.string("Visibility")
+        case .pressure: L10n.string("Pressure")
+        case .locationName: L10n.string("Location Name")
+        case .conditionDescription: L10n.string("Condition Description")
+        case .highLowTemp: L10n.string("High / Low Temperature")
         }
     }
 
@@ -344,8 +344,8 @@ enum FocusDisplayMode: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .full: "Show Full Name"
-        case .compact: "Icon Only (On/Off)"
+        case .full: L10n.string("Show Full Name")
+        case .compact: L10n.string("Icon Only (On/Off)")
         }
     }
 }
@@ -355,9 +355,9 @@ enum LockScreenMainWidgetType: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .notes: return "Notes"
-        case .clipboard: return "Clipboard"
-        default: return self.rawValue.capitalized
+        case .notes: return L10n.string("Notes")
+        case .clipboard: return L10n.string("Clipboard")
+        default: return L10n.string(self.rawValue.capitalized)
         }
     }
 
@@ -371,13 +371,13 @@ enum LockScreenWidgetType: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .caffeine: return "Caffeine"
-        case .timer: return "Timer"
-        case .clock: return "Clock"
-        case .notes: return "Notes"
-        case .clipboard: return "Clipboard"
-        case .system: return "System"
-        default: return self.rawValue.capitalized
+        case .caffeine: return L10n.string("Caffeine")
+        case .timer: return L10n.string("Timer")
+        case .clock: return L10n.string("Clock")
+        case .notes: return L10n.string("Notes")
+        case .clipboard: return L10n.string("Clipboard")
+        case .system: return L10n.string("System")
+        default: return L10n.string(self.rawValue.capitalized)
         }
     }
 
@@ -391,12 +391,12 @@ enum LockScreenMiniWidgetType: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .caffeine: return "Caffeine"
-        case .timer: return "Timer"
-        case .clipboard: return "Clipboard"
-        case .notes: return "Notes"
-        case .system: return "System"
-        default: return self.rawValue.capitalized
+        case .caffeine: return L10n.string("Caffeine")
+        case .timer: return L10n.string("Timer")
+        case .clipboard: return L10n.string("Clipboard")
+        case .notes: return L10n.string("Notes")
+        case .system: return L10n.string("System")
+        default: return L10n.string(self.rawValue.capitalized)
         }
     }
 
@@ -411,11 +411,11 @@ enum BatteryInfoType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .percentage: "Percentage"
-        case .statusIcon: "Status Icon"
-        case .statusText: "Status Text"
-        case .batteryIcon: "Battery Icon"
-        case .estimatedTime: "Estimated Time"
+        case .percentage: L10n.string("Percentage")
+        case .statusIcon: L10n.string("Status Icon")
+        case .statusText: L10n.string("Status Text")
+        case .batteryIcon: L10n.string("Battery Icon")
+        case .estimatedTime: L10n.string("Estimated Time")
         }
     }
 }
@@ -423,13 +423,13 @@ enum BatteryInfoType: String, Codable, CaseIterable, Identifiable {
 enum SnapZoneViewMode: String, Codable, CaseIterable, Identifiable {
     case single, multi
     var id: String { self.rawValue }
-    var displayName: String { self.rawValue.capitalized }
+    var displayName: String { L10n.string(self.rawValue.capitalized) }
 }
 
 enum SnapWindowAnimation: String, Codable, CaseIterable, Identifiable {
     case fast, smooth
     var id: String { rawValue }
-    var displayName: String { rawValue.capitalized }
+    var displayName: String { L10n.string(rawValue.capitalized) }
 
     var summary: String {
         switch self {
@@ -447,8 +447,8 @@ enum FaceIDLocationPolicy: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .everywhere: return "Everywhere"
-        case .selectedWiFiNetworks: return "Selected Wi-Fi Networks"
+        case .everywhere: return L10n.string("Everywhere")
+        case .selectedWiFiNetworks: return L10n.string("Selected Wi-Fi Networks")
         }
     }
 }
@@ -543,10 +543,10 @@ enum NotchAppearanceMode: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
     var displayName: String {
         switch self {
-        case .default: return "Default"
-        case .liquidGlass: return "Liquid Glass"
-        case .blur: return "Blur"
-        case .custom: return "Custom"
+        case .default: return L10n.string("Default")
+        case .liquidGlass: return L10n.string("Liquid Glass")
+        case .blur: return L10n.string("Blur")
+        case .custom: return L10n.string("Custom")
         }
     }
 }
@@ -603,9 +603,9 @@ enum MediaSource: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .system: "System Wide"
-        case .spotify: "Spotify"
-        case .appleMusic: "Apple Music"
+        case .system: L10n.string("System Wide")
+        case .spotify: L10n.string("Spotify")
+        case .appleMusic: L10n.string("Apple Music")
         }
     }
 
@@ -682,9 +682,9 @@ enum NotchDisplayTarget: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .macbookDisplay: "MacBook Display Only"
-        case .mainDisplay: "Main Display Only"
-        case .allDisplays: "All Displays"
+        case .macbookDisplay: L10n.string("MacBook Display Only")
+        case .mainDisplay: L10n.string("Main Display Only")
+        case .allDisplays: L10n.string("All Displays")
         }
     }
 }
@@ -698,13 +698,13 @@ enum HUDAdaptiveTransitionStyle: String, Codable, CaseIterable, Identifiable {
     case smooth, thresholds
 
     var id: String { rawValue }
-    var displayName: String { rawValue.capitalized }
+    var displayName: String { L10n.string(rawValue.capitalized) }
 }
 
 enum NotchBackgroundStyle: String, Codable, CaseIterable, Identifiable {
     case solid, gradient, radial
     var id: String { self.rawValue }
-    var displayName: String { self.rawValue.capitalized }
+    var displayName: String { L10n.string(self.rawValue.capitalized) }
 }
 
 enum MusicPlayerButtonType: String, Codable, CaseIterable, Identifiable, Equatable {
@@ -713,11 +713,11 @@ enum MusicPlayerButtonType: String, Codable, CaseIterable, Identifiable, Equatab
 
     var displayName: String {
         switch self {
-        case .like: "Like"
-        case .shuffle: "Shuffle"
-        case .repeat: "Repeat"
-        case .playlists: "Queue & Playlists"
-        case .devices: "Devices"
+        case .like: L10n.string("Like")
+        case .shuffle: L10n.string("Shuffle")
+        case .repeat: L10n.string("Repeat")
+        case .playlists: L10n.string("Queue & Playlists")
+        case .devices: L10n.string("Devices")
         }
     }
 
@@ -748,16 +748,16 @@ enum MusicLongPressAction: String, Codable, CaseIterable, Identifiable, Equatabl
 
     var displayName: String {
         switch self {
-        case .none: return "None (tap only)"
-        case .seek: return "Seek"
-        case .shuffle: return "Shuffle"
-        case .repeatMode: return "Repeat"
-        case .like: return "Like"
-        case .playPause: return "Play / Pause"
-        case .nextTrack: return "Next Track"
-        case .previousTrack: return "Previous Track"
-        case .openQueue: return "Open Queue"
-        case .openDevices: return "Open Devices"
+        case .none: return L10n.string("None (tap only)")
+        case .seek: return L10n.string("Seek")
+        case .shuffle: return L10n.string("Shuffle")
+        case .repeatMode: return L10n.string("Repeat")
+        case .like: return L10n.string("Like")
+        case .playPause: return L10n.string("Play / Pause")
+        case .nextTrack: return L10n.string("Next Track")
+        case .previousTrack: return L10n.string("Previous Track")
+        case .openQueue: return L10n.string("Open Queue")
+        case .openDevices: return L10n.string("Open Devices")
         }
     }
 
@@ -784,14 +784,14 @@ enum MusicLongPressTarget: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .previous: return "Previous"
-        case .next: return "Next"
-        case .playPause: return "Play / Pause"
-        case .playlists: return "Queue"
-        case .devices: return "Devices"
-        case .like: return "Like"
-        case .shuffle: return "Shuffle"
-        case .repeatMode: return "Repeat"
+        case .previous: return L10n.string("Previous")
+        case .next: return L10n.string("Next")
+        case .playPause: return L10n.string("Play / Pause")
+        case .playlists: return L10n.string("Queue")
+        case .devices: return L10n.string("Devices")
+        case .like: return L10n.string("Like")
+        case .shuffle: return L10n.string("Shuffle")
+        case .repeatMode: return L10n.string("Repeat")
         }
     }
 
@@ -868,10 +868,10 @@ enum NotesSwipeAction: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
     var displayName: String {
         switch self {
-        case .toggleDone: return "Toggle Done"
-        case .copy: return "Copy"
-        case .delete: return "Delete"
-        case .none: return "None"
+        case .toggleDone: return L10n.string("Toggle Done")
+        case .copy: return L10n.string("Copy")
+        case .delete: return L10n.string("Delete")
+        case .none: return L10n.string("None")
         }
     }
 }
@@ -881,10 +881,10 @@ enum ClipboardSwipeAction: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
     var displayName: String {
         switch self {
-        case .share: return "Share"
-        case .copy: return "Copy"
-        case .delete: return "Delete"
-        case .none: return "None"
+        case .share: return L10n.string("Share")
+        case .copy: return L10n.string("Copy")
+        case .delete: return L10n.string("Delete")
+        case .none: return L10n.string("None")
         }
     }
 }
@@ -894,9 +894,9 @@ enum FileDropSwipeAction: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
     var displayName: String {
         switch self {
-        case .share: return "Share"
-        case .delete: return "Delete"
-        case .none: return "None"
+        case .share: return L10n.string("Share")
+        case .delete: return L10n.string("Delete")
+        case .none: return L10n.string("None")
         }
     }
 }
@@ -942,9 +942,9 @@ enum DMGPostInstallAction: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .open: "Open the app"
-        case .revealInFinder: "Reveal in Finder"
-        case .none: "Do nothing"
+        case .open: L10n.string("Open the app")
+        case .revealInFinder: L10n.string("Reveal in Finder")
+        case .none: L10n.string("Do nothing")
         }
     }
 
@@ -965,8 +965,8 @@ enum FileOperationProgressDisplay: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .liveActivity: "Live Activity"
-        case .popup: "Popup Window"
+        case .liveActivity: L10n.string("Live Activity")
+        case .popup: L10n.string("Popup Window")
         }
     }
 }
@@ -2124,16 +2124,16 @@ enum ControlItemIconStyle: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .chevron: return "Chevron"
-        case .arrow: return "Arrow"
-        case .dot: return "Dot"
-        case .line: return "Line"
-        case .bracket: return "Bracket"
-        case .circle: return "Circle"
-        case .triangle: return "Triangle"
-        case .diamond: return "Diamond"
-        case .squareFilled: return "Square"
-        case .ellipsis: return "ellipsis"
+        case .chevron: return L10n.string("Chevron")
+        case .arrow: return L10n.string("Arrow")
+        case .dot: return L10n.string("Dot")
+        case .line: return L10n.string("Line")
+        case .bracket: return L10n.string("Bracket")
+        case .circle: return L10n.string("Circle")
+        case .triangle: return L10n.string("Triangle")
+        case .diamond: return L10n.string("Diamond")
+        case .squareFilled: return L10n.string("Square")
+        case .ellipsis: return L10n.string("ellipsis")
         }
     }
 
@@ -2733,7 +2733,7 @@ final class SettingsModel: ObservableObject {
     }
 
     private let defaults = UserDefaults.standard
-    private let settingsAccessQueue = DispatchQueue(label: "com.cshariq.sapphire.settings.sync.queue")
+    private let settingsAccessQueue = DispatchQueue(label: "com.rocaka.sapphirecn.settings.sync.queue")
     private let settingsAccessQueueKey = DispatchSpecificKey<UInt8>()
     private let persistenceStateLock = NSLock()
     private var isApplyingLoadedSettings = false
@@ -3269,8 +3269,8 @@ enum MagSafeLEDSetting: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .alwaysOn: "Always On"
-        case .off: "Always Off"
+        case .alwaysOn: L10n.string("Always On")
+        case .off: L10n.string("Always Off")
         }
     }
 }
@@ -3280,9 +3280,9 @@ enum LowPowerMode: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .alwaysOn: "Always On"
-        case .onBattery: "On Battery"
-        case .never: "Never"
+        case .alwaysOn: L10n.string("Always On")
+        case .onBattery: L10n.string("On Battery")
+        case .never: L10n.string("Never")
         }
     }
 }
@@ -3292,22 +3292,22 @@ enum WidgetType: String, Codable, CaseIterable, Identifiable, Equatable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .weather: return "Weather"
-        case .calendar: return "Calendar"
-        case .shortcuts: return "Shortcuts"
-        case .music: return "Music"
-        case .sports: return "Sports"
-        case .finance: return "Finance"
-        case .shopify: return "Shopify Orders"
-        case .notes: return "Notes"
-        case .clipboard: return "Clipboard"
-        case .mirror: return "Mirror"
-        case .battery: return "Battery"
-        case .timer: return "Timer"
-        case .focusSession: return "Focus"
-        case .storage: return "Storage"
-        case .dev: return "Dev"
-        case .agent: return "Agent"
+        case .weather: return L10n.string("Weather")
+        case .calendar: return L10n.string("Calendar")
+        case .shortcuts: return L10n.string("Shortcuts")
+        case .music: return L10n.string("Music")
+        case .sports: return L10n.string("Sports")
+        case .finance: return L10n.string("Finance")
+        case .shopify: return L10n.string("Shopify Orders")
+        case .notes: return L10n.string("Notes")
+        case .clipboard: return L10n.string("Clipboard")
+        case .mirror: return L10n.string("Mirror")
+        case .battery: return L10n.string("Battery")
+        case .timer: return L10n.string("Timer")
+        case .focusSession: return L10n.string("Focus")
+        case .storage: return L10n.string("Storage")
+        case .dev: return L10n.string("Dev")
+        case .agent: return L10n.string("Agent")
         }
     }
 }
@@ -3321,9 +3321,9 @@ enum MusicLiveActivityRightTextMode: String, Codable, CaseIterable, Identifiable
 
     var displayName: String {
         switch self {
-        case .off: return "Off"
-        case .continuityOnly: return "Phone only"
-        case .always: return "Always"
+        case .off: return L10n.string("Off")
+        case .continuityOnly: return L10n.string("Phone only")
+        case .always: return L10n.string("Always")
         }
     }
 }
@@ -3337,9 +3337,9 @@ enum MusicLiveActivityWaveformMode: String, Codable, CaseIterable, Identifiable,
 
     var displayName: String {
         switch self {
-        case .off: return "Off"
-        case .continuityOff: return "Hide on phone"
-        case .always: return "Always"
+        case .off: return L10n.string("Off")
+        case .continuityOff: return L10n.string("Hide on phone")
+        case .always: return L10n.string("Always")
         }
     }
 }
@@ -3352,8 +3352,8 @@ enum SpotifyAPIMode: String, Codable, CaseIterable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .privateAPI: return "Private API"
-        case .officialAPI: return "Official API"
+        case .privateAPI: return L10n.string("Private API")
+        case .officialAPI: return L10n.string("Official API")
         }
     }
 }
@@ -3366,8 +3366,8 @@ enum MusicLiveActivityWaveformStyle: String, Codable, CaseIterable, Identifiable
 
     var displayName: String {
         switch self {
-        case .classic: return "Classic"
-        case .continuity: return "Continuity"
+        case .classic: return L10n.string("Classic")
+        case .continuity: return L10n.string("Continuity")
         }
     }
 }
@@ -3409,7 +3409,7 @@ enum LiveActivityType: String, Codable, CaseIterable, Identifiable, Equatable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .capsLock: "Caps Lock"; case .music: "Music"; case .weather: "Weather"; case .calendar: "Calendar"; case .reminders: "Reminders"; case .timers: "Timers"; case .battery: "Battery"; case .eyeBreak: "Eye Break"; case .desktop: "Desktop"; case .focus: "Focus"; case .fileShelf: "File Shelf"; case .fileProgress: "File Progress"; case .stats: "Stats"; case .microphone: "Microphone"; case .devActivity: "Dev Activity"; case .sports: "Sports"; case .finance: "Finance"
+        case .capsLock: L10n.string("Caps Lock"); case .music: L10n.string("Music"); case .weather: L10n.string("Weather"); case .calendar: L10n.string("Calendar"); case .reminders: L10n.string("Reminders"); case .timers: L10n.string("Timers"); case .battery: L10n.string("Battery"); case .eyeBreak: L10n.string("Eye Break"); case .desktop: L10n.string("Desktop"); case .focus: L10n.string("Focus"); case .fileShelf: L10n.string("File Shelf"); case .fileProgress: L10n.string("File Progress"); case .stats: L10n.string("Stats"); case .microphone: L10n.string("Microphone"); case .devActivity: L10n.string("Dev Activity"); case .sports: L10n.string("Sports"); case .finance: L10n.string("Finance")
         }
     }
 }
@@ -3424,10 +3424,10 @@ enum FocusIntensity: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .minimal: return "Minimal"
-        case .gentle: return "Gentle"
-        case .standard: return "Standard"
-        case .strict: return "Strict"
+        case .minimal: return L10n.string("Minimal")
+        case .gentle: return L10n.string("Gentle")
+        case .standard: return L10n.string("Standard")
+        case .strict: return L10n.string("Strict")
         }
     }
 
@@ -3485,10 +3485,10 @@ enum MirrorRotationMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .auto: return "Automatic"
-        case .angle90: return "90°"
-        case .angle180: return "180°"
-        case .angle270: return "270°"
+        case .auto: return L10n.string("Automatic")
+        case .angle90: return L10n.string("90°")
+        case .angle180: return L10n.string("180°")
+        case .angle270: return L10n.string("270°")
         }
     }
 
@@ -3529,9 +3529,9 @@ enum FocusShortcutSyncMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .none: return "Off"
-        case .timer: return "Sync Timer"
-        case .stopwatch: return "Sync Stopwatch"
+        case .none: return L10n.string("Off")
+        case .timer: return L10n.string("Sync Timer")
+        case .stopwatch: return L10n.string("Sync Stopwatch")
         }
     }
 }
@@ -3544,8 +3544,8 @@ enum FocusBlockingMode: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .blocklist: return "Block selected apps"
-        case .allowlist: return "Allow only selected apps"
+        case .blocklist: return L10n.string("Block selected apps")
+        case .allowlist: return L10n.string("Allow only selected apps")
         }
     }
 
@@ -3569,10 +3569,10 @@ enum FocusAmbientSoundType: String, Codable, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .whiteNoise: return "White Noise"
-        case .pinkNoise: return "Pink Noise"
-        case .brownNoise: return "Brown Noise"
-        case .rain: return "Rain"
+        case .whiteNoise: return L10n.string("White Noise")
+        case .pinkNoise: return L10n.string("Pink Noise")
+        case .brownNoise: return L10n.string("Brown Noise")
+        case .rain: return L10n.string("Rain")
         }
     }
 
@@ -3594,8 +3594,8 @@ enum MicrophoneLiveActivityBehavior: String, Codable, CaseIterable, Identifiable
 
     var displayName: String {
         switch self {
-        case .iconOnly: return "Icon Only"
-        case .iconAndGesture: return "Icon + Gesture"
+        case .iconOnly: return L10n.string("Icon Only")
+        case .iconAndGesture: return L10n.string("Icon + Gesture")
         }
     }
 }
@@ -3615,7 +3615,7 @@ enum BatteryNotificationStyle: String, CaseIterable, Identifiable, Decodable, En
 enum NotificationSource: String, CaseIterable, Identifiable {
     case iMessage, faceTime, airDrop
     var id: String { rawValue }
-    var displayName: String { switch self { case .iMessage: "iMessage"; case .faceTime: "FaceTime"; case .airDrop: "AirDrop" } }
+    var displayName: String { switch self { case .iMessage: L10n.string("iMessage"); case .faceTime: L10n.string("FaceTime"); case .airDrop: L10n.string("AirDrop") } }
     var systemImage: String { switch self { case .iMessage: "message.fill"; case .faceTime: "video.fill"; case .airDrop: "shareplay" } }
     var iconColor: Color { switch self { case .iMessage, .faceTime: .green; case .airDrop: .blue } }
 }
@@ -3625,10 +3625,10 @@ enum GeneralSettingType: String, CaseIterable, Identifiable, Equatable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .expandOnHover: "Expand on Hover"
-        case .swipeToSwitchWidgets: "Swipe to Switch Widgets"
-        case .enableOpeningBounce: "Bounce when Opening Widgets"
-        case .capsLockHorizontalLock: "Lock Cursor Horizontally with Caps Lock"
+        case .expandOnHover: L10n.string("Expand on Hover")
+        case .swipeToSwitchWidgets: L10n.string("Swipe to Switch Widgets")
+        case .enableOpeningBounce: L10n.string("Bounce when Opening Widgets")
+        case .capsLockHorizontalLock: L10n.string("Lock Cursor Horizontally with Caps Lock")
         }
     }
     var systemImage: String {
@@ -3660,11 +3660,11 @@ enum NotchButtonType: String, Codable, Identifiable, Equatable {
 
     var displayName: String {
         switch self {
-        case .settings: "Settings"; case .fileShelf: "File Shelf"; case .notes: "Notes"; case .clipboard: "Clipboard"
-        case .intelligence: "Blip"; case .intelligenceLive: "Gemini";
-        case .focusSession: "Focus";
-        case .caffeine: "Caffeinate"; case .spacer: "Spacer";
-        case .multiAudio: "Multi-Audio (Beta)"; case .continuity: "Phone"; case .battery: "Battery"; case .pin: "Pin"
+        case .settings: L10n.string("Settings"); case .fileShelf: L10n.string("File Shelf"); case .notes: L10n.string("Notes"); case .clipboard: L10n.string("Clipboard")
+        case .intelligence: L10n.string("Blip"); case .intelligenceLive: L10n.string("Gemini");
+        case .focusSession: L10n.string("Focus");
+        case .caffeine: L10n.string("Caffeinate"); case .spacer: L10n.string("Spacer");
+        case .multiAudio: L10n.string("Multi-Audio (Beta)"); case .continuity: L10n.string("Phone"); case .battery: L10n.string("Battery"); case .pin: L10n.string("Pin")
         }
     }
 
@@ -3726,10 +3726,10 @@ enum DefaultMusicPlayer: String, Codable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
-        case .appleMusic: "Apple Music"
-        case .spotify: "Spotify"
-        case .tidal: "Tidal"
-        case .youtubeMusic: "YouTube Music"
+        case .appleMusic: L10n.string("Apple Music")
+        case .spotify: L10n.string("Spotify")
+        case .tidal: L10n.string("Tidal")
+        case .youtubeMusic: L10n.string("YouTube Music")
         }
     }
 
@@ -3822,7 +3822,7 @@ extension LaunchpadPageItem: Transferable {
 }
 
 extension UTType {
-    static let launchpadItem = UTType(exportedAs: "com.cshariq.sapphire.launchpaditem")
+    static let launchpadItem = UTType(exportedAs: "com.rocaka.sapphirecn.launchpaditem")
 }
 
 enum SettingsSection: String, CaseIterable, Identifiable {
@@ -3864,51 +3864,51 @@ enum SettingsSection: String, CaseIterable, Identifiable {
 
     var shortDescription: String {
         switch self {
-        case .overview: "Ask about any setting, get suggestions, and change the most-used settings."
-        case .general: "Core app behavior, launch options, animations, and notch controls."
-        case .systemEnhance: "Window previews, app switching, dock controls, and display behavior."
-        case .apps: "Review installed applications, inspect bundle details, and safely move unwanted apps to Trash."
-        case .storage: "Find large folders and reclaim space with transparent, user-approved cleanup."
-        case .widgets: "Choose which widgets appear in the notch and how they are ordered."
-        case .liveActivities: "Control which live activities can surface and auto-expand in the notch."
-        case .appActivities: "Live activities and controls for Zoom, Google Meet, Teams, Slack, Discord, FaceTime, recorders and more."
-        case .fileProgress: "Download, copy and AirDrop progress per app — Safari, Chrome, Edge, Firefox, Finder and others."
-        case .appearance: "Tune the notch look, materials, colors, and layout styling."
-        case .lockScreen: "Configure Sapphire content and behavior while your Mac is locked."
-        case .bluetoothUnlock: "Set up proximity-based authentication and trusted device behavior."
-        case .shortcuts: "Manage quick actions and shortcut surfaces shown in Sapphire."
-        case .keyboardShortcuts: "Reference page listing every keyboard shortcut in Sapphire — global hotkeys, snap zones, and in-app shortcuts."
-        case .snapZones: "Configure window snapping behavior, layouts, and zone actions."
-        case .audio: "Audio adjustments, EQ, and per-app volume adjustments."
-        case .battery: "Battery widgets, history, charging preferences, and power-related controls."
-        case .bluetooth: "Bluetooth device integrations, visibility, and connection behavior."
-        case .hud: "Heads-up display overlays for volume, brightness, keyboard, and media feedback."
-        case .notifications: "Choose which system notifications Sapphire mirrors or enhances."
-        case .nearbyShare: "Nearby sharing preferences, transfers, and device discovery options."
-        case .continuity: "Pair an Android phone for clipboard, notifications, media, battery, and Instant Hotspot."
-        case .fileShelf: "Manage temporary file storage, drag targets, and shelf behavior."
-        case .notes: "Quick notes widget, click-to-expand behavior, and notch bar access."
-        case .clipboard: "Clipboard history, monitoring, and notch clipboard shortcuts."
-        case .emoji: "Slack-style emoji typing with :shortcode: suggestions and a full search picker."
-        case .mouse: "Mouse and trackpad scroll, acceleration, and button customization."
-        case .monitoring: "Menu bar readouts and notifications for CPU, memory, disk, and network."
-        case .devActivity: "Track AI agents, builds, and terminal commands, and keep the Mac awake while they run."
-        case .archives: "Extract ZIP, RAR, 7-Zip, TAR, and other archives — or auto-mount and install disk images (DMGs) — from anywhere."
-        case .mirror: "Mirror widget showing live camera feed, with expandable fullscreen view."
-        case .caffeine: "Keep your Mac awake, clamshell sleep behavior, and lid-angle display controls."
-        case .music: "Music widget sources, playback controls, and media integrations."
-        case .weather: "Weather widget data sources, units, and location-based behavior."
-        case .calendar: "Calendar and reminder integrations shown in widgets and live activities."
-        case .eyeBreak: "Break reminders, timing, and focus nudges for healthier screen habits."
-        case .focusSession: "Session-style Focus Profiles with timers, app/website blocking, social filters, triggers, and cross-device sync."
-        case .appLock: "Lock apps behind Touch ID or password — blur overlays, idle/sleep auto-lock, and auto-close."
-        case .intelligence: "Sapphire Blip — Mac agent with memory, skills, tools, and computer use."
-        case .sports: "Sports widget settings, favorite teams selection, and scoreboard configurations."
-        case .finance: "Stock market ticker configurations, favorite stocks, and trendline visualizations."
-        case .dockLayouts: "Save Dock layouts as presets and switch between them with a click or hotkey."
-        case .mediaOptimizer: "Automatically shrink images, compress media, and extract text with OCR."
+        case .overview: L10n.string("Ask about any setting, get suggestions, and change the most-used settings.")
+        case .general: L10n.string("Core app behavior, launch options, animations, and notch controls.")
+        case .systemEnhance: L10n.string("Window previews, app switching, dock controls, and display behavior.")
+        case .apps: L10n.string("Review installed applications, inspect bundle details, and safely move unwanted apps to Trash.")
+        case .storage: L10n.string("Find large folders and reclaim space with transparent, user-approved cleanup.")
+        case .widgets: L10n.string("Choose which widgets appear in the notch and how they are ordered.")
+        case .liveActivities: L10n.string("Control which live activities can surface and auto-expand in the notch.")
+        case .appActivities: L10n.string("Live activities and controls for Zoom, Google Meet, Teams, Slack, Discord, FaceTime, recorders and more.")
+        case .fileProgress: L10n.string("Download, copy and AirDrop progress per app — Safari, Chrome, Edge, Firefox, Finder and others.")
+        case .appearance: L10n.string("Tune the notch look, materials, colors, and layout styling.")
+        case .lockScreen: L10n.string("Configure Sapphire content and behavior while your Mac is locked.")
+        case .bluetoothUnlock: L10n.string("Set up proximity-based authentication and trusted device behavior.")
+        case .shortcuts: L10n.string("Manage quick actions and shortcut surfaces shown in Sapphire.")
+        case .keyboardShortcuts: L10n.string("Reference page listing every keyboard shortcut in Sapphire — global hotkeys, snap zones, and in-app shortcuts.")
+        case .snapZones: L10n.string("Configure window snapping behavior, layouts, and zone actions.")
+        case .audio: L10n.string("Audio adjustments, EQ, and per-app volume adjustments.")
+        case .battery: L10n.string("Battery widgets, history, charging preferences, and power-related controls.")
+        case .bluetooth: L10n.string("Bluetooth device integrations, visibility, and connection behavior.")
+        case .hud: L10n.string("Heads-up display overlays for volume, brightness, keyboard, and media feedback.")
+        case .notifications: L10n.string("Choose which system notifications Sapphire mirrors or enhances.")
+        case .nearbyShare: L10n.string("Nearby sharing preferences, transfers, and device discovery options.")
+        case .continuity: L10n.string("Pair an Android phone for clipboard, notifications, media, battery, and Instant Hotspot.")
+        case .fileShelf: L10n.string("Manage temporary file storage, drag targets, and shelf behavior.")
+        case .notes: L10n.string("Quick notes widget, click-to-expand behavior, and notch bar access.")
+        case .clipboard: L10n.string("Clipboard history, monitoring, and notch clipboard shortcuts.")
+        case .emoji: L10n.string("Slack-style emoji typing with :shortcode: suggestions and a full search picker.")
+        case .mouse: L10n.string("Mouse and trackpad scroll, acceleration, and button customization.")
+        case .monitoring: L10n.string("Menu bar readouts and notifications for CPU, memory, disk, and network.")
+        case .devActivity: L10n.string("Track AI agents, builds, and terminal commands, and keep the Mac awake while they run.")
+        case .archives: L10n.string("Extract ZIP, RAR, 7-Zip, TAR, and other archives — or auto-mount and install disk images (DMGs) — from anywhere.")
+        case .mirror: L10n.string("Mirror widget showing live camera feed, with expandable fullscreen view.")
+        case .caffeine: L10n.string("Keep your Mac awake, clamshell sleep behavior, and lid-angle display controls.")
+        case .music: L10n.string("Music widget sources, playback controls, and media integrations.")
+        case .weather: L10n.string("Weather widget data sources, units, and location-based behavior.")
+        case .calendar: L10n.string("Calendar and reminder integrations shown in widgets and live activities.")
+        case .eyeBreak: L10n.string("Break reminders, timing, and focus nudges for healthier screen habits.")
+        case .focusSession: L10n.string("Session-style Focus Profiles with timers, app/website blocking, social filters, triggers, and cross-device sync.")
+        case .appLock: L10n.string("Lock apps behind Touch ID or password — blur overlays, idle/sleep auto-lock, and auto-close.")
+        case .intelligence: L10n.string("Sapphire Blip — Mac agent with memory, skills, tools, and computer use.")
+        case .sports: L10n.string("Sports widget settings, favorite teams selection, and scoreboard configurations.")
+        case .finance: L10n.string("Stock market ticker configurations, favorite stocks, and trendline visualizations.")
+        case .dockLayouts: L10n.string("Save Dock layouts as presets and switch between them with a click or hotkey.")
+        case .mediaOptimizer: L10n.string("Automatically shrink images, compress media, and extract text with OCR.")
 
-        case .about: "App version details, Sapphire updates, release channels, credits, links, and project information."
+        case .about: L10n.string("App version details, Sapphire updates, release channels, credits, links, and project information.")
         }
     }
 
@@ -3982,7 +3982,7 @@ enum SettingsSection: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .overview: "Overview"; case .general: "General"; case .systemEnhance: "System Enhance"; case .apps: "Apps"; case .storage: "Storage"; case .widgets: "Widgets"; case .liveActivities: "Live Activities"; case .appActivities: "App Activities"; case .fileProgress: "File Progress"; case .appearance: "Appearance"; case .lockScreen: "Lock Screen"; case .bluetoothUnlock: "Authentication"; case .shortcuts: "Shortcuts"; case .keyboardShortcuts: "Keyboard Shortcuts"; case .snapZones: "Snap Zones"; case .audio: "Audio"; case .battery: "Battery"; case .bluetooth: "Bluetooth"; case .hud: "HUD"; case .notifications: "Notifications"; case .nearbyShare: "Nearby Share"; case .continuity: "Continuity"; case .fileShelf: "File Shelf"; case .notes: "Notes";        case .clipboard: "Clipboard"; case .emoji: "Emoji"; case .mouse: "Mouse"; case .monitoring: "Monitoring"; case .devActivity: "Dev Activity"; case .archives: "Archives & DMG"; case .mirror: "Mirror"; case .caffeine: "Caffeinate"; case .music: "Music"; case .weather: "Weather";        case .calendar: "Calendar"; case .eyeBreak: "Eye Break"; case .focusSession: "Focus Sessions"; case .appLock: "App Lock"; case .intelligence: "Blip"; case .sports: "Sports"; case .finance: "Finance"; case .dockLayouts: "Dock"; case .mediaOptimizer: "Media Optimizer"; case .about: "About"
+        case .overview: L10n.string("Overview"); case .general: L10n.string("General"); case .systemEnhance: L10n.string("System Enhance"); case .apps: L10n.string("Apps"); case .storage: L10n.string("Storage"); case .widgets: L10n.string("Widgets"); case .liveActivities: L10n.string("Live Activities"); case .appActivities: L10n.string("App Activities"); case .fileProgress: L10n.string("File Progress"); case .appearance: L10n.string("Appearance"); case .lockScreen: L10n.string("Lock Screen"); case .bluetoothUnlock: L10n.string("Authentication"); case .shortcuts: L10n.string("Shortcuts"); case .keyboardShortcuts: L10n.string("Keyboard Shortcuts"); case .snapZones: L10n.string("Snap Zones"); case .audio: L10n.string("Audio"); case .battery: L10n.string("Battery"); case .bluetooth: L10n.string("Bluetooth"); case .hud: L10n.string("HUD"); case .notifications: L10n.string("Notifications"); case .nearbyShare: L10n.string("Nearby Share"); case .continuity: L10n.string("Continuity"); case .fileShelf: L10n.string("File Shelf"); case .notes: L10n.string("Notes");        case .clipboard: L10n.string("Clipboard"); case .emoji: L10n.string("Emoji"); case .mouse: L10n.string("Mouse"); case .monitoring: L10n.string("Monitoring"); case .devActivity: L10n.string("Dev Activity"); case .archives: L10n.string("Archives & DMG"); case .mirror: L10n.string("Mirror"); case .caffeine: L10n.string("Caffeinate"); case .music: L10n.string("Music"); case .weather: L10n.string("Weather");        case .calendar: L10n.string("Calendar"); case .eyeBreak: L10n.string("Eye Break"); case .focusSession: L10n.string("Focus Sessions"); case .appLock: L10n.string("App Lock"); case .intelligence: L10n.string("Blip"); case .sports: L10n.string("Sports"); case .finance: L10n.string("Finance"); case .dockLayouts: L10n.string("Dock"); case .mediaOptimizer: L10n.string("Media Optimizer"); case .about: L10n.string("About")
         }
     }
 

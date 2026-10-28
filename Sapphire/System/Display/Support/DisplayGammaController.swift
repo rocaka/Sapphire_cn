@@ -48,7 +48,7 @@ final class DisplayGammaController {
         }
     }
 
-    private let logger = Logger(subsystem: "com.shariq.sapphire", category: "DisplayGamma")
+    private let logger = Logger(subsystem: "com.rocaka.sapphirecn", category: "DisplayGamma")
     private var entries: [CGDirectDisplayID: Entry] = [:]
     private var observers: [(center: NotificationCenter, token: NSObjectProtocol)] = []
     private var reapplyWorkItem: DispatchWorkItem?

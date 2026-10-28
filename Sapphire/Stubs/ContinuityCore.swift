@@ -268,6 +268,6 @@ struct ContinuityNotificationActivityView: View {
 }
 
 extension Notification.Name {
-    static let continuityClipboardReceived = Notification.Name("com.shariq.sapphire.continuity.clipboardReceived")
+    static let continuityClipboardReceived = Notification.Name("com.rocaka.sapphirecn.continuity.clipboardReceived")
 }
 #endif
