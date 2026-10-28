@@ -1433,7 +1433,7 @@
 "Quit Sapphire" = "退出 Sapphire";
 "Quit on Close" = "关闭时退出";
 "RAM Usage" = "内存使用率";
-"Rain" = "雨声";
+"Rain" = "雨";
 "Rain Shower" = "阵雨";
 "Raising the Clear Bass slider or the low EQ bands adds level below ~150 Hz and can clip into audible distortion. Ease off if it sounds crunchy." = "提高清晰低音或低频均衡器会增强约 150 Hz 以下的电平，可能产生削波失真。听到破音时请降低。";
 "Rank running work alongside notifications instead of with the ambient readouts, so it shows even while music is playing." = "将运行任务与通知并列，而非与环境信息排列，以便音乐播放时也能显示。";

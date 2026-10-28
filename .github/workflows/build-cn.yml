@@ -4,12 +4,24 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      configuration:
+        type: choice
+        default: Release
+        options: [Release, Debug]
+      architecture:
+        type: choice
+        default: universal
+        options: [universal, arm64, x86_64]
 permissions:
   contents: read
 jobs:
   build:
     runs-on: macos-latest
     timeout-minutes: 60
+    env:
+      CONFIGURATION: ${{ inputs.configuration || 'Release' }}
+      BUILD_ARCHS: ${{ inputs.architecture != 'universal' && inputs.architecture || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache/restore@v4
@@ -38,7 +50,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Sapphire-CN
+          name: Sapphire-CN-${{ env.CONFIGURATION }}-${{ env.BUILD_ARCHS || 'universal' }}
           path: |
             build-cn/Sapphire-CN.zip
             build-cn/Sapphire-CN.zip.sha256

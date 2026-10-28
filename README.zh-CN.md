@@ -10,7 +10,7 @@
 
 ## 下载与构建
 
-进入本仓库 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml)，下载成功构建的 `Sapphire-CN` artifact，解压其中的 `Sapphire-CN.zip` 后将应用放入「应用程序」。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
+进入本仓库 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml)，下载成功构建的 `Sapphire-CN-Release-universal` artifact，解压其中的 `Sapphire-CN.zip` 后将应用放入「应用程序」。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
 
 本地需要完整 Xcode、macOS SDK 和 GitHub 网络连接：
 
@@ -21,7 +21,7 @@ python3 scripts/check-localization.py
 scripts/build-cn.sh
 ```
 
-输出为 `build-cn/Sapphire-CN.zip` 和 SHA-256 文件。Release 默认按项目配置构建通用架构（Apple Silicon 与 Intel）；捆绑的第三方设备工具仍受上游二进制架构限制。请以构建日志中 `lipo -archs` 的实际结果为准。`CONFIGURATION=Debug scripts/build-cn.sh` 可构建调试版。
+输出为 `build-cn/Sapphire-CN.zip` 和 SHA-256 文件。Release 默认按项目配置构建通用架构（Apple Silicon 与 Intel）；捆绑的第三方设备工具仍受上游二进制架构限制。请以构建日志中 `lipo -archs` 的实际结果为准。`CONFIGURATION=Debug BUILD_ARCHS=arm64 scripts/build-cn.sh` 可快速构建 Apple Silicon 调试版。Actions 的手动运行也可选择配置和架构；调试版用于验证，不代替通用 Release。
 
 ## 签名与权限
 
@@ -44,7 +44,7 @@ xcrun stapler staple build-cn/DerivedData/Build/Products/Release/Sapphire.app
 xcrun stapler validate build-cn/DerivedData/Build/Products/Release/Sapphire.app
 # staple 修改了应用，需重新打包并更新校验和
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent build-cn/DerivedData/Build/Products/Release/Sapphire.app build-cn/Sapphire-CN.zip
-shasum -a 256 build-cn/Sapphire-CN.zip > build-cn/Sapphire-CN.zip.sha256
+(cd build-cn && shasum -a 256 Sapphire-CN.zip > Sapphire-CN.zip.sha256)
 ```
 
 正式公证未完成前，不应将产物标为「已公证」。证书、密码、私钥和 provisioning profile 不应提交到仓库。

@@ -7,10 +7,17 @@ CONFIGURATION="${CONFIGURATION:-Release}"
 SIGNING_IDENTITY="${SIGNING_IDENTITY:--}"
 cd "$ROOT"
 mkdir -p "$BUILD_DIR"
+XCODE_ARGS=(CODE_SIGNING_ALLOWED=NO)
+if [[ -n "${BUILD_ARCHS:-}" ]]; then
+  XCODE_ARGS+=("ARCHS=$BUILD_ARCHS")
+fi
+if [[ "$CONFIGURATION" == 'Debug' ]]; then
+  XCODE_ARGS+=(SWIFT_OPTIMIZATION_LEVEL=-Onone SWIFT_COMPILATION_MODE=singlefile)
+fi
 xcodebuild -project Sapphire.xcodeproj -scheme Sapphire \
   -configuration "$CONFIGURATION" -destination 'generic/platform=macOS' \
   -derivedDataPath "$BUILD_DIR/DerivedData" \
-  CODE_SIGNING_ALLOWED=NO build
+  "${XCODE_ARGS[@]}" build
 APP="$BUILD_DIR/DerivedData/Build/Products/$CONFIGURATION/Sapphire.app"
 test -f "$APP/Contents/Resources/zh-Hans.lproj/Localizable.strings"
 test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
@@ -18,7 +25,7 @@ test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
 python3 "$ROOT/scripts/sign-cn.py" "$APP" "$SIGNING_IDENTITY"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "$APP"
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP" "$BUILD_DIR/Sapphire-CN.zip"
-shasum -a 256 "$BUILD_DIR/Sapphire-CN.zip" > "$BUILD_DIR/Sapphire-CN.zip.sha256"
+(cd "$BUILD_DIR" && shasum -a 256 Sapphire-CN.zip > Sapphire-CN.zip.sha256)
 echo "Build ready: $BUILD_DIR/Sapphire-CN.zip"
 if [[ "$SIGNING_IDENTITY" == '-' ]]; then
   echo 'Ad-hoc signed: no Apple notarization; the privileged root helper remains unavailable.'
