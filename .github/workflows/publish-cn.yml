@@ -1,0 +1,54 @@
+name: Publish verified Sapphire CN build
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Build Sapphire CN run ID
+        required: true
+      tag:
+        description: Existing draft release tag
+        required: true
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify build and draft release match
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BUILD_RUN: ${{ inputs.run_id }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          [[ "$BUILD_RUN" =~ ^[0-9]+$ ]]
+          gh api "repos/$GH_REPO/actions/runs/$BUILD_RUN" > run.json
+          gh release view "$RELEASE_TAG" --json isDraft,targetCommitish > release.json
+          python3 - <<'PY'
+          import json
+          run = json.load(open('run.json'))
+          release = json.load(open('release.json'))
+          assert run['conclusion'] == 'success', 'Build must have succeeded'
+          assert run['path'] == '.github/workflows/build-cn.yml', 'Unexpected workflow'
+          assert release['isDraft'], 'Release must still be a draft'
+          assert release['targetCommitish'] == run['head_sha'], 'Release commit does not match verified build'
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: Sapphire-CN-Release-universal
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: package
+      - name: Verify package checksum and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        working-directory: package
+        run: |
+          set -euo pipefail
+          sha256sum --check Sapphire-CN.zip.sha256
+          gh release upload "$RELEASE_TAG" Sapphire-CN.zip Sapphire-CN.zip.sha256
+          gh release edit "$RELEASE_TAG" --draft=false --latest
