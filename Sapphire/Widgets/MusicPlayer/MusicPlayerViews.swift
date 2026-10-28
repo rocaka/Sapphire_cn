@@ -292,6 +292,9 @@ struct MusicPlayerView: View {
 
     var body: some View {
         VStack(spacing: 4) {
+            if musicManager.isNeteaseSourceSelected, let error = musicManager.neteaseControlError {
+                Text(error).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            }
             if showArtworkSection {
                 artworkSection
                     .padding(.top, 8)
@@ -681,6 +684,10 @@ struct MusicPlayerView: View {
     }
 
     private func handleButtonTap(for targetMode: NotchWidgetMode) {
+        if musicManager.isNeteaseSourceSelected, targetMode == .musicQueueAndPlaylists {
+            musicManager.openNeteaseLibrary()
+            return
+        }
         if let onQueueAction, targetMode == .musicQueueAndPlaylists {
             if !musicManager.isPrivateAPIAuthenticated && !musicManager.isOfficialAPIAuthenticated && musicManager.lastKnownBundleID != "com.apple.Music" {
                 onLoginAction?()

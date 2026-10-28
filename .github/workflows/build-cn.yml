@@ -35,6 +35,8 @@ jobs:
         run: |
           xcrun swiftc -module-cache-path "$RUNNER_TEMP/l10n-cache" Sapphire/App/Localization.swift scripts/LocalizationProbe.swift -o "$RUNNER_TEMP/l10n-probe"
           "$RUNNER_TEMP/l10n-probe" "$PWD/Sapphire"
+      - name: Verify NetEase source isolation and recording matching
+        run: scripts/test-netease.sh
       - name: Verify nested signing and tamper rejection
         run: scripts/test-signing.sh
       - name: Build and ad-hoc sign

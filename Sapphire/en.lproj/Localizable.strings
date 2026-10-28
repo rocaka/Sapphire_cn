@@ -2193,3 +2193,16 @@
 "• Feature usage frequency (e.g., how often a widget is used)\n• App version and macOS version\n• Anonymous crash reports" = "• Feature usage frequency (e.g., how often a widget is used)\n• App version and macOS version\n• Anonymous crash reports";
 "⌘V in Finder turns a copied image into a PNG file in the front folder." = "⌘V in Finder turns a copied image into a PNG file in the front folder.";
 "⌘X then ⌘V moves copied files instead of copying them, ⌘V pastes copied images as PNG files into the front Finder folder, and F2 renames the selected item." = "⌘X then ⌘V moves copied files instead of copying them, ⌘V pastes copied images as PNG files into the front Finder folder, and F2 renames the selected item.";
+
+/* NetEase Cloud Music integration */
+"NetEase Cloud Music" = "NetEase Cloud Music";
+"Open NetEase Cloud Music" = "Open NetEase Cloud Music";
+"Accessibility Settings" = "Accessibility Settings";
+"Accessibility access enabled" = "Accessibility access enabled";
+"Accessibility access required" = "Accessibility access required";
+"NetEase could not perform this action. Check playback and login in the NetEase app." = "NetEase could not perform this action. Check playback and login in the NetEase app.";
+"Enable Sapphire in System Settings > Privacy & Security > Accessibility to control NetEase Cloud Music." = "Enable Sapphire in System Settings > Privacy & Security > Accessibility to control NetEase Cloud Music.";
+"Start playback in NetEase before seeking from Sapphire." = "Start playback in NetEase before seeking from Sapphire.";
+"Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback." = "Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback.";
+"NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire." = "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.";
+"Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls." = "Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls.";

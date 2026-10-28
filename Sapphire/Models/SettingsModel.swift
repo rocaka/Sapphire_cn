@@ -599,13 +599,14 @@ struct NotchAppearanceSettings: Codable, Equatable {
 }
 
 enum MediaSource: String, Codable, CaseIterable, Identifiable {
-    case system, spotify, appleMusic
+    case system, spotify, appleMusic, neteaseMusic
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
         case .system: L10n.string("System Wide")
         case .spotify: L10n.string("Spotify")
         case .appleMusic: L10n.string("Apple Music")
+        case .neteaseMusic: L10n.string("NetEase Cloud Music")
         }
     }
 
@@ -614,6 +615,7 @@ enum MediaSource: String, Codable, CaseIterable, Identifiable {
         case .system: return nil
         case .spotify: return "com.spotify.client"
         case .appleMusic: return "com.apple.Music"
+        case .neteaseMusic: return NeteaseMusicPolicy.bundleID
         }
     }
 }
@@ -3722,11 +3724,12 @@ enum Day: String, Codable, CaseIterable, Identifiable {
 }
 
 enum DefaultMusicPlayer: String, Codable, CaseIterable, Identifiable {
-    case appleMusic, spotify, tidal, youtubeMusic
+    case appleMusic, spotify, tidal, youtubeMusic, neteaseMusic
     var id: String { self.rawValue }
     var displayName: String {
         switch self {
         case .appleMusic: L10n.string("Apple Music")
+        case .neteaseMusic: L10n.string("NetEase Cloud Music")
         case .spotify: L10n.string("Spotify")
         case .tidal: L10n.string("Tidal")
         case .youtubeMusic: L10n.string("YouTube Music")
@@ -3736,6 +3739,7 @@ enum DefaultMusicPlayer: String, Codable, CaseIterable, Identifiable {
     var bundleIdentifier: String? {
         switch self {
         case .appleMusic: "com.apple.Music"
+        case .neteaseMusic: NeteaseMusicPolicy.bundleID
         case .spotify: "com.spotify.client"
         case .tidal: "com.tidal.desktop"
         case .youtubeMusic: nil
@@ -3748,6 +3752,7 @@ enum DefaultMusicPlayer: String, Codable, CaseIterable, Identifiable {
         case .spotify: nil
         case .tidal: URL(string: "https://tidal.com")
         case .youtubeMusic: URL(string: "https://music.youtube.com")
+        case .neteaseMusic: URL(string: "https://music.163.com")
         }
     }
 

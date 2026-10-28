@@ -258,6 +258,8 @@ final class NativeMediaController: NSObject {
     func endBackwardSeek() { commands.submit(.send(11)) }
     func skipBack15Seconds() { commands.submit(.send(12)) }
     func skipForward15Seconds() { commands.submit(.send(13)) }
+    var activeSystemBundleID: String? { lastActiveClientKey }
+
     func setTime(seconds: Double) {
         commands.submit(.seek(micros: Self.micros(fromSeconds: max(0, seconds)) ?? 0))
     }

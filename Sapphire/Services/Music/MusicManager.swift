@@ -110,6 +110,7 @@ class MusicManager {
     }
 
     private func loadDetailPlayerExtras() async {
+        if isNeteaseSourceSelected { await refreshNeteaseState(force: true); return }
         await ensureNextSongAvailableIfNeeded()
         if lastKnownBundleID == "com.apple.Music", settingsModel.current.spotifyShowSuggestedSongs,
            appleSuggestedTracks.isEmpty {
@@ -752,6 +753,49 @@ class MusicManager {
         }
     }
 
+    var neteaseControlError: String?
+    @ObservationIgnored private var neteaseStateRefreshAt = Date.distantPast
+    @ObservationIgnored private var neteaseStateRefreshInFlight = false
+
+    var isNeteaseSourceSelected: Bool {
+        NeteaseMusicPolicy.isSource(currentSourceKey)
+            || (currentSourceKey == nil && lastKnownBundleID == NeteaseMusicPolicy.bundleID)
+    }
+
+    private func performNetease(_ action: NeteaseMusicBridge.Action) async -> Bool {
+        let source = currentSourceKey
+        do {
+            try await NeteaseMusicBridge.shared.perform(action)
+            guard source == currentSourceKey else { return false }
+            neteaseControlError = nil
+            return true
+        } catch {
+            guard source == currentSourceKey else { return false }
+            neteaseControlError = L10n.string(NeteaseMusicBridge.shared.isTrusted
+                ? "NetEase could not perform this action. Check playback and login in the NetEase app."
+                : "Enable Sapphire in System Settings > Privacy & Security > Accessibility to control NetEase Cloud Music.")
+            return false
+        }
+    }
+
+    func refreshNeteaseState(force: Bool = false) async {
+        guard isNeteaseSourceSelected, !neteaseStateRefreshInFlight,
+              force || Date().timeIntervalSince(neteaseStateRefreshAt) > 2 else { return }
+        neteaseStateRefreshAt = Date()
+        neteaseStateRefreshInFlight = true
+        let identity = lastTrackIdentity
+        defer { neteaseStateRefreshInFlight = false }
+        guard let state = await NeteaseMusicBridge.shared.state(), isNeteaseSourceSelected,
+              identity == lastTrackIdentity else { return }
+        if let liked = state.liked { isLiked = liked }
+        if let shuffled = state.shuffled { shuffleState = shuffled }
+        if let mode = state.repeatMode, let repeatMode = RepeatMode(rawValue: mode) { repeatState = repeatMode }
+    }
+
+    func openNeteaseLibrary() {
+        DefaultMusicPlayer.neteaseMusic.open()
+    }
+
     // MARK: - Core Playback Actions (Context-Aware)
 
     func play() async {
@@ -761,6 +805,13 @@ class MusicManager {
                 defaultPlayer.open()
                 return
             }
+        }
+        if isNeteaseSourceSelected {
+            if await performNetease(.play) {
+                beginPlayStateHold(preferPlaying: true, duration: 1.2)
+                applyPlayingState(true)
+            }
+            return
         }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         applyPlayingState(true)
@@ -796,6 +847,13 @@ class MusicManager {
     }
 
     func pause() async {
+        if isNeteaseSourceSelected {
+            if await performNetease(.pause) {
+                beginPlayStateHold(preferPlaying: false, duration: 1.2)
+                applyPlayingState(false)
+            }
+            return
+        }
         beginPlayStateHold(preferPlaying: false, duration: 1.2)
         applyPlayingState(false)
 
@@ -839,6 +897,7 @@ class MusicManager {
     }
 
     func nextTrack() async {
+        if isNeteaseSourceSelected { _ = await performNetease(.next); return }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         if isPhoneMediaSourceSelected {
             ContinuityManager.shared.sendMediaCommand(.next)
@@ -852,6 +911,7 @@ class MusicManager {
     }
 
     func previousTrack() async {
+        if isNeteaseSourceSelected { _ = await performNetease(.previous); return }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         if isPhoneMediaSourceSelected {
             ContinuityManager.shared.sendMediaCommand(.previous)
@@ -891,7 +951,19 @@ class MusicManager {
     }
 
     func seek(to seconds: Double) async {
+        guard seconds.isFinite else { return }
         let clamped = max(0.0, totalDuration > 0 ? min(seconds, totalDuration) : seconds)
+        if isNeteaseSourceSelected {
+            // The adapter addresses the active system client; never seek a different player.
+            guard mediaController.activeSystemBundleID == NeteaseMusicPolicy.bundleID else {
+                neteaseControlError = L10n.string("Start playback in NetEase before seeking from Sapphire.")
+                return
+            }
+            mediaController.setTime(seconds: clamped)
+            neteaseControlError = nil
+            // Wait for the client to report its position; unsupported seeks must not fake progress.
+            return
+        }
 
         if isPhoneMediaSourceSelected {
             ContinuityManager.shared.sendMediaCommand(.seek, seekMs: Int(clamped * 1000))
@@ -923,6 +995,7 @@ class MusicManager {
     }
 
     var isAppleMusicContext: Bool {
+        if isNeteaseSourceSelected { return false }
         if lastKnownBundleID == "com.apple.Music" { return true }
         if isSpotifySourceActive || isSpotifyLiveSourceSelected { return false }
         if title != nil, lastKnownBundleID == DefaultMusicPlayer.tidal.bundleIdentifier { return false }
@@ -1306,6 +1379,8 @@ class MusicManager {
         guard !pool.isEmpty else { return candidates.first }
         let preferredKey: String?
         switch settingsModel.current.mediaSource {
+        case .neteaseMusic:
+            preferredKey = pool.first(where: { NeteaseMusicPolicy.isSource($0) }) ?? pool.first
         case .system:
             preferredKey = pool.first(where: { !isSpotifySourceKey($0) })
                 ?? pool.first(where: isSpotifySourceKey)
@@ -1405,6 +1480,11 @@ class MusicManager {
     // MARK: - Rating & Mode Actions
 
     func toggleLike() async {
+        if isNeteaseSourceSelected {
+            _ = await performNetease(.like)
+            await refreshNeteaseState(force: true)
+            return
+        }
         let newLikedState = !self.isLiked
         self.isLiked = newLikedState
         var success = false
@@ -1435,6 +1515,11 @@ class MusicManager {
     }
 
     func toggleShuffle() async {
+        if isNeteaseSourceSelected {
+            _ = await performNetease(.shuffle)
+            await refreshNeteaseState(force: true)
+            return
+        }
         if isSpotifySourceSelected {
             await cycleShuffleMode()
         } else if lastKnownBundleID == "com.apple.Music" {
@@ -1508,6 +1593,14 @@ class MusicManager {
     }
 
     func cycleRepeatMode() async {
+        if isNeteaseSourceSelected {
+            await refreshNeteaseState(force: true)
+            let mode = repeatState.next()
+            let action: NeteaseMusicBridge.Action = mode == .off ? .repeatOff : (mode == .track ? .repeatTrack : .repeatAll)
+            _ = await performNetease(action)
+            await refreshNeteaseState(force: true)
+            return
+        }
         if lastKnownBundleID == "com.apple.Music" {
             repeatState = repeatState.next()
             appleMusic.setRepeat(mode: repeatState)
@@ -1622,6 +1715,8 @@ class MusicManager {
         currentSourceKey = key
 
         if switching {
+            neteaseControlError = nil
+            neteaseStateRefreshAt = .distantPast
             if wasPhone || key == phoneMediaSourceKey, !keepsDisplayedSong {
                 clearArtwork()
             }
@@ -2114,6 +2209,7 @@ class MusicManager {
 
         let sourceBundleID = MediaApplicationIdentity.canonicalBundleID(payload.bundleIdentifier) ?? "N/A"
         let isSpotify = isSpotifySourceKey(sourceKey) || sourceBundleID == "com.spotify.client"
+        if sourceBundleID != NeteaseMusicPolicy.bundleID { neteaseControlError = nil }
         let switchingAwayFromSpotify = lastKnownBundleID == "com.spotify.client" && !isSpotify
 
         if sourceBundleID != self.lastKnownBundleID {
@@ -2139,6 +2235,7 @@ class MusicManager {
         if self.album != resolvedAlbum { self.album = resolvedAlbum }
 
         if hasTrackChanged {
+            if isNeteaseSourceSelected { isLiked = false; shuffleState = false; repeatState = .off }
             self.lastTrackIdentity = trackIdentity
             let fingerprint = mediaFingerprint(for: payload)
             self.lastMediaFingerprint = fingerprint.isEmpty ? nil : fingerprint
@@ -2174,9 +2271,11 @@ class MusicManager {
         if !applyConnectTimingIfPreferred() {
             syncPlaybackTiming(from: payload, trackChanged: hasTrackChanged)
         }
+        if isNeteaseSourceSelected { Task { await self.refreshNeteaseState() } }
     }
 
     private func applyPlaybackRefresh(_ payload: TrackInfo.Payload) {
+        if isNeteaseSourceSelected { Task { await self.refreshNeteaseState() } }
         latestTrackPayload = payload
 
         if MediaApplicationIdentity.canonicalBundleID(payload.bundleIdentifier) == "com.spotify.client", spotifyPrivateAPI.isLoggedIn {
@@ -2996,6 +3095,8 @@ class MusicManager {
 
         let fetchIdentity = lastTrackIdentity
         let trackDuration: TimeInterval? = totalDuration > 0 ? totalDuration : nil
+        let neteaseIdentifiers: [String?]? = isNeteaseSourceSelected
+            ? [latestTrackPayload?.contentItemIdentifier, latestTrackPayload?.uniqueIdentifier, uri] : nil
         let spotifyGeneration = requestedSpotifyGeneration ?? trackMetadataGeneration
         let imageURL = artworkURL?.absoluteString
             ?? nowPlayingTrack?.metadata?.imageURL?.absoluteString
@@ -3008,6 +3109,18 @@ class MusicManager {
                 }
             }
 
+            // Prefer lyrics for the exact NetEase recording before cross-service providers.
+            if let neteaseIdentifiers, let lines = await NeteaseLyricsProvider().lyrics(
+                identifiers: neteaseIdentifiers, title: title, artist: artist, album: album, duration: trackDuration
+            ) {
+                guard !Task.isCancelled, self.lastTrackIdentity == fetchIdentity, self.isNeteaseSourceSelected else { return }
+                self.lyricsRetry.recordSuccess(attemptKey)
+                self.wordTimingBase = nil
+                self.replaceLyrics(lines)
+                self.lyricsCache.set(lines, for: cacheKey)
+                return
+            }
+            guard !Task.isCancelled, self.lastTrackIdentity == fetchIdentity else { return }
             async let appleLookup = AppleMusicLyricsProvider.shared.lyrics(
                 title: title,
                 artist: artist,
@@ -3296,7 +3409,13 @@ class MusicManager {
     }
 
     private func lyricsCacheKey(title: String, artist: String?, album: String?) -> String {
-        "\(title)|\(artist.trimmedOrNil ?? "")|\(album.trimmedOrNil ?? "")".lowercased()
+        let base = "\(title)|\(artist.trimmedOrNil ?? "")|\(album.trimmedOrNil ?? "")".lowercased()
+        if isNeteaseSourceSelected {
+            let id = NeteaseMusicPolicy.songID(latestTrackPayload?.contentItemIdentifier)
+                ?? NeteaseMusicPolicy.songID(latestTrackPayload?.uniqueIdentifier)
+            return "netease|\(id.map(String.init) ?? "metadata")|\(base)"
+        }
+        return base
     }
 
     func openInSourceApp() {

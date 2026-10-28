@@ -372,6 +372,9 @@ private struct MusicChoiceStepView: View {
                 MusicServiceButton(title: "Spotify", icon: "spotify_logo", isSelected: selection == .spotify) {
                     selection = .spotify
                 }
+                MusicServiceButton(title: L10n.string("NetEase Cloud Music"), icon: "sf:music.note", isSelected: selection == .neteaseMusic) {
+                    selection = .neteaseMusic
+                }
                 MusicServiceButton(title: "Tidal", icon: "sf:waveform", isSelected: selection == .tidal) {
                     selection = .tidal
                 }

@@ -8882,6 +8882,9 @@ struct MusicSettingsView: View {
                 .modifier(SettingsContainerModifier())
                 .animation(.default, value: settings.settings.mediaSource)
 
+                if settings.settings.mediaSource == .neteaseMusic || settings.settings.defaultMusicPlayer == .neteaseMusic {
+                    NeteaseMusicSettingsCard()
+                }
                 if settings.settings.mediaSource == .system {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Show Now Playing From").font(.headline).padding([.horizontal, .top])
@@ -9067,6 +9070,7 @@ struct MusicSettingsView: View {
                 case .features:
                 MusicPlayerFeaturesCard(isSpotifyAvailable: isPrivateAuth)
                 case .accounts:
+                NeteaseMusicSettingsCard()
                 AppleMusicAccountCard()
 
                 VStack(alignment: .leading, spacing: 10) {

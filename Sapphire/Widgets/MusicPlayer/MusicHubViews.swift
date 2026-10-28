@@ -135,6 +135,8 @@ struct QueueAndPlaylistsView: View {
             HStack(spacing: 10) {
                 if isAppleMusic {
                     appleMusicHubPill
+                } else if musicManager.isNeteaseSourceSelected {
+                    Text(L10n.string("NetEase Cloud Music")).font(.caption.bold())
                 } else if isLoggedIn || hubPane == .audio {
                     musicHubUserPill
                 }
@@ -198,7 +200,14 @@ struct QueueAndPlaylistsView: View {
             }
 
             ZStack(alignment: .top) {
-                if showLoginGate {
+                if musicManager.isNeteaseSourceSelected && hubPane != .audio {
+                    VStack(spacing: 14) {
+                        CustomUnavailableView(title: L10n.string("NetEase Cloud Music"), systemImage: "music.note.list",
+                            description: L10n.string("Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback."))
+                        Button(L10n.string("Open NetEase Cloud Music")) { musicManager.openNeteaseLibrary() }
+                            .buttonStyle(.borderedProminent)
+                    }.padding()
+                } else if showLoginGate {
                     LoginPromptView(navigationStack: $navigationStack)
                         .transition(.opacity)
                 } else {

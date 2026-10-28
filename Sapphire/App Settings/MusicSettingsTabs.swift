@@ -214,3 +214,30 @@ struct AppleMusicAccountCard: View {
         }
     }
 }
+
+struct NeteaseMusicSettingsCard: View {
+    @State private var trusted = NeteaseMusicBridge.shared.isTrusted
+
+    var body: some View {
+        SettingsCard(title: L10n.string("NetEase Cloud Music"), description: L10n.string("NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.")) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L10n.string("Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls."))
+                    .font(.caption).foregroundStyle(.secondary)
+                Text(L10n.string("Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback."))
+                    .font(.caption).foregroundStyle(.secondary)
+                HStack {
+                    Label(L10n.string(trusted ? "Accessibility access enabled" : "Accessibility access required"), systemImage: trusted ? "checkmark.circle" : "hand.raised")
+                    Spacer()
+                    Button(L10n.string("Open NetEase Cloud Music")) { DefaultMusicPlayer.neteaseMusic.open() }
+                    Button(L10n.string("Accessibility Settings")) {
+                        NeteaseMusicBridge.shared.requestAccess()
+                        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)
+                    }
+                }
+            }.padding()
+        }
+        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didActivateApplicationNotification)) { _ in
+            trusted = NeteaseMusicBridge.shared.isTrusted
+        }
+    }
+}
