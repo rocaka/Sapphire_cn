@@ -49,6 +49,7 @@ jobs:
         working-directory: package
         run: |
           set -euo pipefail
+          if [[ -f build-cn/Sapphire-CN.zip ]]; then cd build-cn; fi
           sha256sum --check Sapphire-CN.zip.sha256
           gh release upload "$RELEASE_TAG" Sapphire-CN.zip Sapphire-CN.zip.sha256
           gh release edit "$RELEASE_TAG" --draft=false --latest
