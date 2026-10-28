@@ -9,6 +9,8 @@ import Foundation
         precondition(PublicFeatureAvailability.contains(.surroundSound))
         precondition(PublicFeatureAvailability.contains(.ocrFeature))
         precondition(PublicFeatureAvailability.contains(.clipboardPicker))
+        precondition(PublicFeatureAvailability.contains(.mediaTools))
+        precondition(PublicFeatureAvailability.contains(.storageWidgets))
         precondition(PublicFeatureAvailability.contains(.clipboardAutoClear))
         precondition(PublicFeatureAvailability.contains(.clipboardCleanURL))
         for unavailable in [AppFeature.appLock, .geminiLive, .liveSports, .financeWidget, .menuBarProfiles, .dockPresets, .continuityHandoff, .betaSoftwareUpdates] {

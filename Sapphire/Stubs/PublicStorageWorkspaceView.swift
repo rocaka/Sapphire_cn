@@ -28,6 +28,9 @@ struct StorageWorkspaceView: View {
             }
             Text(model.used.formatted(.byteCount(style: .file)) + " / " + model.total.formatted(.byteCount(style: .file)))
                 .font(.caption).monospacedDigit()
+            if model.filteredAndSortedEntries.isEmpty && !model.isLoading {
+                Text("Choose a folder or refresh to start scanning.").font(.caption).foregroundStyle(.secondary)
+            }
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(Array(model.filteredAndSortedEntries.prefix(500))) { entry in

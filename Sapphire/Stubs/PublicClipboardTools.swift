@@ -117,8 +117,13 @@ final class CleanURLManager {
     func cleanClipboardLinkNow() {
         let settings = SettingsModel.shared.current
         guard settings.clipboardCleanURLEnabled else { return }
+        if let app = NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
+           settings.clipboardIgnoredAppBundleIDs.contains(app) { return }
         let pasteboard = NSPasteboard.general
         let count = pasteboard.changeCount
+        let sourceType = NSPasteboard.PasteboardType("org.nspasteboard.source")
+        if let sourceApp = pasteboard.string(forType: sourceType), settings.clipboardIgnoredAppBundleIDs.contains(sourceApp) { return }
+        let sourceData = pasteboard.data(forType: sourceType)
         let types = pasteboard.types ?? []
         let allowed: Set<String> = [NSPasteboard.PasteboardType.string.rawValue, NSPasteboard.PasteboardType.URL.rawValue,
                                     "public.utf16-external-plain-text", "org.nspasteboard.source", "NSStringPboardType"]
@@ -129,6 +134,7 @@ final class CleanURLManager {
         pasteboard.clearContents()
         pasteboard.setString(cleaned, forType: .string)
         if types.contains(.URL) { pasteboard.setString(cleaned, forType: .URL) }
+        if let sourceData { pasteboard.setData(sourceData, forType: sourceType) }
     }
 
     func stopPolling() {

@@ -251,7 +251,11 @@ final class SettingsAssistant: ObservableObject {
             } else if case .bool? = SettingsIndex.value(of: entry.key, in: settings) {
                 line += " | allowed: on / off"
             }
+            #if SAPPHIRE_FULL_BUILD
             if entry.section?.isPremiumLocked == true { line += " | needs a Sapphire subscription" }
+            #else
+            if entry.section?.isPremiumLocked == true { line += " | implementation unavailable in this public build" }
+            #endif
             if let detail = entry.detail { line += " | " + String(detail.prefix(110)) }
             return line
         }.joined(separator: "\n")

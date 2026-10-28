@@ -2270,3 +2270,45 @@
 "Search clipboard" = "Search clipboard";
 
 "Select an item to copy and paste. Without Accessibility access, use Command-V after copying." = "Select an item to copy and paste. Without Accessibility access, use Command-V after copying.";
+
+"Optimize Copy" = "Optimize Copy";
+
+"This file format cannot be optimized by this build." = "This file format cannot be optimized by this build.";
+
+"The source file could not be read." = "The source file could not be read.";
+
+"Unlock this PDF and allow copying before processing it." = "Unlock this PDF and allow copying before processing it.";
+
+"The optimized copy was not smaller. The original file was kept." = "The optimized copy was not smaller. The original file was kept.";
+
+"Another optimization is running. Please wait for it to finish." = "Another optimization is running. Please wait for it to finish.";
+
+"The output file already exists. Choose a different destination." = "The output file already exists. Choose a different destination.";
+
+"Show media tools on the file shelf" = "Show media tools on the file shelf";
+
+"Optimization creates a new copy. The original stays unchanged; unsupported formats and copies without size savings are reported." = "Optimization creates a new copy. The original stays unchanged; unsupported formats and copies without size savings are reported.";
+
+"Maximum Image Dimension" = "Maximum Image Dimension";
+
+"Choose a folder or refresh to start scanning." = "Choose a folder or refresh to start scanning.";
+
+"Storage unavailable" = "Storage unavailable";
+
+"Allow Screen Recording in System Settings, then try capturing again." = "Allow Screen Recording in System Settings, then try capturing again.";
+
+"Select a screen region. Press Escape to cancel." = "Select a screen region. Press Escape to cancel.";
+
+"Recognizing text…" = "Recognizing text…";
+
+"No readable text was found." = "No readable text was found.";
+
+"Text copied to the clipboard." = "Text copied to the clipboard.";
+
+"Enable screen OCR shortcut" = "Enable screen OCR shortcut";
+
+"Cancel Capture" = "Cancel Capture";
+
+"Capture Screen Text" = "Capture Screen Text";
+
+"This shortcut conflicts with another action. Record a different shortcut." = "This shortcut conflicts with another action. Record a different shortcut.";

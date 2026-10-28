@@ -44,7 +44,7 @@ enum PublicTextRecognition {
 
     private static func pdfText(at url: URL) throws -> String {
         guard let document = PDFDocument(url: url) else { throw Failure.unreadable }
-        guard !document.isLocked else { throw Failure.lockedDocument }
+        guard !document.isLocked, document.allowsCopying else { throw Failure.lockedDocument }
         var pages: [String] = []
         for index in 0..<document.pageCount {
             if Task.isCancelled { throw Failure.cancelled }

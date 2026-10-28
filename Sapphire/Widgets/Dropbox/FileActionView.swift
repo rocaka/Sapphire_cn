@@ -383,6 +383,11 @@ struct FileActionView: View {
                 manager.addFiles(from: [result.outputURL])
                 optimizerFailed = false
                 optimizerMessage = "Saved \(result.savedPercent)% (\(ByteFormatter.string(result.savedBytes))) — \(result.outputURL.lastPathComponent) added to the shelf"
+            #if !SAPPHIRE_FULL_BUILD
+            case .failure(.noSavings):
+                optimizerFailed = false
+                optimizerMessage = MediaOptimizeError.noSavings.localizedDescription
+            #endif
             case .failure(let error):
                 optimizerFailed = true
                 optimizerMessage = error.localizedDescription

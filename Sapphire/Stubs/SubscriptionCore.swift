@@ -26,15 +26,10 @@ public struct SubscriptionEntitlements: Codable, Equatable {
 public enum SubscriptionFeatureCatalog {
     public static func features(for tier: SubscriptionTier) -> Set<AppFeature> { PublicFeatureAvailability.available }
     public static func minimumTier(for feature: AppFeature) -> SubscriptionTier { .free }
-    public static func tierDisplayName(_ tier: SubscriptionTier) -> String { tier.rawValue.capitalized }
+    public static func tierDisplayName(_ tier: SubscriptionTier) -> String { tier == .free ? L10n.string("Community Build") : tier.rawValue.capitalized }
     public static func marketingSubtitle(for tier: SubscriptionTier) -> String { L10n.string("Includes the core Sapphire experience.") }
     public static func marketingTierHighlights() -> [(tier: SubscriptionTier, features: [String])] {
-        [
-            (tier: .free, features: ["Core notch experience"]),
-            (tier: .basic, features: ["Unlimited live activities"]),
-            (tier: .pro, features: ["All widgets and automations"]),
-            (tier: .ultra, features: ["Everything, plus beta builds"])
-        ]
+        [(tier: .free, features: [L10n.string("Available local features are free in this community build.")])]
     }
 }
 

@@ -12,6 +12,7 @@ private final class ClipboardPickerPanel: NSPanel {
 @MainActor
 final class ClipboardPickerManager: NSObject, ObservableObject, NSWindowDelegate {
     static let shared = ClipboardPickerManager()
+    @Published private(set) var shortcutUnavailable = false
     private var panel: ClipboardPickerPanel?
     private var previousApp: NSRunningApplication?
     private var configuration: AnyCancellable?
@@ -30,6 +31,12 @@ final class ClipboardPickerManager: NSObject, ObservableObject, NSWindowDelegate
 
     private override init() {
         super.init()
+        start()
+    }
+
+    func start() {
+        stopped = false
+        guard configuration == nil else { return }
         configuration = SettingsModel.shared.changes(of: Configuration.init)
             .prepend(Configuration(SettingsModel.shared.current))
             .sink { [weak self] _ in self?.registerShortcut() }
@@ -40,7 +47,9 @@ final class ClipboardPickerManager: NSObject, ObservableObject, NSWindowDelegate
             guard self?.stopped == false, settings.clipboardPickerEnabled else { return [] }
             return [.init(identifier: ShortcutIdentifier.clipboardPicker, shortcut: settings.clipboardPickerShortcut,
                           perform: { [weak self] in self?.presentPicker() })]
-        }, reportUnavailable: { _ in }), named: "community.clipboardPicker")
+        }, reportUnavailable: { [weak self] identifiers in
+            self?.shortcutUnavailable = identifiers.contains(ShortcutIdentifier.clipboardPicker)
+        }), named: "community.clipboardPicker")
     }
 
     func presentPicker() {

@@ -47,14 +47,6 @@ struct ArchivesAndDMGInstallerSettingsView: View { var body: some View { Premium
 struct AppLockSettingsView: View { var body: some View { PremiumUnavailableView(title: "App Lock") } }
 struct DockLayoutsSettingsView: View { var body: some View { PremiumUnavailableView(title: "Dock Layouts") } }
 
-struct StorageDetailView: View {
-    var body: some View { PremiumUnavailableView(title: "Storage") }
-}
-
-struct StorageWidgetView: View {
-    var body: some View { EmptyView() }
-}
-
 struct ClipboardItemThumbnailView: View {
     let item: ClipboardItem
     var size: CGFloat = 24

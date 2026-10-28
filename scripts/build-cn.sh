@@ -7,7 +7,9 @@ CONFIGURATION="${CONFIGURATION:-Release}"
 SIGNING_IDENTITY="${SIGNING_IDENTITY:--}"
 cd "$ROOT"
 mkdir -p "$BUILD_DIR"
-XCODE_ARGS=(CODE_SIGNING_ALLOWED=NO)
+# Keep Release optimizations while compiling files in parallel. Whole-module
+# optimization on this large public target made feedback cycles excessively long.
+XCODE_ARGS=(CODE_SIGNING_ALLOWED=NO SWIFT_COMPILATION_MODE=singlefile)
 if [[ -n "${BUILD_ARCHS:-}" ]]; then
   XCODE_ARGS+=("ARCHS=$BUILD_ARCHS")
 fi

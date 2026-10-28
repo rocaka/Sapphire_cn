@@ -2302,6 +2302,12 @@ struct ClipboardSettingsView: View {
                         .disabled(!settings.settings.clipboardPickerEnabled)
                     }
                     .padding()
+                    #if !SAPPHIRE_FULL_BUILD
+                    if clipboardPickerManager.shortcutUnavailable {
+                        Text("This shortcut conflicts with another action. Record a different shortcut.")
+                            .font(.caption).foregroundStyle(.orange).padding(.horizontal)
+                    }
+                    #endif
 
                     Divider().padding(.leading, 20)
 

@@ -695,6 +695,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         systemEnhanceHingeAnimation.stop()
         emojiShortcutManager.stopMonitoring()
         clipboardPickerManager.stopMonitoring()
+        #if !SAPPHIRE_FULL_BUILD
+        ocrScreenshotMonitor.stop()
+        #endif
         clipboardAutoClearManager.stop()
         cleanURLManager.stopMonitoring()
         finderCutPasteManager.removeTap()
@@ -879,10 +882,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             .store(in: &cancellables)
         MediaOptimizerManager.shared.start()
         FileOperationProgressRouter.shared.start()
+        #if !SAPPHIRE_FULL_BUILD
+        ocrScreenshotMonitor.start()
+        #else
         _ = ocrScreenshotMonitor
+        #endif
         requestScreenRecordingForSystemEnhanceIfNeeded()
         _ = emojiShortcutManager
+        #if !SAPPHIRE_FULL_BUILD
+        clipboardPickerManager.start()
+        #else
         _ = clipboardPickerManager
+        #endif
         ClipboardManager.shared.startMonitoring()
         clipboardAutoClearManager.start()
         cleanURLManager.start()

@@ -2270,3 +2270,45 @@
 "Search clipboard" = "搜索剪贴板";
 
 "Select an item to copy and paste. Without Accessibility access, use Command-V after copying." = "选择一项以复制并粘贴。未授权辅助功能时，请在复制后按 Command-V 粘贴。";
+
+"Optimize Copy" = "压缩副本";
+
+"This file format cannot be optimized by this build." = "此版本无法压缩这种文件格式。";
+
+"The source file could not be read." = "无法读取原文件。";
+
+"Unlock this PDF and allow copying before processing it." = "请先解锁 PDF 并允许复制，再进行处理。";
+
+"The optimized copy was not smaller. The original file was kept." = "压缩后的副本没有更小，已保留原文件。";
+
+"Another optimization is running. Please wait for it to finish." = "已有压缩任务正在运行，请等待完成。";
+
+"The output file already exists. Choose a different destination." = "输出文件已存在，请选择其他保存位置。";
+
+"Show media tools on the file shelf" = "在文件暂存架显示媒体工具";
+
+"Optimization creates a new copy. The original stays unchanged; unsupported formats and copies without size savings are reported." = "压缩会生成新副本，保留原文件。格式不受支持或没有减小体积时会提示。";
+
+"Maximum Image Dimension" = "图片最长边像素";
+
+"Choose a folder or refresh to start scanning." = "请选择文件夹或点击刷新开始扫描。";
+
+"Storage unavailable" = "无法读取储存空间";
+
+"Allow Screen Recording in System Settings, then try capturing again." = "请在系统设置中允许屏幕录制，再重试截取。";
+
+"Select a screen region. Press Escape to cancel." = "请选择屏幕区域，按 Escape 可取消。";
+
+"Recognizing text…" = "正在识别文字…";
+
+"No readable text was found." = "未找到可识别的文字。";
+
+"Text copied to the clipboard." = "文字已复制到剪贴板。";
+
+"Enable screen OCR shortcut" = "启用屏幕文字识别快捷键";
+
+"Cancel Capture" = "取消截取";
+
+"Capture Screen Text" = "截取屏幕文字";
+
+"This shortcut conflicts with another action. Record a different shortcut." = "此快捷键与其他操作冲突，请录制其他快捷键。";
