@@ -6,6 +6,7 @@ use the root helper. Developer ID signing uses the same identity for all code.
 """
 from pathlib import Path
 import subprocess
+import plistlib
 import sys
 
 app = Path(sys.argv[1]).resolve()
@@ -23,18 +24,30 @@ def sign(path, entitlements=None):
         command += ["--entitlements", str(entitlements)]
     subprocess.run([*command, str(path)], check=True)
 
-# Do not follow framework symlinks or sign a linked file twice.
+# A bundle's primary executable must be signed via its container, after its
+# nested code. codesign on Contents/MacOS/<main> can implicitly sign the app.
+bundle_suffixes = {".framework", ".appex", ".systemextension", ".driver", ".xpc", ".app"}
+bundles = [app] + [p for p in app.rglob("*") if p.is_dir() and not p.is_symlink() and p.suffix in bundle_suffixes]
+primary_executables = set()
+for bundle in bundles:
+    candidates = [bundle / "Contents/Info.plist", bundle / "Resources/Info.plist", bundle / "Info.plist"]
+    for info in candidates:
+        if not info.is_file():
+            continue
+        with info.open("rb") as stream:
+            name = plistlib.load(stream).get("CFBundleExecutable")
+        if name:
+            executable = bundle / name if bundle.suffix == ".framework" else bundle / "Contents/MacOS" / name
+            primary_executables.add(executable.resolve())
+        break
 for path in sorted(app.rglob("*"), key=lambda p: len(p.parts), reverse=True):
-    if path.is_symlink() or not path.is_file():
+    if path.is_symlink() or not path.is_file() or path.resolve() in primary_executables:
         continue
     with path.open("rb") as stream:
         is_macho = stream.read(4) in magic
     if is_macho:
         sign(path)
-for path in sorted(app.rglob("*"), key=lambda p: len(p.parts), reverse=True):
-    if path.is_symlink() or not path.is_dir():
-        continue
-    if path.suffix in {".framework", ".appex", ".systemextension", ".driver", ".xpc", ".app"}:
-        entitlements = root / "SapphireAndroidWidgets/SapphireAndroidWidgets.entitlements" if path.name == "SapphireAndroidWidgets.appex" else None
-        sign(path, entitlements)
+for bundle in sorted((b for b in bundles if b != app), key=lambda p: len(p.parts), reverse=True):
+    entitlements = root / "SapphireAndroidWidgets/SapphireAndroidWidgets.entitlements" if bundle.name == "SapphireAndroidWidgets.appex" else None
+    sign(bundle, entitlements)
 sign(app, root / "Sapphire/SapphirePublic.entitlements")

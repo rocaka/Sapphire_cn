@@ -1137,7 +1137,6 @@
 				C0DE40000000000000000001 /* Embed iDevice Tools */,
 				C0DE40000000000000000002 /* Embed iDevice Libraries */,
 				DAE70B782E12300B001F0890 /* Embed Frameworks */,
-				DAF7D8AC2E207C5100AB0820 /* CopyFiles */,
 				DABFA98B2EBFBA35000C5A8B /* Embed Helper LaunchDaemon Plist */,
 				DA262B242EA942750027CA69 /* Embed Helper Executable */,
 				CAFE100000000000000012AA /* Embed System Extensions */,

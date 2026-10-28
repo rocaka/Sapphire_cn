@@ -13,6 +13,11 @@ PLIST
 printf '%s\n' 'int main(void) { return 0; }' > "$PROBE_DIR/main.c"
 xcrun clang "$PROBE_DIR/main.c" -o "$APP/Contents/MacOS/Sapphire"
 cp "$APP/Contents/MacOS/Sapphire" "$APP/Contents/MacOS/com.rocaka.sapphirecnHelper"
+# Match Xcode's unsigned output; the helper must be signed before the host.
+codesign --remove-signature "$APP/Contents/MacOS/Sapphire"
+codesign --remove-signature "$APP/Contents/MacOS/com.rocaka.sapphirecnHelper"
+mkdir -p "$APP/Contents/Resources/Probe.bundle/Contents"
+printf '%s\n' '<?xml version="1.0"?><plist version="1.0"><dict><key>CFBundleIdentifier</key><string>com.example.resources</string><key>CFBundlePackageType</key><string>BNDL</string></dict></plist>' > "$APP/Contents/Resources/Probe.bundle/Contents/Info.plist"
 python3 "$ROOT/scripts/sign-cn.py" "$APP" -
 codesign --verify --deep --strict "$APP"
 xcrun swiftc -module-cache-path "$PROBE_DIR/module-cache" "$ROOT/Sapphire/Stubs/AppSecurity.swift" "$ROOT/scripts/SigningProbe.swift" -o "$PROBE_DIR/signature-probe"
