@@ -18,6 +18,11 @@ struct LockScreenConfiguration {
     static let backgroundStrokeWidth: CGFloat = 1.5
     static let backgroundStrokeBlur: CGFloat = 1
 
+    static func maximumMusicPlayerWidth(forScreenWidth width: CGFloat) -> CGFloat {
+        guard width.isFinite else { return 1 }
+        return max(1, width - 48 - 2 * backgroundPadding)
+    }
+
     // MARK: - Info Widgets (Top)
     static let infoWidgetContainerHorizontalPadding: CGFloat = 18
     static let infoWidgetInternalHSpacing: CGFloat = 12
@@ -398,7 +403,8 @@ public class LockScreenManager {
         contentScales[id] = scale
 
         let sizeObservingView = SizeObservingView(
-            content: view,
+            content: view.environment(\.notchWidgetMaximumWidth,
+                LockScreenConfiguration.maximumMusicPlayerWidth(forScreenWidth: screen.frame.width)),
             alignment: contentAlignment(for: id),
             fitsContent: id != FULLSCREEN_MUSIC_ID,
             scale: scale

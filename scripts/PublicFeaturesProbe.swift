@@ -13,6 +13,7 @@ import Foundation
         precondition(PublicFeatureAvailability.contains(.storageWidgets))
         precondition(PublicFeatureAvailability.contains(.clipboardAutoClear))
         precondition(PublicFeatureAvailability.contains(.clipboardCleanURL))
+        precondition(PublicFeatureAvailability.contains(.clipboardAdvancedTools), "Implemented Finder cut/paste and native text snippets have an accessible settings page")
         for unavailable in [AppFeature.appLock, .geminiLive, .liveSports, .financeWidget, .menuBarProfiles, .dockPresets, .continuityHandoff, .betaSoftwareUpdates] {
             precondition(!PublicFeatureAvailability.contains(unavailable), "Do not grant access to missing implementations: \(unavailable)")
         }

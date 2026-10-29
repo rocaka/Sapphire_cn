@@ -82,20 +82,6 @@ final class EmojiShortcutManager {
     func stopMonitoring() {}
 }
 
-final class FinderCutPasteManager {
-    static let shared = FinderCutPasteManager()
-    private init() {}
-    func start() {}
-    func removeTap() {}
-}
-
-final class SnippetManager {
-    static let shared = SnippetManager()
-    private init() {}
-    func start() {}
-    func removeHandler() {}
-}
-
 final class MouseControlManager {
     static let shared = MouseControlManager()
     private init() {}

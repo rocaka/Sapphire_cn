@@ -2574,7 +2574,11 @@ struct ClipboardSettingsView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     PremiumFeatureView(feature: .clipboardAdvancedTools) {
                         VStack(alignment: .leading, spacing: 0) {
+                            #if SAPPHIRE_FULL_BUILD
                             SettingsSectionHeader(title: "Finder Cut & Paste", description: "⌘X then ⌘V moves copied files instead of copying them, ⌘V pastes copied images as PNG files into the front Finder folder, and F2 renames the selected item.")
+                            #else
+                            SettingsSectionHeader(title: "Finder Cut & Paste", description: L10n.string("Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts."))
+                            #endif
 
                             ToggleRow(
                                 title: "Enable Finder Shortcuts",
@@ -2583,6 +2587,7 @@ struct ClipboardSettingsView: View {
                             )
 
                             if settings.settings.clipboardFinderCutPasteEnabled {
+                                #if SAPPHIRE_FULL_BUILD
                                 Divider().padding(.leading, 20)
                                 ToggleRow(
                                     title: "Paste Images as PNG Files",
@@ -2596,6 +2601,11 @@ struct ClipboardSettingsView: View {
                                     description: "Press F2 in Finder to start an inline rename.",
                                     isOn: $settings.settings.clipboardFinderF2RenameEnabled
                                 )
+                                #else
+                                PublicTextInputStatusView(kind: .finder)
+                                Text(L10n.string("Pasting images as PNG files and F2 rename are not implemented in this community build."))
+                                    .font(.caption).foregroundStyle(.secondary).padding(.horizontal).padding(.bottom, 8)
+                                #endif
                             }
                         }
                     }
@@ -2613,6 +2623,11 @@ struct ClipboardSettingsView: View {
                                 isOn: $settings.settings.snippetsEnabled
                             )
 
+                            #if !SAPPHIRE_FULL_BUILD
+                            Text(L10n.string("Expands in supported native text fields. Password fields, secure input, composing input methods and ignored apps are skipped."))
+                                .font(.caption).foregroundStyle(.secondary).padding(.horizontal).padding(.bottom, 8)
+                            if settings.settings.snippetsEnabled { PublicTextInputStatusView(kind: .snippets) }
+                            #endif
                             if settings.settings.snippetsEnabled {
                                 Divider().padding(.leading, 20)
                                 ToggleRow(
@@ -8887,7 +8902,7 @@ struct MusicSettingsView: View {
 
                 Picker("Music section", selection: $selectedTab) {
                     ForEach(MusicSettingsTab.allCases) { tab in
-                        Label(tab.rawValue, systemImage: tab.icon).tag(tab)
+                        Label(L10n.string(tab.rawValue), systemImage: tab.icon).tag(tab)
                     }
                 }
                 .labelsHidden()
@@ -8996,6 +9011,7 @@ struct MusicSettingsView: View {
 
                 RequiredPermissionsView(section: .music)
                 case .player:
+                MusicPlayerAppearanceCard()
                 VStack(alignment: .leading, spacing: 0) {
                     HStack { Text("Waveform is volume sensitive"); Spacer(); SettingsSwitch(isOn: $settings.settings.musicWaveformIsVolumeSensitive) }.padding()
                     Divider().padding(.leading, 20)

@@ -26,7 +26,8 @@ enum PublicFeatureAvailability {
     static let available: Set<AppFeature> = [
         .unlimitedLyricsFetch, .translation, .snapZonesKeyboardShortcuts,
         .batteryWidget, .basicStorageFeatures,
-        .audio8D, .surroundSound, .ocrFeature, .clipboardPicker, .clipboardAutoClear, .clipboardCleanURL, .mediaTools, .storageWidgets
+        .audio8D, .surroundSound, .ocrFeature, .clipboardPicker, .clipboardAutoClear, .clipboardCleanURL, .mediaTools, .storageWidgets,
+        .clipboardAdvancedTools
     ]
 
     static func contains(_ feature: AppFeature) -> Bool { available.contains(feature) }

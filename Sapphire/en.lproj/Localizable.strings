@@ -2370,3 +2370,191 @@
 "Invalid weather API URL." = "Invalid weather API URL.";
 
 "Weather data is temporarily unavailable." = "Weather data is temporarily unavailable.";
+
+"A favorite song" = "A favorite song";
+
+"Accent Color" = "Accent Color";
+
+"Add an enabled text snippet with a trigger of at most 128 characters." = "Add an enabled text snippet with a trigger of at most 128 characters.";
+
+"Album Artwork" = "Album Artwork";
+
+"All Sensors" = "All Sensors";
+
+"Allow Sapphire notifications in System Settings to receive alerts." = "Allow Sapphire notifications in System Settings to receive alerts.";
+
+"Allowed" = "Allowed";
+
+"Artist Font Size" = "Artist Font Size";
+
+"Artwork Corner Radius" = "Artwork Corner Radius";
+
+"Artwork Size" = "Artwork Size";
+
+"Available" = "Available";
+
+"Battery Level" = "Battery Level";
+
+"Battery Threshold" = "Battery Threshold";
+
+"CPU Threshold" = "CPU Threshold";
+
+"CPU temperature is unavailable. A running, trusted helper and a supported sensor are required." = "CPU temperature is unavailable. A running, trusted helper and a supported sensor are required.";
+
+"Compact" = "Compact";
+
+"Control Size" = "Control Size";
+
+"Critical" = "Critical";
+
+"Custom Color" = "Custom Color";
+
+"Customize NetEase Buttons Separately" = "Customize NetEase Buttons Separately";
+
+"Customize player size, artwork, text, colors and NetEase buttons." = "Customize player size, artwork, text, colors and NetEase buttons.";
+
+"Disk Space" = "Disk Space";
+
+"Enable Alerts" = "Enable Alerts";
+
+"Enable Menu Bar Readouts" = "Enable Menu Bar Readouts";
+
+"Enter a color such as #FF9F0A. Invalid colors use the default." = "Enter a color such as #FF9F0A. Invalid colors use the default.";
+
+"Expands in supported native text fields. Password fields, secure input, composing input methods and ignored apps are skipped." = "Expands in supported native text fields. Password fields, secure input, composing input methods and ignored apps are skipped.";
+
+"Finder cut and paste is active." = "Finder cut and paste is active.";
+
+"Finder cut and paste needs Accessibility access. Enable Sapphire in System Settings." = "Finder cut and paste needs Accessibility access. Enable Sapphire in System Settings.";
+
+"Finder did not expose a small, verifiable file selection. The shortcut was left unchanged." = "Finder did not expose a small, verifiable file selection. The shortcut was left unchanged.";
+
+"Free Space Threshold" = "Free Space Threshold";
+
+"HID" = "HID";
+
+"Hex Color" = "Hex Color";
+
+"Large Text" = "Large Text";
+
+"Latest sensor readings" = "Latest sensor readings";
+
+"Live measurements" = "Live measurements";
+
+"Lyrics Font Size" = "Lyrics Font Size";
+
+"Measurements paused" = "Measurements paused";
+
+"Memory Usage" = "Memory Usage";
+
+"Menu Bar Readouts" = "Menu Bar Readouts";
+
+"Music Player Appearance" = "Music Player Appearance";
+
+"Network rates appear in the menu bar when enabled." = "Network rates appear in the menu bar when enabled.";
+
+"No operation timings have been collected." = "No operation timings have been collected.";
+
+"No supported sensors are available." = "No supported sensors are available.";
+
+"Not Requested" = "Not Requested";
+
+"Notification Access" = "Notification Access";
+
+"Notify once per discharge when the battery reaches the threshold." = "Notify once per discharge when the battery reaches the threshold.";
+
+"Notify when CPU stays above the threshold for about a minute." = "Notify when CPU stays above the threshold for about a minute.";
+
+"Notify when macOS reports memory pressure." = "Notify when macOS reports memory pressure.";
+
+"Notify when the CPU stays above the threshold for 30 seconds. Requires the Sapphire helper." = "Notify when the CPU stays above the threshold for 30 seconds. Requires the Sapphire helper.";
+
+"Notify when the startup disk is nearly full." = "Notify when the startup disk is nearly full.";
+
+"Off keeps the existing recommended controls. On lets you show, hide and reorder NetEase controls only." = "Off keeps the existing recommended controls. On lets you show, hide and reorder NetEase controls only.";
+
+"Only this page of sensors is requested. A catalog entry without a reported measurement is shown as unavailable." = "Only this page of sensors is requested. A catalog entry without a reported measurement is shown as unavailable.";
+
+"Pasting images as PNG files and F2 rename are not implemented in this community build." = "Pasting images as PNG files and F2 rename are not implemented in this community build.";
+
+"Performance diagnostics are disabled." = "Performance diagnostics are disabled.";
+
+"Player Width" = "Player Width";
+
+"Power and Sensors" = "Power and Sensors";
+
+"Presets" = "Presets";
+
+"Privileged Helper" = "Privileged Helper";
+
+"Restore Defaults" = "Restore Defaults";
+
+"Sapphire operation timings" = "Sapphire operation timings";
+
+"Sensor Group" = "Sensor Group";
+
+"Sensor readings are unavailable without the trusted Sapphire helper. Basic CPU, memory, GPU and disk measurements remain available." = "Sensor readings are unavailable without the trusted Sapphire helper. Basic CPU, memory, GPU and disk measurements remain available.";
+
+"Sensors" = "Sensors";
+
+"Show Artist" = "Show Artist";
+
+"Show Artwork" = "Show Artwork";
+
+"Show CPU Usage" = "Show CPU Usage";
+
+"Show Memory Usage" = "Show Memory Usage";
+
+"Show Network Rates" = "Show Network Rates";
+
+"Show Progress" = "Show Progress";
+
+"Static appearance preview" = "Static appearance preview";
+
+"Static preview. Your current song and playback are unchanged." = "Static preview. Your current song and playback are unchanged.";
+
+"Sustained CPU Load" = "Sustained CPU Load";
+
+"Swap Used" = "Swap Used";
+
+"System Accent" = "System Accent";
+
+"System Alerts" = "System Alerts";
+
+"Systems" = "Systems";
+
+"Temperature Threshold" = "Temperature Threshold";
+
+"Text snippet expansion is active." = "Text snippet expansion is active.";
+
+"Text snippets need Accessibility access. Enable Sapphire in System Settings." = "Text snippets need Accessibility access. Enable Sapphire in System Settings.";
+
+"Text snippets pause while an input method is selected to protect composing text." = "Text snippets pause while an input method is selected to protect composing text.";
+
+"The snippet was left unchanged because its clipboard content is private, unavailable or too large." = "The snippet was left unchanged because its clipboard content is private, unavailable or too large.";
+
+"These are elapsed times for instrumented Sapphire operations, not per-process CPU percentages." = "These are elapsed times for instrumented Sapphire operations, not per-process CPU percentages.";
+
+"This app did not allow the snippet selection to be changed." = "This app did not allow the snippet selection to be changed.";
+
+"This app did not confirm the snippet replacement. No additional edit was attempted." = "This app did not confirm the snippet replacement. No additional edit was attempted.";
+
+"This app does not support safe text snippet replacement through Accessibility." = "This app does not support safe text snippet replacement through Accessibility.";
+
+"This page shares the existing samplers. Its measurements pause when the page is hidden, Sapphire is inactive, or the Mac sleeps. Enabled readouts and alerts keep their own subscriptions." = "This page shares the existing samplers. Its measurements pause when the page is hidden, Sapphire is inactive, or the Mac sleeps. Enabled readouts and alerts keep their own subscriptions.";
+
+"Title Font Size" = "Title Font Size";
+
+"Total" = "Total";
+
+"Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts." = "Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts.";
+
+"Used" = "Used";
+
+"View local system measurements and choose menu bar readouts and alerts." = "View local system measurements and choose menu bar readouts and alerts.";
+
+"White" = "White";
+
+"Your artist" = "Your artist";
+
+"Your lyrics appear here" = "Your lyrics appear here";

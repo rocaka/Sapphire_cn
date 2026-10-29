@@ -17,6 +17,7 @@ struct PlayerProgressView: View {
     @State private var seekProgress: Double = 0.0
 
     var lightStyle: Bool = false
+    var accentOverride: Color? = nil
 
     private var timeColor: Color {
         lightStyle ? Color.white.opacity(0.68) : Color.secondary
@@ -39,7 +40,7 @@ struct PlayerProgressView: View {
                 ),
                 gradient: Gradient(colors: lightStyle
                     ? [.white, .white.opacity(0.75)]
-                    : [musicManager.leftGradientColor, musicManager.rightGradientColor]),
+                    : (accentOverride.map { [$0, $0.opacity(0.72)] } ?? [musicManager.leftGradientColor, musicManager.rightGradientColor])),
                 onSeek: { newProgress in
                     isSeeking = false
                     let seekTime = newProgress * musicManager.totalDuration
@@ -54,7 +55,7 @@ struct PlayerProgressView: View {
                 rate: advancing ? trajectory.progressMotion.rate : 0
             )
             .frame(height: lightStyle ? 10 : 30)
-            .shadow(color: musicManager.accentColor.opacity(lightStyle ? 0.2 : 0.3), radius: lightStyle ? 2 : 4, y: 1)
+            .shadow(color: (accentOverride ?? musicManager.accentColor).opacity(lightStyle ? 0.2 : 0.3), radius: lightStyle ? 2 : 4, y: 1)
 
             clock(trajectory: trajectory, advancing: advancing) { elapsed in
                 "-\((max(0, duration - elapsed)).asMinuteSecondClock)"
@@ -85,6 +86,8 @@ private struct LyricTextView: View {
     @EnvironmentObject var navigationManager: LockScreenNavigationManager
     @Binding var navigationStack: [NotchWidgetMode]
     let isLockScreenMode: Bool
+    var fontSize: CGFloat = 12
+    var accentOverride: Color? = nil
     var onCustomTap: (() -> Void)? = nil
 
     private static func lineBoundaries(_ lyrics: [LyricLine]) -> [ClosedRange<TimeInterval>] {
@@ -107,11 +110,11 @@ private struct LyricTextView: View {
             let trimmed = lyricText?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
             (trimmed.isEmpty ? Text(Image(systemName: "ellipsis")) : Text(trimmed))
-                .font(.system(size: 12, weight: trimmed.isEmpty ? .bold : .medium))
-                .foregroundColor(musicManager.accentColor.opacity(trimmed.isEmpty ? 0.45 : 1))
+                .font(.system(size: fontSize, weight: trimmed.isEmpty ? .bold : .medium))
+                .foregroundColor((accentOverride ?? musicManager.accentColor).opacity(trimmed.isEmpty ? 0.45 : 1))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(maxWidth: .infinity, minHeight: 35, alignment: .center)
+                .frame(maxWidth: .infinity, minHeight: max(35, fontSize * 2.6), alignment: .center)
                 .contentTransition(.opacity)
                 .animation(.easeInOut(duration: 0.2), value: line?.id)
                 .contentShape(Rectangle())
@@ -132,6 +135,15 @@ struct MusicPlayerView: View {
     @Binding var navigationStack: [NotchWidgetMode]
     var musicManager: MusicManager { .shared }
     @ObservedSettings var settings: SettingsObserver
+    @Environment(\.notchWidgetMaximumWidth) private var maximumWidgetWidth
+
+    private var appearance: MusicPlayerAppearance {
+        MusicPlayerAppearancePolicy.resolve(settings.settings.musicPlayerAppearance,
+            maximumContentWidth: Double(maximumWidgetWidth.isFinite ? max(1, maximumWidgetWidth - 20) : 560))
+    }
+    private var accentOverride: Color? { MusicPlayerAppearanceColor.override(for: appearance) }
+    private var playerAccent: Color { accentOverride ?? musicManager.accentColor }
+    private var controlsScale: CGFloat { CGFloat(appearance.controlsScale) }
     @EnvironmentObject var navigationManager: LockScreenNavigationManager
 
     var isLockScreenMode: Bool = false
@@ -172,6 +184,10 @@ struct MusicPlayerView: View {
     }
 
     private var enabledButtons: [MusicPlayerButtonType] {
+        if musicManager.isNeteaseSourceSelected, !musicManager.isPhoneMediaSourceSelected,
+           let buttons = NeteasePlayerButtonPolicy.visibleButtons(in: appearance) {
+            return settings.settings.neteaseShowPlayerControls ? buttons.compactMap(MusicPlayerButtonType.init(rawValue:)) : []
+        }
         var enabled = Set<String>()
         if settings.settings.musicLikeButtonEnabled { enabled.insert("like") }
         if settings.settings.musicShuffleButtonEnabled { enabled.insert("shuffle") }
@@ -288,7 +304,7 @@ struct MusicPlayerView: View {
         return isAppleMusicPlaying && !musicManager.appleSuggestionsResolved
     }
 
-    private var reservesLyricSlot: Bool { musicManager.hasDisplayableLyrics }
+    private var reservesLyricSlot: Bool { appearance.showLyrics && musicManager.hasDisplayableLyrics }
 
     private var showConcertTickets: Bool {
         isSpotifyPlaying
@@ -299,7 +315,7 @@ struct MusicPlayerView: View {
     var body: some View {
         VStack(spacing: 4) {
             if musicManager.isNeteaseSourceSelected, let error = musicManager.neteaseControlError {
-                MusicPlayerNotice(message: error)
+                MusicPlayerNotice(message: error, width: CGFloat(appearance.width))
             }
             if showArtworkSection {
                 artworkSection
@@ -312,7 +328,7 @@ struct MusicPlayerView: View {
                 .allowsHitTesting(showsControls)
                 .animation(.easeInOut(duration: 0.3), value: showsControls)
         }
-        .frame(width: MusicPlayerNotice.contentWidth).padding(10)
+        .frame(width: CGFloat(appearance.width)).padding(10)
         .animation(.easeInOut(duration: 0.4), value: musicManager.isPlaying)
         .animation(.default, value: enabledButtons)
         .onAppear {
@@ -325,6 +341,9 @@ struct MusicPlayerView: View {
         .onDisappear {
             resetTransientButtonState()
             Task { await musicManager.setDetailPlayerOpen(false) }
+        }
+        .onChange(of: appearance.showArtwork) { _, visible in
+            if !visible { readyCanvasURL = nil }
         }
         .onChange(of: musicManager.isLiked) { _, isLiked in
             if isLiked {
@@ -341,6 +360,7 @@ struct MusicPlayerView: View {
 
     private var artworkSection: some View {
         HStack(spacing: 12) {
+            if appearance.showArtwork {
             ZStack {
                     let showLiveCanvas = settings.settings.spotifyCanvasLiveVideo
                         && !isLockScreenMode
@@ -351,18 +371,18 @@ struct MusicPlayerView: View {
                         SpotifyCanvasView(canvasURL: canvasURL) { ready in
                             readyCanvasURL = ready ? canvasURL : (readyCanvasURL == canvasURL ? nil : readyCanvasURL)
                         }
-                        .frame(width: 56, height: 56)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .frame(width: CGFloat(appearance.artworkSize), height: CGFloat(appearance.artworkSize))
+                        .clipShape(RoundedRectangle(cornerRadius: CGFloat(appearance.artworkCornerRadius), style: .continuous))
                         .id(canvasURL)
                     }
 
                     let isShowingVideo = canvasURL != nil && readyCanvasURL == canvasURL
-                    MusicArtworkImage(image: musicManager.artwork, size: 56, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    MusicArtworkImage(image: musicManager.artwork, size: CGFloat(appearance.artworkSize), contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: CGFloat(appearance.artworkCornerRadius), style: .continuous))
                         .opacity(isShowingVideo ? 0.0 : 1.0)
                         .animation(.easeInOut(duration: 0.3), value: isShowingVideo)
                         .compositingGroup()
-                        .shadow(color: musicManager.accentColor.opacity(0.35), radius: 6, y: 3)
+                        .shadow(color: playerAccent.opacity(0.35), radius: 6, y: 3)
                         .id(musicManager.currentTrackArtworkToken)
                         .transition(.notchArtworkSwap)
 
@@ -372,7 +392,7 @@ struct MusicPlayerView: View {
                         .shadow(color: .black.opacity(0.35), radius: 4, y: 1)
                         .scaleEffect(showLikeAnimation ? 1.0 : 0.45)
                         .opacity(showLikeAnimation ? 1.0 : 0.0)
-                        .frame(width: 56, height: 56)
+                        .frame(width: CGFloat(appearance.artworkSize), height: CGFloat(appearance.artworkSize))
 
                     if showConcertTickets {
                         Button {
@@ -387,12 +407,12 @@ struct MusicPlayerView: View {
                                 .shadow(color: .pink.opacity(0.45), radius: 3, y: 1)
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 56, height: 56, alignment: .bottomTrailing)
+                        .frame(width: CGFloat(appearance.artworkSize), height: CGFloat(appearance.artworkSize), alignment: .bottomTrailing)
                         .offset(x: 4, y: 4)
                         .help("Nearby concerts")
                     }
                 }
-                .frame(width: 56, height: 56)
+                .frame(width: CGFloat(appearance.artworkSize), height: CGFloat(appearance.artworkSize))
                 .animation(.easeInOut, value: showTemporaryLikedGlow)
                 .onTapGesture(count: 2) {
                     guard supportsTrackActions else { return }
@@ -415,14 +435,17 @@ struct MusicPlayerView: View {
                     }
                 }
 
+            }
+
                 Button(action: { handleButtonTap(for: .musicQueueAndPlaylists) }) {
                     VStack(alignment: .leading, spacing: 3) {
                         HStack(spacing: 6) {
                             Text(musicManager.title ?? "Title")
-                                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                .font(.system(size: CGFloat(appearance.titleFontSize), weight: .semibold, design: .rounded))
                                 .lineLimit(1)
                         }
 
+                        if appearance.showArtist {
                         if let artist = spotifyArtist {
                             HStack(spacing: 6) {
                                 if let url = artist.avatarURL ?? artist.headerImageURL {
@@ -434,7 +457,7 @@ struct MusicPlayerView: View {
                                     .id(artist.uri)
                                 }
                                 Text(artist.name)
-                                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                                    .font(.system(size: CGFloat(appearance.artistFontSize), weight: .medium, design: .rounded))
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                                 if artist.isVerified {
@@ -462,7 +485,7 @@ struct MusicPlayerView: View {
                                     .id(artist.id)
                                 }
                                 Text(musicManager.artist ?? artist.name)
-                                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                                    .font(.system(size: CGFloat(appearance.artistFontSize), weight: .medium, design: .rounded))
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                             }
@@ -474,9 +497,10 @@ struct MusicPlayerView: View {
                             }
                         } else {
                             Text(musicManager.artist ?? "Artist")
-                                .font(.system(size: 12, design: .rounded))
+                                .font(.system(size: CGFloat(appearance.artistFontSize), design: .rounded))
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)
+                        }
                         }
                     }
                 }
@@ -492,7 +516,7 @@ struct MusicPlayerView: View {
                                 title: pill.title,
                                 artist: pill.artist,
                                 artworkURL: nextTrackArtworkURL,
-                                accent: musicManager.accentColor
+                                accent: playerAccent
                             ) {
                                 handleButtonTap(for: .musicQueueAndPlaylists)
                                 UserDefaults.standard.set(0, forKey: "lastSelectedMusicPane")
@@ -510,7 +534,7 @@ struct MusicPlayerView: View {
                         .offset(y: 8)
                         .transition(.opacity)
                     } else {
-                        WaveformView()
+                        WaveformView(accentOverride: accentOverride)
                             .scaleEffect(1.05)
                             .overlay(alignment: .topTrailing) {
                                 if settings.settings.showPopularityInMusicPlayer {
@@ -530,7 +554,7 @@ struct MusicPlayerView: View {
 
     private var controlsSection: some View {
         VStack(spacing: 3) {
-            PlayerProgressView()
+            if appearance.showProgress { PlayerProgressView(accentOverride: accentOverride) }
 
             if reservesSuggestionSlot {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -548,8 +572,8 @@ struct MusicPlayerView: View {
                                         }
                                         .padding(.horizontal, 9)
                                         .padding(.vertical, 5)
-                                        .background(musicManager.accentColor.opacity(0.16), in: Capsule())
-                                        .foregroundStyle(musicManager.accentColor)
+                                        .background(playerAccent.opacity(0.16), in: Capsule())
+                                        .foregroundStyle(playerAccent)
                                     }
                                     .buttonStyle(.plain)
                                 }
@@ -566,13 +590,15 @@ struct MusicPlayerView: View {
                         LyricTextView(
                             navigationStack: $navigationStack,
                             isLockScreenMode: isLockScreenMode,
+                            fontSize: CGFloat(appearance.lyricsFontSize),
+                            accentOverride: accentOverride,
                             onCustomTap: onLyricsTap
                         )
                     }
 
-                    HStack {
+                    HStack(spacing: 0) {
                         MusicPlayerActionButton(type: primaryButtons.first, size: .primary)
-                        Spacer()
+                        Spacer(minLength: 0)
                         SeekButton(
                             systemName: "backward.fill",
                             onTap: { Task { await musicManager.previousTrack() } },
@@ -585,10 +611,10 @@ struct MusicPlayerView: View {
                             onHoldEnded: endHoldFeedback,
                             displayedSystemName: holdFeedbackButtonID == "previous" ? holdFeedbackIcon : nil
                         )
-                        .frame(width: 44, height: 44)
+                        .frame(width: 44 * controlsScale, height: 44 * controlsScale)
                         .foregroundStyle(holdFeedbackButtonID == "previous" ? holdFeedbackColor : .primary)
                         .help(MusicLongPressUI.skipHelp(primary: "Previous", target: .previous, settings: settings.settings.value))
-                        Spacer()
+                        Spacer(minLength: 0)
                         LongPressControlButton(
                             onTap: { Task { await (musicManager.isPlaying ? musicManager.pause() : musicManager.play()) } },
                             onLongPress: accessoryLongPressHandler(for: .playPause),
@@ -599,17 +625,17 @@ struct MusicPlayerView: View {
                             Image(systemName: holdFeedbackButtonID == "playPause"
                                   ? (holdFeedbackIcon ?? (musicManager.isPlaying ? "pause.fill" : "play.fill"))
                                   : (musicManager.isPlaying ? "pause.fill" : "play.fill"))
-                                .font(.system(size: 28))
+                                .font(.system(size: 28 * controlsScale))
                                 .contentTransition(.symbolEffect(.replace))
                                 .foregroundStyle(holdFeedbackButtonID == "playPause" ? holdFeedbackColor : .primary)
                         }
-                        .frame(width: 44, height: 44)
+                        .frame(width: 44 * controlsScale, height: 44 * controlsScale)
                         .contentShape(Rectangle())
-                        .notchHoverTile(size: 52)
+                        .notchHoverTile(size: 52 * controlsScale)
                         .animation(.easeInOut(duration: 0.15), value: musicManager.isPlaying)
                         .animation(.easeInOut(duration: 0.15), value: holdFeedbackIcon)
                         .help(MusicLongPressUI.accessoryHelp(primary: "Play / Pause", target: .playPause, settings: settings.settings.value))
-                        Spacer()
+                        Spacer(minLength: 0)
                         SeekButton(
                             systemName: "forward.fill",
                             onTap: { Task { await musicManager.nextTrack() } },
@@ -622,18 +648,18 @@ struct MusicPlayerView: View {
                             onHoldEnded: endHoldFeedback,
                             displayedSystemName: holdFeedbackButtonID == "next" ? holdFeedbackIcon : nil
                         )
-                        .frame(width: 44, height: 44)
+                        .frame(width: 44 * controlsScale, height: 44 * controlsScale)
                         .foregroundStyle(holdFeedbackButtonID == "next" ? holdFeedbackColor : .primary)
                         .help(MusicLongPressUI.skipHelp(primary: "Next", target: .next, settings: settings.settings.value))
-                        Spacer()
+                        Spacer(minLength: 0)
                         MusicPlayerActionButton(type: primaryButtons.dropFirst().first, size: .primary)
                     }
-                    .buttonStyle(PlainButtonStyle()).font(.system(size: 22)).foregroundColor(.primary)
+                    .buttonStyle(PlainButtonStyle()).font(.system(size: 22 * controlsScale)).foregroundColor(.primary)
                     .padding(.top, (!reservesLyricSlot && accessoryButtons.isEmpty) ? 8 : 0)
                     .padding(.bottom, !reservesLyricSlot ? 4 : 0)
 
                     if !accessoryButtons.isEmpty {
-                        HStack(spacing: 25) { ForEach(accessoryButtons) { buttonType in MusicPlayerActionButton(type: buttonType, size: .accessory) } }
+                        HStack(spacing: 25 * controlsScale) { ForEach(accessoryButtons) { buttonType in MusicPlayerActionButton(type: buttonType, size: .accessory) } }
                         .frame(maxWidth: .infinity).padding(.top, 4)
                     }
         }
@@ -738,8 +764,8 @@ struct MusicPlayerView: View {
     @ViewBuilder
     private func MusicPlayerActionButton(type: MusicPlayerButtonType?, size: ButtonSize) -> some View {
         if let type = type {
-            let iconSize: CGFloat = size == .primary ? 18 : 16
-            let frameSize: CGFloat = size == .primary ? 40 : 30
+            let iconSize: CGFloat = (size == .primary ? 18 : 16) * controlsScale
+            let frameSize: CGFloat = (size == .primary ? 40 : 30) * controlsScale
 
             switch type {
             case .playlists:
@@ -868,7 +894,7 @@ struct MusicPlayerView: View {
                 .help(MusicLongPressUI.accessoryHelp(primary: "Repeat", target: .repeatMode, settings: settings.settings.value))
             }
         } else {
-            Rectangle().fill(Color.clear).frame(width: 40, height: 40)
+            Rectangle().fill(Color.clear).frame(width: 40 * controlsScale, height: 40 * controlsScale)
         }
     }
 
@@ -1393,6 +1419,7 @@ struct CoreAnimationWaveformView: NSViewRepresentable, Equatable {
 struct WaveformView: View {
     var musicManager: MusicManager { .shared }
     @ObservedSettings var settingsModel: SettingsObserver
+    var accentOverride: Color? = nil
 
     @State private var isHovering = false
     @State private var volumeScale: CGFloat = 0.7
@@ -1428,7 +1455,7 @@ struct WaveformView: View {
                 }) {
                     Image(systemName: musicManager.isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(musicManager.accentColor)
+                        .foregroundColor((accentOverride ?? musicManager.accentColor))
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -1480,8 +1507,8 @@ struct WaveformView: View {
             barCount: barCount,
             volumeScale: volumeScale,
             barThickness: settingsModel.settings.waveformBarThickness,
-            leftGradientColor: musicManager.leftGradientColor,
-            rightGradientColor: musicManager.rightGradientColor
+            leftGradientColor: (accentOverride ?? musicManager.leftGradientColor),
+            rightGradientColor: (accentOverride.map { $0.opacity(0.72) } ?? musicManager.rightGradientColor)
         )
         .id(waveformLayoutID)
     }
@@ -1493,8 +1520,8 @@ struct WaveformView: View {
             barCount: barCount,
             volumeScale: volumeScale,
             barThickness: settingsModel.settings.waveformBarThickness,
-            leftGradientColor: useGradient ? musicManager.leftGradientColor : musicManager.accentColor,
-            rightGradientColor: useGradient ? musicManager.rightGradientColor : musicManager.accentColor
+            leftGradientColor: useGradient ? (accentOverride ?? musicManager.leftGradientColor) : (accentOverride ?? musicManager.accentColor),
+            rightGradientColor: useGradient ? (accentOverride.map { $0.opacity(0.72) } ?? musicManager.rightGradientColor) : (accentOverride ?? musicManager.accentColor)
         )
         .id(waveformLayoutID)
         .transition(.opacity)
@@ -1507,7 +1534,7 @@ struct WaveformView: View {
     private func iconBody(systemName: String) -> some View {
         Image(systemName: systemName)
             .font(.system(size: 16, weight: .semibold))
-            .foregroundColor(musicManager.accentColor)
+            .foregroundColor((accentOverride ?? musicManager.accentColor))
             .transition(.opacity.animation(.easeOut(duration: 0.2)))
     }
 }

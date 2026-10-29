@@ -2370,3 +2370,191 @@
 "Invalid weather API URL." = "天气服务地址无效。";
 
 "Weather data is temporarily unavailable." = "天气数据暂时不可用。";
+
+"A favorite song" = "喜欢的歌曲";
+
+"Accent Color" = "强调色";
+
+"Add an enabled text snippet with a trigger of at most 128 characters." = "请添加并启用一个触发词不超过 128 个字符的文本片段。";
+
+"Album Artwork" = "专辑封面";
+
+"All Sensors" = "所有传感器";
+
+"Allow Sapphire notifications in System Settings to receive alerts." = "请在“系统设置”中允许 Sapphire 发送通知，以接收告警。";
+
+"Allowed" = "已允许";
+
+"Artist Font Size" = "歌手字号";
+
+"Artwork Corner Radius" = "封面圆角半径";
+
+"Artwork Size" = "封面大小";
+
+"Available" = "可用";
+
+"Battery Level" = "电池电量";
+
+"Battery Threshold" = "电量阈值";
+
+"CPU Threshold" = "CPU 阈值";
+
+"CPU temperature is unavailable. A running, trusted helper and a supported sensor are required." = "CPU 温度不可用。需要受信任且正在运行的辅助程序，以及受支持的传感器。";
+
+"Compact" = "紧凑";
+
+"Control Size" = "控制按钮大小";
+
+"Critical" = "严重";
+
+"Custom Color" = "自定义颜色";
+
+"Customize NetEase Buttons Separately" = "单独自定义网易云按钮";
+
+"Customize player size, artwork, text, colors and NetEase buttons." = "自定义播放器大小、封面、文字、颜色和网易云按钮。";
+
+"Disk Space" = "磁盘空间";
+
+"Enable Alerts" = "启用告警";
+
+"Enable Menu Bar Readouts" = "启用菜单栏读数";
+
+"Enter a color such as #FF9F0A. Invalid colors use the default." = "请输入颜色值，例如 #FF9F0A。无效颜色将使用默认值。";
+
+"Expands in supported native text fields. Password fields, secure input, composing input methods and ignored apps are skipped." = "在受支持的原生文本框中展开片段。密码框、安全输入、输入法组合输入以及忽略列表中的应用会被跳过。";
+
+"Finder cut and paste is active." = "Finder 剪切粘贴已启用。";
+
+"Finder cut and paste needs Accessibility access. Enable Sapphire in System Settings." = "Finder 剪切粘贴需要辅助功能权限。请在“系统设置”中允许 Sapphire。";
+
+"Finder did not expose a small, verifiable file selection. The shortcut was left unchanged." = "无法获取可快速核验的 Finder 文件选择，快捷键行为保持不变。";
+
+"Free Space Threshold" = "可用空间阈值";
+
+"HID" = "人机接口设备（HID）";
+
+"Hex Color" = "十六进制颜色值";
+
+"Large Text" = "大字体";
+
+"Latest sensor readings" = "最新传感器读数";
+
+"Live measurements" = "实时测量";
+
+"Lyrics Font Size" = "歌词字号";
+
+"Measurements paused" = "测量已暂停";
+
+"Memory Usage" = "内存使用率";
+
+"Menu Bar Readouts" = "菜单栏读数";
+
+"Music Player Appearance" = "音乐播放器外观";
+
+"Network rates appear in the menu bar when enabled." = "启用后，网络速率将显示在菜单栏中。";
+
+"No operation timings have been collected." = "尚未收集操作耗时数据。";
+
+"No supported sensors are available." = "没有可用的受支持传感器。";
+
+"Not Requested" = "尚未申请";
+
+"Notification Access" = "通知权限";
+
+"Notify once per discharge when the battery reaches the threshold." = "每次放电期间，电量降至阈值时通知一次。";
+
+"Notify when CPU stays above the threshold for about a minute." = "CPU 使用率持续超过阈值约一分钟时通知。";
+
+"Notify when macOS reports memory pressure." = "macOS 报告内存压力时通知。";
+
+"Notify when the CPU stays above the threshold for 30 seconds. Requires the Sapphire helper." = "CPU 温度持续超过阈值 30 秒时通知。需要 Sapphire 辅助程序。";
+
+"Notify when the startup disk is nearly full." = "启动磁盘空间即将耗尽时通知。";
+
+"Off keeps the existing recommended controls. On lets you show, hide and reorder NetEase controls only." = "关闭时沿用现有推荐控件；开启后可单独设置网易云控件的显示、隐藏和顺序。";
+
+"Only this page of sensors is requested. A catalog entry without a reported measurement is shown as unavailable." = "仅采集本页显示的传感器。目录中尚未返回测量值的项目会显示为不可用。";
+
+"Pasting images as PNG files and F2 rename are not implemented in this community build." = "此社区版尚未实现将图片粘贴为 PNG 文件及按 F2 重命名。";
+
+"Performance diagnostics are disabled." = "性能诊断未启用。";
+
+"Player Width" = "播放器宽度";
+
+"Power and Sensors" = "功耗与传感器";
+
+"Presets" = "预设";
+
+"Privileged Helper" = "特权辅助程序";
+
+"Restore Defaults" = "恢复默认设置";
+
+"Sapphire operation timings" = "Sapphire 操作耗时";
+
+"Sensor Group" = "传感器分组";
+
+"Sensor readings are unavailable without the trusted Sapphire helper. Basic CPU, memory, GPU and disk measurements remain available." = "没有受信任的 Sapphire 辅助程序时，传感器读数不可用。CPU、内存、GPU 和磁盘的基本测量仍可使用。";
+
+"Sensors" = "传感器";
+
+"Show Artist" = "显示歌手";
+
+"Show Artwork" = "显示封面";
+
+"Show CPU Usage" = "显示 CPU 使用率";
+
+"Show Memory Usage" = "显示内存用量";
+
+"Show Network Rates" = "显示网络速率";
+
+"Show Progress" = "显示播放进度";
+
+"Static appearance preview" = "静态外观预览";
+
+"Static preview. Your current song and playback are unchanged." = "静态预览，不影响当前歌曲和播放状态。";
+
+"Sustained CPU Load" = "CPU 持续高负载";
+
+"Swap Used" = "已用交换空间";
+
+"System Accent" = "系统强调色";
+
+"System Alerts" = "系统告警";
+
+"Systems" = "系统";
+
+"Temperature Threshold" = "温度阈值";
+
+"Text snippet expansion is active." = "文本片段展开已启用。";
+
+"Text snippets need Accessibility access. Enable Sapphire in System Settings." = "文本片段需要辅助功能权限。请在“系统设置”中允许 Sapphire。";
+
+"Text snippets pause while an input method is selected to protect composing text." = "使用输入法时，文本片段会暂停，以免干扰正在组合的文字。";
+
+"The snippet was left unchanged because its clipboard content is private, unavailable or too large." = "剪贴板内容属于私密内容、不可用或过大，文本片段保持不变。";
+
+"These are elapsed times for instrumented Sapphire operations, not per-process CPU percentages." = "这里显示 Sapphire 中已加入耗时记录的操作所用时间，并非各进程的 CPU 使用率。";
+
+"This app did not allow the snippet selection to be changed." = "此应用不允许更改文本片段的选区。";
+
+"This app did not confirm the snippet replacement. No additional edit was attempted." = "此应用未确认片段替换结果，未再次尝试修改。";
+
+"This app does not support safe text snippet replacement through Accessibility." = "此应用不支持通过辅助功能安全地替换文本片段。";
+
+"This page shares the existing samplers. Its measurements pause when the page is hidden, Sapphire is inactive, or the Mac sleeps. Enabled readouts and alerts keep their own subscriptions." = "此页面复用现有采样器。离开页面、Sapphire 不在前台或 Mac 休眠时，页面测量会暂停；已启用的菜单栏读数和告警会保留各自的订阅。";
+
+"Title Font Size" = "标题字号";
+
+"Total" = "总量";
+
+"Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts." = "在 Finder 中先按 ⌘X，再按 ⌘V 移动所选文件。实际移动和冲突处理均由 Finder 完成。";
+
+"Used" = "已用";
+
+"View local system measurements and choose menu bar readouts and alerts." = "查看本机系统测量数据，并设置菜单栏读数和告警。";
+
+"White" = "白色";
+
+"Your artist" = "歌手名称";
+
+"Your lyrics appear here" = "歌词将在此处显示";
