@@ -2577,7 +2577,7 @@ struct ClipboardSettingsView: View {
                             #if SAPPHIRE_FULL_BUILD
                             SettingsSectionHeader(title: "Finder Cut & Paste", description: "⌘X then ⌘V moves copied files instead of copying them, ⌘V pastes copied images as PNG files into the front Finder folder, and F2 renames the selected item.")
                             #else
-                            SettingsSectionHeader(title: "Finder Cut & Paste", description: L10n.string("Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts."))
+                            SettingsSectionHeader(title: "Finder Cut & Paste", description: "Use ⌘X then ⌘V in Finder to move selected files. Finder handles the actual move and any conflicts.")
                             #endif
 
                             ToggleRow(
