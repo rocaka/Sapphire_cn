@@ -25,7 +25,7 @@ public enum AppFeature: String, Codable, CaseIterable {
 enum PublicFeatureAvailability {
     static let available: Set<AppFeature> = [
         .unlimitedLyricsFetch, .translation, .snapZonesKeyboardShortcuts,
-        .focusProductiveAccess, .batteryWidget, .basicStorageFeatures,
+        .batteryWidget, .basicStorageFeatures,
         .audio8D, .surroundSound, .ocrFeature, .clipboardPicker, .clipboardAutoClear, .clipboardCleanURL, .mediaTools, .storageWidgets
     ]
 

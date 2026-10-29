@@ -3,7 +3,7 @@ import Foundation
     static func main() {
         precondition(PublicFeatureAvailability.contains(.batteryWidget))
         precondition(PublicFeatureAvailability.contains(.snapZonesKeyboardShortcuts))
-        precondition(PublicFeatureAvailability.contains(.focusProductiveAccess))
+        precondition(!PublicFeatureAvailability.contains(.focusProductiveAccess), "The public source has no local productive-site access grant implementation")
         precondition(PublicFeatureAvailability.contains(.basicStorageFeatures))
         precondition(PublicFeatureAvailability.contains(.audio8D))
         precondition(PublicFeatureAvailability.contains(.surroundSound))
