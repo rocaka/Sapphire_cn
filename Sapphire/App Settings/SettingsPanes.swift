@@ -9250,10 +9250,11 @@ struct MusicSettingsView: View {
                     ToggleRow(title: "Prefer airplay over spotify devices", description: "Default to airplay devices when spotify isn't running and spotify is authenticated", isOn: $settings.settings.preferAirPlayOverSpotify)
                 }.modifier(SettingsContainerModifier())
                 case .lyrics:
+                DesktopLyricsSettingsCard()
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Lyrics").font(.headline).padding([.top, .horizontal])
                     ToggleRow(title: "Show Lyrics in Live Activity", description: "Display synchronized lyrics when available.", isOn: $settings.settings.showLyricsInLiveActivity)
-                    if settings.settings.showLyricsInLiveActivity {
+                    if settings.settings.showLyricsInLiveActivity || settings.settings.desktopLyricsAppearance.enabled {
                         Divider().padding(.leading, 20)
                         ToggleRow(
                             title: "Hide Lyrics in Full Screen",
@@ -9291,7 +9292,7 @@ struct MusicSettingsView: View {
                 .modifier(SettingsContainerModifier())
                 .animation(.default, value: settings.settings.showLyricsInLiveActivity)
 
-                if settings.settings.showLyricsInLiveActivity {
+                if settings.settings.showLyricsInLiveActivity || settings.settings.desktopLyricsAppearance.enabled {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Allow Lyrics From:").font(.headline).padding([.horizontal, .top])
                         AppTogglesListView(

@@ -703,6 +703,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         cleanURLManager.stopMonitoring()
         finderCutPasteManager.removeTap()
         snippetManager.removeHandler()
+        DesktopLyricsController.shared.stop()
         mouseControlManager.shutdown()
         focusFollowsMouseManager.removeMonitors()
         extraClickFilterManager.shutdown()
@@ -900,6 +901,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         cleanURLManager.start()
         finderCutPasteManager.start()
         snippetManager.start()
+        DesktopLyricsController.shared.start()
         _ = mouseControlManager
         focusFollowsMouseManager.start()
         extraClickFilterManager.start()
@@ -1425,6 +1427,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func applicationWillTerminate(_ aNotification: Notification) {
         StartupHealthMarker.shared.markCleanExit()
+        DesktopLyricsController.shared.stop()
         mouseControlManager.restoreSystemSettings()
         settingsModel.flushPendingSave()
         NearbyConnectionManager.shared.becomeInvisible()

@@ -75,6 +75,7 @@ enum MusicPlaybackTickPolicy {
         var hasLyrics: Bool
         var showNextSong: Bool
         var upNextSourceSupported: Bool
+        var desktopLyricsActive = false
     }
 
     static func interval(for inputs: Inputs) -> TimeInterval? {
@@ -88,7 +89,8 @@ enum MusicPlaybackTickPolicy {
             && inputs.musicLiveActivityEnabled
             && inputs.showNextSong
             && inputs.upNextSourceSupported
-        guard inputs.isPlaying, needsProgressUI || needsLyricLiveActivity || needsUpNextLiveActivity else { return nil }
+        let needsDesktopLyrics = inputs.desktopLyricsActive && inputs.hasLyrics
+        guard inputs.isPlaying, needsProgressUI || needsLyricLiveActivity || needsUpNextLiveActivity || needsDesktopLyrics else { return nil }
         return needsProgressUI ? 0.2 : 0.5
     }
 
@@ -99,14 +101,15 @@ enum MusicPlaybackTickPolicy {
         lyrics: [LyricLine],
         duration: TimeInterval
     ) -> TimeInterval? {
-        guard inputs.isPlaying, inputs.isMusicLiveActivityActive, inputs.musicLiveActivityEnabled else {
+        let liveActivity = inputs.isMusicLiveActivityActive && inputs.musicLiveActivityEnabled
+        guard inputs.isPlaying, liveActivity || inputs.desktopLyricsActive else {
             return nil
         }
 
         let epsilon = 0.01
         var delays: [TimeInterval] = []
 
-        if inputs.showLyricsInLiveActivity, inputs.lyricsAllowedForActiveApp, inputs.hasLyrics {
+        if inputs.hasLyrics && (inputs.desktopLyricsActive || (liveActivity && inputs.showLyricsInLiveActivity && inputs.lyricsAllowedForActiveApp)) {
             for line in lyrics {
                 if line.timestamp > lyricsElapsed + epsilon {
                     delays.append(line.timestamp - lyricsElapsed)
@@ -117,7 +120,7 @@ enum MusicPlaybackTickPolicy {
             }
         }
 
-        if inputs.showNextSong, inputs.upNextSourceSupported, duration > 0 {
+        if liveActivity, inputs.showNextSong, inputs.upNextSourceSupported, duration > 0 {
             let upNextStart = max(0, duration - 10)
             if upNextStart > elapsed + epsilon {
                 delays.append(upNextStart - elapsed)

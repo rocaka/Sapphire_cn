@@ -116,14 +116,13 @@ final class FinderCutPasteManager: ObservableObject, @unchecked Sendable {
             guard state.enabled, state.finderPID == pid, state.generation == snapshot.generation else { lock.unlock(); return .pass }
             state.policy.beginCopy(changeCount: before, files: files)
             state.copyDeadline = ProcessInfo.processInfo.systemUptime + 1
-            state.mappedKeys[7] = (8, false)
             let generation = state.generation
             lock.unlock()
             DispatchQueue.main.async { [weak self] in MainActor.assumeIsolated { self?.scheduleCopyChecks(generation: generation) } }
             guard Self.focusedApplicationPID() == pid,
                   let currentFocus = PublicInputAX.element(Self.value(AXUIElementCreateApplication(pid), attribute: kAXFocusedUIElementAttribute)),
                   CFEqual(currentFocus, focused) else { invalidate(); return .pass }
-            return Self.replace(event, key: 8, option: false)
+            return finishKeyDown(event, originalKey: 7, key: 8, option: false, pid: pid, generation: snapshot.generation)
         }
         // Empty destination folders are valid; text fields (search / rename) were
         // excluded above. Clipboard identity is checked at the actual shortcut.
@@ -133,13 +132,29 @@ final class FinderCutPasteManager: ObservableObject, @unchecked Sendable {
         let current = state.policy.version.flatMap { $0.changeCount == currentCount ? $0 : nil }
         let move = state.policy.consume(current: current, finderActive: true)
         state.copyDeadline = nil
-        if move { state.mappedKeys[9] = (9, true) }
         lock.unlock()
         guard move else { return .pass }
         guard Self.focusedApplicationPID() == pid,
               let currentFocus = PublicInputAX.element(Self.value(AXUIElementCreateApplication(pid), attribute: kAXFocusedUIElementAttribute)),
               CFEqual(currentFocus, focused), NSPasteboard.general.changeCount == currentCount else { invalidate(); return .pass }
-        return Self.replace(event, key: 9, option: true)
+        return finishKeyDown(event, originalKey: 9, key: 9, option: true, pid: pid, generation: snapshot.generation)
+    }
+
+    /// Revalidate lifecycle after the final AX / pasteboard reads. Constructing
+    /// the decision under this lock makes disable/reset and acceptance ordered.
+    /// A release for an already accepted keyDown keeps its existing pairing path.
+    private func finishKeyDown(_ event: CGEvent, originalKey: Int64, key: Int64, option: Bool, pid: pid_t, generation: UInt64) -> EventTapDecision {
+        guard AccessibilityTrustMonitor.isCurrentlyTrusted(), !IsSecureEventInputEnabled() else { invalidate(); return .pass }
+        lock.lock()
+        defer { lock.unlock() }
+        guard state.enabled, state.finderPID == pid, state.generation == generation else { return .pass }
+        let decision = Self.replace(event, key: key, option: option)
+        if case .replace = decision {
+            state.mappedKeys[originalKey] = (key, option)
+        } else {
+            state.policy.reset(); state.copyDeadline = nil
+        }
+        return decision
     }
 
     private static func replace(_ event: CGEvent, key: Int64, option: Bool) -> EventTapDecision {

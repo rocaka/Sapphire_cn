@@ -2558,3 +2558,21 @@
 "Your artist" = "歌手名称";
 
 "Your lyrics appear here" = "歌词将在此处显示";
+
+/* Desktop lyrics appearance */
+"Desktop Lyrics" = "桌面歌词";
+"Desktop Lyrics Below the Notch" = "刘海下方桌面歌词";
+"Show the current lyric below the notch, even when the music player is closed." = "播放器收起时，仍在刘海下方显示当前歌词。";
+"Enable Desktop Lyrics" = "启用桌面歌词";
+"Lyrics follow the display with Sapphire's notch. They do not capture mouse clicks and hide while the notch is expanded, the Mac is locked, or the display sleeps." = "歌词跟随 Sapphire 刘海所在的显示器，不拦截鼠标点击；刘海展开、Mac 锁定或屏幕休眠时隐藏。";
+"Static preview. Desktop lyrics use the existing song and lyric source; songs without lyrics show no overlay." = "静态预览。桌面歌词沿用当前歌曲和歌词源；没有歌词时不显示。";
+"Lyrics Width" = "歌词宽度";
+"Desktop Lyrics Font Size" = "桌面歌词字号";
+"Gap Below the Notch" = "与刘海的间距";
+"Lyrics Background Opacity" = "歌词背景不透明度";
+"Lyrics Color (Hex)" = "歌词颜色（十六进制）";
+"Show Translation as a Second Line" = "第二行显示译文";
+"Uses an available translation from the existing lyrics settings; this switch does not start a translation request." = "使用现有歌词设置中已获取的译文；此开关不会发起翻译请求。";
+"Hide Desktop Lyrics When Paused" = "暂停时隐藏桌面歌词";
+"Your favorite songs, with you through the day" = "让喜欢的歌，陪你度过每一刻";
+"A second line can show an available translation" = "第二行可显示已获取的译文";

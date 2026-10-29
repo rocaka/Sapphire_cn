@@ -703,6 +703,9 @@ final class NotchStageView: NSView {
 
     // MARK: Inspection
 
+    /// The actual content mode, independent of outgoing views kept for morphs.
+    var isExpandedContent: Bool { activityBehindPanel }
+
     var presentedClipFrame: CGRect { clip.presentedRect }
 
     var settledClipFrame: CGRect { clip.frame }

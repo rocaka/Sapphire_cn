@@ -47,6 +47,8 @@ jobs:
         run: scripts/test-music-player-appearance.sh
       - name: Verify native text input policies and adapters
         run: scripts/test-public-text-input.sh
+      - name: Verify desktop lyrics preferences and event scheduling
+        run: scripts/test-desktop-lyrics.sh
       - name: Verify monitoring display and pagination
         run: scripts/test-monitoring-format.sh
       - name: Verify public feature availability

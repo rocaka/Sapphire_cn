@@ -418,6 +418,7 @@ extension SettingsIndex {
         .init(key: "musicLongPressShuffle", title: nil, detail: nil, section: nil, range: nil, options: MusicLongPressAction.allCases.map(\.rawValue)),
         .init(key: "musicOpenOnClick", title: "Open detailed Music widget on live activity click", detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicPlayerAppearance", title: "Music Player Appearance", detail: "Customize player size, artwork, text, colors and NetEase buttons.", section: .music, range: nil, options: nil),
+        .init(key: "desktopLyricsAppearance", title: "Desktop Lyrics Below the Notch", detail: "Show the current lyric below the notch, even when the music player is closed.", section: .music, range: nil, options: nil),
         .init(key: "musicPlaylistsButtonEnabled", title: nil, detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicRepeatButtonEnabled", title: nil, detail: nil, section: .music, range: nil, options: nil),
         .init(key: "musicShuffleButtonEnabled", title: nil, detail: nil, section: .music, range: nil, options: nil),

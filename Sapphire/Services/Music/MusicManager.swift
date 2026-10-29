@@ -171,6 +171,16 @@ class MusicManager {
         await setLyricsSurfaceOpen(isOpen, at: \.isDetachedLyricsOpen, named: "Detached Lyrics Window")
     }
 
+    /// Reuses the existing lyric fetcher and next-event playback timer. The
+    /// desktop controller releases demand when disabled, locked, or asleep.
+    func setDesktopLyricsActive(_ active: Bool) {
+        guard isDesktopLyricsActive != active else { return }
+        isDesktopLyricsActive = active
+        refreshTimers()
+        if active { publishPlaybackTime(force: true) }
+        refreshLyricsLoadingState()
+    }
+
     private func setLyricsSurfaceOpen(
         _ isOpen: Bool,
         at keyPath: ReferenceWritableKeyPath<MusicManager, Bool>,
@@ -302,6 +312,7 @@ class MusicManager {
     private(set) var isMusicHubOpen: Bool = false
     private(set) var isLyricsDetailOpen: Bool = false
     private(set) var isDetachedLyricsOpen: Bool = false
+    private(set) var isDesktopLyricsActive = false
     private(set) var isMusicLiveActivityActive: Bool = false
     @ObservationIgnored private(set) var systemVolume: Float = 0.0
 
@@ -365,7 +376,7 @@ class MusicManager {
     }
 
     private var needsLyricsUpdates: Bool {
-        if isDetailPlayerOpen || isLyricsDetailOpen || isDetachedLyricsOpen { return true }
+        if isDetailPlayerOpen || isLyricsDetailOpen || isDetachedLyricsOpen || isDesktopLyricsActive { return true }
         guard settingsModel.current.showLyricsInLiveActivity,
               settingsModel.current.musicLiveActivityEnabled else { return false }
         if isPhoneMediaSourceSelected,
@@ -2817,7 +2828,8 @@ class MusicManager {
             lyricsAllowedForActiveApp: ActiveAppMonitor.shared.isLyricsAllowedForActiveApp,
             hasLyrics: !lyrics.isEmpty,
             showNextSong: settingsModel.current.spotifyShowNextSong,
-            upNextSourceSupported: isSpotifySourceActive || isSpotifyLiveSourceSelected || lastKnownBundleID == "com.apple.Music"
+            upNextSourceSupported: isSpotifySourceActive || isSpotifyLiveSourceSelected || lastKnownBundleID == "com.apple.Music",
+            desktopLyricsActive: isDesktopLyricsActive
         )
         let tickInterval = MusicPlaybackTickPolicy.interval(for: inputs)
         LyricsLog.infoOnChange(

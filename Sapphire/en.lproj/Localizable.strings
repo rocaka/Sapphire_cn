@@ -2558,3 +2558,21 @@
 "Your artist" = "Your artist";
 
 "Your lyrics appear here" = "Your lyrics appear here";
+
+/* Desktop lyrics appearance */
+"Desktop Lyrics" = "Desktop Lyrics";
+"Desktop Lyrics Below the Notch" = "Desktop Lyrics Below the Notch";
+"Show the current lyric below the notch, even when the music player is closed." = "Show the current lyric below the notch, even when the music player is closed.";
+"Enable Desktop Lyrics" = "Enable Desktop Lyrics";
+"Lyrics follow the display with Sapphire's notch. They do not capture mouse clicks and hide while the notch is expanded, the Mac is locked, or the display sleeps." = "Lyrics follow the display with Sapphire's notch. They do not capture mouse clicks and hide while the notch is expanded, the Mac is locked, or the display sleeps.";
+"Static preview. Desktop lyrics use the existing song and lyric source; songs without lyrics show no overlay." = "Static preview. Desktop lyrics use the existing song and lyric source; songs without lyrics show no overlay.";
+"Lyrics Width" = "Lyrics Width";
+"Desktop Lyrics Font Size" = "Desktop Lyrics Font Size";
+"Gap Below the Notch" = "Gap Below the Notch";
+"Lyrics Background Opacity" = "Lyrics Background Opacity";
+"Lyrics Color (Hex)" = "Lyrics Color (Hex)";
+"Show Translation as a Second Line" = "Show Translation as a Second Line";
+"Uses an available translation from the existing lyrics settings; this switch does not start a translation request." = "Uses an available translation from the existing lyrics settings; this switch does not start a translation request.";
+"Hide Desktop Lyrics When Paused" = "Hide Desktop Lyrics When Paused";
+"Your favorite songs, with you through the day" = "Your favorite songs, with you through the day";
+"A second line can show an available translation" = "A second line can show an available translation";

@@ -153,7 +153,7 @@ class ActiveAppMonitor: ObservableObject {
 
         settingsModel.$settings
             .map { (settings: Settings) -> [String: Bool]? in
-                settings.showLyricsInLiveActivity ? settings.musicAppStates : nil
+                (settings.showLyricsInLiveActivity || settings.desktopLyricsAppearance.enabled) ? settings.musicAppStates : nil
             }
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
@@ -241,7 +241,7 @@ class ActiveAppMonitor: ObservableObject {
 
     private func updateLyricPermission() {
         let newPermissionState: Bool = {
-            guard settingsModel.current.showLyricsInLiveActivity else { return false }
+            guard settingsModel.current.showLyricsInLiveActivity || settingsModel.current.desktopLyricsAppearance.enabled else { return false }
             guard let activeBundleID = activeAppBundleID else { return true }
             if let isAllowed = settingsModel.current.musicAppStates[activeBundleID] { return isAllowed }
             return !isBrowser(activeBundleID)

@@ -1746,6 +1746,7 @@ struct Settings: Codable, Equatable {
     var musicOpenOnClick: Bool = true
     var musicPlayerButtonOrder: [MusicPlayerButtonType] = [.playlists, .devices, .like, .shuffle, .repeat]
     var musicPlayerAppearance = MusicPlayerAppearance()
+    var desktopLyricsAppearance = DesktopLyricsAppearance()
     var neteaseShowPlayerControls: Bool = true
     var musicLikeButtonEnabled: Bool = false
     var musicShuffleButtonEnabled: Bool = false
