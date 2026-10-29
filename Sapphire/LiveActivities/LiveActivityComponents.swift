@@ -383,6 +383,7 @@ struct FileProgressLiveActivityView {
 
                 Text(statusText)
                     .font(.system(size: 11))
+                    .monospacedDigit()
                     .foregroundColor(.white.opacity(0.7))
                     .lineLimit(1)
             }

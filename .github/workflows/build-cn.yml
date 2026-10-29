@@ -43,6 +43,8 @@ jobs:
         run: scripts/test-netease-refresh.sh
       - name: Verify bounded notch size reporting
         run: scripts/test-notch-sizing.sh
+      - name: Verify continuous transfer progress stays sharp
+        run: scripts/test-notch-progress-resize.sh
       - name: Verify music appearance migration and display bounds
         run: scripts/test-music-player-appearance.sh
       - name: Verify native text input policies and adapters

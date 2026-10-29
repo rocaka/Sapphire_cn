@@ -3254,8 +3254,12 @@ struct NotchController: View {
               (abs(targetWidth - animatedWidth) > epsilon || abs(targetHeight - animatedHeight) > epsilon) else { return }
 
         let currentActivityType = liveActivityManager.currentActivity
+        // Transfer metrics change their intrinsic width throughout a download.
+        // Keep that card sharp while resizing; repeatedly restarting the delayed
+        // blur removal otherwise makes it pulse or remain unreadable.
         let isExemptFromBlur = reduceMotion
             || currentActivityType == .music || currentActivityType == .systemHUD
+            || currentActivityType == .fileProgress
             || Date() < scratch.activitySwitchBlurWindowEnd
 
         if !isExemptFromBlur {
