@@ -2,7 +2,7 @@
 
 本分支保留上游 AGPL-3.0 许可证与署名。社区版通过明确的功能可用性清单开放本地实现，不伪造原作者订阅、账号或授权状态。
 
-本轮 [公开预览版](https://github.com/rocaka/Sapphire_cn/releases/tag/cn-2026.10.29-customization-preview) 对应源码 `cbb3dd11b3aa4e2d9df7ec06b07951bf93b57ebe`。[完整 Debug](https://github.com/rocaka/Sapphire_cn/actions/runs/40841311365) 和 [通用 Release](https://github.com/rocaka/Sapphire_cn/actions/runs/40841299808) 均已成功，确认 `x86_64 arm64` 双架构、嵌套签名及发布附件 SHA256 一致。界面与系统集成交互的实机边界仍按下表说明。
+本轮 [公开预览版](https://github.com/rocaka/Sapphire_cn/releases/tag/cn-2026.10.29-progress-fix) 对应源码 `bb8bb6b0f841907b7ea393989d92014af641c411`。[通用 Release](https://github.com/rocaka/Sapphire_cn/actions/runs/40846332740) 已成功，新增下载进度连续刷新回归、既有检查及嵌套签名全部通过，发布附件与构建输出 SHA256 一致。界面与系统集成交互的实机边界仍按下表说明。
 
 ## 已有实现及本轮补齐
 
