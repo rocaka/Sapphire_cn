@@ -58,7 +58,12 @@ class WeatherViewModel: ObservableObject {
     @Published private var state = WeatherViewState()
 
     var weatherData: ProcessedWeatherData? { state.weatherData }
-    var locationName: String { state.locationName }
+    var locationName: String {
+        switch state.locationName {
+        case "Loading...", "Unavailable", "Unknown Location": return L10n.string(state.locationName)
+        default: return state.locationName
+        }
+    }
     var temperature: String { state.temperature }
     var conditionDescription: String { L10n.string(state.conditionDescription == "Clear" ? "Clear Skies" : state.conditionDescription) }
     var highLowTemp: String { state.highLowTemp }

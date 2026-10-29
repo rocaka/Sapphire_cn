@@ -2338,3 +2338,35 @@
 "The copied image was optimized." = "复制的图片已压缩。";
 
 "The original image was already compact. Clipboard unchanged." = "原图片已足够小，未修改剪贴板。";
+
+"Playback uses macOS media controls. Favorites, shuffle and repeat use NetEase's native menu and need Accessibility access." = "播放、暂停和切歌使用 macOS 媒体控制；收藏、随机和循环使用网易云原生菜单，需要辅助功能权限。";
+
+"Check NetEase Connection" = "检查网易云连接";
+
+"NetEase native controls are available." = "网易云原生控制连接正常。";
+
+"Connection Details" = "连接详情";
+
+"macOS recognizes Accessibility access for this running copy." = "macOS 已认可当前运行副本的辅助功能权限。";
+
+"macOS does not recognize Accessibility access for this running copy, even if an older entry is enabled." = "macOS 尚未认可当前运行副本的辅助功能权限；系统中已开启的条目可能仍对应旧签名。";
+
+"The NetEase native control menu is unavailable in this client state." = "网易云当前状态下无法访问原生控制菜单。";
+
+"macOS denied NetEase native controls for this copy. Check the connection in Music settings." = "系统拒绝了当前副本的网易云原生控制，请到“音乐”设置检查连接。";
+
+"Source revision" = "源码版本";
+
+"Weather API key is not configured." = "尚未配置天气服务密钥。";
+
+"Location services are disabled system-wide." = "系统定位服务已关闭。";
+
+"Location access was denied. Please enable it in System Settings." = "定位权限被拒绝，请在系统设置中开启。";
+
+"Grant Location access in Sapphire's Permissions settings to show weather." = "请在 Sapphire 权限设置中允许定位，以显示天气。";
+
+"Unknown location authorization status." = "无法识别定位授权状态。";
+
+"Invalid weather API URL." = "天气服务地址无效。";
+
+"Weather data is temporarily unavailable." = "天气数据暂时不可用。";

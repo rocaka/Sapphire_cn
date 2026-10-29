@@ -49,6 +49,19 @@ enum WidgetLayoutPolicy {
         notchDisplayWidth > 0 ? availableBarWidth(forScreenWidth: notchDisplayWidth) : availableBarWidth()
     }
 
+    static func maximumBarWidth(notchDisplayWidth: CGFloat, horizontalPadding: CGFloat = 0) -> CGFloat {
+        let screenWidth = notchDisplayWidth.isFinite && notchDisplayWidth > 0
+            ? notchDisplayWidth
+            : (CursorPosition.targetNotchScreen() ?? NSScreen.main)?.visibleFrame.width ?? 1440
+        let padding = horizontalPadding.isFinite ? max(0, horizontalPadding) : 0
+        return max(1, screenWidth - padding - 48)
+    }
+
+    static func gapWidth(showDividers: Bool) -> CGFloat {
+        // The divider is a separate HStack child, with spacing on both sides.
+        interWidgetSpacing * (showDividers ? 2 : 1) + (showDividers ? dividerWidth : 0)
+    }
+
     static func availableBarWidthForSettings(settings: Settings, screens: [NSScreen] = NSScreen.screens) -> CGFloat {
         let notchScreens = NotchScreens.screens(for: settings, among: screens)
         guard let widest = notchScreens.map(\.frame.width).max() else { return availableBarWidth() }
@@ -59,10 +72,7 @@ enum WidgetLayoutPolicy {
         guard !widgets.isEmpty else { return 0 }
         var total = widgets.reduce(0) { $0 + estimatedWidth(for: $1) }
         if widgets.count > 1 {
-            total += interWidgetSpacing * CGFloat(widgets.count - 1)
-            if showDividers {
-                total += dividerWidth * CGFloat(widgets.count - 1)
-            }
+            total += gapWidth(showDividers: showDividers) * CGFloat(widgets.count - 1)
         }
         return total
     }
@@ -87,7 +97,7 @@ enum WidgetLayoutPolicy {
             if result.isEmpty {
                 spacing = 0
             } else {
-                spacing = interWidgetSpacing + (showDividers ? dividerWidth : 0)
+                spacing = gapWidth(showDividers: showDividers)
             }
 
             if result.isEmpty || used + spacing + width <= availableWidth {

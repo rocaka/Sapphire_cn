@@ -15,13 +15,14 @@ struct WeatherWidgetView: View {
         ZStack {
             HStack(alignment: .center, spacing: 10) {
                 primaryInfo.layoutPriority(1)
-                secondaryInfo
+                secondaryInfo.frame(width: 64, alignment: .trailing)
             }
             .padding(.horizontal, 10)
         }
         .padding(.top, 0)
-        .frame(minWidth: 200, minHeight: 90)
-        .fixedSize()
+        .frame(width: WidgetLayoutPolicy.estimatedWidth(for: .weather))
+        .frame(minHeight: 90)
+        .fixedSize(horizontal: false, vertical: true)
         .foregroundColor(.white)
         .preferredColorScheme(.dark)
         .contentShape(Rectangle())
@@ -45,6 +46,7 @@ struct WeatherWidgetView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(viewModel.temperature)
                     .font(.system(size: 42, weight: .bold, design: .rounded))
+                    .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .id(viewModel.temperature)
                     .transition(.opacity)
@@ -53,11 +55,13 @@ struct WeatherWidgetView: View {
                     .font(.headline).fontWeight(.medium).lineLimit(1).minimumScaleFactor(0.7)
                     .id(viewModel.locationName)
                     .transition(.opacity)
+                    .help(viewModel.locationName)
 
                 Text(viewModel.conditionDescription)
                     .font(.subheadline).opacity(0.8).lineLimit(1).minimumScaleFactor(0.7)
                     .id(viewModel.conditionDescription)
                     .transition(.opacity)
+                    .help(viewModel.conditionDescription)
             }
             .animation(.easeInOut(duration: 0.4), value: viewModel.locationName)
         }

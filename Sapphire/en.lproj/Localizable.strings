@@ -2338,3 +2338,35 @@
 "The copied image was optimized." = "The copied image was optimized.";
 
 "The original image was already compact. Clipboard unchanged." = "The original image was already compact. Clipboard unchanged.";
+
+"Playback uses macOS media controls. Favorites, shuffle and repeat use NetEase's native menu and need Accessibility access." = "Playback uses macOS media controls. Favorites, shuffle and repeat use NetEase's native menu and need Accessibility access.";
+
+"Check NetEase Connection" = "Check NetEase Connection";
+
+"NetEase native controls are available." = "NetEase native controls are available.";
+
+"Connection Details" = "Connection Details";
+
+"macOS recognizes Accessibility access for this running copy." = "macOS recognizes Accessibility access for this running copy.";
+
+"macOS does not recognize Accessibility access for this running copy, even if an older entry is enabled." = "macOS does not recognize Accessibility access for this running copy, even if an older entry is enabled.";
+
+"The NetEase native control menu is unavailable in this client state." = "The NetEase native control menu is unavailable in this client state.";
+
+"macOS denied NetEase native controls for this copy. Check the connection in Music settings." = "macOS denied NetEase native controls for this copy. Check the connection in Music settings.";
+
+"Source revision" = "Source revision";
+
+"Weather API key is not configured." = "Weather API key is not configured.";
+
+"Location services are disabled system-wide." = "Location services are disabled system-wide.";
+
+"Location access was denied. Please enable it in System Settings." = "Location access was denied. Please enable it in System Settings.";
+
+"Grant Location access in Sapphire's Permissions settings to show weather." = "Grant Location access in Sapphire's Permissions settings to show weather.";
+
+"Unknown location authorization status." = "Unknown location authorization status.";
+
+"Invalid weather API URL." = "Invalid weather API URL.";
+
+"Weather data is temporarily unavailable." = "Weather data is temporarily unavailable.";

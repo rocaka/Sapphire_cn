@@ -781,7 +781,7 @@ class MusicManager {
             if error is CancellationError { return false }
             switch error as? NeteaseMusicBridge.Failure {
             case .permission:
-                message = "This copy of Sapphire needs Accessibility access. If already enabled, quit and reopen Sapphire from Applications."
+                message = "macOS denied NetEase native controls for this copy. Check the connection in Music settings."
             case .notRunning:
                 message = "Open NetEase Cloud Music before using its controls."
             case .appBusy, .timedOut:
@@ -796,6 +796,26 @@ class MusicManager {
             setNeteaseControlError(L10n.string(message))
             return false
         }
+    }
+
+    private func performNeteaseTransport(_ action: NeteaseMusicBridge.Action) async -> Bool {
+        guard isNeteaseSourceSelected else { return false }
+        if NeteaseMusicPolicy.canUseSystemTransport(activeBundleID: mediaController.activeSystemBundleID) {
+            switch action {
+            case .play: mediaController.play()
+            case .pause: mediaController.pause()
+            case .next: mediaController.nextTrack()
+            case .previous: mediaController.previousTrack()
+            default: return await performNetease(action)
+            }
+            setNeteaseControlError(nil)
+            // Playback UI follows the client's actual media report. A submitted
+            // command must not pretend the client has already changed state.
+            return true
+        }
+        // When inactive, native menus can still address only NetEase. They need
+        // AX access; do not fall back to a global command aimed at another app.
+        return await performNetease(action)
     }
 
     func refreshNeteaseState(force: Bool = false) async {
@@ -829,19 +849,16 @@ class MusicManager {
     // MARK: - Core Playback Actions (Context-Aware)
 
     func play() async {
+        if isNeteaseSourceSelected {
+            _ = await performNeteaseTransport(.play)
+            return
+        }
         if currentSourceKey == nil, !isPhoneMediaSourceSelected {
             let defaultPlayer = settingsModel.current.defaultMusicPlayer
             if defaultPlayer != .appleMusic {
                 defaultPlayer.open()
                 return
             }
-        }
-        if isNeteaseSourceSelected {
-            if await performNetease(.play) {
-                beginPlayStateHold(preferPlaying: true, duration: 1.2)
-                applyPlayingState(true)
-            }
-            return
         }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         applyPlayingState(true)
@@ -878,10 +895,7 @@ class MusicManager {
 
     func pause() async {
         if isNeteaseSourceSelected {
-            if await performNetease(.pause) {
-                beginPlayStateHold(preferPlaying: false, duration: 1.2)
-                applyPlayingState(false)
-            }
+            _ = await performNeteaseTransport(.pause)
             return
         }
         beginPlayStateHold(preferPlaying: false, duration: 1.2)
@@ -927,7 +941,7 @@ class MusicManager {
     }
 
     func nextTrack() async {
-        if isNeteaseSourceSelected { _ = await performNetease(.next); return }
+        if isNeteaseSourceSelected { _ = await performNeteaseTransport(.next); return }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         if isPhoneMediaSourceSelected {
             ContinuityManager.shared.sendMediaCommand(.next)
@@ -941,7 +955,7 @@ class MusicManager {
     }
 
     func previousTrack() async {
-        if isNeteaseSourceSelected { _ = await performNetease(.previous); return }
+        if isNeteaseSourceSelected { _ = await performNeteaseTransport(.previous); return }
         beginPlayStateHold(preferPlaying: true, duration: 1.2)
         if isPhoneMediaSourceSelected {
             ContinuityManager.shared.sendMediaCommand(.previous)

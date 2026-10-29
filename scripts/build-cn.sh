@@ -21,6 +21,22 @@ xcodebuild -project Sapphire.xcodeproj -scheme Sapphire \
   -derivedDataPath "$BUILD_DIR/DerivedData" \
   "${XCODE_ARGS[@]}" build
 APP="$BUILD_DIR/DerivedData/Build/Products/$CONFIGURATION/Sapphire.app"
+python3 - "$APP/Contents/Info.plist" <<'PY'
+import os, plistlib, re, subprocess, sys
+from pathlib import Path
+path = Path(sys.argv[1])
+with path.open('rb') as stream:
+    info = plistlib.load(stream)
+revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+if not re.fullmatch(r'[0-9a-f]{40,64}', revision):
+    raise SystemExit('Invalid build source revision')
+info['SapphireSourceRevision'] = revision
+run_number = os.environ.get('GITHUB_RUN_NUMBER', '')
+if run_number.isascii() and run_number.isdigit():
+    info['SapphireBuildNumber'] = run_number
+with path.open('wb') as stream:
+    plistlib.dump(info, stream)
+PY
 test -f "$APP/Contents/Resources/zh-Hans.lproj/Localizable.strings"
 test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
 /usr/bin/lipo -archs "$APP/Contents/MacOS/Sapphire"

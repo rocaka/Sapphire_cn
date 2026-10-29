@@ -218,12 +218,15 @@ struct AppleMusicAccountCard: View {
 struct NeteaseMusicSettingsCard: View {
     @EditingSettings var settings: SettingsEditingSession
     @State private var trusted = false
+    @State private var diagnostics: NeteaseMusicBridge.Diagnostics?
+    @State private var checking = false
+    @State private var showConnectionDetails = false
 
     var body: some View {
         SettingsCard(title: "NetEase Cloud Music", description: "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.") {
             VStack(alignment: .leading, spacing: 12) {
                 Toggle("Show NetEase playback controls", isOn: $settings.settings.neteaseShowPlayerControls)
-                Text(L10n.string("Song details, artwork, progress and synchronized lyrics follow the current track. Playback, favorites, shuffle and repeat use the NetEase app's controls."))
+                Text(L10n.string("Playback uses macOS media controls. Favorites, shuffle and repeat use NetEase's native menu and need Accessibility access."))
                     .font(.caption).foregroundStyle(.secondary)
                 Text(L10n.string("Manage your queue, playlists, search and account in the NetEase app. Sapphire controls its current playback."))
                     .font(.caption).foregroundStyle(.secondary)
@@ -236,6 +239,24 @@ struct NeteaseMusicSettingsCard: View {
                         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)
                     }
                 }
+                HStack {
+                    Button(L10n.string("Check NetEase Connection")) {
+                        guard !checking else { return }
+                        checking = true
+                        Task { @MainActor in
+                            let result = await NeteaseMusicBridge.shared.checkConnection()
+                            diagnostics = result
+                            trusted = result.processTrusted
+                            showConnectionDetails = true
+                            checking = false
+                        }
+                    }.disabled(checking)
+                    if checking { ProgressView().controlSize(.small) }
+                    if let diagnostics, diagnostics.lastFailure == nil, diagnostics.accessVerified == true {
+                        Label(L10n.string("NetEase native controls are available."), systemImage: "checkmark.circle")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }
                 if !trusted {
                     Text(L10n.string("Authorize the running copy of Sapphire. If an older copy is listed, remove it, add this copy, then quit and reopen the app."))
                         .font(.caption).foregroundStyle(.secondary)
@@ -243,14 +264,48 @@ struct NeteaseMusicSettingsCard: View {
                         NSWorkspace.shared.activateFileViewerSelecting([Bundle.main.bundleURL])
                     }
                 }
+                if let diagnostics {
+                    DisclosureGroup(L10n.string("Connection Details"), isExpanded: $showConnectionDetails) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(L10n.string(diagnostics.processTrusted
+                                ? "macOS recognizes Accessibility access for this running copy."
+                                : "macOS does not recognize Accessibility access for this running copy, even if an older entry is enabled."))
+                            Text(diagnostics.runningAppPath).textSelection(.enabled)
+                            if let revision = diagnostics.sourceRevision {
+                                Text(L10n.string("Source revision") + ": " + String(revision.prefix(12)))
+                                    .textSelection(.enabled)
+                            }
+                            if let stage = diagnostics.failureStage {
+                                Text(stage).textSelection(.enabled)
+                            }
+                            if let code = diagnostics.axErrorCode {
+                                Text("AX: \(code)").textSelection(.enabled)
+                            }
+                            if diagnostics.lastFailure == .notRunning {
+                                Text(L10n.string("Open NetEase Cloud Music before using its controls."))
+                            } else if diagnostics.lastFailure == .unavailable {
+                                Text(L10n.string("The NetEase native control menu is unavailable in this client state."))
+                            }
+                        }
+                        .font(.caption).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
             }.padding()
         }
-        .onAppear { trusted = NeteaseMusicBridge.shared.refreshPermissionHint() }
+        .onAppear { refreshPermissionState() }
         .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didActivateApplicationNotification)) { _ in
-            trusted = NeteaseMusicBridge.shared.refreshPermissionHint()
+            refreshPermissionState()
         }
         .onReceive(NotificationCenter.default.publisher(for: AccessibilityTrustMonitor.trustDidChange)) { _ in
-            trusted = NeteaseMusicBridge.shared.refreshPermissionHint()
+            refreshPermissionState()
         }
+    }
+
+    private func refreshPermissionState() {
+        let snapshot = NeteaseMusicBridge.shared.diagnosticSnapshot()
+        trusted = snapshot.processTrusted
+        diagnostics = snapshot
     }
 }

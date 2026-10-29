@@ -90,6 +90,10 @@ struct NotchWidgetPlaneRoot: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .coordinateSpace(.notchDrag)
             .environment(\.notchDisplayWidth, inputs.notchDisplayWidth)
+            .environment(\.notchWidgetMaximumWidth, WidgetLayoutPolicy.maximumBarWidth(
+                notchDisplayWidth: inputs.notchDisplayWidth,
+                horizontalPadding: inputs.padding.leading + inputs.padding.trailing
+            ))
             .notchHostEnvironment(bandHeight: inputs.notchBandHeight, displayScale: inputs.displayScale)
             .modifier(NotchWidgetPlaneGraphProbe())
     }

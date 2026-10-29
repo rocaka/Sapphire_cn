@@ -9,6 +9,10 @@ struct NeteasePolicyProbe {
         expect(NeteaseMusicPolicy.isSource("com.netease.163music"), "Native bundle")
         expect(!NeteaseMusicPolicy.isSource("com.netease.163music.fake"), "Reject another bundle")
         expect(!NeteaseMusicPolicy.isSource("com.spotify.client"), "Source isolation")
+        expect(NeteaseMusicPolicy.canUseSystemTransport(activeBundleID: NeteaseMusicPolicy.bundleID), "Active NetEase uses system playback without AX")
+        for other in [nil, "unknown", "com.spotify.client", "com.apple.Music", "com.netease.163music.fake"] as [String?] {
+            expect(!NeteaseMusicPolicy.canUseSystemTransport(activeBundleID: other), "Never send a NetEase action to another active player")
+        }
         for value in ["https://music.163.com/song?id=209226", "https://music.163.com/#/song?id=209226", "orpheus://song/209226"] {
             expect(NeteaseMusicPolicy.songID(value) == 209226, "Song URL: \(value)")
         }

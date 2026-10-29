@@ -9,16 +9,16 @@ struct SigningProbe {
         }
         let app = URL(fileURLWithPath: CommandLine.arguments[1])
         let identity = try AppSecurityValidator.identity(at: app)
-        precondition(identity.bundleIdentifier == "com.rocaka.sapphirecn")
+        precondition(identity.bundleIdentifier == "com.rocaka.sapphirecn.tests.signing-fixture")
         precondition(identity.signingIdentifier == identity.bundleIdentifier)
         precondition(identity.teamIdentifier == nil)
         do {
             try AppSecurityValidator.validateReplacement(candidate: app, replacing: app)
             preconditionFailure("Ad-hoc apps must require manual updates")
         } catch AppSecurityValidationError.publisherMismatch {}
-        let tampered = app.deletingLastPathComponent().appendingPathComponent("Tampered.app")
+        let tampered = app.deletingLastPathComponent().appendingPathComponent("TamperedSigningFixture.app")
         try FileManager.default.copyItem(at: app, to: tampered)
-        let executable = tampered.appendingPathComponent("Contents/MacOS/Sapphire")
+        let executable = tampered.appendingPathComponent("Contents/MacOS/SapphireSigningFixture")
         let handle = try FileHandle(forWritingTo: executable)
         try handle.seekToEnd()
         try handle.write(contentsOf: Data("tampered".utf8))

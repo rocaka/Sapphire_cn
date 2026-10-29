@@ -8,10 +8,12 @@ private final class FakeExecutor: NeteaseMusicExecuting, @unchecked Sendable {
     private var failure: NeteaseMusicBridge.Failure?
     private var blockedFirst = false
     private let blockKind: String?
+    private let issue: NeteaseAXIssue?
     let release = DispatchSemaphore(value: 0)
-    init(failure: NeteaseMusicBridge.Failure? = nil, blockKind: String? = nil) {
+    init(failure: NeteaseMusicBridge.Failure? = nil, blockKind: String? = nil, issue: NeteaseAXIssue? = nil) {
         self.failure = failure
         self.blockKind = blockKind
+        self.issue = issue
     }
     var events: [String] { lock.lock(); defer { lock.unlock() }; return recorded }
     func setFailure(_ value: NeteaseMusicBridge.Failure?) { lock.lock(); failure = value; lock.unlock() }
@@ -28,11 +30,11 @@ private final class FakeExecutor: NeteaseMusicExecuting, @unchecked Sendable {
     func perform(_ action: NeteaseMusicBridge.Action, pid: pid_t, cancellation: NeteaseAXCancellation) -> NeteaseAXResult<Void> {
         let error = enter(String(describing: action))
         if cancellation.isCancelled { return .init(outcome: .cancelled, accessVerified: false) }
-        if let error { return .init(outcome: .failure(error), accessVerified: error != .permission) }
+        if let error { return .init(outcome: .failure(error), accessVerified: error != .permission, issue: issue) }
         return .init(outcome: .success(()), accessVerified: true)
     }
     func state(pid: pid_t) -> NeteaseAXResult<NeteaseMusicBridge.State> {
-        if let error = enter("read") { return .init(outcome: .failure(error), accessVerified: error != .permission) }
+        if let error = enter("read") { return .init(outcome: .failure(error), accessVerified: error != .permission, issue: issue) }
         return .init(outcome: .success(.init(liked: true, shuffled: false, repeatMode: "off")), accessVerified: true)
     }
 }
@@ -56,6 +58,28 @@ private final class FakeExecutor: NeteaseMusicExecuting, @unchecked Sendable {
         precondition(!expired.consume(now: 1))
 
         var prompts = 0
+        let deniedExecutor = FakeExecutor(failure: .permission,
+            issue: .init(failure: .permission, stage: "application.AXMenuBar", axErrorCode: AXError.apiDisabled.rawValue))
+        let denied = NeteaseMusicBridge(executor: deniedExecutor, processIdentifier: { 123 }, trust: { true }, prompt: { prompts += 1; return false })
+        let deniedDiagnostic = await denied.checkConnection()
+        precondition(deniedDiagnostic.processTrusted && deniedDiagnostic.lastFailure == .permission,
+            "Diagnostics must show actual raw trust independently of an AX rejection")
+        precondition(deniedDiagnostic.lastOperation == "state" && deniedDiagnostic.failureStage == "application.AXMenuBar")
+        precondition(deniedDiagnostic.axErrorCode == -25211 && deniedDiagnostic.accessVerified == false)
+        precondition(deniedDiagnostic.runningAppPath == Bundle.main.bundleURL.path && deniedDiagnostic.targetProcessIdentifier == 123)
+        precondition(deniedDiagnostic.checkedAt != nil && prompts == 0, "Connection diagnostics must never prompt")
+        let unsupportedExecutor = FakeExecutor(failure: .unavailable,
+            issue: .init(failure: .unavailable, stage: "application.AXMenuBar", axErrorCode: AXError.attributeUnsupported.rawValue))
+        let unsupported = NeteaseMusicBridge(executor: unsupportedExecutor, processIdentifier: { 123 }, trust: { true }, prompt: { prompts += 1; return false })
+        let unsupportedDiagnostic = await unsupported.checkConnection()
+        precondition(unsupportedDiagnostic.lastFailure == .unavailable && unsupportedDiagnostic.axErrorCode == -25205,
+            "An unavailable AXMenuBar must not be presented as a permission failure")
+        let absentExecutor = FakeExecutor()
+        let absent = NeteaseMusicBridge(executor: absentExecutor, processIdentifier: { nil }, trust: { true }, prompt: { prompts += 1; return false })
+        let absentDiagnostic = await absent.checkConnection()
+        precondition(absentDiagnostic.lastFailure == .notRunning && absentDiagnostic.failureStage == "process.lookup")
+        precondition(absentDiagnostic.axErrorCode == nil && absentExecutor.events.isEmpty && prompts == 0)
+
         let executor = FakeExecutor()
         let bridge = NeteaseMusicBridge(executor: executor, processIdentifier: { 123 }, trust: { false }, prompt: { prompts += 1; return false })
         try await bridge.perform(.play)
@@ -145,6 +169,6 @@ private final class FakeExecutor: NeteaseMusicExecuting, @unchecked Sendable {
         var busy = 0
         for task in burst { if await task.value == .busy { busy += 1 } }
         precondition(busy == 5 && boundedExecutor.events.count == 4, "The action queue must be bounded and accepted toggles must execute once")
-        print("NetEase AX bridge: no automatic prompts, real error classification, shared reads, action priority, stale-state rejection, song invalidation and bounded queue passed")
+        print("NetEase AX bridge: no automatic prompts, raw trust / AX failure diagnostics, shared reads, action priority, stale-state rejection, song invalidation and bounded queue passed")
     }
 }

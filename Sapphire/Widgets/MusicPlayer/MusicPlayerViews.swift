@@ -299,7 +299,7 @@ struct MusicPlayerView: View {
     var body: some View {
         VStack(spacing: 4) {
             if musicManager.isNeteaseSourceSelected, let error = musicManager.neteaseControlError {
-                Text(error).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                MusicPlayerNotice(message: error)
             }
             if showArtworkSection {
                 artworkSection
@@ -312,7 +312,7 @@ struct MusicPlayerView: View {
                 .allowsHitTesting(showsControls)
                 .animation(.easeInOut(duration: 0.3), value: showsControls)
         }
-        .frame(width: 400).padding(10)
+        .frame(width: MusicPlayerNotice.contentWidth).padding(10)
         .animation(.easeInOut(duration: 0.4), value: musicManager.isPlaying)
         .animation(.default, value: enabledButtons)
         .onAppear {

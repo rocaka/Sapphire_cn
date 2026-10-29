@@ -262,6 +262,7 @@ struct NotchWidgetView: View {
 private struct NotchDefaultWidgetsView: View {
     @Environment(\.navigationStack) private var navigationStack
     @Environment(\.notchDisplayWidth) private var notchDisplayWidth
+    @Environment(\.notchWidgetMaximumWidth) private var notchWidgetMaximumWidth
     @Environment(\.isCalendarHovered) private var isCalendarHovered
     @ObservedSettings private var settings: SettingsObserver
     @State private var musicVisibility: MusicWidgetVisibilitySnapshot
@@ -335,15 +336,17 @@ private struct NotchDefaultWidgetsView: View {
 
     var body: some View {
         let widgets = enabledAndOrderedWidgets
-        HStack(spacing: 20) {
-            ForEach(widgets) { widgetType in
-                widgetView(for: widgetType)
-                    .id(widgetType)
+        NotchWidgetRow(maximumWidth: min(notchWidgetMaximumWidth, WidgetLayoutPolicy.maximumBarWidth(notchDisplayWidth: notchDisplayWidth))) {
+            HStack(spacing: WidgetLayoutPolicy.interWidgetSpacing) {
+                ForEach(widgets) { widgetType in
+                    widgetView(for: widgetType)
+                        .id(widgetType)
 
-                if widgetType != widgets.last && settings.settings.showDividersBetweenWidgets {
-                    Divider()
-                        .frame(height: 60)
-                        .background(Color.white.opacity(0.3))
+                    if widgetType != widgets.last && settings.settings.showDividersBetweenWidgets {
+                        Divider()
+                            .frame(width: WidgetLayoutPolicy.dividerWidth, height: 60)
+                            .background(Color.white.opacity(0.3))
+                    }
                 }
             }
         }

@@ -8,6 +8,12 @@ enum NeteaseMusicPolicy {
         return key == bundleID || key.hasPrefix(bundleID + ":")
     }
 
+    /// System media commands address the active client. Never send one while
+    /// another app is active merely because NetEase remains selected in Sapphire.
+    static func canUseSystemTransport(activeBundleID: String?) -> Bool {
+        activeBundleID == bundleID
+    }
+
     /// Accept only song URLs belonging to NetEase, not an arbitrary numeric media ID.
     static func songID(_ value: String?) -> Int64? {
         guard let value, value.count < 2048, let url = URL(string: value) else { return nil }

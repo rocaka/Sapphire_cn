@@ -8,6 +8,10 @@ on:
       tag:
         description: Existing draft release tag
         required: true
+      publish_release:
+        description: Publish after staging assets (false keeps a private validation draft)
+        type: boolean
+        default: true
 permissions:
   actions: read
   contents: write
@@ -46,10 +50,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ inputs.tag }}
+          PUBLISH_RELEASE: ${{ inputs.publish_release }}
         working-directory: package
         run: |
           set -euo pipefail
           if [[ -f build-cn/Sapphire-CN.zip ]]; then cd build-cn; fi
           sha256sum --check Sapphire-CN.zip.sha256
           gh release upload "$RELEASE_TAG" Sapphire-CN.zip Sapphire-CN.zip.sha256
-          gh release edit "$RELEASE_TAG" --draft=false --latest
+          if [[ "$PUBLISH_RELEASE" == 'true' ]]; then
+            gh release edit "$RELEASE_TAG" --draft=false --latest
+          fi

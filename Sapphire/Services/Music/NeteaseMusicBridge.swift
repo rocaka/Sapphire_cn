@@ -15,6 +15,18 @@ final class NeteaseMusicBridge {
     enum Failure: Error, Equatable, Sendable {
         case permission, notRunning, unavailable, appBusy, timedOut, busy, disabled
     }
+    struct Diagnostics: Sendable {
+        let processTrusted: Bool
+        let runningAppPath: String
+        let sourceRevision: String?
+        let targetProcessIdentifier: pid_t?
+        let lastOperation: String?
+        let lastFailure: Failure?
+        let failureStage: String?
+        let axErrorCode: Int32?
+        let accessVerified: Bool?
+        let checkedAt: Date?
+    }
 
     private let executor: any NeteaseMusicExecuting
     private let processIdentifier: @MainActor () -> pid_t?
@@ -29,6 +41,7 @@ final class NeteaseMusicBridge {
     private var outstandingCommands = 0
     private var readGeneration: UInt64 = 0
     private var sharedRead: (id: UUID, pid: pid_t, generation: UInt64, task: Task<State?, Never>)?
+    private var lastDiagnostic: (operation: String, failure: Failure?, issue: NeteaseAXIssue?, accessVerified: Bool, checkedAt: Date)?
 
     private struct Command: Sendable {
         let id: UUID
@@ -74,6 +87,26 @@ final class NeteaseMusicBridge {
         trustHint = (value, ProcessInfo.processInfo.systemUptime + 1)
         if value { didPrompt = false }
         return value
+    }
+
+    /// Explicit diagnostics reflect this running process rather than a cached
+    /// permission hint. Neither method prompts or changes another app's state.
+    func diagnosticSnapshot() -> Diagnostics {
+        Diagnostics(processTrusted: refreshPermissionHint(), runningAppPath: Bundle.main.bundleURL.path,
+            sourceRevision: Bundle.main.object(forInfoDictionaryKey: "SapphireSourceRevision") as? String,
+            targetProcessIdentifier: processIdentifier(), lastOperation: lastDiagnostic?.operation,
+            lastFailure: lastDiagnostic?.failure, failureStage: lastDiagnostic?.issue?.stage,
+            axErrorCode: lastDiagnostic?.issue?.axErrorCode, accessVerified: lastDiagnostic?.accessVerified,
+            checkedAt: lastDiagnostic?.checkedAt)
+    }
+
+    func checkConnection() async -> Diagnostics {
+        guard processIdentifier() != nil else {
+            lastDiagnostic = ("state", .notRunning, .init(failure: .notRunning, stage: "process.lookup", axErrorCode: nil), false, Date())
+            return diagnosticSnapshot()
+        }
+        _ = await state()
+        return diagnosticSnapshot()
     }
 
     /// Only explicit permission UI calls this method, never playback actions.
@@ -153,7 +186,14 @@ final class NeteaseMusicBridge {
         command.continuation.resume(throwing: CancellationError())
     }
 
-    private func observeAccess<Value>(_ result: NeteaseAXResult<Value>) {
+    private func observeAccess<Value>(_ result: NeteaseAXResult<Value>, operation: String) {
+        switch result.outcome {
+        case .success:
+            lastDiagnostic = (operation, nil, nil, result.accessVerified, Date())
+        case .failure(let failure):
+            lastDiagnostic = (operation, failure, result.issue, result.accessVerified, Date())
+        case .cancelled: break
+        }
         if case .failure(.permission) = result.outcome {
             trustHint = (false, ProcessInfo.processInfo.systemUptime + 1)
         } else if result.accessVerified {
@@ -171,7 +211,7 @@ final class NeteaseMusicBridge {
             worker.async(qos: .userInitiated) {
                 let result = executor.perform(command.action, pid: command.pid, cancellation: command.cancellation)
                 Task { @MainActor in
-                    self.observeAccess(result)
+                    self.observeAccess(result, operation: String(describing: command.action))
                     self.outstandingCommands -= 1
                     self.executing = false
                     if command.cancellation.isCancelled { command.continuation.resume(throwing: CancellationError()) }
@@ -192,7 +232,7 @@ final class NeteaseMusicBridge {
             worker.async {
                 let result = executor.state(pid: read.pid)
                 Task { @MainActor in
-                    self.observeAccess(result)
+                    self.observeAccess(result, operation: "state")
                     self.executing = false
                     if case .success(let state) = result.outcome, read.generation == self.readGeneration {
                         read.continuation.resume(returning: state)
@@ -211,10 +251,23 @@ final class NeteaseAXCancellation: @unchecked Sendable {
     func cancel() { lock.lock(); cancelled = true; lock.unlock() }
 }
 
+struct NeteaseAXIssue: Equatable, Sendable {
+    let failure: NeteaseMusicBridge.Failure
+    let stage: String
+    let axErrorCode: Int32?
+}
+
 struct NeteaseAXResult<Value: Sendable>: Sendable {
     enum Outcome: Sendable { case success(Value), failure(NeteaseMusicBridge.Failure), cancelled }
     let outcome: Outcome
     let accessVerified: Bool
+    let issue: NeteaseAXIssue?
+
+    init(outcome: Outcome, accessVerified: Bool, issue: NeteaseAXIssue? = nil) {
+        self.outcome = outcome
+        self.accessVerified = accessVerified
+        self.issue = issue
+    }
 }
 
 protocol NeteaseMusicExecuting: Sendable {
@@ -251,36 +304,48 @@ struct NeteaseAXExecutor: NeteaseMusicExecuting {
     private final class Context {
         var budget = NeteaseAXBudget(now: ProcessInfo.processInfo.systemUptime)
         var accessVerified = false
+        private(set) var issue: NeteaseAXIssue?
+        private var stage = "request"
         let cancellation: NeteaseAXCancellation?
         init(cancellation: NeteaseAXCancellation? = nil) { self.cancellation = cancellation }
-        func prepare(_ element: AXUIElement) throws {
+        func fail(_ failure: NeteaseMusicBridge.Failure, stage: String, axErrorCode: Int32? = nil) throws -> Never {
+            issue = NeteaseAXIssue(failure: failure, stage: stage, axErrorCode: axErrorCode)
+            throw failure
+        }
+        func prepare(_ element: AXUIElement, stage: String) throws {
+            self.stage = stage
+            issue = nil
             if cancellation?.isCancelled == true { throw CancellationError() }
-            guard budget.consume(now: ProcessInfo.processInfo.systemUptime) else { throw NeteaseMusicBridge.Failure.timedOut }
+            guard budget.consume(now: ProcessInfo.processInfo.systemUptime) else { try fail(.timedOut, stage: stage) }
             AXUIElementSetMessagingTimeout(element, 0.2)
         }
         func check(_ error: AXError) throws {
             switch error {
-            case .success, .noValue, .attributeUnsupported:
+            case .success:
                 accessVerified = true
-            default: throw NeteaseAXFailurePolicy.failure(for: error) ?? .unavailable
+            case .noValue, .attributeUnsupported:
+                accessVerified = true
+                issue = NeteaseAXIssue(failure: .unavailable, stage: stage, axErrorCode: error.rawValue)
+            default: try fail(NeteaseAXFailurePolicy.failure(for: error) ?? .unavailable, stage: stage, axErrorCode: error.rawValue)
             }
         }
-        func value(_ element: AXUIElement, _ key: String) throws -> CFTypeRef? {
-            try prepare(element)
+        func value(_ element: AXUIElement, _ key: String, stage: String) throws -> CFTypeRef? {
+            try prepare(element, stage: stage)
             var value: CFTypeRef?
-            try check(AXUIElementCopyAttributeValue(element, key as CFString, &value))
+            let error = AXUIElementCopyAttributeValue(element, key as CFString, &value)
+            try check(error)
             return value
         }
-        func children(_ element: AXUIElement) throws -> [AXUIElement] {
-            try prepare(element)
+        func children(_ element: AXUIElement, stage: String) throws -> [AXUIElement] {
+            try prepare(element, stage: stage)
             var values: CFArray?
             try check(AXUIElementCopyAttributeValues(element, kAXChildrenAttribute as CFString, 0, 48, &values))
             return values as? [AXUIElement] ?? []
         }
-        func title(_ element: AXUIElement) throws -> String { try value(element, kAXTitleAttribute) as? String ?? "" }
-        func checked(_ element: AXUIElement?) throws -> Bool? {
+        func title(_ element: AXUIElement, stage: String) throws -> String { try value(element, kAXTitleAttribute, stage: stage) as? String ?? "" }
+        func checked(_ element: AXUIElement?, stage: String) throws -> Bool? {
             guard let element else { return nil }
-            try prepare(element)
+            try prepare(element, stage: stage)
             var value: CFTypeRef?
             let error = AXUIElementCopyAttributeValue(element, kAXMenuItemMarkCharAttribute as CFString, &value)
             try check(error)
@@ -299,10 +364,10 @@ struct NeteaseAXExecutor: NeteaseMusicExecuting {
         }
     }
 
-    private func indexedChildren(_ element: AXUIElement, context: Context) throws -> [String: AXUIElement] {
+    private func indexedChildren(_ element: AXUIElement, stage: String, context: Context) throws -> [String: AXUIElement] {
         var result: [String: AXUIElement] = [:]
-        for child in try context.children(element) {
-            let title = try context.title(child)
+        for child in try context.children(element, stage: "\(stage).children") {
+            let title = try context.title(child, stage: "\(stage).title")
             if !title.isEmpty, result[title] == nil { result[title] = child }
         }
         return result
@@ -310,20 +375,34 @@ struct NeteaseAXExecutor: NeteaseMusicExecuting {
 
     private func menu(pid: pid_t, includeRepeat: Bool, context: Context) throws -> Menu {
         let app = AXUIElementCreateApplication(pid)
-        guard let rawBar = try context.value(app, kAXMenuBarAttribute), CFGetTypeID(rawBar) == AXUIElementGetTypeID() else {
-            throw NeteaseMusicBridge.Failure.unavailable
+        guard let rawBar = try context.value(app, kAXMenuBarAttribute, stage: "application.AXMenuBar"), CFGetTypeID(rawBar) == AXUIElementGetTypeID() else {
+            if let issue = context.issue { throw issue.failure }
+            try context.fail(.unavailable, stage: "application.AXMenuBar.missing")
         }
         let bar = unsafeBitCast(rawBar, to: AXUIElement.self)
         var control: AXUIElement?
-        for item in try context.children(bar) {
-            if ["控制", "Controls", "Control", "播放控制"].contains(try context.title(item)) { control = item; break }
+        let barItems = try context.children(bar, stage: "menuBar.AXChildren")
+        guard !barItems.isEmpty else {
+            if let issue = context.issue { throw issue.failure }
+            try context.fail(.unavailable, stage: "menuBar.empty")
         }
-        guard let control, let menu = try context.children(control).first else { throw NeteaseMusicBridge.Failure.unavailable }
-        let items = try indexedChildren(menu, context: context)
+        for item in barItems {
+            if ["控制", "Controls", "Control", "播放控制"].contains(try context.title(item, stage: "menuBarItem.AXTitle")) { control = item; break }
+        }
+        guard let control else { try context.fail(.unavailable, stage: "controlMenu.notFound") }
+        guard let menu = try context.children(control, stage: "controlMenu.AXChildren").first else {
+            if let issue = context.issue { throw issue.failure }
+            try context.fail(.unavailable, stage: "controlMenu.empty")
+        }
+        let items = try indexedChildren(menu, stage: "controlItem", context: context)
+        guard !items.isEmpty else {
+            if let issue = context.issue { throw issue.failure }
+            try context.fail(.unavailable, stage: "controlMenu.items.empty")
+        }
         var repeatItems: [String: AXUIElement] = [:]
         if includeRepeat, let repeatItem = ["循环播放", "Repeat"].compactMap({ items[$0] }).first,
-           let submenu = try context.children(repeatItem).first {
-            repeatItems = try indexedChildren(submenu, context: context)
+           let submenu = try context.children(repeatItem, stage: "repeatMenu.AXChildren").first {
+            repeatItems = try indexedChildren(submenu, stage: "repeatItem", context: context)
         }
         return Menu(items: items, repeatItems: repeatItems)
     }
@@ -341,23 +420,28 @@ struct NeteaseAXExecutor: NeteaseMusicExecuting {
             case .pause: aliases = ["暂停", "Pause"]; alreadySet = menu.item(["播放", "Play"])
             case .next: aliases = ["下一个", "下一首", "Next", "Next Track"]; alreadySet = nil
             case .previous: aliases = ["上一个", "上一首", "Previous", "Previous Track"]; alreadySet = nil
-            case .like: aliases = ["取消喜欢", "取消喜欢歌曲", "Unlike Song", "喜欢歌曲", "喜欢", "Like Song"]; alreadySet = nil
+            case .like: aliases = ["取消喜欢", "取消喜欢歌曲", "Unlike Song", "Dislike", "喜欢歌曲", "喜欢", "Like Song", "Like"]; alreadySet = nil
             case .shuffle: aliases = ["随机播放", "Shuffle"]; alreadySet = nil
             case .repeatOff: aliases = ["关", "关闭", "Off"]; alreadySet = nil
             case .repeatTrack: aliases = ["单曲", "One", "Repeat One"]; alreadySet = nil
             case .repeatAll: aliases = ["全部", "All", "Repeat All"]; alreadySet = nil
             }
-            guard let item = alreadySet ?? menu.item(aliases, repeatMenu: isRepeat) else { throw NeteaseMusicBridge.Failure.unavailable }
-            guard try context.value(item, kAXEnabledAttribute) as? Bool == true else { throw NeteaseMusicBridge.Failure.disabled }
+            guard let item = alreadySet ?? menu.item(aliases, repeatMenu: isRepeat) else {
+                try context.fail(.unavailable, stage: "command.\(action).menuItem.notFound")
+            }
+            guard try context.value(item, kAXEnabledAttribute, stage: "command.\(action).AXEnabled") as? Bool == true else {
+                if let issue = context.issue { throw issue.failure }
+                try context.fail(.disabled, stage: "command.\(action).AXEnabled.false")
+            }
             if alreadySet == nil {
-                try context.prepare(item)
+                try context.prepare(item, stage: "command.\(action).AXPress")
                 try context.check(AXUIElementPerformAction(item, kAXPressAction as CFString))
             }
             return NeteaseAXResult(outcome: .success(()), accessVerified: context.accessVerified)
         } catch is CancellationError {
             return NeteaseAXResult(outcome: .cancelled, accessVerified: context.accessVerified)
         } catch {
-            return NeteaseAXResult(outcome: .failure((error as? NeteaseMusicBridge.Failure) ?? .unavailable), accessVerified: context.accessVerified)
+            return NeteaseAXResult(outcome: .failure((error as? NeteaseMusicBridge.Failure) ?? .unavailable), accessVerified: context.accessVerified, issue: context.issue)
         }
     }
 
@@ -366,15 +450,15 @@ struct NeteaseAXExecutor: NeteaseMusicExecuting {
         do {
             let menu = try menu(pid: pid, includeRepeat: true, context: context)
             var state = NeteaseMusicBridge.State()
-            if menu.item(["取消喜欢", "取消喜欢歌曲", "Unlike Song"]) != nil { state.liked = true }
-            else { state.liked = try context.checked(menu.item(["喜欢歌曲", "喜欢", "Like Song"])) }
-            state.shuffled = try context.checked(menu.item(["随机播放", "Shuffle"]))
+            if menu.item(["取消喜欢", "取消喜欢歌曲", "Unlike Song", "Dislike"]) != nil { state.liked = true }
+            else { state.liked = try context.checked(menu.item(["喜欢歌曲", "喜欢", "Like Song", "Like"]), stage: "state.like.AXMenuItemMarkChar") }
+            state.shuffled = try context.checked(menu.item(["随机播放", "Shuffle"]), stage: "state.shuffle.AXMenuItemMarkChar")
             for (aliases, mode) in [(["关", "关闭", "Off"], "off"), (["单曲", "One", "Repeat One"], "track"), (["全部", "All", "Repeat All"], "context")] {
-                if try context.checked(menu.item(aliases, repeatMenu: true)) == true { state.repeatMode = mode; break }
+                if try context.checked(menu.item(aliases, repeatMenu: true), stage: "state.repeat.\(mode).AXMenuItemMarkChar") == true { state.repeatMode = mode; break }
             }
             return NeteaseAXResult(outcome: .success(state), accessVerified: context.accessVerified)
         } catch {
-            return NeteaseAXResult(outcome: .failure((error as? NeteaseMusicBridge.Failure) ?? .unavailable), accessVerified: context.accessVerified)
+            return NeteaseAXResult(outcome: .failure((error as? NeteaseMusicBridge.Failure) ?? .unavailable), accessVerified: context.accessVerified, issue: context.issue)
         }
     }
 }
