@@ -5,13 +5,16 @@ import Foundation
 final class MediaOptimizerManager {
     static let shared = MediaOptimizerManager()
     private var optimizing = false
+    var isOptimizing: Bool { optimizing }
     private init() {}
-    func start() {}
+    func start() { PublicClipboardImageOptimizer.shared.start() }
+    func stop() { PublicClipboardImageOptimizer.shared.stop() }
 
     func optimizeFile(_ url: URL) async -> Result<MediaOptimizeResult, MediaOptimizeError> {
         guard !optimizing else { return .failure(.busy) }
+        PublicClipboardImageOptimizer.shared.pause()
         optimizing = true
-        defer { optimizing = false }
+        defer { optimizing = false; PublicClipboardImageOptimizer.shared.resumeCurrent() }
         let settings = SettingsModel.shared.current
         let configuration = MediaOptimizer.Configuration(quality: settings.mediaToolsImageQuality, maximumDimension: settings.mediaToolsMaxImageDimension)
         let cache = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first ?? FileManager.default.temporaryDirectory

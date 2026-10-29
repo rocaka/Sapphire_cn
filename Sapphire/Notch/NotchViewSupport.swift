@@ -10,8 +10,10 @@ import AppKit
 struct IdealSizeReader: Layout {
     final class Cache {
         var ideal: CGSize = .zero
-        var reported: CGSize?
-        var reportGeneration = 0
+        var reports = NotchSizeReportPolicy()
+        var reportScheduled = false
+        var pendingOnChange: ((CGSize) -> Void)?
+        var pendingEpsilon: CGFloat = 0.5
     }
 
     let epsilon: CGFloat
@@ -21,20 +23,19 @@ struct IdealSizeReader: Layout {
 
     func makeCache(subviews: Subviews) -> Cache {
         let cache = Cache()
-        cache.ideal = Self.idealSize(of: subviews)
-        cache.reportGeneration = reportGeneration
+        cache.ideal = NotchSizeReportPolicy.validated(Self.idealSize(of: subviews))
         return cache
     }
 
     func updateCache(_ cache: inout Cache, subviews: Subviews) {
-        cache.ideal = Self.idealSize(of: subviews)
+        cache.ideal = NotchSizeReportPolicy.validated(Self.idealSize(of: subviews), fallback: cache.ideal)
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Cache) -> CGSize {
         report(cache.ideal, cache: cache)
         if sizeIsProposalIndependent || proposal == .unspecified { return cache.ideal }
         guard let subview = subviews.first else { return .zero }
-        return subview.sizeThatFits(proposal)
+        return NotchSizeReportPolicy.validated(subview.sizeThatFits(proposal), fallback: cache.ideal)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Cache) {
@@ -47,18 +48,19 @@ struct IdealSizeReader: Layout {
     }
 
     private func report(_ size: CGSize, cache: Cache) {
-        if cache.reportGeneration != reportGeneration {
-            cache.reportGeneration = reportGeneration
-            cache.reported = nil
+        cache.reports.record(size, epsilon: epsilon, generation: reportGeneration)
+        guard cache.reports.pending != nil else { return }
+        cache.pendingOnChange = onChange
+        cache.pendingEpsilon = epsilon
+        guard !cache.reportScheduled else { return }
+        cache.reportScheduled = true
+        DispatchQueue.main.async {
+            cache.reportScheduled = false
+            let callback = cache.pendingOnChange
+            cache.pendingOnChange = nil
+            guard let latest = cache.reports.consume(epsilon: cache.pendingEpsilon) else { return }
+            callback?(latest)
         }
-        if let reported = cache.reported,
-           abs(reported.width - size.width) <= epsilon,
-           abs(reported.height - size.height) <= epsilon {
-            return
-        }
-        cache.reported = size
-        let onChange = self.onChange
-        DispatchQueue.main.async { onChange(size) }
     }
 }
 
@@ -74,8 +76,7 @@ extension View {
             sizeIsProposalIndependent: sizeIsProposalIndependent,
             reportGeneration: reportGeneration
         ) { newValue in
-            guard abs(newValue.width - binding.wrappedValue.width) > epsilon
-                || abs(newValue.height - binding.wrappedValue.height) > epsilon else { return }
+            guard !NotchSizeReportPolicy.equivalent(newValue, binding.wrappedValue, epsilon: epsilon) else { return }
             binding.wrappedValue = newValue
         }
         return reader { self }
@@ -86,7 +87,10 @@ extension View {
             epsilon: epsilon,
             sizeIsProposalIndependent: false
         ) { newValue in
-            guard abs(newValue.width - binding.wrappedValue) > epsilon else { return }
+            guard !NotchSizeReportPolicy.equivalent(
+                CGSize(width: newValue.width, height: 0),
+                CGSize(width: binding.wrappedValue, height: 0), epsilon: epsilon
+            ) else { return }
             binding.wrappedValue = newValue.width
         }
         return reader { self }

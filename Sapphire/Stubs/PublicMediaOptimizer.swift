@@ -62,6 +62,7 @@ enum MediaOptimizer {
     }
 
     static func optimize(_ source: URL, in directory: URL, configuration: Configuration) async throws -> MediaOptimizeResult {
+        try Task.checkCancellation()
         guard let kind = kind(for: source) else { throw MediaOptimizeError.unsupported }
         let originalBytes = try size(source)
         guard originalBytes > 0 else { throw MediaOptimizeError.unreadable }
@@ -75,7 +76,7 @@ enum MediaOptimizer {
             output = try newOutput(base: base, suffix: "pdf", directory: directory)
             guard let document = PDFDocument(url: source) else { throw MediaOptimizeError.unreadable }
             guard !document.isLocked, document.allowsCopying else { throw MediaOptimizeError.protectedPDF }
-            guard document.write(to: output) else { throw MediaOptimizeError.unreadable }
+            guard document.write(to: output, withOptions: [.optimizeImagesForScreenOption: true]) else { throw MediaOptimizeError.unreadable }
         case .video, .audio:
             let type: AVFileType = kind == .video ? .mp4 : .m4a
             output = try newOutput(base: base, suffix: kind == .video ? "mp4" : "m4a", directory: directory)
@@ -98,6 +99,7 @@ enum MediaOptimizer {
                                       kCGImageSourceCreateThumbnailWithTransform: true,
                                       kCGImageSourceThumbnailMaxPixelSize: configuration.maximumDimension]
         guard let image = CGImageSourceCreateThumbnailAtIndex(data, 0, options as CFDictionary) else { throw MediaOptimizeError.unreadable }
+        try Task.checkCancellation()
         let alpha = ![CGImageAlphaInfo.none, .noneSkipFirst, .noneSkipLast].contains(image.alphaInfo)
         let type = alpha ? UTType.png : UTType.jpeg
         let output = try newOutput(base: base, suffix: alpha ? "png" : "jpg", directory: directory)

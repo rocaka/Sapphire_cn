@@ -697,6 +697,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         clipboardPickerManager.stopMonitoring()
         #if !SAPPHIRE_FULL_BUILD
         ocrScreenshotMonitor.stop()
+        MediaOptimizerManager.shared.stop()
         #endif
         clipboardAutoClearManager.stop()
         cleanURLManager.stopMonitoring()

@@ -754,42 +754,72 @@ class MusicManager {
     }
 
     var neteaseControlError: String?
-    @ObservationIgnored private var neteaseStateRefreshAt = Date.distantPast
-    @ObservationIgnored private var neteaseStateRefreshInFlight = false
+    @ObservationIgnored private lazy var neteaseRefreshCoordinator = NeteaseStateRefreshCoordinator { [weak self] in
+        await self?.readNeteaseStateOnce()
+    }
 
     var isNeteaseSourceSelected: Bool {
         NeteaseMusicPolicy.isSource(currentSourceKey)
             || (currentSourceKey == nil && lastKnownBundleID == NeteaseMusicPolicy.bundleID)
     }
 
+    private func setNeteaseControlError(_ message: String?) {
+        if neteaseControlError != message { neteaseControlError = message }
+    }
+
     private func performNetease(_ action: NeteaseMusicBridge.Action) async -> Bool {
+        guard isNeteaseSourceSelected else { return false }
         let source = currentSourceKey
         do {
             try await NeteaseMusicBridge.shared.perform(action)
             guard source == currentSourceKey else { return false }
-            neteaseControlError = nil
+            setNeteaseControlError(nil)
             return true
         } catch {
             guard source == currentSourceKey else { return false }
-            neteaseControlError = L10n.string(NeteaseMusicBridge.shared.isTrusted
-                ? "NetEase could not perform this action. Check playback and login in the NetEase app."
-                : "Enable Sapphire in System Settings > Privacy & Security > Accessibility to control NetEase Cloud Music.")
+            let message: String
+            if error is CancellationError { return false }
+            switch error as? NeteaseMusicBridge.Failure {
+            case .permission:
+                message = "This copy of Sapphire needs Accessibility access. If already enabled, quit and reopen Sapphire from Applications."
+            case .notRunning:
+                message = "Open NetEase Cloud Music before using its controls."
+            case .appBusy, .timedOut:
+                message = "NetEase is not responding. Wait a moment and try again."
+            case .busy:
+                message = "The previous NetEase command is still running. Please wait a moment."
+            case .disabled:
+                message = "This control is currently disabled in NetEase. Check playback and login in the NetEase app."
+            case .unavailable, .none:
+                message = "NetEase could not perform this action. Check playback and login in the NetEase app."
+            }
+            setNeteaseControlError(L10n.string(message))
             return false
         }
     }
 
     func refreshNeteaseState(force: Bool = false) async {
-        guard isNeteaseSourceSelected, !neteaseStateRefreshInFlight,
-              force || Date().timeIntervalSince(neteaseStateRefreshAt) > 2 else { return }
-        neteaseStateRefreshAt = Date()
-        neteaseStateRefreshInFlight = true
+        let task = neteaseRefreshCoordinator.schedule(selected: isNeteaseSourceSelected,
+            visible: isDetailPlayerOpen || isMusicHubOpen, force: force)
+        await task?.value
+    }
+
+    private func scheduleNeteaseStateRefresh() {
+        // Reserve the single task synchronously; a burst of metadata must not
+        // create one wrapper Task for every stream event.
+        neteaseRefreshCoordinator.schedule(selected: isNeteaseSourceSelected,
+            visible: isDetailPlayerOpen || isMusicHubOpen)
+    }
+
+    private func readNeteaseStateOnce() async {
+        guard isNeteaseSourceSelected else { return }
+        let source = currentSourceKey
         let identity = lastTrackIdentity
-        defer { neteaseStateRefreshInFlight = false }
-        guard let state = await NeteaseMusicBridge.shared.state(), isNeteaseSourceSelected,
-              identity == lastTrackIdentity else { return }
-        if let liked = state.liked { isLiked = liked }
-        if let shuffled = state.shuffled { shuffleState = shuffled }
-        if let mode = state.repeatMode, let repeatMode = RepeatMode(rawValue: mode) { repeatState = repeatMode }
+        guard let state = await NeteaseMusicBridge.shared.state(), !Task.isCancelled,
+              isNeteaseSourceSelected, source == currentSourceKey, identity == lastTrackIdentity else { return }
+        if let liked = state.liked, isLiked != liked { isLiked = liked }
+        if let shuffled = state.shuffled, shuffleState != shuffled { shuffleState = shuffled }
+        if let mode = state.repeatMode, let repeatMode = RepeatMode(rawValue: mode), repeatState != repeatMode { repeatState = repeatMode }
     }
 
     func openNeteaseLibrary() {
@@ -956,11 +986,11 @@ class MusicManager {
         if isNeteaseSourceSelected {
             // The adapter addresses the active system client; never seek a different player.
             guard mediaController.activeSystemBundleID == NeteaseMusicPolicy.bundleID else {
-                neteaseControlError = L10n.string("Start playback in NetEase before seeking from Sapphire.")
+                setNeteaseControlError(L10n.string("Start playback in NetEase before seeking from Sapphire."))
                 return
             }
             mediaController.setTime(seconds: clamped)
-            neteaseControlError = nil
+            setNeteaseControlError(nil)
             // Wait for the client to report its position; unsupported seeks must not fake progress.
             return
         }
@@ -1481,8 +1511,7 @@ class MusicManager {
 
     func toggleLike() async {
         if isNeteaseSourceSelected {
-            _ = await performNetease(.like)
-            await refreshNeteaseState(force: true)
+            if await performNetease(.like) { await refreshNeteaseState(force: true) }
             return
         }
         let newLikedState = !self.isLiked
@@ -1516,8 +1545,7 @@ class MusicManager {
 
     func toggleShuffle() async {
         if isNeteaseSourceSelected {
-            _ = await performNetease(.shuffle)
-            await refreshNeteaseState(force: true)
+            if await performNetease(.shuffle) { await refreshNeteaseState(force: true) }
             return
         }
         if isSpotifySourceSelected {
@@ -1594,11 +1622,12 @@ class MusicManager {
 
     func cycleRepeatMode() async {
         if isNeteaseSourceSelected {
+            let source = currentSourceKey
             await refreshNeteaseState(force: true)
+            guard isNeteaseSourceSelected, source == currentSourceKey else { return }
             let mode = repeatState.next()
             let action: NeteaseMusicBridge.Action = mode == .off ? .repeatOff : (mode == .track ? .repeatTrack : .repeatAll)
-            _ = await performNetease(action)
-            await refreshNeteaseState(force: true)
+            if await performNetease(action) { await refreshNeteaseState(force: true) }
             return
         }
         if lastKnownBundleID == "com.apple.Music" {
@@ -1706,6 +1735,7 @@ class MusicManager {
             sourcePinnedByUser = true
         }
         let switching = key != currentSourceKey
+        let wasNetease = isNeteaseSourceSelected
         let wasSpotify = currentSourceKey.map(isSpotifySourceKey) ?? false
         let wasPhone = currentSourceKey == phoneMediaSourceKey
         let isNowSpotify = isSpotifySourceKey(key)
@@ -1715,8 +1745,9 @@ class MusicManager {
         currentSourceKey = key
 
         if switching {
-            neteaseControlError = nil
-            neteaseStateRefreshAt = .distantPast
+            setNeteaseControlError(nil)
+            neteaseRefreshCoordinator.cancel()
+            if wasNetease || NeteaseMusicPolicy.isSource(key) { NeteaseMusicBridge.shared.invalidateState() }
             if wasPhone || key == phoneMediaSourceKey, !keepsDisplayedSong {
                 clearArtwork()
             }
@@ -2209,7 +2240,7 @@ class MusicManager {
 
         let sourceBundleID = MediaApplicationIdentity.canonicalBundleID(payload.bundleIdentifier) ?? "N/A"
         let isSpotify = isSpotifySourceKey(sourceKey) || sourceBundleID == "com.spotify.client"
-        if sourceBundleID != NeteaseMusicPolicy.bundleID { neteaseControlError = nil }
+        if sourceBundleID != NeteaseMusicPolicy.bundleID { setNeteaseControlError(nil) }
         let switchingAwayFromSpotify = lastKnownBundleID == "com.spotify.client" && !isSpotify
 
         if sourceBundleID != self.lastKnownBundleID {
@@ -2235,7 +2266,13 @@ class MusicManager {
         if self.album != resolvedAlbum { self.album = resolvedAlbum }
 
         if hasTrackChanged {
-            if isNeteaseSourceSelected { isLiked = false; shuffleState = false; repeatState = .off }
+            if isNeteaseSourceSelected {
+                neteaseRefreshCoordinator.cancel()
+                NeteaseMusicBridge.shared.invalidateState()
+                if isLiked { isLiked = false }
+                if shuffleState { shuffleState = false }
+                if repeatState != .off { repeatState = .off }
+            }
             self.lastTrackIdentity = trackIdentity
             let fingerprint = mediaFingerprint(for: payload)
             self.lastMediaFingerprint = fingerprint.isEmpty ? nil : fingerprint
@@ -2271,11 +2308,11 @@ class MusicManager {
         if !applyConnectTimingIfPreferred() {
             syncPlaybackTiming(from: payload, trackChanged: hasTrackChanged)
         }
-        if isNeteaseSourceSelected { Task { await self.refreshNeteaseState() } }
+        scheduleNeteaseStateRefresh()
     }
 
     private func applyPlaybackRefresh(_ payload: TrackInfo.Payload) {
-        if isNeteaseSourceSelected { Task { await self.refreshNeteaseState() } }
+        scheduleNeteaseStateRefresh()
         latestTrackPayload = payload
 
         if MediaApplicationIdentity.canonicalBundleID(payload.bundleIdentifier) == "com.spotify.client", spotifyPrivateAPI.isLoggedIn {
@@ -2732,6 +2769,9 @@ class MusicManager {
     }
 
     private func clearPlayerState() {
+        if isNeteaseSourceSelected { NeteaseMusicBridge.shared.invalidateState() }
+        neteaseRefreshCoordinator.cancel()
+        setNeteaseControlError(nil)
         self.latestTrackPayload = nil
         self.currentSourceKey = nil
         self.sourcePinnedByUser = false

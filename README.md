@@ -1,4 +1,4 @@
-> **Sapphire 中文版：** [中文说明、构建与签名指南](README.zh-CN.md) · [构建下载](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml)
+> **Sapphire 中文版：** [中文说明、构建与签名指南](README.zh-CN.md) · [安装包下载](https://github.com/rocaka/Sapphire_cn/releases/latest)
 > 本分支包含简体中文支持；下方保留上游项目介绍。公开源码中的占位功能及签名限制请先阅读中文说明。
 
 <div align="center">

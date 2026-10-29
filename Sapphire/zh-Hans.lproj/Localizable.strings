@@ -2312,3 +2312,29 @@
 "Capture Screen Text" = "截取屏幕文字";
 
 "This shortcut conflicts with another action. Record a different shortcut." = "此快捷键与其他操作冲突，请录制其他快捷键。";
+
+"This copy of Sapphire needs Accessibility access. If already enabled, quit and reopen Sapphire from Applications." = "当前版本需要辅助功能权限。如已开启，请从“应用程序”重新打开 Sapphire。";
+
+"Open NetEase Cloud Music before using its controls." = "请先打开网易云音乐，再使用播放控制。";
+
+"NetEase is not responding. Wait a moment and try again." = "网易云音乐暂未响应，请稍后重试。";
+
+"The previous NetEase command is still running. Please wait a moment." = "上一条网易云操作仍在执行，请稍候。";
+
+"This control is currently disabled in NetEase. Check playback and login in the NetEase app." = "网易云暂未启用此操作，请检查客户端的播放及登录状态。";
+
+"Authorize the running copy of Sapphire. If an older copy is listed, remove it, add this copy, then quit and reopen the app." = "请授权当前运行的 Sapphire。如系统列表仍是旧版，请移除旧条目，添加此版本，并退出后重新打开应用。";
+
+"Show This Copy of Sapphire" = "显示当前 Sapphire 所在位置";
+
+"Auto-optimize copied images" = "自动优化复制的图片";
+
+"Only copied image data is processed. Files, rich text and ignored apps are left unchanged." = "仅处理复制的图片数据，不改动文件、富文本或已忽略应用的内容。";
+
+"This copied image is too large for automatic optimization." = "复制的图片过大，无法自动压缩。";
+
+"Optimizing the copied image…" = "正在压缩复制的图片…";
+
+"The copied image was optimized." = "复制的图片已压缩。";
+
+"The original image was already compact. Clipboard unchanged." = "原图片已足够小，未修改剪贴板。";

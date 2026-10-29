@@ -2312,3 +2312,29 @@
 "Capture Screen Text" = "Capture Screen Text";
 
 "This shortcut conflicts with another action. Record a different shortcut." = "This shortcut conflicts with another action. Record a different shortcut.";
+
+"This copy of Sapphire needs Accessibility access. If already enabled, quit and reopen Sapphire from Applications." = "This copy of Sapphire needs Accessibility access. If already enabled, quit and reopen Sapphire from Applications.";
+
+"Open NetEase Cloud Music before using its controls." = "Open NetEase Cloud Music before using its controls.";
+
+"NetEase is not responding. Wait a moment and try again." = "NetEase is not responding. Wait a moment and try again.";
+
+"The previous NetEase command is still running. Please wait a moment." = "The previous NetEase command is still running. Please wait a moment.";
+
+"This control is currently disabled in NetEase. Check playback and login in the NetEase app." = "This control is currently disabled in NetEase. Check playback and login in the NetEase app.";
+
+"Authorize the running copy of Sapphire. If an older copy is listed, remove it, add this copy, then quit and reopen the app." = "Authorize the running copy of Sapphire. If an older copy is listed, remove it, add this copy, then quit and reopen the app.";
+
+"Show This Copy of Sapphire" = "Show This Copy of Sapphire";
+
+"Auto-optimize copied images" = "Auto-optimize copied images";
+
+"Only copied image data is processed. Files, rich text and ignored apps are left unchanged." = "Only copied image data is processed. Files, rich text and ignored apps are left unchanged.";
+
+"This copied image is too large for automatic optimization." = "This copied image is too large for automatic optimization.";
+
+"Optimizing the copied image…" = "Optimizing the copied image…";
+
+"The copied image was optimized." = "The copied image was optimized.";
+
+"The original image was already compact. Clipboard unchanged." = "The original image was already compact. Clipboard unchanged.";

@@ -117,24 +117,33 @@ final class CleanURLManager {
     func cleanClipboardLinkNow() {
         let settings = SettingsModel.shared.current
         guard settings.clipboardCleanURLEnabled else { return }
-        if let app = NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
-           settings.clipboardIgnoredAppBundleIDs.contains(app) { return }
         let pasteboard = NSPasteboard.general
         let count = pasteboard.changeCount
+        guard pasteboard.pasteboardItems?.count == 1 else { return }
         let sourceType = NSPasteboard.PasteboardType("org.nspasteboard.source")
-        if let sourceApp = pasteboard.string(forType: sourceType), settings.clipboardIgnoredAppBundleIDs.contains(sourceApp) { return }
-        let sourceData = pasteboard.data(forType: sourceType)
         let types = pasteboard.types ?? []
-        let allowed: Set<String> = [NSPasteboard.PasteboardType.string.rawValue, NSPasteboard.PasteboardType.URL.rawValue,
-                                    "public.utf16-external-plain-text", "org.nspasteboard.source", "NSStringPboardType"]
-        guard !types.isEmpty, types.allSatisfy({ allowed.contains($0.rawValue) }),
+        guard !ClipboardCaptureFilter.shouldIgnore(types: Set(types.map(\.rawValue)), sourceBundleID: pasteboard.string(forType: sourceType),
+            frontmostBundleID: NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
+            ignoredBundleIDs: Set(settings.clipboardIgnoredAppBundleIDs), ignoreMarkedItems: true) else { return }
+        guard PublicPasteboardRepresentations.isTextURLOnly(Set(types.map(\.rawValue))),
               let text = pasteboard.string(forType: .string) ?? pasteboard.string(forType: .URL),
               let cleaned = PublicClipboardToolsPolicy.cleanURL(text, customParameters: settings.clipboardCleanURLCustomParams),
               pasteboard.changeCount == count else { return }
+        let item = NSPasteboardItem()
+        guard item.setString(cleaned, forType: .string) else { return }
+        if PublicPasteboardRepresentations.hasURL(in: Set(types.map(\.rawValue))), !item.setString(cleaned, forType: .URL) { return }
+        for aliases in PublicPasteboardRepresentations.urlMetadataGroups {
+            for rawType in aliases {
+                let type = NSPasteboard.PasteboardType(rawType)
+                if let data = pasteboard.data(forType: type) {
+                    guard item.setData(data, forType: type) else { return }
+                    break // Let Cocoa regenerate aliases instead of overriding them twice.
+                }
+            }
+        }
+        guard pasteboard.changeCount == count else { return }
         pasteboard.clearContents()
-        pasteboard.setString(cleaned, forType: .string)
-        if types.contains(.URL) { pasteboard.setString(cleaned, forType: .URL) }
-        if let sourceData { pasteboard.setData(sourceData, forType: sourceType) }
+        pasteboard.writeObjects([item])
     }
 
     func stopPolling() {

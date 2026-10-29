@@ -10,7 +10,9 @@
 
 ## 下载与构建
 
-进入本仓库 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml)，下载成功构建的 `Sapphire-CN-Release-universal` artifact，解压其中的 `Sapphire-CN.zip` 后将应用放入「应用程序」。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
+从本仓库 [最新发布](https://github.com/rocaka/Sapphire_cn/releases/latest) 下载 `Sapphire-CN.zip`。退出旧版，解压后将 `Sapphire.app` 放入「应用程序」并替换旧版，再从该位置打开。发布附件使用公开链接，无需登录 GitHub。
+
+开发中的构建可在 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml) 下载 `Sapphire-CN-Release-universal` artifact（通常需要登录 GitHub）。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
 
 本地需要完整 Xcode、macOS SDK 和 GitHub 网络连接：
 
@@ -28,6 +30,8 @@ scripts/build-cn.sh
 默认使用 ad-hoc（临时）签名，不需要原作者的开发者账户。构建后从内到外重签嵌套二进制、框架、扩展和主程序，再运行 `codesign --verify --deep --strict`。中文版使用独立的 `com.rocaka.sapphirecn` 应用标识及辅助服务标识，避免与上游共用权限和后台服务。
 
 **临时签名不等于 Apple Developer ID 签名或 Apple 公证。** 首次打开可能被 Gatekeeper 阻止；先尝试打开，再通过「系统设置 → 隐私与安全性 → 仍要打开」批准。不要全局关闭 Gatekeeper。更新或重新签名后，macOS 可能要求重新授予辅助功能、屏幕录制等权限。
+
+若已经开启辅助功能但新版仍报告无权限，请先退出所有旧副本。在系统辅助功能列表移除旧 Sapphire，再添加「应用程序」中的新版并开启，最后重新启动新版。网易云设置中的「显示当前 Sapphire 所在位置」可帮助确认运行的是哪一份应用。播放和收藏操作本身不会自动弹出授权请求，客户端忙碌或菜单不可用会显示对应错误。
 
 上游辅助服务会拒绝临时签名客户端执行 root 操作。本分支保留此校验，因此默认构建无法保证电池充电控制、风扇和其他特权功能可用。**不要通过删除辅助服务校验来解决。** 需要正式签名时，在本机钥匙串安装自己的 Developer ID Application 证书，然后执行：
 
@@ -51,7 +55,7 @@ xcrun stapler validate build-cn/DerivedData/Build/Products/Release/Sapphire.app
 
 ## 公开源码的功能范围
 
-上游公开仓库对订阅、部分智能功能、体育／金融、设备互联、存储等提供的是占位实现，摄像头／音频等扩展也存在公开占位目标。本分支修复公开源码的编译配置并进行汉化，不包含未公开的商业模块，也不提供付费功能解锁。修改语言或签名不会让占位功能变成完整实现。
+上游公开仓库对部分智能功能、体育／金融、设备互联、存储等提供的是占位实现，摄像头／音频等扩展也存在公开占位目标。本分支开放有完整实现的本地功能，并补齐部分界面与本地处理功能；具体状态和测试范围见 [社区版功能实现进度](FEATURES.zh-CN.md)。不包含未公开的商业模块，也不伪造原作者订阅或账号。尚未实现的功能仍保持不可用，不能只通过修改 VIP 标记获得。
 
 公共构建不初始化占位 Firebase 项目，也不向原作者上传 Crashlytics 符号。更新检查指向本仓库 Releases；在本仓库发布新版本前不会有可用更新。自动替换应用要求有效签名和相同 Apple 开发者团队，临时签名版本请手动更新。
 

@@ -237,7 +237,9 @@ final class NotchHostedContentView: NSView {
         }
         let width = size.width == NSView.noIntrinsicMetric ? fitted().width : size.width
         let height = size.height == NSView.noIntrinsicMetric ? fitted().height : size.height
-        return CGSize(width: max(0, ceil(width)), height: max(0, ceil(height)))
+        return NotchSizeReportPolicy.validated(
+            CGSize(width: ceil(width), height: ceil(height)), fallback: frame.size
+        )
     }
 
     private func applyFittingSizeIfNeeded() {
@@ -251,13 +253,18 @@ final class NotchHostedContentView: NSView {
     }
 
     private var pendingFittingSizeCheck = false
+    private var fittingSizeNeedsRefresh = false
 
     private func fittingSizeDidChange() {
-        guard sizing == .fitting, !pendingFittingSizeCheck else { return }
+        guard sizing == .fitting else { return }
+        guard isPresented, !isHidden else { fittingSizeNeedsRefresh = true; return }
+        guard !pendingFittingSizeCheck else { return }
         pendingFittingSizeCheck = true
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.pendingFittingSizeCheck = false
+            guard self.isPresented, !self.isHidden else { self.fittingSizeNeedsRefresh = true; return }
+            self.fittingSizeNeedsRefresh = false
             let before = self.frame.size
             self.applyFittingSizeIfNeeded()
             if before != self.frame.size { self.onFittingSizeChange?() }
@@ -376,6 +383,7 @@ final class NotchHostedContentView: NSView {
         removalGeneration += 1
         isPresented = true
         isHidden = false
+        if fittingSizeNeedsRefresh { fittingSizeDidChange() }
         hosting.setTrackingSuppressed(!hitTestable)
         guard let layer else { return }
         layer.isHidden = false

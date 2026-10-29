@@ -5,6 +5,7 @@ import UniformTypeIdentifiers
 
 struct MediaOptimizerSettingsView: View {
     @EditingSettings var settings: SettingsEditingSession
+    @ObservedObject private var automaticImages = PublicClipboardImageOptimizer.shared
     @ObservedObject private var screenOCR = OCRScreenshotMonitor.shared
     @ObservedObject private var shortcutRecorder = GlobalShortcutRecorder.shared
     @State private var text = ""
@@ -17,6 +18,10 @@ struct MediaOptimizerSettingsView: View {
             Text("Extract text from images and PDFs on this Mac. Scanned PDF pages use local OCR; files are not uploaded.")
                 .font(.caption).foregroundStyle(.secondary)
             Toggle("Show media tools on the file shelf", isOn: $settings.settings.mediaToolsShowShelfActions)
+            Toggle("Auto-optimize copied images", isOn: $settings.settings.mediaToolsAutoOptimizeClipboard)
+            Text("Only copied image data is processed. Files, rich text and ignored apps are left unchanged.")
+                .font(.caption).foregroundStyle(.secondary)
+            if let status = automaticImages.status { Text(status).font(.caption).foregroundStyle(.secondary) }
             Text("Optimization creates a new copy. The original stays unchanged; unsupported formats and copies without size savings are reported.")
                 .font(.caption).foregroundStyle(.secondary)
             HStack {

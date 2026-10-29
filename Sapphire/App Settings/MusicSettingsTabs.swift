@@ -217,7 +217,7 @@ struct AppleMusicAccountCard: View {
 
 struct NeteaseMusicSettingsCard: View {
     @EditingSettings var settings: SettingsEditingSession
-    @State private var trusted = NeteaseMusicBridge.shared.isTrusted
+    @State private var trusted = false
 
     var body: some View {
         SettingsCard(title: "NetEase Cloud Music", description: "NetEase integration uses the macOS player and native controls. No NetEase account login is stored in Sapphire.") {
@@ -236,10 +236,21 @@ struct NeteaseMusicSettingsCard: View {
                         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)
                     }
                 }
+                if !trusted {
+                    Text(L10n.string("Authorize the running copy of Sapphire. If an older copy is listed, remove it, add this copy, then quit and reopen the app."))
+                        .font(.caption).foregroundStyle(.secondary)
+                    Button(L10n.string("Show This Copy of Sapphire")) {
+                        NSWorkspace.shared.activateFileViewerSelecting([Bundle.main.bundleURL])
+                    }
+                }
             }.padding()
         }
+        .onAppear { trusted = NeteaseMusicBridge.shared.refreshPermissionHint() }
         .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didActivateApplicationNotification)) { _ in
-            trusted = NeteaseMusicBridge.shared.isTrusted
+            trusted = NeteaseMusicBridge.shared.refreshPermissionHint()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: AccessibilityTrustMonitor.trustDidChange)) { _ in
+            trusted = NeteaseMusicBridge.shared.refreshPermissionHint()
         }
     }
 }

@@ -37,6 +37,12 @@ jobs:
           "$RUNNER_TEMP/l10n-probe" "$PWD/Sapphire"
       - name: Verify NetEase source isolation and recording matching
         run: scripts/test-netease.sh
+      - name: Verify NetEase control queue and permission handling
+        run: scripts/test-netease-bridge.sh
+      - name: Verify NetEase refresh coalescing
+        run: scripts/test-netease-refresh.sh
+      - name: Verify bounded notch size reporting
+        run: scripts/test-notch-sizing.sh
       - name: Verify public feature availability
         run: scripts/test-public-features.sh
       - name: Verify local image and PDF text recognition
