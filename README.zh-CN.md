@@ -20,7 +20,7 @@
 
 ## 下载与构建
 
-从本仓库 [最新发布](https://github.com/rocaka/Sapphire_cn/releases/latest) 下载 `Sapphire-CN.zip`。退出旧版，解压后将 `Sapphire.app` 放入「应用程序」并替换旧版，再从该位置打开。发布附件使用公开链接，无需登录 GitHub。
+本轮新增音乐界面自定义、刘海下方桌面歌词及本地工具，请从 [功能预览版](https://github.com/rocaka/Sapphire_cn/releases/tag/cn-2026.10.29-customization-preview) 下载 `Sapphire-CN.zip`。退出旧版，解压后将 `Sapphire.app` 放入「应用程序」并替换旧版，再从该位置打开。发布附件使用公开链接，无需登录 GitHub；预览版说明列出仍待实机验收的操作。其他版本见 [全部发布](https://github.com/rocaka/Sapphire_cn/releases)。
 
 开发中的构建可在 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml) 下载 `Sapphire-CN-Release-universal` artifact（通常需要登录 GitHub）。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
 
