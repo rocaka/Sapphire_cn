@@ -27,7 +27,9 @@ struct NotchAppearanceControlsView:View {
  var body:some View {EmptyView()}
 }
 '''
-(temp/'Editor.swift').write_text(fixtures+wrapper)
+components=(root/'Sapphire/App Settings/SettingsComponents.swift').read_text()
+sliders=components[components.index('struct CustomSliderRowView:'):components.index('struct SettingsContainerModifier:')]
+(temp/'Editor.swift').write_text(fixtures+wrapper+sliders)
 PY
 xcrun swiftc -parse-as-library -module-cache-path "$TEMP_DIR/cache" "$TEMP_DIR/Color.swift" -o "$TEMP_DIR/probe"
 "$TEMP_DIR/probe"

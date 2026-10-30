@@ -637,16 +637,10 @@ struct CustomSliderRowView: View {
                 Spacer()
                 Text(String(format: specifier, draft))
             }
+            // A State binding has a stable location; a getter/setter binding here
+            // captures the whole row and its upstream projected bindings on every update.
             Slider(
-                value: Binding(
-                    get: { draft },
-                    set: { newValue in
-                        draft = newValue
-                        if !isEditing {
-                            value = newValue
-                        }
-                    }
-                ),
+                value: $draft,
                 in: range,
                 onEditingChanged: { editing in
                     if editing {
@@ -665,6 +659,10 @@ struct CustomSliderRowView: View {
         }
         .padding()
         .onAppear { draft = value }
+        .onChange(of: draft) { _, newValue in
+            guard !isEditing, newValue != value else { return }
+            value = newValue
+        }
         .onChange(of: value) { _, newValue in
             if !isEditing {
                 draft = newValue
@@ -702,38 +700,30 @@ struct DeferredSlider: View {
         Group {
             if let step {
                 Slider(
-                    value: draftBinding,
+                    value: $draft,
                     in: range,
                     step: step,
                     onEditingChanged: handleEditingChanged
                 )
             } else {
                 Slider(
-                    value: draftBinding,
+                    value: $draft,
                     in: range,
                     onEditingChanged: handleEditingChanged
                 )
             }
         }
         .onAppear { draft = value }
+        .onChange(of: draft) { _, newValue in
+            guard newValue != value else { return }
+            onDraftChange?(newValue)
+            if !isEditing { value = newValue }
+        }
         .onChange(of: value) { _, newValue in
             if !isEditing {
                 draft = newValue
             }
         }
-    }
-
-    private var draftBinding: Binding<Double> {
-        Binding(
-            get: { draft },
-            set: { newValue in
-                draft = newValue
-                onDraftChange?(newValue)
-                if !isEditing {
-                    value = newValue
-                }
-            }
-        )
     }
 
     private func handleEditingChanged(_ editing: Bool) {
@@ -771,26 +761,18 @@ struct DeferredValueEditor<Content: View>: View {
     }
 
     var body: some View {
-        content(draftBinding, handleEditingChanged)
+        content($draft, handleEditingChanged)
             .onAppear { draft = value }
+            .onChange(of: draft) { _, newValue in
+                guard newValue != value else { return }
+                onDraftChange?(newValue)
+                if !isEditing { value = newValue }
+            }
             .onChange(of: value) { _, newValue in
                 if !isEditing {
                     draft = newValue
                 }
             }
-    }
-
-    private var draftBinding: Binding<Double> {
-        Binding(
-            get: { draft },
-            set: { newValue in
-                draft = newValue
-                onDraftChange?(newValue)
-                if !isEditing {
-                    value = newValue
-                }
-            }
-        )
     }
 
     private func handleEditingChanged(_ editing: Bool) {
