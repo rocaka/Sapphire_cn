@@ -416,9 +416,9 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
         let offerStableDowngrade = ReleaseChannelPolicy.shouldOfferStableDowngrade(
             for: SettingsModel.shared.settings
         )
-        let stillRelevant = SapphireVersionOrdering.isNewer(persisted.version, than: currentAppVersion)
+        let stillRelevant = AppVersionOrdering.isNewer(persisted.version, than: currentAppVersion)
             || (offerStableDowngrade
-                && SapphireVersionOrdering.compare(persisted.version, currentAppVersion) != .orderedSame)
+                && AppVersionOrdering.compare(persisted.version, currentAppVersion) != .orderedSame)
         guard stillRelevant,
               Self.isSafeReleaseAssetName(persisted.asset.name),
               persisted.asset.name.lowercased().hasSuffix(".zip"),
@@ -474,9 +474,9 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
             let latestVersion = release.marketingVersion
             let offerStableDowngrade = channel == .stable
                 && ReleaseChannelPolicy.shouldOfferStableDowngrade(for: SettingsModel.shared.settings)
-            let shouldOffer = SapphireVersionOrdering.isNewer(latestVersion, than: currentAppVersion)
+            let shouldOffer = AppVersionOrdering.isNewer(latestVersion, than: currentAppVersion)
                 || (offerStableDowngrade
-                    && SapphireVersionOrdering.compare(latestVersion, currentAppVersion) != .orderedSame)
+                    && AppVersionOrdering.compare(latestVersion, currentAppVersion) != .orderedSame)
 
             applyReleaseNotes(from: releases, offeredVersion: shouldOffer ? latestVersion : nil)
             if shouldOffer {
@@ -830,8 +830,8 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
 
     private static func findRelease(version: String, in releases: [GitHubRelease]) -> GitHubRelease? {
         releases.first { release in
-            SapphireVersionOrdering.compare(release.marketingVersion, version) == .orderedSame
-                || SapphireVersionOrdering.compare(
+            AppVersionOrdering.compare(release.marketingVersion, version) == .orderedSame
+                || AppVersionOrdering.compare(
                     release.tagName
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .replacingOccurrences(of: "v", with: "", options: .caseInsensitive),
@@ -1121,7 +1121,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
 
             let stagedVersion = Bundle(url: stagedURL)?
                 .object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-            guard SapphireVersionOrdering.compare(stagedVersion, expectedVersion) == .orderedSame else {
+            guard AppVersionOrdering.compare(stagedVersion, expectedVersion) == .orderedSame else {
                 throw NSError(
                     domain: "UpdateError",
                     code: 24,
@@ -1270,7 +1270,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
                 try Self.validateUpdatePublisher(candidate: newAppURL, replacing: currentAppURL)
                 let candidateVersion = Bundle(url: newAppURL)?
                     .object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-                guard SapphireVersionOrdering.compare(candidateVersion, expectedVersion) == .orderedSame else {
+                guard AppVersionOrdering.compare(candidateVersion, expectedVersion) == .orderedSame else {
                     throw NSError(
                         domain: "UpdateError",
                         code: 14,
