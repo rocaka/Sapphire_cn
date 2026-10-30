@@ -52,6 +52,10 @@ jobs:
         run: scripts/test-notch-progress-resize.sh
       - name: Verify music appearance migration and display bounds
         run: scripts/test-music-player-appearance.sh
+      - name: Verify appearance value identity and editor interfaces
+        run: scripts/test-appearance-policy.sh
+      - name: Verify community update ordering and release versions
+        run: scripts/test-community-updates.sh
       - name: Verify native text input policies and adapters
         run: scripts/test-public-text-input.sh
       - name: Verify desktop lyrics preferences and event scheduling
@@ -87,3 +91,13 @@ jobs:
             build-cn/Sapphire-CN.zip.sha256
             build.log
           if-no-files-found: warn
+
+      - name: Preserve release debug symbols
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          retention-days: 3
+          compression-level: 9
+          name: Sapphire-CN-Symbols-${{ github.sha }}
+          path: build-cn/DerivedData/Build/Products/${{ env.CONFIGURATION }}/*.dSYM
+          if-no-files-found: ignore

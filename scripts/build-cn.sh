@@ -59,6 +59,9 @@ PY
 test -f "$APP/Contents/Resources/zh-Hans.lproj/Localizable.strings"
 test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
 /usr/bin/lipo -archs "$APP/Contents/MacOS/Sapphire"
+# Strip before signing. Keep exported symbols/runtime metadata and save dSYMs
+# separately in CI, so smaller user packages remain diagnosable.
+/usr/bin/strip -S -x "$APP/Contents/MacOS/Sapphire"
 python3 "$ROOT/scripts/sign-cn.py" "$APP" "$SIGNING_IDENTITY"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "$APP"
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP" "$BUILD_DIR/Sapphire-CN.zip"

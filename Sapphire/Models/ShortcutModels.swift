@@ -42,14 +42,9 @@ extension CodableColor: Equatable {
 
 extension CodableColor: Hashable {
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        // Match value equality: UUID is view identity, not color equality.
+        hasher.combine(CFHash(cgColor))
         hasher.combine(location)
-        if let components = cgColor.components {
-            hasher.combine(components)
-        }
-        if let colorSpaceName = cgColor.colorSpace?.name {
-            hasher.combine(colorSpaceName)
-        }
     }
 }
 
