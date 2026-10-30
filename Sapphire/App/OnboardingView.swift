@@ -648,7 +648,7 @@ private struct SubscriptionOverviewStepView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 50)
 
-                Link("Upgrade on website instead", destination: URL(string: "https://sapphire-app.tech/")!)
+                Link("Upgrade on website instead", destination: URL(string: "https://github.com/rocaka/Sapphire_cn")!)
                     .font(.caption)
                     .foregroundStyle(.purple)
             }
@@ -664,13 +664,7 @@ private struct SubscriptionOverviewStepView: View {
     }
 
     private func beginCheckout(for tier: SubscriptionTier) {
-        let plan = tier == .free ? "basic" : tier.rawValue
-        guard var components = URLComponents(string: "https://sapphire-app.tech/checkout.html") else { return }
-        components.queryItems = [
-            URLQueryItem(name: "plan", value: plan),
-            URLQueryItem(name: "qty", value: "1")
-        ]
-        guard let url = components.url else { return }
+        guard let url = URL(string: "https://github.com/rocaka/Sapphire_cn/releases") else { return }
         NSWorkspace.shared.open(url)
     }
 
@@ -861,15 +855,15 @@ private struct FinishStepView: View {
                 .foregroundStyle(.secondary)
 
             HStack(spacing: 12) {
-                Link(destination: URL(string: "https://sapphire-app.tech/")!) {
+                Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn")!) {
                     Image(systemName: "link").resizable().aspectRatio(contentMode: .fit).frame(width: 18, height: 18).foregroundColor(.white).padding(6).background(Color.blue).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }.buttonStyle(PlainButtonStyle())
 
-                Link(destination: URL(string: "https://github.com/cshariq/Sapphire")!) {
+                Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn")!) {
                     Image("github_logo").resizable().renderingMode(.template).aspectRatio(contentMode: .fit).frame(width: 18, height: 18).foregroundColor(.white).padding(6).background(Color.black).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }.buttonStyle(PlainButtonStyle())
 
-                Link(destination: URL(string: "https://discord.gg/TdRjC2kNnU")!) {
+                Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn/issues")!) {
                     Image("discord_logo").resizable().aspectRatio(contentMode: .fit).frame(width: 18, height: 18).padding(6).background(Color(red: 0.35, green: 0.40, blue: 0.95)).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }.buttonStyle(PlainButtonStyle())
             }

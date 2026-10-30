@@ -31,6 +31,14 @@ revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).stri
 if not re.fullmatch(r'[0-9a-f]{40,64}', revision):
     raise SystemExit('Invalid build source revision')
 info['SapphireSourceRevision'] = revision
+import datetime
+version = os.environ.get('RELEASE_VERSION', '')
+if not version:
+    version = datetime.datetime.now(datetime.timezone.utc).strftime('%Y.%m.%d') + '.' + os.environ.get('GITHUB_RUN_NUMBER', '1')
+if not re.fullmatch(r'[0-9]+(?:\.[0-9]+){2,3}', version):
+    raise SystemExit('Release version must be numeric: YYYY.MM.DD.build')
+info['CFBundleShortVersionString'] = version
+info['SapphireReleaseVersion'] = version
 run_number = os.environ.get('GITHUB_RUN_NUMBER', '')
 if run_number.isascii() and run_number.isdigit():
     info['SapphireBuildNumber'] = run_number

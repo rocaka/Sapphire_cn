@@ -199,6 +199,12 @@ struct GitHubRelease: Codable {
     }
 }
 
+enum CommunityReleaseOrdering {
+    static func isOlder(_ lhs: GitHubRelease, than rhs: GitHubRelease) -> Bool {
+        (lhs.publishedAt ?? "") < (rhs.publishedAt ?? "")
+    }
+}
+
 enum UpdateStatus: Equatable {
     case checking
     case upToDate
@@ -311,7 +317,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
     private var networkMonitor: NWPathMonitor?
     private let networkMonitorQueue = DispatchQueue(label: "com.rocaka.sapphirecn.update-network", qos: .utility)
     private var periodicCheckInterval: TimeInterval = 5 * 60 * 60
-    private let persistedAvailableUpdateKey = "SapphirePersistedAvailableUpdate"
+    private let persistedAvailableUpdateKey = "SapphireCNAvailableUpdateV2"
     private let releasesCacheKey = "SapphireReleasesCache"
     private let releasesCacheETagKey = "SapphireReleasesCacheETag"
     private let releasesCacheDateKey = "SapphireReleasesCacheDate"
@@ -458,10 +464,10 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
             let fetched = try await fetchReleasesWithRetry()
             isUsingCachedReleaseData = fetched.usedCache
             let releases = fetched.releases.filter { !$0.draft }
-            let eligible = channel == .beta ? releases : releases.filter { !$0.prerelease }
-            guard let release = eligible.max(by: {
-                SapphireVersionOrdering.compare($0.marketingVersion, $1.marketingVersion) == .orderedAscending
-            }) else {
+            // Community previews carry the newest fixes. Compare publication
+            // dates rather than sorting same-day descriptive tags as SemVer.
+            let eligible = releases.filter { Self.preferredUpdateAsset(in: $0) != nil }
+            guard let release = eligible.max(by: { CommunityReleaseOrdering.isOlder($0, than: $1) }) else {
                 throw UpdateMetadataError.noEligibleRelease
             }
 
@@ -724,7 +730,7 @@ class UpdateChecker: NSObject, ObservableObject, @preconcurrency URLSessionDownl
 
     nonisolated private static func isTrustedDownloadURL(_ url: URL) -> Bool {
         guard url.scheme?.lowercased() == "https", let host = url.host?.lowercased() else { return false }
-        return host == "github.com"
+        return (host == "github.com" && url.path.hasPrefix("/rocaka/Sapphire_cn/releases/download/"))
             || host == "objects.githubusercontent.com"
             || host.hasSuffix(".githubusercontent.com")
     }

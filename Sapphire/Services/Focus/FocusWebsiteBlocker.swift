@@ -138,15 +138,11 @@ private final class FocusBlockPageServer {
         connection.receive(minimumIncompleteLength: 1, maximumLength: 16_384) { [weak self] data, _, _, _ in
             guard let self, let data,
                   let request = String(data: data, encoding: .utf8),
-                  let host = Self.host(from: request) else {
+                  Self.host(from: request) != nil else {
                 connection.cancel()
                 return
             }
-            let normalizedHost = host.split(separator: ":").first.map(String.init) ?? host
-            let requestParameter = self.productiveAccessHandler?(normalizedHost) == true
-                ? "&request=productive"
-                : ""
-            let location = "https://sapphire-app.tech/blocked?site=\(Self.urlEncode(normalizedHost))&source=focus\(requestParameter)"
+            let location = "https://github.com/rocaka/Sapphire_cn/blob/main/FEATURES.zh-CN.md"
             let response = "HTTP/1.1 302 Found\r\nLocation: \(location)\r\nCache-Control: no-store\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
             connection.send(content: Data(response.utf8), completion: .contentProcessed { _ in
                 connection.cancel()

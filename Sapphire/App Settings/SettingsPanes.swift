@@ -278,6 +278,38 @@ struct PermissionFeatureInfoPopover: View {
 struct NotchAppearanceEditorView: View {
     @Binding var appearance: NotchAppearanceSettings
     let title: String
+    @State private var draft: NotchAppearanceSettings
+    @State private var lastApplied: NotchAppearanceSettings
+
+    init(appearance: Binding<NotchAppearanceSettings>, title: String) {
+        self._appearance = appearance
+        self.title = title
+        self._draft = State(initialValue: appearance.wrappedValue)
+        self._lastApplied = State(initialValue: appearance.wrappedValue)
+    }
+
+    var body: some View {
+        NotchAppearanceControlsView(appearance: $draft, title: title)
+            .task(id: draft) {
+                do { try await Task.sleep(for: .milliseconds(150)) } catch { return }
+                guard !Task.isCancelled, appearance != draft else { return }
+                lastApplied = draft
+                appearance = draft
+            }
+            .onChange(of: appearance) { _, value in
+                guard value != lastApplied else { return }
+                lastApplied = value
+                draft = value
+            }
+            .onDisappear {
+                if appearance != draft { lastApplied = draft; appearance = draft }
+            }
+    }
+}
+
+private struct NotchAppearanceControlsView: View {
+    @Binding var appearance: NotchAppearanceSettings
+    let title: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -10513,7 +10545,7 @@ struct AboutSettingsView: View {
                         }
 
                         HStack(spacing: 10) {
-                            Link(destination: URL(string: "https://sapphire-app.tech/")!) {
+                            Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn")!) {
                                 Image(systemName: "link")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -10525,7 +10557,7 @@ struct AboutSettingsView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
 
-                            Link(destination: URL(string: "https://github.com/cshariq/Sapphire")!) {
+                            Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn")!) {
                                 Image("github_logo")
                                     .resizable()
                                     .renderingMode(.template)
@@ -10538,7 +10570,7 @@ struct AboutSettingsView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
 
-                            Link(destination: URL(string: "https://discord.gg/TdRjC2kNnU")!) {
+                            Link(destination: URL(string: "https://github.com/rocaka/Sapphire_cn/issues")!) {
                                 Image("discord_logo")
                                     .resizable()
                                         .aspectRatio(contentMode: .fit)

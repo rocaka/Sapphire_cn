@@ -9,6 +9,10 @@ on:
         type: choice
         default: Release
         options: [Release, Debug]
+      release_version:
+        description: Numeric release version matching the release tag
+        type: string
+        default: ""
       architecture:
         type: choice
         default: universal
@@ -20,6 +24,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 60
     env:
+      RELEASE_VERSION: ${{ inputs.release_version || '' }}
       CONFIGURATION: ${{ inputs.configuration || 'Release' }}
       BUILD_ARCHS: ${{ inputs.architecture != 'universal' && inputs.architecture || '' }}
     steps:
