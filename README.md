@@ -1,4 +1,4 @@
-> **Sapphire 中文版：** [中文说明、构建与签名指南](README.zh-CN.md) · [安装包下载](https://github.com/rocaka/Sapphire_cn/releases/latest)
+> **Sapphire 中文版：** [中文说明、构建与签名指南](README.zh-CN.md) · [安装包下载](https://github.com/rocaka/Sapphire_cn/releases/tag/v2026.1030.2)
 > 本分支包含简体中文支持；下方保留上游项目介绍。公开源码中的占位功能及签名限制请先阅读中文说明。
 
 <div align="center">
@@ -6,19 +6,19 @@
 
   <h1>Sapphire</h1>
   <p><b>The all-in-one mac app that redefines the notch</b></p>
-  <a href="https://sapphire-app.tech" style="text-decoration: none; margin-right: 10px;">
+  <a href="https://github.com/rocaka/Sapphire_cn" style="text-decoration: none; margin-right: 10px;">
     <div style="background-color: #007aff; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; font-weight: bold;">
-      Official Website
+      Community Repository
     </div>
   </a>
-  <a href="https://github.com/cshariq/Sapphire/releases/latest" style="text-decoration: none;">
+  <a href="https://github.com/rocaka/Sapphire_cn/releases/tag/v2026.1030.2" style="text-decoration: none;">
     <div style="background-color: #007aff; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; font-weight: bold;">
       Download Latest Release
     </div>
   </a>
-  <a href="https://discord.gg/Ryuea8vM2h" style="text-decoration: none;">
+  <a href="https://github.com/rocaka/Sapphire_cn/issues" style="text-decoration: none;">
     <div style="background-color: #007aff; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; font-weight: bold;">
-      Join Discord
+      Report an Issue
     </div>
   </a>
 </div>
@@ -29,7 +29,7 @@ Sapphire is a sleek notch app that displays current activities neatly around the
 
 ## Installation
 
-1.  **Download:** Download the latest package release from the [releases page](https://github.com/cshariq/Sapphire/releases/latest).
+1.  **Download:** Download the latest package release from the [releases page](https://github.com/rocaka/Sapphire_cn/releases/tag/v2026.1030.2).
 2.  **Install:** Open the downloaded package and follow the installation process.
 3.  **Permissions:** On first launch, you may need to grant accessibility and other permissions in `System Settings` for all features to work correctly.
 

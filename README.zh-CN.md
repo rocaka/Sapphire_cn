@@ -20,7 +20,7 @@
 
 ## 下载与构建
 
-本轮新增音乐界面自定义、刘海下方桌面歌词及本地工具，并修复下载进度刷新引起的刘海闪烁，请从 [最新功能预览版](https://github.com/rocaka/Sapphire_cn/releases/tag/cn-2026.10.29-progress-fix) 下载 `Sapphire-CN.zip`。退出旧版，解压后将 `Sapphire.app` 放入「应用程序」并替换旧版，再从该位置打开。发布附件使用公开链接，无需登录 GitHub；预览版说明列出仍待实机验收的操作。其他版本见 [全部发布](https://github.com/rocaka/Sapphire_cn/releases)。
+当前版本修正社区版更新选择与版本号、项目入口，并减少外观编辑时的重复更新；签名前去除主程序调试与局部符号，保留双架构与功能资源。请从 [2026.1030.2 预览版](https://github.com/rocaka/Sapphire_cn/releases/tag/v2026.1030.2) 下载 `Sapphire-CN.zip`。Apple Silicon Mac 可选较小的 `Sapphire-CN-arm64.zip`，Intel Mac 选择通用 `Sapphire-CN.zip`。退出旧版，解压后将 `Sapphire.app` 放入「应用程序」并替换旧版，再从该位置打开。发布附件使用公开链接，无需登录 GitHub；预览版说明列出实机验证边界。其他版本见 [全部发布](https://github.com/rocaka/Sapphire_cn/releases)。
 
 开发中的构建可在 [Actions](https://github.com/rocaka/Sapphire_cn/actions/workflows/build-cn.yml) 下载 `Sapphire-CN-Release-universal` artifact（通常需要登录 GitHub）。只有绿色成功的构建才代表已通过编译与签名验证；日志 artifact 不代表有可安装程序。
 
@@ -34,6 +34,14 @@ scripts/build-cn.sh
 ```
 
 输出为 `build-cn/Sapphire-CN.zip` 和 SHA-256 文件。Release 默认按项目配置构建通用架构（Apple Silicon 与 Intel）；捆绑的第三方设备工具仍受上游二进制架构限制。请以构建日志中 `lipo -archs` 的实际结果为准。`CONFIGURATION=Debug BUILD_ARCHS=arm64 scripts/build-cn.sh` 可快速构建 Apple Silicon 调试版。Actions 的手动运行也可选择配置和架构；调试版用于验证，不代替通用 Release。
+
+可从已验证的通用构建派生 Apple Silicon 专用包：
+
+```sh
+scripts/package-arm64-cn.sh /path/to/Sapphire.app /path/to/new-empty-output-directory
+```
+
+该脚本只抽取主程序的 ARM64 代码，保留完整资源与嵌套组件，重新签名并严格验证；版本、源码标记和 ARM 调试 UUID 必须保持一致。输出 `Sapphire-CN-arm64.zip` 及校验文件，原通用应用保持原样。也可直接使用 `BUILD_ARCHS=arm64 scripts/build-cn.sh` 从源码构建。
 
 ## 签名与权限
 
@@ -67,7 +75,7 @@ xcrun stapler validate build-cn/DerivedData/Build/Products/Release/Sapphire.app
 
 上游公开仓库对部分智能功能、体育／金融、设备互联、存储等提供的是占位实现，摄像头／音频等扩展也存在公开占位目标。本分支开放有完整实现的本地功能，并补齐部分界面与本地处理功能；具体状态和测试范围见 [社区版功能实现进度](FEATURES.zh-CN.md)。不包含未公开的商业模块，也不伪造原作者订阅或账号。尚未实现的功能仍保持不可用，不能只通过修改 VIP 标记获得。
 
-公共构建不初始化占位 Firebase 项目，也不向原作者上传 Crashlytics 符号。更新检查指向本仓库 Releases；在本仓库发布新版本前不会有可用更新。自动替换应用要求有效签名和相同 Apple 开发者团队，临时签名版本请手动更新。
+公共构建不初始化占位 Firebase 项目，也不向原作者上传 Crashlytics 符号。更新检查指向本仓库 Releases，按有可用安装包的公开发布时间选择最新社区版本，包含预览版。主程序、内嵌扩展与标签使用一致的三段版本号；旧版更新器需首次手动替换才能获得这些修正。自动替换应用要求有效签名和相同 Apple 开发者团队，临时签名版本请手动更新。
 
 ## 维护
 
