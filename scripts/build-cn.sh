@@ -44,6 +44,17 @@ if run_number.isascii() and run_number.isdigit():
     info['SapphireBuildNumber'] = run_number
 with path.open('wb') as stream:
     plistlib.dump(info, stream)
+# Embedded extensions must advertise the same marketing version as the host.
+for extension in path.parent.parent.rglob('*.appex'):
+    metadata = extension / 'Contents' / 'Info.plist'
+    if not metadata.is_file():
+        continue
+    with metadata.open('rb') as stream:
+        child = plistlib.load(stream)
+    if str(child.get('CFBundleIdentifier', '')).startswith('com.rocaka.sapphirecn.'):
+        child['CFBundleShortVersionString'] = version
+        with metadata.open('wb') as stream:
+            plistlib.dump(child, stream)
 PY
 test -f "$APP/Contents/Resources/zh-Hans.lproj/Localizable.strings"
 test -f "$APP/Contents/Resources/en.lproj/Localizable.strings"
