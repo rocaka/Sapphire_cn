@@ -22,7 +22,9 @@ struct NotchAppearanceDisplaySection: View {
                 displayPicker
             }
             NotchAppearanceEditorView(appearance: widgetBinding, title: "Expanded Notch Appearance")
+                .id("widget-" + (selectedDisplay ?? "all"))
             NotchAppearanceEditorView(appearance: liveActivityBinding, title: "Collapsed Notch Appearance")
+                .id("activity-" + (selectedDisplay ?? "all"))
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)) { _ in
             screensRevision += 1
