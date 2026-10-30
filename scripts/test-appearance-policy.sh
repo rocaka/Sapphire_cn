@@ -19,7 +19,9 @@ probe='''
 (temp/'Color.swift').write_text(s+probe)
 s=(root/'Sapphire/App Settings/SettingsPanes.swift').read_text()
 wrapper=s[s.index('struct NotchAppearanceEditorView:'):s.index('private struct NotchAppearanceControlsView:')]
-fixtures='''import SwiftUI
+fixtures='''import AppKit
+import SwiftUI
+extension Notification.Name { static let sapphireSettingsWillClose = Notification.Name("SapphireSettingsWillClose") }
 struct NotchAppearanceSettings: Equatable { var opacity:Double=1 }
 struct NotchAppearanceControlsView:View {
  @Binding var appearance:NotchAppearanceSettings

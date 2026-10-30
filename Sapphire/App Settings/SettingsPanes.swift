@@ -278,13 +278,15 @@ struct PermissionFeatureInfoPopover: View {
 struct NotchAppearanceEditorView: View {
     @Binding var appearance: NotchAppearanceSettings
     let title: String
+    private let flushPendingSettings: () -> Void
     @State private var draft: NotchAppearanceSettings
     @State private var lastApplied: NotchAppearanceSettings
     @State private var editRevision: UInt64 = 0
 
-    init(appearance: Binding<NotchAppearanceSettings>, title: String) {
+    init(appearance: Binding<NotchAppearanceSettings>, title: String, flushPendingSettings: @escaping () -> Void = {}) {
         self._appearance = appearance
         self.title = title
+        self.flushPendingSettings = flushPendingSettings
         self._draft = State(initialValue: appearance.wrappedValue)
         self._lastApplied = State(initialValue: appearance.wrappedValue)
     }
@@ -303,9 +305,23 @@ struct NotchAppearanceEditorView: View {
                 lastApplied = value
                 draft = value
             }
-            .onDisappear {
-                if appearance != draft { lastApplied = draft; appearance = draft }
+            .onReceive(NotificationCenter.default.publisher(for: .sapphireSettingsWillClose)) { _ in
+                flushDraft()
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in
+                flushDraft()
+            }
+            .onDisappear { flushDraft() }
+    }
+
+    private func flushDraft() {
+        // The settings window flushes before destroying its content. Apply the
+        // local draft and commit the session here too, regardless of observer order.
+        if appearance != draft {
+            lastApplied = draft
+            appearance = draft
+        }
+        flushPendingSettings()
     }
 }
 

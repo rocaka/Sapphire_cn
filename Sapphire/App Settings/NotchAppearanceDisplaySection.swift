@@ -21,9 +21,9 @@ struct NotchAppearanceDisplaySection: View {
             if screens.count > 1 {
                 displayPicker
             }
-            NotchAppearanceEditorView(appearance: widgetBinding, title: "Expanded Notch Appearance")
+            NotchAppearanceEditorView(appearance: widgetBinding, title: "Expanded Notch Appearance", flushPendingSettings: { settings.flushPendingSave() })
                 .id("widget-" + (selectedDisplay ?? "all"))
-            NotchAppearanceEditorView(appearance: liveActivityBinding, title: "Collapsed Notch Appearance")
+            NotchAppearanceEditorView(appearance: liveActivityBinding, title: "Collapsed Notch Appearance", flushPendingSettings: { settings.flushPendingSave() })
                 .id("activity-" + (selectedDisplay ?? "all"))
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)) { _ in
