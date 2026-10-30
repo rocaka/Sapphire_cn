@@ -280,6 +280,7 @@ struct NotchAppearanceEditorView: View {
     let title: String
     @State private var draft: NotchAppearanceSettings
     @State private var lastApplied: NotchAppearanceSettings
+    @State private var editRevision: UInt64 = 0
 
     init(appearance: Binding<NotchAppearanceSettings>, title: String) {
         self._appearance = appearance
@@ -290,7 +291,8 @@ struct NotchAppearanceEditorView: View {
 
     var body: some View {
         NotchAppearanceControlsView(appearance: $draft, title: title)
-            .task(id: draft) {
+            .onChange(of: draft) { _, _ in editRevision &+= 1 }
+            .task(id: editRevision) {
                 do { try await Task.sleep(for: .milliseconds(150)) } catch { return }
                 guard !Task.isCancelled, appearance != draft else { return }
                 lastApplied = draft
